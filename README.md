@@ -163,7 +163,7 @@ Password
 ```
 fumigram/
 ├── apps/               # Main application (themes & views)
-│   └── default/        # Default theme
+│   └── viga/        # Default theme
 │       ├── 404/
 │       ├── activate/
 │       ├── boosts/
