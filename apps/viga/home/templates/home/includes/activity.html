@@ -1,0 +1,9 @@
+<div class="valign item activity_" id="<?php echo($context['activity']['id']) ?>">
+	<div class="wrapper_">
+		<img class="img-circle" src="<?php echo($context['activity']['udata']['avatar']) ?>" alt="Picture" />
+	</div>
+  	<div class="caption caption_">
+  		<div><?php echo($context['activity']['text']) ?></div> 
+  		<time><span><?php echo($context['activity']['svg']) ?></span>&nbsp;<?php echo(time2str($context['activity']['time'])) ?></time>
+  	</div>
+</div>

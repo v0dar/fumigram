@@ -1,0 +1,70 @@
+<style>footer{display: none !important;}</style>
+<div class="container">
+	<div class="setup-step step-one-active">
+		<div class="line">
+			<div class="line_sec"></div>
+			<div class="dot one"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg><span>{{LANG profile}}</span></div>
+			<div class="dot two"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg><span>{{LANG about}}</span></div>
+			<div class="dot three"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg><span>{{LANG follow}}</span></div>
+		</div>
+	</div>
+	<div class="pg_page padd pp_startup">
+		<form id="startup_image">
+			<div class="start_head">
+				<h3>{{LANG add_photo_s}}</h3>
+			</div>
+			<div class="img_container startup_image" id="user_image">
+				<div class="valign img_container_1">
+					<img src="{{CONFIG site_url}}/media/img/icons/camera.png" alt="...">
+				</div>
+			</div>
+			<div class="valign pg_start_subtn">
+				<small onclick="skip_startup()">{{LANG skip_step}}</small>
+				<button class="btn btn-mat main" type="submit">{{LANG save_c}}</button>
+			</div>
+			<input type="hidden" name="user_id" value="<?php echo($context['me']['user_id']) ?>">
+			<input type="hidden" name="hash" value="<?php echo($context['csrf_token']) ?>">
+			<input type="file" name="photo" class="hidden" id="user-photo" accept="image/x-png,image/jpg,image/jpeg" required>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+function skip_startup() {
+	$.post(link('startup/skip'), function(data, textStatus, xhr) {
+		$('#ajax_redirect').attr('href', "{{CONFIG site_url}}");
+		$('#ajax_redirect').attr('data-ajax', "load.php?app=home&apph=home");
+		$('#ajax_redirect').click();
+	});
+}
+jQuery(document).ready(function($) {
+	$("#user_image").click(function(event) {
+		$("#user-photo").trigger('click');
+	});
+	$("#user-photo").change(function(event) {
+		$("#user_image").html("<img src='" + window.URL.createObjectURL(this.files[0]) + "' alt='Picture' width='100%' height='100%'>")
+		$('.btn_register').removeAttr('disabled');
+	});
+
+	var form = $("form#startup_image");
+	form.ajaxForm({
+		url: link('startup/profile'),
+		type: 'POST',
+		dataType: 'json',
+		beforeSend: function(){
+			$('form').find('button[type="submit"]').attr('disabled','true');
+		},
+		success: function(data){
+			if (data.status == 200) {
+				$('.ha').attr('src', data.photo);
+				$('.cha').attr('src', data.photo);
+				$('.d-me').attr('src', data.photo);
+				$('.nv-me').attr('src', data.photo);
+				$('#ajax_redirect').attr('href', "{{CONFIG site_url}}");
+				$('#ajax_redirect').attr('data-ajax', "load.php?app=home&apph=home");
+				$('#ajax_redirect').click();
+			}
+	        $('form').find('button[type="submit"]').removeAttr('disabled');
+		}
+	});	
+});
+</script>

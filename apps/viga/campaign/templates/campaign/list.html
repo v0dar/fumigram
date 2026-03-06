@@ -1,0 +1,50 @@
+<tr data-ad-id="<?php echo $context['ad']->id; ?>">
+	<td><span><?php echo $context['ad']->id; ?></span></td>
+	<td width="200"><span><?php echo $context['ad']->name; ?></span></td>
+	<td><span>{{LANG <?php echo $context['ad']->bidding; ?>}}</span></td>
+	<td><span><?php echo $context['ad']->clicks; ?></span></td>
+	<td><span><?php echo $context['ad']->views; ?></span></td>
+	<td data-ad-status="<?php echo $context['ad']->id; ?>" width="100">
+		<span>
+			<?php if ($context['ad']->status == 1): ?>
+			<span class="label label-success" style="font-weight: 400;">{{LANG running}}</span>
+			<?php else: ?>
+			<span class="label label-danger" style="font-weight: 400;">{{LANG not_active}}</span>
+			<?php endif; ?>
+		</span>
+	</td>
+	<td>
+		<div class="dropdown">
+			<span class="dropdown-toggle" type="button" data-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z"></path></svg></span>
+			<ul class="dropdown-menu zoom pull-right ultimate-menu">
+				<li>
+					<a class="menu-option pointer" href="<?php echo $context['ad']->edit_url; ?>">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M9.243 19H21v2H3v-4.243l9.9-9.9 4.242 4.244L9.242 19zm5.07-13.556l2.122-2.122a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414l-2.122 2.121-4.242-4.242z"></path></svg>&nbsp;&nbsp;&nbsp;
+						<div>
+							<b>{{LANG edit_ads}}</b>
+							<p>{{LANG edit_ziz_ads}}</p>
+						</div>
+					</a>
+				</li>
+				<li>
+					<a class="menu-option pointer analyze href="javascript:void(0)">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M3,14L3.5,14.07L8.07,9.5C7.89,8.85 8.06,8.11 8.59,7.59C9.37,6.8 10.63,6.8 11.41,7.59C11.94,8.11 12.11,8.85 11.93,9.5L14.5,12.07L15,12C15.18,12 15.35,12 15.5,12.07L19.07,8.5C19,8.35 19,8.18 19,8A2,2 0 0,1 21,6A2,2 0 0,1 23,8A2,2 0 0,1 21,10C20.82,10 20.65,10 20.5,9.93L16.93,13.5C17,13.65 17,13.82 17,14A2,2 0 0,1 15,16A2,2 0 0,1 13,14L13.07,13.5L10.5,10.93C10.18,11 9.82,11 9.5,10.93L4.93,15.5L5,16A2,2 0 0,1 3,18A2,2 0 0,1 1,16A2,2 0 0,1 3,14Z"></path></svg>&nbsp;&nbsp;&nbsp;
+						<div>
+							<b>{{LANG view_analytics}}</b>
+							<p>{{LANG analyze_campaign}}</p>
+						</div>
+					</a>
+				</li>
+				<li class="delete-ad" id="<?php echo $context['ad']->id; ?>">
+					<div class="menu-option pointer">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>&nbsp;&nbsp;&nbsp;
+						<div>
+							<b>{{LANG delete_ads}}</b>
+							<p>{{LANG delete_ziz_ads}}</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</td>
+</tr>

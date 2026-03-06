@@ -1,0 +1,93 @@
+<script>$('[data-id="<?php echo($msg_data['id']) ?>"]').not(':first');</script>
+<?php if ($msg_data['from_id'] == $context['user']['user_id']) { ?>
+<div class="message-list-item right" data-id="<?php echo($msg_data['id']) ?>">
+	<div class="message-list-item__inner right">	
+		<div class="dropup valign message-options">
+			<!-- <div class="pointer dropdown-toggle" data-toggle="dropdown" role="button">
+				<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" opacity="0.5"><path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-7h2a3 3 0 0 0 6 0h2a5 5 0 0 1-10 0zm1-2a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm8 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" /></svg>
+			</div> -->
+			<div class="pointer del-msg">
+				<svg xmlns="http://www.w3.org/2000/svg" height="19" viewBox="0 0 24 24" width="19" opacity="0.5"><path fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-9h10v2H7v-2z"></path></svg>
+			</div>
+	    </div>
+
+		<div class="message__data">
+			<?php 
+			if (!empty($msg_data['text']) && empty($msg_data['media_file'])) { ?>
+				<p class="message__text"><?php echo($msg_data['text']) ?></p>
+			<?php }elseif (!empty($msg_data['media_file']) && $msg_data['media_type'] == 'image'){ ?>
+				<div class="img-file" data-lightgallery="<?php echo($msg_data['id']) ?>">
+					<a href="<?php echo(media($msg_data['media_file'])) ?>" data-lightbox>
+						<img src="<?php echo(media($msg_data['media_file'])) ?>">
+					</a>
+				</div>
+				<!-- <div class="img-file"> Reply With Image
+					<p class="small mb-0">Congratulations:)</p>
+					<div class="card shadow-none p-2">
+						<img src="<?php echo(media($msg_data['media_file'])) ?>">
+					</div>
+				</div> -->
+			<?php }elseif (!empty($msg_data['media_file']) && $msg_data['media_type'] == 'video'){ ?>
+				<div class="video-file">
+					<video class="" controls>
+						<source src="<?php echo(media($msg_data['media_file'])) ?>" type="video/mp4">
+						<source src="<?php echo(media($msg_data['media_file'])) ?>" type="video/mov">
+						<source src="<?php echo(media($msg_data['media_file'])) ?>" type="video/webm">
+						<source src="<?php echo(media($msg_data['media_file'])) ?>" type="video/3gp">
+						<source src="<?php echo(media($msg_data['media_file'])) ?>" type="video/ogg">
+					</video>
+				</div>
+			<?php } ?>
+			<time class="pull-right"><span class="time-ago" title="<?php echo(ToDate($msg_data['time'])) ?>"><?php echo(time2str($msg_data['time'])) ?></span><time>
+		</div>
+	</div>
+</div>
+<?php } else { ?>
+<div class="message-list-item left" data-id="<?php echo($msg_data['id']) ?>">
+	<div class="message-list-item__inner left">
+		<div class="user__avatar">
+			<img src="<?php echo(media($context['user_data']['avatar'])) ?>" class="img-circle">	
+		</div>
+		<div class="message__data">
+			<?php if (!empty($msg_data['text']) && empty($msg_data['media_file'])) { ?>
+				<p class="message__text"><?php echo($msg_data['text']) ?></p>
+			<?php } elseif(!empty($msg_data['media_file']) && $msg_data['media_type'] == 'image'){ ?>
+				<div class="img-file" data-lightgallery="<?php echo($msg_data['id']) ?>">
+					<a href="<?php echo(media($msg_data['media_file'])) ?>" data-lightbox>
+						<img src="<?php echo(media($msg_data['media_file'])) ?>">
+					</a>
+				</div>
+			<?php }elseif (!empty($msg_data['media_file']) && $msg_data['media_type'] == 'video'){ ?>
+				<div class="video-file">
+					<video class="" controls>
+						<source src="<?php echo(media($msg_data['media_file'])) ?>" type="video/mp4">
+						<source src="<?php echo(media($msg_data['media_file'])) ?>" type="video/mov">
+						<source src="<?php echo(media($msg_data['media_file'])) ?>" type="video/webm">
+						<source src="<?php echo(media($msg_data['media_file'])) ?>" type="video/3gp">
+						<source src="<?php echo(media($msg_data['media_file'])) ?>" type="video/ogg">
+					</video>
+				</div>
+			<?php } ?>
+			<time><span class="time-ago" title="<?php echo(ToDate($msg_data['time'])) ?>"><?php echo(time2str($msg_data['time'])) ?></span><time>
+		</div>
+
+		<div class="dropup valign message-options">
+			<!-- <div class="pointer dropdown-toggle" data-toggle="dropdown" role="button">
+				<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" opacity="0.5"><path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-7h2a3 3 0 0 0 6 0h2a5 5 0 0 1-10 0zm1-2a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm8 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" /></svg>
+			</div> -->
+			<div class="pointer del-msg">
+				<svg xmlns="http://www.w3.org/2000/svg" height="19" viewBox="0 0 24 24" width="19" opacity="0.5"><path fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-9h10v2H7v-2z"></path></svg>
+			</div>
+	    </div>
+		
+	</div>
+</div>
+<?php } ?>
+<script>
+	jQuery(document).ready(function($) {
+		$('div[data-lightgallery="<?php echo($msg_data['id']) ?>"]')
+		.lightGallery({mode:'lg-fade',zoom:true,scale:1,actualSize:false})
+		.on('onBeforeOpen.lg', function(event) {event.preventDefault();$("body").delay(1000).addClass('page__numb')})
+		.on('onBeforeClose.lg',function(event) {event.preventDefault();$("body").delay(1000).removeClass('page__numb')});
+	});
+</script>

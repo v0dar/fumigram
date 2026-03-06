@@ -1,0 +1,28 @@
+<li data-post-comment-reply="<?php echo($context['reply']['id']) ?>">
+	<div class="user-avatar">
+		<img src="<?php echo(media($context['reply']['avatar'])) ?>" class="img-circle" />
+	</div>
+	<div class="pp_com_body">
+		<span>
+			<strong><a class="reply-username <?php if($config['popover'] == 'on') { ?>udata<?php } ?>" data-id="<?php echo($context['reply']['user_id']) ?>" href="<?php echo(un2url($context['reply']['username'])) ?>" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo($context['reply']['username']) ?>"><?php echo($context['reply']['username']) ?></a></strong> 
+			<?php echo($context['reply']['text']) ?>
+			<div onclick="like_dis_comment_reply(<?php echo($context['reply']['id']) ?>,this)" class="like_comment comment_like_<?php echo($context['reply']['id']) ?>">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="<?php echo($context['reply']['is_liked'] ? 'liked_color' : '') ?>"><path fill="currentColor" d="M12 22l-9.192-9.192c-2.18-2.568-2.066-6.42.353-8.84A6.5 6.5 0 0 1 12 3.64a6.5 6.5 0 0 1 9.179 9.154L12 22zm7.662-10.509a4.5 4.5 0 0 0-6.355-6.337L12 6.282l-1.307-1.128a4.5 4.5 0 0 0-6.355 6.337l.114.132L12 19.172l7.548-7.549.114-.132z"/><path fill="currentColor" class="lk_act_svg" d="M21.179 12.794l.013.014L12 22l-9.192-9.192.013-.014A6.5 6.5 0 0 1 12 3.64a6.5 6.5 0 0 1 9.179 9.154z"/></svg>
+			</div>
+		</span>
+	</div>
+	<div class="events_container">
+		<span class="evnt_cont_btns comment_like_span_reply_<?php echo($context['reply']['id']) ?>" id="comment_like_<?php echo($context['reply']['id']) ?>"><span><?php echo($context['reply']['likes']) ?></span> {{LANG likes}}</span>
+		<span class="middot">·</span>
+		<span class="ajax-tile comment_time" title="<?php echo(time2str($context['reply']['time'])); ?>"><?php echo(time1str($context['reply']['time'])); ?></span>
+	</div>
+	<?php if ($context['reply']['is_owner']) { ?>
+		<span class="delcomment del-rp" onclick="delete_commnet_reply(<?php echo($context['reply']['id']) ?>);">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-9.414l2.828-2.829 1.415 1.415L13.414 12l2.829 2.828-1.415 1.415L12 13.414l-2.828 2.829-1.415-1.415L10.586 12 7.757 9.172l1.415-1.415L12 10.586z"/></svg>
+		</span>
+	<?php } ?>
+</li>
+<script type="text/javascript">
+	tippy('.like_comment', {arrow: true,content: '{{LANG like}}'});
+	tippy('.del-rp', {arrow: true,content: '{{LANG delete_reply}}'});
+</script>

@@ -1,0 +1,79 @@
+<div class="administration-settings noti-active">
+	<div class="valign settings-holder admin">
+		<img src="<?php echo($context['me']['avatar']) ?>" class="avatar cha" alt="...">
+		<div class="infoz">
+			<h5 title="<?php echo($context['me']['name']) ?>"><a><?php echo($context['me']['name']) ?></a></h5>
+			<p>{{LANG admin_settings}}</p>
+			<span>{{LANG admin_settings_dec}}</span>
+		</div>
+	</div>
+	<form class="form pp_sett_form" id="edit-administration-settings">
+		<p class="pg_mat_switch switch">
+			<label class="_admin_info">
+				{{LANG dev_and_admin}}
+				<input type="checkbox" <?php if($context['me']['admin']){ ?> checked <?php } ?> id="admin" name="admin" <?php if ($context['user']['moderator'] == 1 || $context['user']['manager'] == 1) { ?> disabled <?php } ?> >
+				<span class="lever"></span>
+			</label>
+		</p>
+		<p class="pg_mat_switch switch">
+			<label class="_community_panthers">
+				{{LANG community_panthers}}
+				<input type="checkbox" <?php if($context['me']['partner']){ ?> checked <?php } ?> id="partner" name="partner">
+				<span class="lever"></span>
+			</label>
+		</p>
+		<p class="pg_mat_switch switch">
+			<label class="_com_manager">
+				{{LANG site_com_manager}}
+				<input type="checkbox" <?php if($context['me']['manager']){ ?> checked <?php } ?> id="manager " name="manager" <?php if ($context['user']['moderator'] == 1 || $context['user']['manager'] == 1) { ?> disabled <?php } ?>>
+				<span class="lever"></span>
+			</label>
+		</p>
+		<p class="pg_mat_switch switch">
+            <label class="_com_moderators">
+				{{LANG site_moderators}}
+				<input type="checkbox" <?php if($context['me']['moderator']){ ?> checked <?php } ?> id="moderator" name="moderator" <?php if ($context['user']['moderator'] == 1 || $context['user']['manager'] == 1) { ?> disabled <?php } ?>>
+				<span class="lever"></span>
+			</label>
+		</p>
+		<p class="pg_mat_switch switch">
+			<label class="_graph_creators">
+				{{LANG graphis_creators}}
+				<input type="checkbox" <?php if($context['me']['graphics']){ ?> checked <?php } ?> id="graphics" name="graphics">
+				<span class="lever"></span>
+			</label>
+		</p>
+		<p class="pg_mat_switch switch">
+			<label class="_lang_translators">
+				{{LANG site_translators}}
+				<input type="checkbox" <?php if($context['me']['translator']){ ?> checked <?php } ?> id="translator" name="translator">
+				<span class="lever"></span>
+			</label>
+		</p>
+		<p class="pg_mat_switch switch">
+			<label class="_community_promoters">
+				{{LANG community_promoters}}
+				<input type="checkbox" <?php if($context['me']['promoter']){ ?> checked <?php } ?> id="promoter" name="promoter">
+				<span class="lever"></span>
+			</label>
+		</p>
+		<div class="pg_sett_save"><button class="btn btn-mat administration" type="submit"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M11.602 13.76l1.412 1.412 8.466-8.466 1.414 1.414-9.88 9.88-6.364-6.364 1.414-1.414 2.125 2.125 1.413 1.412zm.002-2.828l4.952-4.953 1.41 1.41-4.952 4.953-1.41-1.41zm-2.827 5.655L7.364 18 1 11.636l1.414-1.414 1.413 1.413-.001.001 4.951 4.951z"></path></svg> {{LANG save_changes}}</span></button></div>
+		<input type="hidden" name="user_id" value="<?php echo($context['me']['user_id']) ?>">
+		<input type="hidden" name="hash" value="<?php echo($context['csrf_token']) ?>">
+		<br>
+		<p class="text-center">{{LANG be_careful}}</p>
+	</form>
+</div>
+<?php include $context['direct'].'/settings/templates/settings/js/script.html'; ?>
+<script type="text/javascript">
+    tippy('.dev_badge', {arrow: true,content: '{{LANG admins}}',});
+	tippy('.c_mderator', {arrow: true,content: "{{LANG moderator}}",});
+	tippy('.c_manager', {arrow: true,content: "{{LANG community_manager}}",});
+    tippy('._admin_info', {arrow: true,content: "{{LANG dev_admin_dec}}",});
+    tippy('._com_manager', {arrow: true,content: "{{LANG com_manager_dec}}",});
+    tippy('._com_moderators', {arrow: true,content: "{{LANG com_moderators_dec}}",});
+	tippy('._graph_creators', {arrow: true,content: "{{LANG graph_content_creators}}",});
+	tippy('._lang_translators', {arrow: true,content: "{{LANG site_lang_translators}}",});
+	tippy('._community_promoters', {arrow: true,content: "{{LANG _community_promoters}}",});
+	tippy('._community_panthers', {arrow: true,content: "{{LANG com_pathners_dec}}",});
+</script>

@@ -1,0 +1,42 @@
+<div class="pg_auth_page pg_auth_full">
+	<div class="login_page">
+		<div class="login-pagez">
+			<a href="{{CONFIG site_url}}" class="logo"><img src="{{CONFIG site_url}}/media/img/<?php if ($_COOKIE['mode'] == 'night') { ?>logo<?php } else { ?>logo<?php } ?>.{{CONFIG logo_extension}}" alt="logo"></a>
+			<h3>{{LANG reset_password}}</h3>
+			<span>{{LANG putin_ur_new_password}}</span><br><br>
+			<form action="" class="form" id="reset-password">
+				<div class="pg_mat_input">
+					<input type="password" name="password" id="password" placeholder="{{LANG password}}" required autofocus />
+					<label for="password">{{LANG password}}</label>
+				</div>
+				<div class="pg_mat_input">
+					<input type="password" name="confirm_passwd" id="confirm_passwd" placeholder="{{LANG confirm_passwd}}" required  />
+					<label for="confirm_passwd">{{LANG confirm_passwd}}</label>
+				</div>
+				<input type="hidden" value="<?php echo($context['code']) ?>" name="code">
+				<input type="hidden" name="hash" value="<?php echo($context['csrf_token']) ?>">
+				<button class="btn btn-large btn-main btn-mat" id="sign_submit" type="submit">{{LANG reset}}</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script>
+		jQuery(document).ready(function($) {
+			$("form#reset-password").ajaxForm({
+				url: '<?php echo($context["rita"]) ?>/reset-new',
+				type: 'POST', dataType: 'json',
+				beforeSend: function(){
+					$('form').find('button[type="submit"]').attr('disabled','true');
+				}, success: function(data){
+					if (data.status == 200) {
+						Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+						setTimeout(function(){
+							window.location.href = data.link;
+					    },3000);
+					}else{
+					} $('form').find('button[type="submit"]').removeAttr('disabled');
+				}
+			})
+		});
+</script>

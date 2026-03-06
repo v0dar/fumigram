@@ -1,0 +1,84 @@
+<div class="priv-active">
+	<div class="valign settings-holder privacy">
+		<img src="<?php echo($context['me']['avatar']) ?>" class="avatar cha" alt="...">
+		<div class="infoz">
+			<h5 title="<?php echo($context['me']['name']) ?>"><a><?php echo($context['me']['name']) ?></a></h5>
+			<p>{{LANG acc_privacy_settings}}</p>
+			<span>{{LANG change_ur_privacy}}</span>
+		</div>
+	</div>
+	<form class="form pp_sett_form" id="edit-privacy-settings">
+		<div class="pg_mat_input">
+			<label>{{LANG p_privacy}}</label>
+			<select name="p_privacy" class="pg_select_has_label">
+				<option value="2" <?php if($context['me']['p_privacy'] == 2){ ?> selected <?php } ?>>{{LANG everyone}}</option>
+				<option value="1" <?php if($context['me']['p_privacy'] == 1){ ?> selected <?php } ?>>{{LANG followers}}</option>
+				<option value="0" <?php if($context['me']['p_privacy'] == 0){ ?> selected <?php } ?>>{{LANG nobody}}</option>
+			</select>
+		</div>
+		<div class="pg_mat_input">
+			<label>{{LANG c_privacy}}</label>
+			<select name="c_privacy" class="pg_select_has_label">
+				<option value="1" <?php if($context['me']['c_privacy'] == 1){ ?> selected <?php } ?>>{{LANG everyone}}</option>
+				<option value="2" <?php if($context['me']['c_privacy'] == 2){ ?> selected <?php } ?>>{{LANG people_i_follow}}</option>
+			</select>
+		</div>
+		<?php if ($config['joined_info'] == 'on') { ?>
+			<div class="pg_mat_input">
+				<label>{{LANG joined_type}}</label>
+				<select name="joined_type" class="pg_select_has_label">
+					<option value="1" <?php if($context['me']['joined_type'] == 1){ ?> selected <?php } ?>>{{LANG joined_date}}</option>
+					<option value="0" <?php if($context['me']['joined_type'] == 0){ ?> selected <?php } ?>>{{LANG joined_time}}</option>
+				</select>
+			</div>
+		<?php } ?>
+		<?php if ($config['private_photos'] == 'on' || $config['private_photos'] == 'on') { ?>
+			<p class="pg_mat_switch switch">
+				<label>
+					{{LANG show_my_subscriptions}}
+					<input type="checkbox" <?php if($context['me']['show_subscribers']){ ?> checked <?php } ?> id="show_subscribers" name="show_subscribers">
+					<span class="lever"></span>
+				</label>
+				<span>{{LANG allow_show_subscriptions}}</span>
+			</p>
+		<?php } ?>
+		<p class="pg_mat_switch switch">
+			<label>
+				{{LANG show_my_favourites}}
+				<input type="checkbox" <?php if($context['me']['show_favorites']){ ?> checked <?php } ?> id="show_favorites" name="show_favorites">
+				<span class="lever"></span>
+			</label>
+			<span>{{LANG allow_show_favourites}}</span>
+		</p>
+		<!-- <?php if ($config['joined_info'] == 'on') { ?>
+			<p class="pg_mat_switch switch">
+				<label>
+					{{LANG show_my_join_info}}
+					<input type="checkbox" <?php if($context['me']['show_joined']){ ?> checked <?php } ?> id="show_joined" name="show_joined">
+					<span class="lever"></span>
+				</label>
+				<span>{{LANG allow_show_joined}}</span>
+			</p>
+		<?php } ?> -->
+		<p class="pg_mat_switch switch">
+			<label>
+				{{LANG auto_renew_premium}}
+				<input type="checkbox" <?php if($context['me']['auto_renew']){ ?> checked <?php } ?> id="auto_renew" name="auto_renew">
+				<span class="lever"></span>
+			</label>
+			<span>{{LANG auto_renew_premium_membership}}</span>
+		</p>
+		<p class="pg_mat_switch switch">
+			<label>
+				{{LANG profile_search}}
+				<input type="checkbox" <?php if($context['me']['search_engines']){ ?> checked <?php } ?> id="search_engines" name="search_engines">
+				<span class="lever"></span>
+			</label>
+			<span>{{LANG allow_profile_search}}</span>
+		</p>
+		<div class="pg_sett_save"><button type="submit" class="btn btn-mat privacy"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M11.602 13.76l1.412 1.412 8.466-8.466 1.414 1.414-9.88 9.88-6.364-6.364 1.414-1.414 2.125 2.125 1.413 1.412zm.002-2.828l4.952-4.953 1.41 1.41-4.952 4.953-1.41-1.41zm-2.827 5.655L7.364 18 1 11.636l1.414-1.414 1.413 1.413-.001.001 4.951 4.951z"></path></svg> {{LANG save_changes}}</span></button></div>
+		<input type="hidden" name="user_id" value="<?php echo($context['me']['user_id']) ?>">
+		<input type="hidden" name="hash" value="<?php echo($context['csrf_token']) ?>">
+	</form>
+</div>
+<?php include $context['direct'].'/settings/templates/settings/js/script.html'; ?>

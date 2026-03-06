@@ -1,0 +1,20 @@
+
+<div class="item blocked-users" data-blocked-users-ls="<?php echo($udata['user_id']) ?>">
+	<div class="avatar">
+		<img src="<?php echo(media($udata['avatar'])) ?>" alt="...">
+		<div class="valign uname">
+			<a class="<?php if($config['popover'] == 'on') { ?>udata<?php } ?>" data-id="<?php echo($udata['user_id']) ?>" href="<?php echo(un2url($udata['username'])) ?>" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo($udata['username']) ?>">
+				<h4>@<?php echo($udata['username']) ?></h4>
+			</a>
+		</div>
+	</div>
+		<div class="button">
+			<button class="btn btn-mat unblock-user" id="<?php echo($udata['user_id']) ?>">
+				<span>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-unlock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>
+					{{LANG unblock}}
+				</span>
+			</button>
+		</div>
+	<div class="clear"></div>
+</div>

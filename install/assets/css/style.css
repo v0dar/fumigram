@@ -1,0 +1,48 @@
+:root {--grey-dark: #2d323e;--fumigram: #ff235d;}
+body {background-color: #fff;}
+p {color: #757575;font-weight: 500;font-size: 16px;font-family: 'Viga', Arial, sans-serif;}
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {color: var(--grey-dark);font-weight: 500 !important;font-family: 'Viga', Arial, sans-serif;}
+a {-webkit-transition: .3s all ease;-o-transition: .3s all ease;transition: .3s all ease;font-family: 'Viga', Arial, sans-serif;}
+a:hover {text-decoration: none !important;}
+.content {padding: 7rem 0;}
+h2 {font-size: 20px;}
+.half,.half .container>.row {height: 100vh;min-height: 700px;}
+@media (max-width: 991.98px) {
+.half .bg {height: 200px;}
+.background {display: none;}}
+@media (max-width: 1199.98px) {.half .contents,.half .bg {width: 100% !important;}}
+.half .contents {background: #fff;}
+.half .contents,.half .bg {width: 50%;}
+.logo {position: relative; top: -20px; text-align: center;}
+.installer>.wrapper {max-height: 100vh;min-height: 100vh;overflow: hidden;}
+.installer>.wrapper>.install-box {padding-top: 50px;overflow-y: auto;scroll-behavior: smooth;}
+.installer>.wrapper>.install-box .box-content {padding-bottom: 100px;}
+.box-content>h3 {color: var(--grey-dark);font-size: 26px;text-align: center;margin-bottom: 10px; text-transform: uppercase;}
+.box-content p {text-align: center;font-size: 17px;color: var(--grey-dark);}
+.list-group-item {border: 0px;margin: 10px auto;border-radius: 12px !important;-webkit-box-shadow: 0 1px 12px rgba(0, 0, 0, 0.12);box-shadow: 0 1px 15px rgba(0, 0, 0, 0.12);}
+.alert-danger {font-family: 'Viga', Arial, sans-serif;background: var(--fumigram) !important;color: #fff !important;font-size: 16px !important;-webkit-box-shadow: 0 1px 9px rgba(64, 1, 14, 0.12);box-shadow: 0 1px 15px rgba(56, 1, 10, 0.12);}
+.requirements>.proceed>span {display: block;padding: 15px;background: var(--fumigram);color: fff;border-radius: 5px;font-size: 22px;cursor: pointer;transition: background-color .2s ease-in-out, color .2s ease-in-out, border-color .2s ease-in-out, box-shadow .2s ease-in-out;box-shadow: 3px 5px 10px 0 rgba(0, 0, 0, .2);font-family: 'Viga', sans-serif;}
+.background {overflow: hidden;}
+.background>div>img {max-height: 100vh;overflow: hidden;object-fit: cover;object-position: center;width: 100%;min-height: 100vh}
+.half .contents .form-control,
+.half .bg .form-control {height: 58px;background: #f4f3f3;color: var(--grey-dark);font-size: 15px;}
+.half .contents .form-control:active,
+.half .contents .form-control:focus,
+.half .bg .form-control:active,
+.half .bg .form-control:focus {outline: none;-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);}
+.installation {background: #fff;padding: 20px;font-family: 'Viga', Arial, sans-serif;border-radius: 12px !important;-webkit-box-shadow: 0 1px 12px rgba(0, 0, 0, 0.12);box-shadow: 0 1px 15px rgba(0, 0, 0, 0.12);}
+.installation h5 {font-size: 17px;margin-bottom: 0px;color: var(--fumigram);margin-top: 40px;}
+.installation p {font-size: 15px;margin-top: 5px;}
+.installation label {position: relative;bottom: -12px;padding: 5px 10px;background: #ffffff;margin-left: 10px;font-size: 14px;text-transform: uppercase;color: var(--grey-dark);margin-bottom: 0px !important;border-radius: 3px !important;-webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.12);box-shadow: 0 1px 10px rgba(0, 0, 0, 0.12);}
+.installation input.form-control {border: none;-webkit-box-shadow: none;box-shadow: none;border-radius: 4px;border: 2px solid #e2e2e2;padding-top: 15px;}
+.install {margin-top: 30px;border: 0;background: var(--fumigram);display: block;width: 100%;padding: 15px;border-radius: 5px;transition: background-color .2s ease-in-out, color .2s ease-in-out, border-color .2s ease-in-out, box-shadow .2s ease-in-out;box-shadow: 3px 5px 10px 0 rgba(0, 0, 0, .2);font-family: 'Viga', sans-serif;position: relative;}
+.install>span {text-align: center;color: #fff;font-size: 20px;}
+.link {text-decoration: none !important;text-align: center !important;margin-top: 30px;border: 0;background: var(--fumigram);display: block;width: 100%;padding: 15px !important;border-radius: 5px;transition: background-color .2s ease-in-out, color .2s ease-in-out, border-color .2s ease-in-out, box-shadow .2s ease-in-out;box-shadow: 3px 5px 10px 0 rgba(0, 0, 0, .2);font-family: 'Viga', sans-serif;position: relative;}
+.link>span {color: #fff;font-size: 22px;}
+
+.form-control {border: 1px solid #daced1 !important;}
+.installation.processing>form>.install>span:before {background-image: repeating-linear-gradient(-45deg, transparent, transparent 1rem, #ffffff78 1rem, #ffffff78 2rem);background-size: 200% 200%;animation: barberpole 6s linear infinite;content: "";position: absolute;width: 100%;height: 100%;left: 0px;top: 0px;cursor: default;}
+@keyframes barberpole {100% {background-position: 100% 100%;}}
+.half .bg {background-size: cover;background-position: center;}
+.half a {color: #888;text-decoration: underline;}
+.half .btn {height: 54px;padding-left: 30px;padding-right: 30px;}

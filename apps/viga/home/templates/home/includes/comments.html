@@ -1,0 +1,52 @@
+<li data-post-comment="<?php echo($comment['id']) ?>">
+	<div class="user-avatar">
+		<img src="<?php echo(media($comment['avatar'])) ?>" class="img-circle" />
+	</div>
+	<div class="pp_com_body">
+		<span>
+			<strong><a class="comment-username <?php if($config['popover'] == 'on') { ?>udata<?php } ?>" data-id="<?php echo($comment['user_id']) ?>" href="<?php echo(un2url($comment['username'])) ?>" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo($comment['username']) ?>"><?php echo($comment['username']) ?></a></strong> 
+			<?php echo($comment['text']) ?>
+			<div onclick="like_dis_comment(<?php echo($comment['id']) ?>,this)" class="like_comment comment_like_<?php echo($comment['id']) ?>">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="<?php echo($comment['is_liked'] ? 'liked_color' : '') ?>"><path fill="currentColor" d="M12 22l-9.192-9.192c-2.18-2.568-2.066-6.42.353-8.84A6.5 6.5 0 0 1 12 3.64a6.5 6.5 0 0 1 9.179 9.154L12 22zm7.662-10.509a4.5 4.5 0 0 0-6.355-6.337L12 6.282l-1.307-1.128a4.5 4.5 0 0 0-6.355 6.337l.114.132L12 19.172l7.548-7.549.114-.132z"/><path fill="currentColor" class="lk_act_svg" d="M21.179 12.794l.013.014L12 22l-9.192-9.192.013-.014A6.5 6.5 0 0 1 12 3.64a6.5 6.5 0 0 1 9.179 9.154z"/></svg>
+			</div>
+		</span>
+	</div>
+	<div class="events_container" id="index-<?php echo($comment['id']) ?>">
+		<span class="evnt_cont_btns comment_like_span_<?php echo($comment['id']) ?>" id="comment_like_<?php echo($comment['id']) ?>"><span><?php echo($comment['likes']) ?></span> {{LANG likes}}</span>
+		<span class="middot">·</span>
+		<span onclick="get_comment_reply(<?php echo($comment['id']) ?>,this)" id="comment_reply_<?php echo($comment['id']) ?>" class="evnt_cont_btns pointer"><span><?php echo($comment['replies']) ?></span> {{LANG reply}}</span>
+		<span class="middot">·</span>
+		<span class="ajax-tile comment_time" title="<?php echo(time2str($comment['time'])) ?>"><?php echo(time1str($comment['time'])); ?></span>
+		<div class="reply_list"></div>
+		<form class="form add-comment" style="display: none;" id="add_reply_form_<?php echo $comment['id']; ?>">
+			<div class="fluid">
+				<div class="user-avatar" style="margin-left: 5px;">
+					<img src="{{ME avatar}}" width="34px" height="34px" class="img-circle">
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control comment" onkeydown="reply_comment(<?php echo $comment['id']; ?>,event);" placeholder="{{LANG write_comment}}" autocomplete="off" style="max-width: 506px;">
+				</div>
+				<div class="dropdown">
+					<span class="dropdown-toggle btn-emoji" style="top: -0.7em;" data-toggle="dropdown" onclick="echo_emoji('<?php echo $comment['id']; ?>','main-post');">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22">
+							<path fill="currentColor" d="M9.153 11.603c.795 0 1.439-.879 1.439-1.962s-.644-1.962-1.439-1.962-1.439.879-1.439 1.962.644 1.962 1.439 1.962zm-3.204 1.362c-.026-.307-.131 5.218 6.063 5.551 6.066-.25 6.066-5.551 6.066-5.551-6.078 1.416-12.129 0-12.129 0zm11.363 1.108s-.669 1.959-5.051 1.959c-3.505 0-5.388-1.164-5.607-1.959 0 0 5.912 1.055 10.658 0zM11.804 1.011C5.609 1.011.978 6.033.978 12.228s4.826 10.761 11.021 10.761S23.02 18.423 23.02 12.228c.001-6.195-5.021-11.217-11.216-11.217zM12 21.354c-5.273 0-9.381-3.886-9.381-9.159s3.942-9.548 9.215-9.548 9.548 4.275 9.548 9.548c-.001 5.272-4.109 9.159-9.382 9.159zm3.108-9.751c.795 0 1.439-.879 1.439-1.962s-.644-1.962-1.439-1.962-1.439.879-1.439 1.962.644 1.962 1.439 1.962z"></path>
+						</svg>
+					</span>
+					<ul class="dropdown-menu <?php if ($config['emoji_zoom_in'] == 'on') { ?>zoom<?php } ?> pull-right ultimate-menu demoji emoji-comment-<?php echo $comment['id']; ?>" style="margin-top: 15px;"></ul>
+				</div>
+			</div>
+			<div class="reply_commenting_overlay hidden">
+				<div id="pp_loader"><div class="speeding_wheel"></div></div>
+			</div>
+		</form>
+	</div>
+	<?php if ($comment['is_owner']) { ?>
+		<span class="delcomment" onclick="delete_commnet(<?php echo($comment['id']) ?>);">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-9.414l2.828-2.829 1.415 1.415L13.414 12l2.829 2.828-1.415 1.415L12 13.414l-2.828 2.829-1.415-1.415L10.586 12 7.757 9.172l1.415-1.415L12 10.586z"/></svg>
+		</span>
+	<?php } ?>
+</li>
+<script type="text/javascript">
+	tippy('.delcomment', {arrow: true,content: '{{LANG delete_comment}}'});
+	tippy('.like_comment', {arrow: true,content: '{{LANG like}}'});
+</script>

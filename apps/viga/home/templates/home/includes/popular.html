@@ -1,0 +1,26 @@
+<?php if ($context['popular']) { ?>
+    <div class="follow-suggestions-cr">
+        <div class="valign pg_widget_title">
+            <h5>{{LANG follow_suggestions}}</h5>
+            <a href="<?php echo(pxp_link('explore/people')) ?>" data-ajax="load.php?app=explore&apph=people" class="more-follows">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="feather"><path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"></path></svg>
+            </a>
+        </div>
+        <div class="pg_folw_sugg_carousel tl-follow-suggestions">
+            <?php foreach ($context['popular'] as $key => $popular_sugg) { ?>
+                <div class="item">
+                    <div class="avatar">
+                        <img src="<?php echo($popular_sugg['avatar']) ?>" alt="Picture">
+                        <div class="valign uname">
+                            <a class="<?php if($config['popover'] == 'on') { ?>udata<?php } ?>" data-id="<?php echo($popular_sugg['user_id']) ?>" href="<?php echo($popular_sugg['url']) ?>" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo($popular_sugg['username']) ?>"><h4><?php echo $popular_sugg['username']; ?></h4></a>
+                        </div>
+                    </div>
+                    <div class="button">
+                        <button class="btn btn-mat" onclick="follow(<?php echo $popular_sugg['user_id']; ?>,this);"><span>{{LANG follow}}</span></button>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+    <?php } ?>
+    <script>tippy('.more-follows', {arrow: true,content: '{{LANG all_follow_suggestions}}'});</script>

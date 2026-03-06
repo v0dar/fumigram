@@ -1,0 +1,154 @@
+<?php if ($config['securionpay_payment'] == 'on') { ?>
+    <script src="https://securionpay.com/checkout.js"></script>
+<?php } ?>
+<?php if ($config['credit_card'] == 'on') { ?>
+    <script src="https://js.stripe.com/v3/"></script>
+<?php } ?>
+
+<div class="sett-active">
+	<div class="valign settings-holder credits">
+		<img src="<?php echo($context['me']['avatar']) ?>" class="avatar cha" alt="...">
+		<div class="infoz">
+			<h5 title="<?php echo($context['me']['name']) ?>"><a><?php echo($context['me']['name']) ?></a></h5>
+			<p>{{LANG credits}}</p>
+			<span>{{LANG ps_credit_balance}}</span>
+		</div>
+	</div><br>
+	<div class="re-credits">
+		<div class="re-cred-bl">
+			<div class="credits-circle-1"></div>
+			<div class="credits-circle-2"></div>
+			<div class="credits-circle-3"></div>
+			<h2><span><?php echo($context['me']['credits']) ?></span> {{LANG credits}}</h2>
+			<p>{{LANG your_total_credit_balance}}</p>
+		</div>
+	</div>
+
+	<div class="credit-plans">
+		<div class="cr-plans">
+			<p>
+				<input type="radio" name="plans" id="r-sack" value="sack_of_credits" data-price="<?php echo($config['sack_of_credits_price']) ?>">
+				<label for="r-sack" class="r-sack">
+					<span class="title">{{LANG sack_of_credits}}</span>
+					<b><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="currentColor"></path></svg> <?php echo $config['sack_of_credits']; ?></b>
+					<img src="{{CONFIG site_url}}/media/img/credits/bag-of-credits.png" alt=""/>
+					<span class="amount"><?php echo($context['currency_symbol'].$config['sack_of_credits_price']) ?></span>
+				</label>
+			</p>
+			<p>
+				<input type="radio" name="plans" id="r-pot" value="pot_of_credits" data-price="<?php echo($config['pot_of_credits_price']) ?>">
+				<label for="r-pot" class="r-pot">
+					<span class="title">{{LANG pot_of_credits}}</span>
+					<b><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="currentColor"></path></svg> <?php echo $config['pot_of_credits']; ?></b>
+					<img src="{{CONFIG site_url}}/media/img/credits/pot-of-credits.png" alt=""/>
+					<span class="amount"><?php echo($context['currency_symbol'].$config['pot_of_credits_price']) ?></span>
+				</label>
+			</p>
+			<p>
+				<input type="radio" name="plans" id="r-cup" value="cup_of_credits" data-price="<?php echo($config['cup_of_credits_price']) ?>">
+				<label for="r-cup" class="r-cup">
+					<span class="title">{{LANG cup_of_credits}}</span>
+					<b><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="currentColor"></path></svg> <?php echo $config['cup_of_credits']; ?></b>
+					<img src="{{CONFIG site_url}}/media/img/credits/cup-of-credits.png" alt=""/>
+					<span class="amount"><?php echo($context['currency_symbol'].$config['cup_of_credits_price']) ?></span>
+				</label>
+			</p>
+			
+		</div>
+
+		<!-- <div class="cr-plans">
+			<p>
+				<input type="radio" name="plans" id="r-chest" value="{{LANG chest_of_credits}} <?php echo $config['chest_of_credits']; ?>" data-price="<?php echo($config['chest_of_credits_price']) ?>">
+				<label for="r-chest" class="r-chest">
+					<span class="title">{{LANG chest_of_credits}}</span>
+					<b><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M11,17V16H9V14H13V13H10A1,1 0 0,1 9,12V9A1,1 0 0,1 10,8H11V7H13V8H15V10H11V11H14A1,1 0 0,1 15,12V15A1,1 0 0,1 14,16H13V17H11Z"></path></svg> <?php echo $config['chest_of_credits']; ?></b>
+					<img src="{{CONFIG site_url}}/media/img/credits/chest-of-credits.png" alt=""/>
+					<span class="amount"><?php echo($context['currency_symbol'].$config['chest_of_credits_price']) ?></span>
+				</label>
+			</p>
+			<p></p>
+			<p></p>
+		</div> -->
+
+		<div class="pay-with credit-pay">
+			<div class="pay_u_btns valign">
+				<?php if ($config['paypal_payment'] == 'on') { ?>
+					<button class="payment btn paypal valign hidden" onclick="Pxp_PayPalLink();">
+						<span>{{LANG paypal}}</span> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M8.32,21.97C8.21,21.92 8.08,21.76 8.06,21.65C8.03,21.5 8,21.76 8.66,17.56C9.26,13.76 9.25,13.82 9.33,13.71C9.46,13.54 9.44,13.54 10.94,13.53C12.26,13.5 12.54,13.5 13.13,13.41C16.38,12.96 18.39,11.05 19.09,7.75C19.13,7.53 19.17,7.34 19.18,7.34C19.18,7.33 19.25,7.38 19.33,7.44C20.36,8.22 20.71,9.66 20.32,11.58C19.86,13.87 18.64,15.39 16.74,16.04C15.93,16.32 15.25,16.43 14.05,16.46C13.25,16.5 13.23,16.5 13,16.65C12.83,16.82 12.84,16.79 12.45,19.2C12.18,20.9 12.08,21.45 12.04,21.55C11.97,21.71 11.83,21.85 11.67,21.93L11.56,22H10C8.71,22 8.38,22 8.32,21.97V21.97M3.82,19.74C3.63,19.64 3.5,19.47 3.5,19.27C3.5,19 6.11,2.68 6.18,2.5C6.27,2.32 6.5,2.13 6.68,2.06L6.83,2H10.36C14.27,2 14.12,2 15,2.2C17.62,2.75 18.82,4.5 18.37,7.13C17.87,10.06 16.39,11.8 13.87,12.43C13,12.64 12.39,12.7 10.73,12.7C9.42,12.7 9.32,12.71 9.06,12.85C8.8,13 8.59,13.27 8.5,13.6C8.46,13.67 8.23,15.07 7.97,16.7C7.71,18.33 7.5,19.69 7.5,19.72L7.47,19.78H5.69C4.11,19.78 3.89,19.78 3.82,19.74V19.74Z" /></svg>
+					</button>
+				<?php } ?>
+				<?php if ($config['cashfree_payment'] == "yes" && !empty($config['cashfree_client_key']) && !empty($config['cashfree_secret_key'])) { ?>
+					<button id="cashfree-button1" onclick="PayViaCashfreeWallet();" class="btn valign cashfree hidden">
+						<span>{{LANG cashfree}}</span> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M20,8H4V6H20M20,18H4V12H20M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" /></svg>
+					</button>
+				<?php } ?>
+				<?php if ($config['paystack'] == "on" && !empty($config['paystack_secret_key'])) { ?>
+					<button id="paystack-button1" class="payment valign btn btn-paystack-payment paystack hidden" onclick="PayViaPaystackWallet();">
+						<span>{{LANG paystack}}</span> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M20,8H4V6H20M20,18H4V12H20M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" /></svg>
+					</button>
+				<?php } ?>
+				<?php if ($config['checkout_payment'] == "yes" && !empty($config['checkout_seller_id']) && !empty($config['checkout_publishable_key']) && !empty($config['checkout_private_key'])) { ?>
+					<button id="2co_credit" class="btn 2co valign twoco btn-2checkout-payment hidden" onclick="PayVia2CheckoutWallet();">
+						<span>{{LANG 2checkout}}</span> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M9,7V9H13V11H11A2,2 0 0,0 9,13V17H11L15,17V15H11V13H13A2,2 0 0,0 15,11V9A2,2 0 0,0 13,7H9M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2Z" /></svg>
+					</button>
+				<?php } ?>
+				<?php if ($config['authorize_payment'] == "on" && !empty($config['authorize_login_id']) && !empty($config['authorize_transaction_key'])) { ?>
+					<button id="authorize-button1" class="payment valign btn btn-authorize-payment authorize hidden"onclick="PayUsingAuthorize();">
+						<span> {{LANG authorize}}</span> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M20,8H4V6H20M20,18H4V12H20M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" /></svg>
+					</button>
+				<?php } ?>
+				<?php if ($config['razorpay'] == "on" && !empty($config['razorpay_key']) && !empty($config['razorpay_secret'])) { ?>
+				<button class="payment btn-razorpay btn valign razorpay btn-razorpay-payment hidden" onclick="PayViaRazorpayWallet();">
+					<span>{{LANG razorpay}}</span> <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 284 324" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g> <polygon id="Fill-17" fill="currentColor" points="122.6338 105.6902 106.8778 163.6732 197.0338 105.3642 138.0748 325.3482 197.9478 325.4032 285.0458 0.4822"/> <path d="M25.5947,232.9246 L0.8077,325.4026 L123.5337,325.4026 C123.5337,325.4026 173.7317,137.3196 173.7457,137.2656 C173.6987,137.2956 25.5947,232.9246 25.5947,232.9246" fill="currentColor"/> </g> </g> </svg>
+				</button>
+				<?php } ?>
+				<?php if ($config['securionpay_payment'] == "on" && !empty($config['securionpay_public_key']) && !empty($config['securionpay_secret_key'])) { ?>
+					<button id="securionpay-button1" class="payment valign btn btn-securionpay-payment securionpay hidden" onclick="PayUsingSecurionpay();">
+						<span>{{LANG securionpay}}</span> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M20,8H4V6H20M20,18H4V12H20M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" /></svg>
+					</button>
+				<?php } ?>
+				<?php if ($config['iyzipay_payment'] == "yes" && !empty($config['iyzipay_key']) && !empty($config['iyzipay_secret_key'])) { ?>
+					<button id="iyzipay-button1" class="payment valign btn btn-iyzipay-payment iyzipay hidden" onclick="PayViaIyzipayWallet();">
+						<span>{{LANG iyzipay}}</span> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M20,8H4V6H20M20,18H4V12H20M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" /></svg>
+					</button>
+				<?php } ?>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+function price() {
+    var plans = document.getElementsByName('plans');
+    for (index=0; index < plans.length; index++) {
+        if (plans[index].checked) {
+            return plans[index].getAttribute('data-price');
+            break;
+        }
+    }
+}
+// Credit Description
+function value() {
+    var plans = document.getElementsByName('plans');
+    for (index=0; index < plans.length; index++) {
+        if (plans[index].checked) {
+            return plans[index].value;
+            break;
+        }
+    }
+}
+
+// Paypal Method
+function Pxp_PayPalLink(type) {
+	$('.paypal').attr('disabled','true');
+	Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">{{LANG processing_payment}}</div>'});
+	$.post(link('payment/paypal'), {value:value(), price:price(), mode: "add_credits"}, function(data, textStatus, xhr) {
+		if (data.status == 200) {
+			window.location.href = data.url;
+		} else {
+			Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+		}
+	$('.paypal').removeAttr('disabled');
+	});
+}
+</script>

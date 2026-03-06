@@ -1,0 +1,347 @@
+<div class="upload-video pg_sett_row" style="margin-top: -13px">
+	<div class="col-md-12 page-content">
+		<div class="pg_page padd">
+			<div class="video-pad">
+				<div class="upload-step step-one-active">
+					<div class="line">
+						<div class="line_sec"></div>
+						<div class="dot one"><span></span><p>{{LANG upload}}</p></div>
+						<div class="dot two"><span></span><p>{{LANG details}}</p></div>
+						<div class="dot three"><span></span><p>{{LANG porcessing}}</p></div>
+						<div class="dot four"><span></span><p>{{LANG uploaded}}</p></div>
+					</div>
+				</div>
+				<div class="video-pad-one">
+					<div class="upload" data-block="drop-zone">
+						<div class="content">
+							<video class="hidden" id="post__tiles"></video>
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 491.535 491.535" xml:space="preserve"> <rect x="0" y="474.278" style="fill:#f6f6f6;" width="368.896" height="17.244"/> <polygon style="fill:#fff;" points="86.969,0.013 368.878,0.013 368.878,474.287 0,474.287 0,86.981 "/> <polygon style="fill:#d1d1d1;" points="86.969,86.981 0,86.981 86.969,0.013 "/> <rect x="180.531" y="36.539" style="fill:#64798A;" width="311.004" height="345.958"/> <g> <rect x="194.765" y="53.281" style="fill:#FFFFFF;" width="31.995" height="31.995"/> <rect x="445.276" y="53.281" style="fill:#FFFFFF;" width="31.995" height="31.995"/> <rect x="194.765" y="123.405" style="fill:#FFFFFF;" width="31.995" height="31.995"/> <rect x="445.276" y="123.405" style="fill:#FFFFFF;" width="31.995" height="31.995"/> <rect x="194.765" y="193.518" style="fill:#FFFFFF;" width="31.995" height="31.995"/> <rect x="445.276" y="193.518" style="fill:#FFFFFF;" width="31.995" height="31.995"/> <rect x="194.765" y="263.642" style="fill:#FFFFFF;" width="31.995" height="31.995"/> <rect x="445.276" y="263.642" style="fill:#FFFFFF;" width="31.995" height="31.995"/> <rect x="194.765" y="333.734" style="fill:#FFFFFF;" width="31.995" height="31.995"/> <rect x="445.276" y="333.734" style="fill:#FFFFFF;" width="31.995" height="31.995"/> </g> <g> <rect x="244.7" y="53.281" style="fill:#27A2DB;" width="182.63" height="172.232"/> <rect x="244.7" y="251.814" style="fill:#27A2DB;" width="182.63" height="113.951"/> </g></svg>
+						</div>
+						<div>
+							<h4 class="utitle">{{LANG choose_v_file}}</h4>
+							<h4 class="vid-txt">{{LANG darg_drop_to_upload}}</h4>
+							<p>{{LANG ur_vid_file}}</p><br>
+							<button class="btn btn-mat main upld_vid">{{LANG select_media}}</button>
+						</div>
+					</div>
+					<div class="progress hidden"><br>
+						<span class="percent">0%</span>
+						<div class="video-parent">
+							<div class="bar upload-progress-bar progress-bar active"></div>
+						</div>
+						<div class="clear"></div>
+						<div class="text-center percent_age"></div>
+					</div>
+					<!-- <?php if (IS_DEVEL) { ?>
+						<div class="upload-alert alert-info">
+							<h4>Just developers can see this message</h4>
+							<p>Note: Your server max upload size is: <?php echo ini_get('upload_max_filesize')?>, that means you can't upload files that are larger than: <?php echo ini_get('upload_max_filesize')?><br><br> If you want to increase the limit or If you can't upload large files, go to Settings > File upload system > Max upload size and increase the value, if you still can't upload large files, please contact your host provider and let them increase the upload limit and max_execution_time.</p>
+						</div>
+					<?php } ?> -->
+				</div>
+				<div class="upload-mode">
+					<form id="process-video" action="{{CONFIG site_url}}/aj/upload/process-video">
+						<input type="hidden" name="type" id="type" value="normal">
+						<input type="file" class="hidden" name="video" id="video-file" accept="video/*">
+						<input type="hidden" name="hash" value="<?php echo($context['csrf_token']) ?>">
+					</form>
+				</div>
+				 <div class="edit-video-mode">
+					<form class="form-horizontal pt_forms" id="upload-video">
+						<div class="video-pad-two" style="display: none;">
+							<div class="row edit-video">
+								<div class="col-md-4">
+									<div class="video-preview">
+										<div class="preview-thumb">
+											<div id="image-renderer">
+												<svg enable-background="new 0 0 510 510" height="512" viewBox="0 0 510 510" width="512" xmlns="http://www.w3.org/2000/svg"><linearGradient id="SVGID_1_" gradientTransform="matrix(.994 .11 -.11 .994 -28.962 -29.776)" gradientUnits="userSpaceOnUse" x1="172.48" x2="497.848" y1="110.639" y2="436.007"><stop offset="0" stop-color="#ffa936"/><stop offset=".4112" stop-color="#ff8548"/><stop offset=".7781" stop-color="#ff6c54"/><stop offset="1" stop-color="#ff6359"/></linearGradient><linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="490.487" x2="466.43" y1="159.015" y2="164.322"><stop offset="0" stop-color="#f82814" stop-opacity="0"/><stop offset="1" stop-color="#c0272d"/></linearGradient><linearGradient id="lg1"><stop offset="0" stop-color="#cdec7a"/><stop offset=".2157" stop-color="#b0e995"/><stop offset=".5613" stop-color="#87e4bb"/><stop offset=".8347" stop-color="#6ee1d2"/><stop offset="1" stop-color="#65e0db"/></linearGradient><linearGradient id="SVGID_3_" gradientTransform="matrix(.983 -.185 .185 .983 55.608 42.369)" gradientUnits="userSpaceOnUse" x1="15.52" x2="340.888" xlink:href="#lg1" y1="104.705" y2="430.073"/><linearGradient id="lg2"><stop offset="0" stop-color="#cdec7a" stop-opacity="0"/><stop offset=".2354" stop-color="#9ad57d" stop-opacity=".235"/><stop offset=".6035" stop-color="#51b482" stop-opacity=".604"/><stop offset=".8679" stop-color="#239f85" stop-opacity=".868"/><stop offset="1" stop-color="#119786"/></linearGradient><linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="491.682" x2="450.637" xlink:href="#lg2" y1="256.546" y2="256.546"/><linearGradient id="SVGID_5_" gradientUnits="userSpaceOnUse" x1="176.731" x2="176.731" xlink:href="#lg2" y1="466.917" y2="442.601"/><linearGradient id="SVGID_6_" gradientUnits="userSpaceOnUse" x1="88.264" x2="413.632" y1="111.753" y2="437.121"><stop offset="0" stop-color="#f8f6fb"/><stop offset="1" stop-color="#efdcfb"/></linearGradient><linearGradient id="SVGID_7_" gradientUnits="userSpaceOnUse" x1="112.768" x2="430.112" y1="101.155" y2="514.021"><stop offset="0" stop-color="#18cefb"/><stop offset=".2969" stop-color="#2bb9f9"/><stop offset=".7345" stop-color="#42a0f7"/><stop offset="1" stop-color="#4a97f6"/></linearGradient><linearGradient id="SVGID_8_" gradientUnits="userSpaceOnUse" x1="75.588" x2="214.616" y1="316.53" y2="497.406"><stop offset="0" stop-color="#cdec7a"/><stop offset=".2154" stop-color="#b0e995" stop-opacity=".784"/><stop offset=".5604" stop-color="#87e4bb" stop-opacity=".439"/><stop offset=".8334" stop-color="#6ee1d2" stop-opacity=".165"/><stop offset=".9985" stop-color="#65e0db" stop-opacity="0"/></linearGradient><linearGradient id="SVGID_9_" gradientUnits="userSpaceOnUse" x1="198.822" x2="366.499" xlink:href="#lg1" y1="288.474" y2="506.622"/><linearGradient id="SVGID_10_" gradientUnits="userSpaceOnUse" x1="117.242" x2="171.618" y1="131.922" y2="202.666"><stop offset="0" stop-color="#ffd945"/><stop offset=".3043" stop-color="#ffcd3e"/><stop offset=".8558" stop-color="#ffad2b"/><stop offset="1" stop-color="#ffa325"/></linearGradient><g><path d="m426.926 470.539-386.877-42.878c-18.601-2.061-32.008-18.811-29.947-37.412l35.559-320.841c2.062-18.601 18.812-32.009 37.412-29.947l386.877 42.878c18.601 2.062 32.009 18.812 29.947 37.412l-35.559 320.841c-2.061 18.601-18.811 32.009-37.412 29.947z" fill="url(#SVGID_1_)"/><path d="m499.897 119.752-14.02 126.534-31.162-165.634 15.241 1.688c18.595 2.058 32 18.806 29.941 37.412z" fill="url(#SVGID_2_)"/><path d="m482.373 410.94-382.536 71.964c-18.392 3.46-36.107-8.645-39.567-27.037l-59.68-317.241c-3.46-18.392 8.645-36.107 27.037-39.567l382.536-71.964c18.392-3.46 36.107 8.645 39.567 27.037l59.68 317.241c3.46 18.393-8.645 36.108-27.037 39.567z" fill="url(#SVGID_3_)"/><path d="m457.896 97.546v317.999l24.476-4.605c18.392-3.46 30.497-21.175 27.037-39.567z" fill="url(#SVGID_4_)"/><path d="m58.45 446.187 1.821 9.68c3.46 18.392 21.175 30.497 39.567 27.037l195.175-36.717z" fill="url(#SVGID_5_)"/><g><path d="m424.01 448.166h-389.245c-18.715 0-33.886-15.171-33.886-33.886v-322.806c0-18.715 15.171-33.886 33.886-33.886h389.245c18.715 0 33.886 15.171 33.886 33.886v322.806c0 18.715-15.171 33.886-33.886 33.886z" fill="url(#SVGID_6_)"/><path d="m392.279 416.326h-325.782c-15.663 0-28.361-12.698-28.361-28.361v-270.175c0-15.663 12.698-28.361 28.361-28.361h325.782c15.663 0 28.361 12.698 28.361 28.361v270.175c0 15.663-12.698 28.361-28.361 28.361z" fill="url(#SVGID_7_)"/><g><path d="m252.069 416.326h-185.567c-15.666 0-28.37-12.694-28.37-28.359v-44.29l47.082-57.228c15.538-18.903 44.46-18.903 60.009 0l29.315 35.64z" fill="url(#SVGID_8_)"/><path d="m420.643 316.75v71.217c0 15.666-12.704 28.359-28.37 28.359h-295.268l77.532-94.237 95.246-115.783c15.538-18.892 44.471-18.892 60.009 0z" fill="url(#SVGID_9_)"/></g><circle cx="137.225" cy="157.919" fill="url(#SVGID_10_)" r="40.219"/></g></g></svg>
+											</div>
+										</div>
+										<p>{{LANG video_name}}</p>
+										<div class="video-name"></div>
+									</div>
+									<p class="preview-text">
+										<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M8 2.75c-.997 0-1.842.648-2.138 1.546.671-.046 1.49-.046 2.505-.046H15.633c1.015 0 1.834 0 2.505.046A2.251 2.251 0 0016 2.75H8zm0-1.5a3.75 3.75 0 00-3.727 3.334c-.147.052-.29.113-.43.184a4.75 4.75 0 00-2.075 2.076c-.281.55-.403 1.154-.461 1.868-.057.697-.057 1.563-.057 2.655V12.633c0 1.092 0 1.958.057 2.655.058.714.18 1.317.46 1.869a4.75 4.75 0 002.077 2.075c.139.071.282.132.429.184A3.75 3.75 0 008 22.75h8a3.75 3.75 0 003.727-3.334c.147-.052.29-.113.43-.184a4.75 4.75 0 002.075-2.075c.281-.552.403-1.155.461-1.869.057-.697.057-1.563.057-2.655V11.367c0-1.092 0-1.958-.057-2.655-.058-.714-.18-1.317-.46-1.868a4.75 4.75 0 00-2.076-2.076 3.588 3.588 0 00-.43-.184A3.75 3.75 0 0016 1.25H8zm10.138 18.454c-.671.046-1.49.046-2.505.046H8.367c-1.015 0-1.834 0-2.505-.046A2.25 2.25 0 008 21.25h8c.997 0 1.842-.648 2.138-1.546zM4.525 6.104c.304-.155.688-.251 1.309-.302.63-.051 1.434-.052 2.566-.052h7.2c1.133 0 1.937 0 2.566.052.62.05 1.005.147 1.31.302a3.25 3.25 0 011.42 1.42c.155.305.251.69.302 1.31.051.63.052 1.434.052 2.566v1.2c0 1.133 0 1.937-.052 2.566-.05.62-.147 1.005-.302 1.31a3.25 3.25 0 01-1.42 1.42c-.305.155-.69.251-1.31.302-.63.051-1.433.052-2.566.052H8.4c-1.132 0-1.937 0-2.566-.052-.62-.05-1.005-.147-1.31-.302a3.25 3.25 0 01-1.42-1.42c-.155-.305-.251-.69-.302-1.31-.051-.63-.052-1.434-.052-2.566v-1.2c0-1.133 0-1.937.052-2.566.05-.62.147-1.005.302-1.31a3.25 3.25 0 011.42-1.42zm8.378 2.93l-.028-.019c-.38-.253-.707-.47-.981-.62-.275-.148-.614-.296-.998-.273a1.75 1.75 0 00-1.292.69c-.232.308-.297.672-.326.983-.028.31-.028.704-.028 1.16V13.045c0 .456 0 .85.028 1.16.029.31.094.675.326.982.31.408.78.66 1.292.691.384.023.723-.125.998-.273.274-.15.601-.367.98-.62l.03-.02 1.515-1.01.027-.018c.31-.207.585-.39.794-.558.215-.173.444-.395.574-.709a1.75 1.75 0 000-1.34c-.13-.314-.359-.536-.574-.71-.209-.167-.483-.35-.794-.557l-.027-.018-1.516-1.01zm-2.093.672a.25.25 0 01.16-.086c.018.005.08.024.21.094.206.112.475.29.892.568l1.515 1.01c.346.231.562.377.71.496a.856.856 0 01.135.125c.02.056.02.118 0 .174a.856.856 0 01-.134.125c-.149.12-.365.265-.71.495l-1.516 1.01c-.417.278-.686.457-.893.569-.13.07-.191.089-.209.094a.25.25 0 01-.16-.086 1.044 1.044 0 01-.038-.226 13.333 13.333 0 01-.022-1.058v-2.02c0-.5 0-.824.022-1.058.014-.147.032-.209.038-.226z"></path></svg>
+										{{LANG up_complete}}
+									</p>
+									<?php if ($config['private_videos'] == 'on') { ?>
+										<hr>
+										<div class="set_post_price_alert">
+											<p>{{LANG price}}</p>
+										<div><span><input type="text" name="video_price" placeholder="0.00" autocomplete="off" onkeyup="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></span></div>
+									  </div>
+									  <p>{{LANG v_price_help}}<br>{{LANG v_sold_in}}</p>
+									<?php } ?>	
+								</div>
+								<div class="col-md-8">
+									<div class="pg_mat_input">
+										<textarea class="upload-area" placeholder="{{LANG add_post_caption}}" rows="4" name="caption" id="caption"></textarea>
+										<div class="dropdown vid">
+											<span class="dropdown-toggle btn-emoji" data-toggle="dropdown" onclick="show_emoji('caption');">
+												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9.153 11.603c.795 0 1.439-.879 1.439-1.962s-.644-1.962-1.439-1.962-1.439.879-1.439 1.962.644 1.962 1.439 1.962zm-3.204 1.362c-.026-.307-.131 5.218 6.063 5.551 6.066-.25 6.066-5.551 6.066-5.551-6.078 1.416-12.129 0-12.129 0zm11.363 1.108s-.669 1.959-5.051 1.959c-3.505 0-5.388-1.164-5.607-1.959 0 0 5.912 1.055 10.658 0zM11.804 1.011C5.609 1.011.978 6.033.978 12.228s4.826 10.761 11.021 10.761S23.02 18.423 23.02 12.228c.001-6.195-5.021-11.217-11.216-11.217zM12 21.354c-5.273 0-9.381-3.886-9.381-9.159s3.942-9.548 9.215-9.548 9.548 4.275 9.548 9.548c-.001 5.272-4.109 9.159-9.382 9.159zm3.108-9.751c.795 0 1.439-.879 1.439-1.962s-.644-1.962-1.439-1.962-1.439.879-1.439 1.962.644 1.962 1.439 1.962z"></path></svg>
+											</span>
+											<ul class="dropdown-menu <?php if ($config['emoji_zoom_in'] == 'on') { ?>zoom<?php } ?> pull-right ultimate-menu demoji emoji-part"></ul>
+										</div>
+										<label>{{LANG add_post_caption}}</label>
+									</div>
+									<p class="pg_mat_switch switch">
+										<label>
+											{{LANG allow_users_to_comment}}
+											<input type="checkbox" id="comment" name="comment" checked>
+											<span class="lever"></span>
+										</label>
+									</p>
+									<div class="video-thumb">
+										<h5>{{LANG thumbnail}}</h5>
+										<p>{{LANG select_thumbnail}}</p>
+										<div class="video-thumbnail">
+											<div class="video-image" onclick="document.getElementById('video-thumb').click(); return false">
+												<div class="image-content">
+													<div><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.9436 2.25H11H12C12.4142 2.25 12.75 2.58579 12.75 3C12.75 3.41421 12.4142 3.75 12 3.75H11C9.09318 3.75 7.73851 3.75159 6.71085 3.88976C5.70476 4.02502 5.12511 4.27869 4.7019 4.7019C4.27869 5.12511 4.02502 5.70476 3.88976 6.71085C3.75159 7.73851 3.75 9.09318 3.75 11V13C3.75 14.7777 3.75138 16.0755 3.86353 17.0758L4.46967 16.4697L6.14124 14.7981L6.17801 14.7613C6.81331 14.126 7.34307 13.5962 7.82019 13.2322C8.32379 12.8479 8.85587 12.5784 9.5 12.5784C10.1441 12.5784 10.6762 12.8479 11.1798 13.2322C11.6569 13.5962 12.1867 14.126 12.822 14.7613L12.822 14.7613L12.8588 14.7981L14.0003 15.9396C14.496 15.4467 14.9261 15.0329 15.3202 14.7322C15.8238 14.3479 16.3559 14.0784 17 14.0784C17.6441 14.0784 18.1762 14.3479 18.6798 14.7322C19.128 15.0741 19.6227 15.5624 20.2077 16.1471C20.2493 15.2994 20.25 14.2727 20.25 13V12C20.25 11.5858 20.5858 11.25 21 11.25C21.4142 11.25 21.75 11.5858 21.75 12V13V13.0564V13.0565C21.75 14.8942 21.75 16.3498 21.5969 17.489C21.4392 18.6614 21.1071 19.6104 20.3588 20.3588C19.6104 21.1071 18.6614 21.4392 17.489 21.5969C16.3498 21.75 14.8942 21.75 13.0565 21.75H13.0564H13H11H10.9436H10.9435C9.1058 21.75 7.65018 21.75 6.51098 21.5969C5.33856 21.4392 4.38961 21.1071 3.64124 20.3588C2.89288 19.6104 2.56076 18.6614 2.40313 17.489C2.24997 16.3498 2.24998 14.8942 2.25 13.0564V13V11V10.9436C2.24998 9.10582 2.24997 7.65019 2.40313 6.51098C2.56076 5.33855 2.89288 4.38961 3.64124 3.64124C4.38961 2.89288 5.33856 2.56076 6.51098 2.40313C7.65019 2.24997 9.10582 2.24998 10.9436 2.25ZM4.7019 19.2981C4.54709 19.1433 4.41496 18.9675 4.30302 18.7576L5.53033 17.5303L7.2019 15.8588C7.88356 15.1771 8.34258 14.7203 8.73006 14.4247C9.10023 14.1423 9.3157 14.0784 9.5 14.0784C9.6843 14.0784 9.89977 14.1423 10.2699 14.4247C10.6574 14.7203 11.1164 15.1771 11.7981 15.8588L13.4697 17.5303L16.1471 20.2077C15.2994 20.2493 14.2727 20.25 13 20.25H11C9.09318 20.25 7.73851 20.2484 6.71085 20.1102C5.70476 19.975 5.12511 19.7213 4.7019 19.2981ZM19.2981 19.2981C18.9917 19.6045 18.6034 19.822 18.0307 19.97L18.0303 19.9697L15.0611 17.0004C15.5523 16.5123 15.9149 16.1652 16.2301 15.9247C16.6002 15.6423 16.8157 15.5784 17 15.5784C17.1843 15.5784 17.3998 15.6423 17.7699 15.9247C18.1574 16.2203 18.6164 16.6771 19.2981 17.3588L19.9697 18.0303L19.97 18.0307C19.822 18.6034 19.6045 18.9917 19.2981 19.2981ZM18.5303 2.46967C18.2374 2.17678 17.7626 2.17678 17.4697 2.46967L14.9697 4.96967C14.6768 5.26256 14.6768 5.73744 14.9697 6.03033C15.2626 6.32322 15.7374 6.32322 16.0303 6.03033L17.25 4.81066V9C17.25 9.41421 17.5858 9.75 18 9.75C18.4142 9.75 18.75 9.41421 18.75 9V4.81066L19.9697 6.03033C20.2626 6.32322 20.7374 6.32322 21.0303 6.03033C21.3232 5.73744 21.3232 5.26256 21.0303 4.96967L18.5303 2.46967Z" fill="currentColor"/></svg>{{LANG upload}} {{LANG thumbnail}}</div>
+												</div>
+											</div>
+											<div id="image-holder"></div>
+										</div>
+									</div>
+									<button type="submit" class="btn btn-mat main upld_vid">{{LANG publish}}</button>
+								</div>
+							</div>
+						</div>
+						<div class="video-pad-four" style="display: none;">
+							<div class="row">
+								<div class="video-uploaded">
+									<label>
+										<input type="radio">
+										<div class="video-uploaded-in ui-vid">
+											<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M8 2.75c-.997 0-1.842.648-2.138 1.546.671-.046 1.49-.046 2.505-.046H15.633c1.015 0 1.834 0 2.505.046A2.251 2.251 0 0016 2.75H8zm0-1.5a3.75 3.75 0 00-3.727 3.334c-.147.052-.29.113-.43.184a4.75 4.75 0 00-2.075 2.076c-.281.55-.403 1.154-.461 1.868-.057.697-.057 1.563-.057 2.655V12.633c0 1.092 0 1.958.057 2.655.058.714.18 1.317.46 1.869a4.75 4.75 0 002.077 2.075c.139.071.282.132.429.184A3.75 3.75 0 008 22.75h8a3.75 3.75 0 003.727-3.334c.147-.052.29-.113.43-.184a4.75 4.75 0 002.075-2.075c.281-.552.403-1.155.461-1.869.057-.697.057-1.563.057-2.655V11.367c0-1.092 0-1.958-.057-2.655-.058-.714-.18-1.317-.46-1.868a4.75 4.75 0 00-2.076-2.076 3.588 3.588 0 00-.43-.184A3.75 3.75 0 0016 1.25H8zm10.138 18.454c-.671.046-1.49.046-2.505.046H8.367c-1.015 0-1.834 0-2.505-.046A2.25 2.25 0 008 21.25h8c.997 0 1.842-.648 2.138-1.546zM4.525 6.104c.304-.155.688-.251 1.309-.302.63-.051 1.434-.052 2.566-.052h7.2c1.133 0 1.937 0 2.566.052.62.05 1.005.147 1.31.302a3.25 3.25 0 011.42 1.42c.155.305.251.69.302 1.31.051.63.052 1.434.052 2.566v1.2c0 1.133 0 1.937-.052 2.566-.05.62-.147 1.005-.302 1.31a3.25 3.25 0 01-1.42 1.42c-.305.155-.69.251-1.31.302-.63.051-1.433.052-2.566.052H8.4c-1.132 0-1.937 0-2.566-.052-.62-.05-1.005-.147-1.31-.302a3.25 3.25 0 01-1.42-1.42c-.155-.305-.251-.69-.302-1.31-.051-.63-.052-1.434-.052-2.566v-1.2c0-1.133 0-1.937.052-2.566.05-.62.147-1.005.302-1.31a3.25 3.25 0 011.42-1.42zm8.378 2.93l-.028-.019c-.38-.253-.707-.47-.981-.62-.275-.148-.614-.296-.998-.273a1.75 1.75 0 00-1.292.69c-.232.308-.297.672-.326.983-.028.31-.028.704-.028 1.16V13.045c0 .456 0 .85.028 1.16.029.31.094.675.326.982.31.408.78.66 1.292.691.384.023.723-.125.998-.273.274-.15.601-.367.98-.62l.03-.02 1.515-1.01.027-.018c.31-.207.585-.39.794-.558.215-.173.444-.395.574-.709a1.75 1.75 0 000-1.34c-.13-.314-.359-.536-.574-.71-.209-.167-.483-.35-.794-.557l-.027-.018-1.516-1.01zm-2.093.672a.25.25 0 01.16-.086c.018.005.08.024.21.094.206.112.475.29.892.568l1.515 1.01c.346.231.562.377.71.496a.856.856 0 01.135.125c.02.056.02.118 0 .174a.856.856 0 01-.134.125c-.149.12-.365.265-.71.495l-1.516 1.01c-.417.278-.686.457-.893.569-.13.07-.191.089-.209.094a.25.25 0 01-.16-.086 1.044 1.044 0 01-.038-.226 13.333 13.333 0 01-.022-1.058v-2.02c0-.5 0-.824.022-1.058.014-.147.032-.209.038-.226z"></path></svg>
+											<b>{{LANG uploaded}}</b>
+										</div>
+									</label>
+								</div>
+								<br>
+								<h3 class="text-center up-title">
+									<a class="btn btn-mat success" id="watch">{{LANG watch_video}}</a>
+									<a class="btn btn-mat main" href="{{CONFIG site_url}}/upload/video" data-ajax="load.php?app=upload&apph=upload&ui=video">{{LANG upload_more}}</a>
+									<a class="btn btn-mat primary" href="{{CONFIG site_url}}/upload/tile" data-ajax="load.php?app=upload&apph=upload&ui=tile">{{LANG upload_tile}}</a>
+								</h3>
+							</div>
+						</div>
+						<input type="hidden" name="video" id="ready-video">
+						<input type="hidden" name="extra" id="video-thumnail">
+						<input type="hidden" name="hash" value="<?php echo($context['csrf_token']) ?>">
+					</form>
+				 </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<form id="thumb-form">
+	<input type="hidden" name="extra" id="video-thumnail" value="">
+	<input type="hidden" name="hash" value="<?php echo($context['csrf_token']) ?>">
+	<input class="hidden" id="video-thumb" name="thumb" type="file" accept="image/x-png,image/jpg,image/jpeg">
+</form>
+
+<script>
+$(document).on('click',"#image-holder .covers", function() {
+	$('#image-renderer').html('');
+	$('#image-renderer').html('<img src="' + $(this).attr('src') + '">');
+	$('#video-thumnail').val($(this).attr('src'));
+});
+$(document).on('click',".discard", function() {
+	$('.discard--modal').fadeIn(300);
+});
+$(document).on('click',".discard--video", function() {
+	$('#caption').val('');
+	$('#video-file').val('');
+	$('#ready-video').val('');
+	$('#video-thumnail').val('');
+	$('#image-holder').html('');
+	$('.progress').addClass('hidden');
+	$('.discard--modal').fadeOut(300);
+	delay(function () {
+		$('#ajax_redirect').attr('href', "{{CONFIG site_url}}/upload");
+		$('#ajax_redirect').attr('data-ajax', "load.php?app=upload&apph=upload");
+		$('#ajax_redirect').click();
+	}, 1000);
+});
+// $("#upload-video textarea").emojioneArea({
+// 	pickerPosition: "bottom",
+// 	tonesStyle: "radio",
+// 	filters: {flags: false,objects: false,travel_places: false,activity: false}
+// });
+var video_thumb = Array();
+$('#video-thumb').change(function(event) {
+	var link = '<?php echo($context["rita"]) ?>/upload-thumb';
+	$.ajax({
+		url: link,
+		type: 'POST',
+		dataType: 'json',
+		data: new FormData($("#thumb-form")[0]),
+        processData: false,
+        contentType: false,
+        success: function(data) {
+			if (data.status == 200) {
+				video_thumb.push(data.thumbnail);
+				$('#video-thumnail').val(data.thumbnail);
+				$('#image-holder').prepend('<img class="covers" src="' + data.video_thumb + '">');
+			} else {
+				Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+			}
+        }
+    });
+});
+
+$(function () {
+	var video_drop = $("[data-block='drop-zone']");
+	if (typeof(window.FileReader)){
+		video_drop[0].ondragover = function() {
+		 $('.upload > .content svg').addClass('active');
+		 return false;
+	};
+	video_drop[0].ondragleave = function() {
+		 $('.upload > .content svg').removeClass('active');
+		 return false;
+	};
+	video_drop[0].ondrop = function(event) {
+		event.preventDefault();
+		$('.upload > .content svg').removeClass('active');
+		var file = event.dataTransfer.files;
+		$('#process-video').find('input').prop('files', file);
+		$('#process-video').find('input').trigger("change");
+	  };
+	}
+});
+afterglow.init();
+function progress(e) {
+    if (e.lengthComputable) {
+        var max = e.total;
+        var cur = e.loaded;
+		var bar         = $('.bar');
+        var percent     = $('.percent');
+		var prcsvdo    = $('.percent_age');
+        var Percentage = (cur * 100) / max;
+		var percentVal = Percentage.toFixed(0) + '%';
+		prcsvdo.html('<svg width="30" height="10" viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg" fill="#<?php echo ($_COOKIE["mode"] == "night") ? "fff" : "222"?>"><circle cx="15" cy="15" r="15"><animate attributeName="r" from="15" to="15" begin="0s" dur="0.8s" values="15;9;15" calcMode="linear" repeatCount="indefinite" /><animate attributeName="fill-opacity" from="1" to="1" begin="0s" dur="0.8s" values="1;.5;1" calcMode="linear" repeatCount="indefinite" /></circle><circle cx="60" cy="15" r="9" fill-opacity="0.3"><animate attributeName="r" from="9" to="9" begin="0s" dur="0.8s" values="9;15;9" calcMode="linear" repeatCount="indefinite" /><animate attributeName="fill-opacity" from="0.5" to="0.5" begin="0s" dur="0.8s" values=".5;1;.5" calcMode="linear" repeatCount="indefinite" /></circle><circle cx="105" cy="15" r="15"><animate attributeName="r" from="15" to="15" begin="0s" dur="0.8s" values="15;9;15" calcMode="linear" repeatCount="indefinite" /><animate attributeName="fill-opacity" from="1" to="1" begin="0s" dur="0.8s" values="1;.5;1" calcMode="linear" repeatCount="indefinite" /></circle></svg> {{LANG porcessing_video}}');
+		$('.progress').find('.bar').removeClass('upload-progress-bar');
+		bar.width(percentVal);
+        percent.html(percentVal);
+        if (Percentage >= 100) {
+			var percentVal = '100%';
+	    	bar.width(percentVal);
+        }
+    }
+}
+jQuery(document).ready(function ($) {
+	$('.upload').on('click', function(e) {
+        $('#video-file').trigger("click");
+    });
+	$('#caption').keyup(function() {
+		var text = $(this).val();
+		$('.video-name').text(text);
+	});
+	$('#video-file').change(function (event) {
+		try {
+			window.URL = window.URL || window.webkitURL;
+			var vfile = $(this).prop('files')[0];
+			window.URL.createObjectURL(vfile);
+			$(".utitle").html(vfile.name);
+			delay(function () {$('#process-video').submit();}, 500);
+		} catch (e) {
+			Snackbar.show({showAction: false,text: '<div>Failed to collect the video file</div>'});
+		}
+    });
+
+	$("#process-video").submit(function (event) {
+        event.preventDefault();
+		let type = $(this).find('#type').val();
+		let video = $(this).find('#video-file').prop('files')[0];
+		if (!video) {return false;}
+		var formData = new FormData();
+		formData.append('type', type);
+		formData.append('video', video);
+		var action = $(this).attr('action') + '?hash=' + $(this).find('input[name=hash]').val();
+		$('.progress').removeClass('hidden');
+        $.ajax({
+            url: action,
+            type: 'POST',
+            dataType: 'json',
+            data: formData,
+			processData: false,
+            contentType: false,
+            xhr: function () {
+                var bar = $.ajaxSettings.xhr();
+                if (bar.upload) {
+					$('.upload > .content svg').addClass('active');
+                    bar.upload.addEventListener('progress', progress, false);
+                } return bar;
+            }
+        }).done(function (data) {
+			if (data.status == 200) {
+				delay(function () {
+					$(".video-pad-one").slideUp();
+					$(".video-pad-two").slideDown();
+					$('#video-file').val('');
+					$('#image-renderer').html('');
+					$('#caption').val(data.flname);
+					$('#ready-video').val(data.video);
+					$('.progress').addClass('hidden');
+					$('.video-name').html(data.flname);
+					$('#video-thumnail').val(data.extra);
+					$(".upld_vid").removeAttr('disabled');
+					$(".discard").removeAttr('disabled');
+					$('.upload-step').addClass('step-two-active');
+					$('#image-renderer').html('<img src="' + data.extra + '">');
+					Snackbar.show({showAction: false,backgroundColor: '#fff', pos: 'bottom-center', text: '<div class="snack-div">'+data.flname+' {{LANG successfully_uplaoded}}</div>'});
+
+					var i = 0;
+					thumbnails = data.images;
+					$.each(thumbnails, function(index, value) {
+						$('#image-holder').append('<img class="covers" src="' + value + '">');
+						i++;
+					});
+					$("#video-thumnail").val(thumbnails[0]);
+				}, 2000);
+			} else {
+				$('#video-file').val('');
+				$(".upload-card").slideDown();
+				$(".loading-cover").slideUp();
+				$('.progress').addClass('hidden');
+				Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+			}
+		});
+	});
+});
+
+$("form#upload-video").ajaxForm({
+	url: '<?php echo($context["rita"]) ?>/upload-video',
+	type: 'POST',
+	dataType: 'json',
+	beforeSubmit: function(arr,form){
+		$('#caption').attr('disabled','true');
+		$('#comment').attr('disabled','true');
+		$('.pg_select_has_label').attr('disabled','true');
+		$('.upload-step').addClass('step-three-active');
+		$(form).find('button[type="submit"]').attr('disabled','true');
+	}, success: function(data,stat,xhr,form){
+		if (data.status == 200) {
+			delay(function () {
+				$('#ready-video').val('');
+			    $('#video-thumnail').val('');
+				$(".video-pad-two").slideUp();
+				$(".video-pad-four").slideDown();
+				$('#watch').attr('href', data.pidurl);
+				$('.upload-step').addClass('step-four-active');
+				$(form).find('button[type="submit"]').removeAttr('disabled');	
+				Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+			}, 3000);
+		} else {
+			$('#ready-video').val('');
+			$('#video-thumnail').val('');
+			$(form).find('button[type="submit"]').removeAttr('disabled');	
+			Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+		}	
+	}
+});
+
+</script>

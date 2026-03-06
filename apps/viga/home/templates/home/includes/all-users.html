@@ -1,0 +1,10 @@
+<div class="pg_folw_sugg_carousel explore-people__item all-users" id="<?php echo($udata['user_id']) ?>">
+	<div class="item">
+		<div class="avatar">
+			<img src="<?php echo(media($udata['avatar'])) ?>" alt="...">
+			<div class="valign uname cq">
+				<a class="<?php if($config['popover'] == 'on') { ?>udata<?php } ?>" data-id="<?php echo($udata['user_id']) ?>" href="<?php echo(un2url($udata['username'])) ?>" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo($udata['username']) ?>"><h4><?php echo($udata['username']) ?></h4></a>
+			</div>
+		</div>
+	</div>
+</div>

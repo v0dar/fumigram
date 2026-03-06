@@ -1,0 +1,73 @@
+<script src="{{THEME_URL}}/main/static/js/libs/TweenMax.min.js"></script>
+<script src="{{THEME_URL}}/main/static/js/libs/underscore-min.js"></script>
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
+<style>.congrats h2 {margin-top: -30px;font-size: 50px;cursor: pointer; color: #ff6a00;}.blob {height: 50px;width: 50px;color: #ffc400;position: absolute;top: 40%;left: 50%;z-index: 1;font-size: 40px;display: none;}</style>
+<div class="terms-page__container">
+	<div class="terms-page__inner">
+		<div class="content photo_oops_page congrats">
+			<div class="congrats_img animated bounceIn">
+				<img src="{{CONFIG site_url}}/media/img/congrats.png">
+			</div>
+			<h2 class="text-center">{{LANG upgraded}}</h2>
+			<p class="text-center">{{LANG congrats_text}}</p>
+		</div>
+	</div>
+</div>
+<script>
+// Click "Congratulations!" to play animation
+$(function() {
+	var numberOfStars = 40;
+	for (var i = 0; i < numberOfStars; i++) {
+	  $('.congrats').append('<div class="blob fa fa-star ' + i + '"></div>');
+	}	
+	animateText();
+	animateBlobs();
+});
+$('.congrats').click(function() {
+	reset();
+	animateText();
+	animateBlobs();
+});
+function reset() {
+	$.each($('.blob'), function(i) {
+		TweenMax.set($(this), { x: 0, y: 0, opacity: 1 });
+	});
+	TweenMax.set($('h2'), { scale: 1, opacity: 1, rotation: 0 });
+}
+function animateText() {
+		TweenMax.from($('.congrats h2'), 0.8, {
+		scale: 0.4,
+		opacity: 0,
+		rotation: 15,
+		ease: Back.easeOut.config(4),
+	});
+}
+function animateBlobs() {
+	var xSeed = _.random(350, 380);
+	var ySeed = _.random(120, 170);
+	$.each($('.blob'), function(i) {
+		var $blob = $(this);
+		var speed = _.random(1, 5);
+		var rotation = _.random(5, 100);
+		var scale = _.random(0.8, 1.5);
+		var x = _.random(-xSeed, xSeed);
+		var y = _.random(-ySeed, ySeed);
+		TweenMax.to($blob, speed, {
+			x: x,
+			y: y,
+			ease: Power1.easeOut,
+			opacity: 0,
+			rotation: rotation,
+			scale: scale,
+			onStartParams: [$blob],
+			onStart: function($element) {
+				$element.css('display', 'block');
+			},
+			onCompleteParams: [$blob],
+			onComplete: function($element) {
+				$element.css('display', 'none');
+			}
+		});
+	});
+}
+</script>

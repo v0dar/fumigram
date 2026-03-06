@@ -1,0 +1,88 @@
+<div class="timeline-posts content-shadow timeline-posts-ads" data-id="<?php echo($post_data['id']) ?>">
+	<div class="valign header">
+		<div class="valign publisher-name">
+			<a href="<?php echo($post_data['url']) ?>" target="_blank">
+				<img src="<?php echo(media($post_data['udata']['avatar'])) ?>" class="img-circle" />
+			</a>
+			<div>
+				<p><a href="<?php echo($post_data['url']) ?>" target="_blank"><?php if ($post_data['headline']) { echo $post_data['headline']; } ?></a></p>
+				<div class="timeline-posts_ads_name">
+					<span><a href="{{CONFIG site_url}}/campaign" data-ajax="load.php?app=campaign&apph=campaign" class="sponsored">{{LANG sponsored}}</a></span>
+					<span class="middot">·</span>
+					<time class="time-ago" title="<?php echo(ToDate($post_data['posted'])) ?>"><a href="<?php echo($post_data['url']) ?>" target="_blank"><?php echo(time2str($post_data['posted'])); ?></a></time>
+				</div>
+			</div>
+		</div>
+		<?php if ($post_data['udata']['user_id'] == $me['user_id']) { ?>
+			<div class="dropdown">
+				<span class="dropdown-toggle" data-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 13.172l4.95-4.95 1.414 1.414L12 16 5.636 9.636 7.05 8.222z"/></svg></span>
+				<ul class="dropdown-menu zoom pull-right ultimate-menu">
+					<li onclick="window.location.href = '{{CONFIG site_url}}/edit_ad/<?php echo($post_data['id']) ?>'">
+						<div class="menu-option pointer">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon></svg>&nbsp;&nbsp;&nbsp;
+							<div>
+								<b>{{LANG edit_ad}}</b>
+								<p>{{LANG edit_this_post_ad}}</p>
+							</div>
+						</div>
+					</li>
+					<li class="delete-ad">
+						<div class="menu-option pointer">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>&nbsp;&nbsp;&nbsp;
+							<div>
+								<b>{{LANG delete_ad}}</b>
+								<p>{{LANG delete_ad_from_timeline}}</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		<?php } ?>
+	</div>
+	<div class="post-images fluid">
+		<?php if (!empty($post_data['ad_media'])) { ?>
+			<a href="<?php echo($post_data['url']) ?>" target="_blank" <?php if ($post_data['bidding'] == 'clicks') { ?> onclick="ad_click(<?php echo $post_data['id']; ?>)" <?php } ?>>
+				<img src="<?php echo(media($post_data['ad_media'])) ?>" width="100%" class="img-res">
+			</a>
+       	<?php } ?>
+	</div>
+	<div class="caption" data-caption>
+		<?php if ($post_data['description']) {
+			echo $post_data['description'];
+		} ?>
+	</div>
+</div>
+<?php include $context['direct'].'/main/templates/modals/delete_ad.html'; ?>
+<?php if ($post_data['udata']['user_id'] == $me['user_id']) { ?>
+	<script type="text/javascript">
+		$(document).on('click', '.delete-ad', function(event) {
+			var self = $(this);	
+			var id = '<?php echo($post_data['id']) ?>'
+			$('div.delad--modal').data('id',id).fadeIn(500);
+		});
+		$(document).on('click','.delete--ad',function(event) {
+			var zis = $(this);
+			var id  = zis.parents('.confirm--modal').data('id');
+			if (id) {
+				zis.parents('.confirm--modal').data('id',"").fadeOut(500);
+				$("#modal-progress").removeClass('hidden');
+				$.ajax({
+					url: link('profile/delete_ad'),
+					type: 'POST',
+					dataType: 'json',
+					data: {id:id},
+				})
+				.done(function(data) {
+					if (data.status == 200) {
+						$("div[data-id='"+id+"']").slideUp(500,function(){$(this).remove();})
+					}
+					else{
+						scroll2top();
+						$.toast(data.message,{duration: 5000, type: 'success',align: 'bottom',singleton: true});
+					}
+					$("#modal-progress").addClass('hidden');
+				});
+			}
+		});
+	</script>
+<?php } ?>

@@ -1,0 +1,55 @@
+<style>.explore-page-container .peoples {background-image: linear-gradient(rgba(0, 0, 0, 0.363), rgba(0, 0, 0, 0.407)), url('{{CONFIG site_url}}/media/img/str/aaa-11.jpg');height:350px;}</style>
+<div class="explore-page-container">
+	<div class="sub__header peoples">
+		<div class="explore-coverbg"></div>
+		<div class="container">
+			<h3 class="animated fadeInUpBig"><a class="text-decoration-none">{{LANG explore_people}}</a></h3>
+			<p class="animated fadeInUpBig"><?php echo lang('suggested_people') ?></p>
+			<a href="<?php echo(pxp_link('explore')); ?>" data-ajax="load.php?app=explore&apph=explore" class="btn btn-white animated fadeInUpBig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm3.5-11.5l-2 5-5 2 2-5 5-2z"></path><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm3.5-13.5l-5 2-2 5 5-2 2-5z" fill="none"></path></svg> <?php echo lang('photos_videos');?></a>
+		</div>
+	</div>
+	<div class="container">
+		<div class="explore-people-container pg_grid_ppl_sugg peo">
+			<div class="row people">
+				<?php if ($context['users']) {
+					foreach ($context['users'] as $key => $udata) {
+						include 'includes/row.html';
+					}
+				} else{
+					include 'includes/no-users-found.html';
+				} ?>
+			</div>
+		</div>
+	</div>
+</div>
+	<script>
+		jQuery(document).ready(function($) {
+			var scrolled = 0;
+			var last_id  = 0;
+			$(window).scroll(function() {
+			    if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+			    	if (scrolled == 0) {
+		                scrolled = 1;
+		                if ($(".explore-people__item").length > 0) {
+		                	last_id = $(".explore-people__item").last().attr('id');
+		                }
+						$.ajax({
+							url: link('main/explore-people'),
+							type: 'GET',
+							dataType: 'json',
+							data: {offset:last_id},
+						}).done(function(data) {
+							if (data.status == 200) {
+								$(".explore-people-container").find('.people').append($(data.html));
+								scrolled = 0;
+							}
+							else{
+								$(window).unbind('scroll');
+							}
+						});
+		       		}
+			    }
+			});
+		});
+	</script>
+	<?php include $context['dirname_theme'].'/main/templates/includes/lazy-load.html'; ?>

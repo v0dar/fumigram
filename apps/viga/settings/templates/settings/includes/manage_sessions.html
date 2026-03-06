@@ -1,0 +1,19 @@
+<div>
+	<div class="valign settings-holder sessions">
+		<img src="<?php echo($context['me']['avatar']) ?>" class="avatar cha" alt="...">
+		<div class="infoz">
+			<h5 title="<?php echo($context['me']['name']) ?>"><a><?php echo($context['me']['name']) ?></a></h5>
+			<p>{{LANG manage_sessions}}</p>
+			<span>{{LANG manage_sessions_txt}}</span>
+		</div>
+	</div><br>
+		<div class="row">
+			<?php if ($context['sessions']) {
+				foreach ($context['sessions'] as $key => $sdata) {
+					include 'session.html';
+				}
+			} ?>
+		</div>
+</div>
+
+<?php include $context['direct'].'/settings/templates/settings/js/script.html'; ?>

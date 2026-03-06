@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="pinterest-rich-pin" content="false" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="keywords" content="{{CONFIG meta_keywords}}">
+	<meta name="mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no shrink-to-fit=no">
+	<link rel="apple-touch-icon" href="{{CONFIG site_url}}/media/img/icon.{{CONFIG favicon_extension}}">
+	<link rel="shortcut icon" type="image/png" href="{{CONFIG site_url}}/media/img/icon.{{CONFIG favicon_extension}}"/>
+    <?php if ($context['app_name'] == 'posts'){ ?>
+        <meta name="title" content="{{TITLE}}">
+        <meta name="description" content="<?php echo(strip_tags(htmlentities($context['post_data']['description']))) ?>">
+        <?php if(isset($context['post_data']['media_set'])){ ?>
+            <?php if(isset($context['post_data']['media_set'][0])){ ?>
+                <meta property="og:image" content="<?php echo(Media($context['post_data']['media_set'][0]['file'])) ?>" />
+				<meta property="og:image:secure_url" content="<?php echo(Media($context['post_data']['media_set'][0]['file'])) ?>" />
+            <?php } ?>
+        <?php } ?>
+    <?php } ?>
+	<?php if ($context['app_name'] == 'tile'){ ?>
+		<meta name="title" content="{{TITLE}}">
+        <meta name="description" content="<?php echo(strip_tags(htmlentities($context['post_data']['description']))) ?>">
+		<?php if(isset($context['post_data']['media_set'])){ ?>
+            <?php if(isset($context['post_data']['media_set'][0])){ ?>
+                <meta property="og:image" content="<?php echo(Media($context['post_data']['media_set'][0]['file'])) ?>" />
+				<meta property="og:image:secure_url" content="<?php echo(Media($context['post_data']['media_set'][0]['file'])) ?>" />
+            <?php } ?>
+        <?php } ?>
+	<?php } ?>
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:creator" content="@fumigram">
+	<meta property="twitter:url" content="{{CONFIG site_url}}">
+	<meta name="twitter:title" content="{{CONFIG site_name}} | {{TITLE}}" />
+	<meta name="twitter:description" content="{{CONFIG site_desc}}" />
+	<meta name="twitter:image" content="<?php echo isset($context['post_data']['media_set'][0]['file']) ? Media( $context['post_data']['media_set'][0]['file'] ) : 'https://i.imgur.com/l2Y4tEQ.jpeg';?>" />
+	<meta property="og:image:secure_url" content="<?php echo isset($context['post_data']['media_set'][0]['file']) ? Media( $context['post_data']['media_set'][0]['file'] ) : 'https://i.imgur.com/l2Y4tEQ.jpeg';?>" />
+	<?php if($context['app_name'] == 'profile' && !$context['user_data']['search_engines']){ ?>
+	<meta name="robots" content="noindex">
+    <meta name="googlebot" content="noindex">
+    <?php } ?>
+	<title>{{TITLE}}</title>
+	<meta name="default-title" content="{{CONFIG site_title}}">
+    <meta name="description" content="{{CONFIG site_desc}}">
+	<meta property="og:url" content="<?php echo $config['site_url'] ?>" />
+	<?php if($context['app_name'] == 'profile' && $context['user_data']['search_engines']){ ?>
+		<link href="<?php echo $context["user_data"]["url"];?>" rel="canonical">
+		<meta name="robots" content="index, follow">
+		<meta property="og:title" content="{{TITLE}}" />
+		<meta property="og:type" content="article" />
+
+		<meta property="og:image" content="<?php echo $context['user_data']['avatar']; ?>" />
+		<meta property="og:image:secure_url" content="<?php echo $context['user_data']['avatar']; ?>" />
+		<meta property="og:description" content="{{CONFIG site_desc}}" />
+
+		<meta property="og:type" content="article" />
+	    <meta property="og:image" content="<?php echo $context['user_data']['avatar']; ?>" />
+		<meta property="og:image:secure_url" content="<?php echo $context['user_data']['avatar']; ?>" />
+		<meta property="og:description" content="{{CONFIG site_desc}}" />
+		<meta property="og:title" content="{{TITLE}}" />
+
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:title" content="{{TITLE}}" />
+		<meta name="twitter:description" content="{{CONFIG site_desc}}" />
+		<meta name="twitter:image" content="<?php echo $context['user_data']['avatar']; ?>" />
+		<meta property="og:image:secure_url" content="<?php echo $context['user_data']['avatar']; ?>" />
+		<meta name="twitter:creator" content="@fumigram">
+	<?php }?>
+
+	<?php if ($context['app_name'] == 'home') { ?>
+		<meta property="og:title" content="{{TITLE}}" />
+		<meta property="og:type" content="article" />
+		<meta property="og:image" content="{{CONFIG site_url}}/media/img/social-image.{{CONFIG social_extension}}" />
+		<meta property="og:image:secure_url" content="{{CONFIG site_url}}/media/img/social-image.{{CONFIG social_extension}}" />
+		<meta property="og:description" content="{{CONFIG site_desc}}" />
+	<?php } ?>
+
+	<?php if ($context['app_name'] == 'posts') {?>
+		<meta property="og:title" content="{{TITLE}}" />
+		<meta property="og:type" content="article" />
+		<meta property="og:image" content="<?php echo $context['post_data']['avatar'];?>" />
+		<meta property="og:image:secure_url" content="<?php echo $context['post_data']['avatar'];?>" />
+		<meta property="og:description" content="{{TITLE}}" />
+	<?php } ?>
+
+	<?php if ($context['app_name'] == 'login' || $context['app_name'] == 'signup') { ?>
+		<meta property="og:title" content="{{CONFIG site_title}}" />
+		<meta property="og:type" content="article" />
+		<meta property="og:url" content="<?php echo $config['site_url'] ?>" />
+		<meta property="og:image" content="{{CONFIG site_url}}/media/img/social-image.{{CONFIG social_extension}}" />
+		<meta property="og:image:secure_url" content="{{CONFIG site_url}}/media/img/social-image.{{CONFIG social_extension}}" />
+		<meta property="og:description" content="{{CONFIG site_desc}}" />
+
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:title" content="{{CONFIG site_title}}" />
+		<meta name="twitter:description" content="{{CONFIG site_desc}}" />
+		<meta name="twitter:image" content="{{CONFIG site_url}}/media/img/social-image.{{CONFIG social_extension}}" />
+	<?php } ?>
+	<?php if ($config['progressive_web_app'] == 'on') { ?>
+		<link rel='manifest' href='{{CONFIG site_url}}/media/img/pwa/manifest.json'>
+		<link rel="apple-touch-icon" href="{{CONFIG site_url}}/media/img/pwa/icon-48x48.png">
+        <link rel="apple-touch-icon" href="{{CONFIG site_url}}/media/img/pwa/icon-72x72.png">
+        <link rel="apple-touch-icon" href="{{CONFIG site_url}}/media/img/pwa/icon-96x96.png">
+        <link rel="apple-touch-icon" href="{{CONFIG site_url}}/media/img/pwa/icon-128x128.png">
+        <link rel="apple-touch-icon" href="{{CONFIG site_url}}/media/img/pwa/icon-144x144.png">
+        <link rel="apple-touch-icon" href="{{CONFIG site_url}}/media/img/pwa/icon-152x152.png">
+        <link rel="apple-touch-icon" href="{{CONFIG site_url}}/media/img/pwa/icon-192x192.png">
+		<link rel="apple-touch-icon" href="{{CONFIG site_url}}/media/img/pwa/icon-384x384.png">
+        <link rel="apple-touch-icon" href="{{CONFIG site_url}}/media/img/pwa/icon-512x512.png">
+        <meta name="apple-mobile-web-app-status-bar" content="<?php echo ($config['pwa_background_color']); ?>">
+        <meta name="theme-color" content="<?php echo ($config['theme_color']); ?>">
+	<?php } ?>
+	<script src="{{THEME_URL}}/main/static/js/libs/jquery-3.2.1.js"></script>
+	<script src="{{THEME_URL}}/main/static/js/merge.master.js"></script>
+	<script src='{{THEME_URL}}/main/static/js/libs/app.js'></script>
+	<script src="{{THEME_URL}}/main/static/js/libs/slick.min.js"></script>
+	<script src="{{THEME_URL}}/main/static/css/libs/bs3/js/bootstrap.js"></script>
+	<link rel="stylesheet" href="{{THEME_URL}}/main/static/css/libs/bs3/css/bootstrap.css">
+	<script src="{{THEME_URL}}/main/static/js/libs/highcharts/highcharts.js"></script>
+	<script src="{{THEME_URL}}/main/static/js/libs/highcharts/exporting.js"></script>
+	<script src='{{THEME_URL}}/main/static/js/libs/xm_plugins.min.js'></script>
+	<script src='{{THEME_URL}}/main/static/js/libs/tiny-slider.min.js'></script>
+	<?php if ($context['app_name'] == 'login' || $context['app_name'] == 'signup' || $context['app_name'] == 'activate') { ?>
+	<link rel="stylesheet" href="{{THEME_URL}}/main/static/css/styles.login.css">
+    <?php } else { ?>
+	<link rel="stylesheet" href="{{THEME_URL}}/main/static/css/styles.master.css">
+    <?php } ?>
+	<?php if ($_COOKIE['mode'] == 'night') { ?>
+	<link rel="stylesheet" id="night_mode_css" href="{{THEME_URL}}/main/static/css/styles.master.night.css">
+    <?php } ?>
+    <?php if ($context['app_name'] == 'login' && $config['recaptcha'] == 'on') { ?>
+	<script type="text/javascript" src='https://www.google.com/recaptcha/api.js'></script>
+    <?php } ?>
+	<link rel="stylesheet" href="{{THEME_URL}}/main/static/css/libs/swiper-bundle.min.css" />
+	<script src="{{THEME_URL}}/main/static/js/libs/swiper-bundle.min.js"></script>
+    <script src="{{THEME_URL}}/main/static/js/libs/gridAlicious/jquery.grid-a-licious.js"></script>
+	<script src="{{THEME_URL}}/main/static/js/libs/jquery-form.v3.51.0.js"></script>
+	<script src="{{THEME_URL}}/main/static/js/script.master.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto:400,500" rel="stylesheet">
+	<script src="{{THEME_URL}}/main/static/js/libs/afterglow.min.js" class="home_script"></script>
+	<script src="{{THEME_URL}}/main/static/js/libs/jquery.pause.js" class="home_script"></script>
+
+	<!-- fonts -->
+	<link href="{{THEME_URL}}/main/static/fonts/Viga/viga.css" rel="stylesheet">
+	<?php if ($context['app_name'] == 'profile') { ?>
+	<script src="{{THEME_URL}}/main/static/js/libs/jquery.equalheights.js" class="profile_script"></script>
+	<?php } ?>
+	<script>
+		function rita(){ return '{{CONFIG site_url}}/aj/'; }
+		function site_url(path){ return '{{CONFIG site_url}}/' + path; }
+		function ajax_load_url(){ return '{{CONFIG site_url}}/load/'; }
+		function theme_url(){ return '{{THEME_URL}}'; }
+        window.logo = '{{CONFIG site_url}}/media/img/logo.{{CONFIG logo_extension}}';
+		window.light_logo = '{{CONFIG site_url}}/media/img/light-logo.{{CONFIG logo_extension}}';
+	</script>
+	<!-- <script src="{{CONFIG site_url}}/core/zipy/emoji/emojionearea/dist/emojionearea.js"></script>
+	<link rel="stylesheet" href="{{CONFIG site_url}}/core/zipy/emoji/emojionearea/dist/emojionearea.css" type="text/css"/> -->
+	<script src="{{THEME_URL}}/main/static/js/lazyload.min.js"></script>
+	<script src="{{THEME_URL}}/main/static/js/bootstrap-select.min.js"></script>
+	<link rel="stylesheet" href="{{THEME_URL}}/main/static/css/bootstrap-select.min.css">
+	<?php if ($config['razorpay'] == "on" && !empty($config['razorpay_key']) && !empty($config['razorpay_secret'])) { ?>
+		<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+	<?php } ?>
+	<?php if ($config['checkout_payment'] == 'yes') { ?>
+        <script type="text/javascript" src="https://www.2checkout.com/checkout/api/2co.min.js"></script>
+	<?php } ?>
+</head>
+<script type="text/javascript">
+	$(document).on('click', 'a[data-ajax]', function(event) {
+		$('body').addClass('app-loading');
+		$('#main-page').addClass('opacity');
+		event.preventDefault();
+		var url = $(this).attr('data-ajax');
+		clearInterval(window.chat_interval);
+		$(".lightbox__container").empty();
+		$.post(site_url(url), {param1: 'value1'}, function(htmlData, textStatus, xhr) {
+			window.scrollTo(0,0);
+			if ($('#ajax_redirect')[0].hasAttribute("data-sent")) { 
+				$('#ajax_redirect').attr('data-sent', "0");
+			}
+			data = JSON.parse($(htmlData).filter('#json-data').val());
+			$('#main-page').html(htmlData);
+			    if (typeof(data.url)  == 'undefined') {
+					window.location.href = site_url('');
+		    }else{
+				if (!data.footer) { $('footer').hide();
+				}else{ $('footer').show(); }
+				if (!data.header) { $('#header_nav').hide();
+				}else{ $('#header_nav').show(); }
+				window.history.pushState({state:'new'},'', site_url(data.url));
+				$('title').html(data.page_title);
+				if (data.app_name == 'settings' || data.app_name == 'profile') {
+					$('#home_nav').removeClass('active');$('#tiles_nav').removeClass('active');$('#explore_nav').removeClass('active');$('#premium_nav').removeClass('active');$('#message_nav').removeClass('active');$('#home_scnd_nav').removeClass('active');$('#tiles_scnd_nav').removeClass('active');$('#explore_scnd_nav').removeClass('active');$('#premium_scnd_nav').removeClass('active');$('#message_scnd_nav').removeClass('active');
+					$('#home_nav').html('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zm-6-2h5V9.157l-6-5.454-6 5.454V19h5v-6h2v6z"/><path d="M20 20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9zm-9-7v6h2v-6h-2z" fill="none"></path></svg><span><a href="{{CONFIG site_url}}" data-ajax="load.php?app=home&apph=home"> {{LANG home}}</a></span>');
+					$('#message_nav').html('<svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M12.003 2.001a9.705 9.705 0 110 19.4 10.876 10.876 0 01-2.895-.384.798.798 0 00-.533.04l-1.984.876a.801.801 0 01-1.123-.708l-.054-1.78a.806.806 0 00-.27-.569 9.49 9.49 0 01-3.14-7.175 9.65 9.65 0 0110-9.7z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="1.739"></path><path d="M17.79 10.132a.659.659 0 00-.962-.873l-2.556 2.05a.63.63 0 01-.758.002L11.06 9.47a1.576 1.576 0 00-2.277.42l-2.567 3.98a.659.659 0 00.961.875l2.556-2.049a.63.63 0 01.759-.002l2.452 1.84a1.576 1.576 0 002.278-.42z" fill-rule="evenodd"></path></svg><span><a href="{{CONFIG site_url}}/messages" data-ajax="load.php?app=messages&apph=messages"> {{LANG messages}}</a></span><small class="badge" id="new__messages"></small>');
+					$('#premium_nav').html('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor"><path fill="none" d="M14.46,23.12012a.9991.9991,0,0,1-.40723-.08692,9.004,9.004,0,0,1-4.3125-4.0166,6.977,6.977,0,0,0,.18995,2.58106,1.04987,1.04987,0,0,1,.0498.3125.99942.99942,0,0,1-1.37744.92578A8.98348,8.98348,0,0,1,4.94727,8.92773a8.51269,8.51269,0,0,1,1.9873-1.8623l.23047-.1875A7.017,7.017,0,0,0,9.63623,1.93555a1.00009,1.00009,0,0,1,1.49121-.80567,8.717,8.717,0,0,1,4.26709,9.0918,5.78155,5.78155,0,0,0,1.398-1.77734.99959.99959,0,0,1,1.39941-.41114,1.237,1.237,0,0,1,.23.17481,8.99474,8.99474,0,0,1-3.65381,14.86328A1.00594,1.00594,0,0,1,14.46,23.12012Zm-6.93017-15.25h0Z"></path></svg><span><a href="{{CONFIG site_url}}/premium" data-ajax="load.php?app=premium&apph=premium"> {{LANG premium}}</a></span>');
+					$('#explore_nav').html(' <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm3.5-11.5l-2 5-5 2 2-5 5-2z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm3.5-13.5l-5 2-2 5 5-2 2-5z" fill="none"></path></svg><span><a href="{{CONFIG site_url}}/explore" data-ajax="load.php?app=explore&apph=explore"> {{LANG explore}}</a></span>');
+				}
+				if (data.app_name == 'home') {
+					$('.profile_script').remove();$('.posts_script').remove();
+					$('#home_nav').addClass('active');$('#tiles_nav').removeClass('active');$('#home_scnd_nav').addClass('active');$('#explore_nav').removeClass('active');$('#premium_nav').removeClass('active');$('#message_nav').removeClass('active');$('#tiles_scnd_nav').removeClass('active');$('#premium_scnd_nav').removeClass('active');$('#explore_scnd_nav').removeClass('active');$('#message_scnd_nav').removeClass('active');
+					$('#message_nav').html('<svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M12.003 2.001a9.705 9.705 0 110 19.4 10.876 10.876 0 01-2.895-.384.798.798 0 00-.533.04l-1.984.876a.801.801 0 01-1.123-.708l-.054-1.78a.806.806 0 00-.27-.569 9.49 9.49 0 01-3.14-7.175 9.65 9.65 0 0110-9.7z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="1.739"></path><path d="M17.79 10.132a.659.659 0 00-.962-.873l-2.556 2.05a.63.63 0 01-.758.002L11.06 9.47a1.576 1.576 0 00-2.277.42l-2.567 3.98a.659.659 0 00.961.875l2.556-2.049a.63.63 0 01.759-.002l2.452 1.84a1.576 1.576 0 002.278-.42z" fill-rule="evenodd"></path></svg><span><a href="{{CONFIG site_url}}/messages" data-ajax="load.php?app=messages&apph=messages"> {{LANG messages}}</a></span><small class="badge" id="new__messages"></small>');
+					$('#premium_nav').html('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor"><path fill="none" d="M14.46,23.12012a.9991.9991,0,0,1-.40723-.08692,9.004,9.004,0,0,1-4.3125-4.0166,6.977,6.977,0,0,0,.18995,2.58106,1.04987,1.04987,0,0,1,.0498.3125.99942.99942,0,0,1-1.37744.92578A8.98348,8.98348,0,0,1,4.94727,8.92773a8.51269,8.51269,0,0,1,1.9873-1.8623l.23047-.1875A7.017,7.017,0,0,0,9.63623,1.93555a1.00009,1.00009,0,0,1,1.49121-.80567,8.717,8.717,0,0,1,4.26709,9.0918,5.78155,5.78155,0,0,0,1.398-1.77734.99959.99959,0,0,1,1.39941-.41114,1.237,1.237,0,0,1,.23.17481,8.99474,8.99474,0,0,1-3.65381,14.86328A1.00594,1.00594,0,0,1,14.46,23.12012Zm-6.93017-15.25h0Z"></path></svg><span><a href="{{CONFIG site_url}}/premium" data-ajax="load.php?app=premium&apph=premium"> {{LANG premium}}</a></span>');
+					$('#home_nav').html('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zm-6-2h5V9.157l-6-5.454-6 5.454V19h5v-6h2v6z"/><path d="M20 20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9zm-9-7v6h2v-6h-2z" fill="currentColor"></path></svg><span><a href="{{CONFIG site_url}}" data-ajax="load.php?app=home&apph=home"> {{LANG home}}</a></span>');
+					$('#explore_nav').html(' <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm3.5-11.5l-2 5-5 2 2-5 5-2z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm3.5-13.5l-5 2-2 5 5-2 2-5z" fill="none"></path></svg><span><a href="{{CONFIG site_url}}/explore" data-ajax="load.php?app=explore&apph=explore"> {{LANG explore}}</a></span>');
+					if ($('.home_script').length == 0) {
+						$('head').append($('<script>',{ src: "{{THEME_URL}}/main/static/js/libs/afterglow.min.js", class: "home_script"}),
+						$('<script>',{ src: "{{THEME_URL}}/main/static/js/libs/jquery.pause.js", class: "home_script"}));
+					}
+				}
+				if (data.app_name == 'explore') {
+					$('.home_script').remove();$('.profile_script').remove();$('.posts_script').remove();
+					$('#home_nav').removeClass('active');$('#explore_nav').addClass('active');$('#tiles_nav').removeClass('active');$('#premium_nav').removeClass('active');$('#message_nav').removeClass('active');$('#home_scnd_nav').removeClass('active');$('#explore_scnd_nav').addClass('active');$('#tiles_scnd_nav').removeClass('active');$('#premium_scnd_nav').removeClass('active');$('#message_scnd_nav').removeClass('active');
+					$('#message_nav').html('<svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M12.003 2.001a9.705 9.705 0 110 19.4 10.876 10.876 0 01-2.895-.384.798.798 0 00-.533.04l-1.984.876a.801.801 0 01-1.123-.708l-.054-1.78a.806.806 0 00-.27-.569 9.49 9.49 0 01-3.14-7.175 9.65 9.65 0 0110-9.7z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="1.739"></path><path d="M17.79 10.132a.659.659 0 00-.962-.873l-2.556 2.05a.63.63 0 01-.758.002L11.06 9.47a1.576 1.576 0 00-2.277.42l-2.567 3.98a.659.659 0 00.961.875l2.556-2.049a.63.63 0 01.759-.002l2.452 1.84a1.576 1.576 0 002.278-.42z" fill-rule="evenodd"></path></svg><span><a href="{{CONFIG site_url}}/messages" data-ajax="load.php?app=messages&apph=messages"> {{LANG messages}}</a></span><small class="badge" id="new__messages"></small>');
+					$('#premium_nav').html('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor"><path fill="none" d="M14.46,23.12012a.9991.9991,0,0,1-.40723-.08692,9.004,9.004,0,0,1-4.3125-4.0166,6.977,6.977,0,0,0,.18995,2.58106,1.04987,1.04987,0,0,1,.0498.3125.99942.99942,0,0,1-1.37744.92578A8.98348,8.98348,0,0,1,4.94727,8.92773a8.51269,8.51269,0,0,1,1.9873-1.8623l.23047-.1875A7.017,7.017,0,0,0,9.63623,1.93555a1.00009,1.00009,0,0,1,1.49121-.80567,8.717,8.717,0,0,1,4.26709,9.0918,5.78155,5.78155,0,0,0,1.398-1.77734.99959.99959,0,0,1,1.39941-.41114,1.237,1.237,0,0,1,.23.17481,8.99474,8.99474,0,0,1-3.65381,14.86328A1.00594,1.00594,0,0,1,14.46,23.12012Zm-6.93017-15.25h0Z"></path></svg><span><a href="{{CONFIG site_url}}/premium" data-ajax="load.php?app=premium&apph=premium"> {{LANG premium}}</a></span>');
+					$('#home_nav').html('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zm-6-2h5V9.157l-6-5.454-6 5.454V19h5v-6h2v6z"/><path d="M20 20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9zm-9-7v6h2v-6h-2z" fill="none"></path></svg><span><a href="{{CONFIG site_url}}" data-ajax="load.php?app=home&apph=home"> {{LANG home}}</a></span>');
+					$('#explore_nav').html('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm3.5-11.5l-2 5-5 2 2-5 5-2z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm3.5-13.5l-5 2-2 5 5-2 2-5z" fill="currentColor"></path></svg><span><a href="{{CONFIG site_url}}/explore" data-ajax="load.php?app=explore&apph=explore"> {{LANG explore}}</a></span>');
+				}
+				if (data.app_name == 'tiles') {
+					$('#tiles_nav').addClass('active');$('#home_nav').removeClass('active');$('#premium_nav').removeClass('active');$('#explore_nav').removeClass('active');$('#tiles_scnd_nav').addClass('active');$('#message_nav').removeClass('active');$('#home_scnd_nav').removeClass('active');$('#explore_scnd_nav').removeClass('active');$('#premium_scnd_nav').removeClass('active');$('#message_scnd_nav').removeClass('active');
+					$('#message_nav').html('<svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M12.003 2.001a9.705 9.705 0 110 19.4 10.876 10.876 0 01-2.895-.384.798.798 0 00-.533.04l-1.984.876a.801.801 0 01-1.123-.708l-.054-1.78a.806.806 0 00-.27-.569 9.49 9.49 0 01-3.14-7.175 9.65 9.65 0 0110-9.7z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="1.739"></path><path d="M17.79 10.132a.659.659 0 00-.962-.873l-2.556 2.05a.63.63 0 01-.758.002L11.06 9.47a1.576 1.576 0 00-2.277.42l-2.567 3.98a.659.659 0 00.961.875l2.556-2.049a.63.63 0 01.759-.002l2.452 1.84a1.576 1.576 0 002.278-.42z" fill-rule="evenodd"></path></svg><span><a href="{{CONFIG site_url}}/messages" data-ajax="load.php?app=messages&apph=messages"> {{LANG messages}}</a></span><small class="badge" id="new__messages"></small>');
+					$('#premium_nav').html('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor"><path fill="none" d="M14.46,23.12012a.9991.9991,0,0,1-.40723-.08692,9.004,9.004,0,0,1-4.3125-4.0166,6.977,6.977,0,0,0,.18995,2.58106,1.04987,1.04987,0,0,1,.0498.3125.99942.99942,0,0,1-1.37744.92578A8.98348,8.98348,0,0,1,4.94727,8.92773a8.51269,8.51269,0,0,1,1.9873-1.8623l.23047-.1875A7.017,7.017,0,0,0,9.63623,1.93555a1.00009,1.00009,0,0,1,1.49121-.80567,8.717,8.717,0,0,1,4.26709,9.0918,5.78155,5.78155,0,0,0,1.398-1.77734.99959.99959,0,0,1,1.39941-.41114,1.237,1.237,0,0,1,.23.17481,8.99474,8.99474,0,0,1-3.65381,14.86328A1.00594,1.00594,0,0,1,14.46,23.12012Zm-6.93017-15.25h0Z"></path></svg><span><a href="{{CONFIG site_url}}/premium" data-ajax="load.php?app=premium&apph=premium"> {{LANG premium}}</a></span>');
+					$('#explore_nav').html(' <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm3.5-11.5l-2 5-5 2 2-5 5-2z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm3.5-13.5l-5 2-2 5 5-2 2-5z" fill="none"></path></svg><span><a href="{{CONFIG site_url}}/explore" data-ajax="load.php?app=explore&apph=explore"> {{LANG explore}}</a></span>');
+					$('#home_nav').html('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zm-6-2h5V9.157l-6-5.454-6 5.454V19h5v-6h2v6z"/><path d="M20 20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9zm-9-7v6h2v-6h-2z" fill="none"></path></svg><span><a href="{{CONFIG site_url}}" data-ajax="load.php?app=home&apph=home"> {{LANG home}}</a></span>');
+				}
+				if (data.app_name == 'premium') {
+					$('#premium_nav').addClass('active');$('#home_nav').removeClass('active');$('#tiles_nav').removeClass('active');$('#explore_nav').removeClass('active');$('#message_nav').removeClass('active');$('#premium_scnd_nav').addClass('active');$('#home_scnd_nav').removeClass('active');$('#tiles_scnd_nav').removeClass('active');$('#message_scnd_nav').removeClass('active');$('#explore_scnd_nav').removeClass('active');
+					$('#message_nav').html('<svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M12.003 2.001a9.705 9.705 0 110 19.4 10.876 10.876 0 01-2.895-.384.798.798 0 00-.533.04l-1.984.876a.801.801 0 01-1.123-.708l-.054-1.78a.806.806 0 00-.27-.569 9.49 9.49 0 01-3.14-7.175 9.65 9.65 0 0110-9.7z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="1.739"></path><path d="M17.79 10.132a.659.659 0 00-.962-.873l-2.556 2.05a.63.63 0 01-.758.002L11.06 9.47a1.576 1.576 0 00-2.277.42l-2.567 3.98a.659.659 0 00.961.875l2.556-2.049a.63.63 0 01.759-.002l2.452 1.84a1.576 1.576 0 002.278-.42z" fill-rule="evenodd"></path></svg><span><a href="{{CONFIG site_url}}/messages" data-ajax="load.php?app=messages&apph=messages"> {{LANG messages}}</a></span><small class="badge" id="new__messages"></small>');
+					$('#premium_nav').html('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M14.46,23.12012a.9991.9991,0,0,1-.40723-.08692,9.004,9.004,0,0,1-4.3125-4.0166,6.977,6.977,0,0,0,.18995,2.58106,1.04987,1.04987,0,0,1,.0498.3125.99942.99942,0,0,1-1.37744.92578A8.98348,8.98348,0,0,1,4.94727,8.92773a8.51269,8.51269,0,0,1,1.9873-1.8623l.23047-.1875A7.017,7.017,0,0,0,9.63623,1.93555a1.00009,1.00009,0,0,1,1.49121-.80567,8.717,8.717,0,0,1,4.26709,9.0918,5.78155,5.78155,0,0,0,1.398-1.77734.99959.99959,0,0,1,1.39941-.41114,1.237,1.237,0,0,1,.23.17481,8.99474,8.99474,0,0,1-3.65381,14.86328A1.00594,1.00594,0,0,1,14.46,23.12012Zm-6.93017-15.25h0Z"></path></svg><span><a href="{{CONFIG site_url}}/premium" data-ajax="load.php?app=premium&apph=premium"> {{LANG premium}}</a></span>');
+					$('#explore_nav').html(' <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm3.5-11.5l-2 5-5 2 2-5 5-2z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm3.5-13.5l-5 2-2 5 5-2 2-5z" fill="none"></path></svg><span><a href="{{CONFIG site_url}}/explore" data-ajax="load.php?app=explore&apph=explore"> {{LANG explore}}</a></span>');
+					$('#home_nav').html('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zm-6-2h5V9.157l-6-5.454-6 5.454V19h5v-6h2v6z"/><path d="M20 20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9zm-9-7v6h2v-6h-2z" fill="none"></path></svg><span><a href="{{CONFIG site_url}}" data-ajax="load.php?app=home&apph=home"> {{LANG home}}</a></span>');
+			    }
+				if (data.app_name == 'messages') {
+					$('#home_nav').removeClass('active');$('#message_nav').addClass('active');$('#tiles_nav').removeClass('active');$('#premium_nav').removeClass('active');$('#explore_nav').removeClass('active');$('#message_scnd_nav').addClass('active');$('#home_scnd_nav').removeClass('active');$('#tiles_scnd_nav').removeClass('active');	$('#explore_scnd_nav').removeClass('active');$('#premium_scnd_nav').removeClass('active');
+					$('#message_nav').html('<svg fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M12.003 1.131a10.487 10.487 0 00-10.87 10.57 10.194 10.194 0 003.412 7.771l.054 1.78a1.67 1.67 0 002.342 1.476l1.935-.872a11.767 11.767 0 003.127.416 10.488 10.488 0 0010.87-10.57 10.487 10.487 0 00-10.87-10.57zm5.786 9.001l-2.566 3.983a1.577 1.577 0 01-2.278.42l-2.452-1.84a.63.63 0 00-.759.002l-2.556 2.049a.659.659 0 01-.96-.874L8.783 9.89a1.576 1.576 0 012.277-.42l2.453 1.84a.63.63 0 00.758-.003l2.556-2.05a.659.659 0 01.961.874z"></path></svg><span><a href="{{CONFIG site_url}}/messages" data-ajax="load.php?app=messages&apph=messages"> {{LANG messages}}</a></span><small class="badge" id="new__messages"></small>');
+					$('#explore_nav').html(' <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm3.5-11.5l-2 5-5 2 2-5 5-2z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm3.5-13.5l-5 2-2 5 5-2 2-5z" fill="none"></path></svg><span><a href="{{CONFIG site_url}}/explore" data-ajax="load.php?app=explore&apph=explore"> {{LANG explore}}</a></span>');
+					$('#home_nav').html('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zm-6-2h5V9.157l-6-5.454-6 5.454V19h5v-6h2v6z"/><path d="M20 20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9zm-9-7v6h2v-6h-2z" fill="none"></path></svg><span><a href="{{CONFIG site_url}}" data-ajax="load.php?app=home&apph=home"> {{LANG home}}</a></span>');
+					$('#premium_nav').html('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor"><path fill="none" d="M14.46,23.12012a.9991.9991,0,0,1-.40723-.08692,9.004,9.004,0,0,1-4.3125-4.0166,6.977,6.977,0,0,0,.18995,2.58106,1.04987,1.04987,0,0,1,.0498.3125.99942.99942,0,0,1-1.37744.92578A8.98348,8.98348,0,0,1,4.94727,8.92773a8.51269,8.51269,0,0,1,1.9873-1.8623l.23047-.1875A7.017,7.017,0,0,0,9.63623,1.93555a1.00009,1.00009,0,0,1,1.49121-.80567,8.717,8.717,0,0,1,4.26709,9.0918,5.78155,5.78155,0,0,0,1.398-1.77734.99959.99959,0,0,1,1.39941-.41114,1.237,1.237,0,0,1,.23.17481,8.99474,8.99474,0,0,1-3.65381,14.86328A1.00594,1.00594,0,0,1,14.46,23.12012Zm-6.93017-15.25h0Z"></path></svg><span><a href="{{CONFIG site_url}}/premium" data-ajax="load.php?app=premium&apph=premium"> {{LANG premium}}</a></span>');
+				}
+				if (data.app_name != 'explore' && data.app_name != 'home' && data.app_name != 'premium' && data.app_name != 'tiles' && data.app_name != 'messages') {
+					$('#home_nav').removeClass('active');$('#explore_nav').removeClass('active');$('#tiles_nav').removeClass('active');$('#premium_nav').removeClass('active');$('#message_nav').removeClass('active');$('#home_scnd_nav').removeClass('active');$('#tiles_scnd_nav').removeClass('active');$('#premium_scnd_nav').removeClass('active');$('#message_scnd_nav').removeClass('active');$('#explore_scnd_nav').removeClass('active');
+					$('#message_nav').html('<svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M12.003 2.001a9.705 9.705 0 110 19.4 10.876 10.876 0 01-2.895-.384.798.798 0 00-.533.04l-1.984.876a.801.801 0 01-1.123-.708l-.054-1.78a.806.806 0 00-.27-.569 9.49 9.49 0 01-3.14-7.175 9.65 9.65 0 0110-9.7z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="1.739"></path><path d="M17.79 10.132a.659.659 0 00-.962-.873l-2.556 2.05a.63.63 0 01-.758.002L11.06 9.47a1.576 1.576 0 00-2.277.42l-2.567 3.98a.659.659 0 00.961.875l2.556-2.049a.63.63 0 01.759-.002l2.452 1.84a1.576 1.576 0 002.278-.42z" fill-rule="evenodd"></path></svg><span><a href="{{CONFIG site_url}}/messages" data-ajax="load.php?app=messages&apph=messages"> {{LANG messages}}</a></span><small class="badge" id="new__messages"></small>');
+					$('#premium_nav').html('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor"><path fill="none" d="M14.46,23.12012a.9991.9991,0,0,1-.40723-.08692,9.004,9.004,0,0,1-4.3125-4.0166,6.977,6.977,0,0,0,.18995,2.58106,1.04987,1.04987,0,0,1,.0498.3125.99942.99942,0,0,1-1.37744.92578A8.98348,8.98348,0,0,1,4.94727,8.92773a8.51269,8.51269,0,0,1,1.9873-1.8623l.23047-.1875A7.017,7.017,0,0,0,9.63623,1.93555a1.00009,1.00009,0,0,1,1.49121-.80567,8.717,8.717,0,0,1,4.26709,9.0918,5.78155,5.78155,0,0,0,1.398-1.77734.99959.99959,0,0,1,1.39941-.41114,1.237,1.237,0,0,1,.23.17481,8.99474,8.99474,0,0,1-3.65381,14.86328A1.00594,1.00594,0,0,1,14.46,23.12012Zm-6.93017-15.25h0Z"></path></svg><span><a href="{{CONFIG site_url}}/premium" data-ajax="load.php?app=premium&apph=premium"> {{LANG premium}}</a></span>');
+					$('#explore_nav').html(' <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm3.5-11.5l-2 5-5 2 2-5 5-2z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm3.5-13.5l-5 2-2 5 5-2 2-5z" fill="none"></path></svg><span><a href="{{CONFIG site_url}}/explore" data-ajax="load.php?app=explore&apph=explore"> {{LANG explore}}</a></span>');
+					$('#home_nav').html('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zm-6-2h5V9.157l-6-5.454-6 5.454V19h5v-6h2v6z"/><path d="M20 20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9zm-9-7v6h2v-6h-2z" fill="none"></path></svg><span><a href="{{CONFIG site_url}}" data-ajax="load.php?app=home&apph=home"> {{LANG home}}</a></span>');
+				}
+				if (data.app_name == 'timeline') {
+					$('.profile_script').remove();$('.posts_script').remove();
+					$('#home_nav').addClass('active');$('#tiles_nav').removeClass('active');$('#home_scnd_nav').addClass('active');$('#premium_nav').removeClass('active');$('#message_nav').removeClass('active');$('#explore_nav').removeClass('active');$('#tiles_scnd_nav').removeClass('active');$('#premium_scnd_nav').removeClass('active');$('#message_scnd_nav').removeClass('active');$('#explore_scnd_nav').removeClass('active');
+					$('#home_nav').html('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zm-6-2h5V9.157l-6-5.454-6 5.454V19h5v-6h2v6z"/><path d="M20 20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9zm-9-7v6h2v-6h-2z" fill="currentColor"></path></svg><span><a href="{{CONFIG site_url}}" data-ajax="load.php?app=home&apph=home"> {{LANG home}}</a></span>');
+					$('#message_nav').html('<svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M12.003 2.001a9.705 9.705 0 110 19.4 10.876 10.876 0 01-2.895-.384.798.798 0 00-.533.04l-1.984.876a.801.801 0 01-1.123-.708l-.054-1.78a.806.806 0 00-.27-.569 9.49 9.49 0 01-3.14-7.175 9.65 9.65 0 0110-9.7z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="1.739"></path><path d="M17.79 10.132a.659.659 0 00-.962-.873l-2.556 2.05a.63.63 0 01-.758.002L11.06 9.47a1.576 1.576 0 00-2.277.42l-2.567 3.98a.659.659 0 00.961.875l2.556-2.049a.63.63 0 01.759-.002l2.452 1.84a1.576 1.576 0 002.278-.42z" fill-rule="evenodd"></path></svg><span><a href="{{CONFIG site_url}}/messages" data-ajax="load.php?app=messages&apph=messages"> {{LANG messages}}</a></span><small class="badge" id="new__messages"></small>');
+					$('#premium_nav').html('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor"><path fill="none" d="M14.46,23.12012a.9991.9991,0,0,1-.40723-.08692,9.004,9.004,0,0,1-4.3125-4.0166,6.977,6.977,0,0,0,.18995,2.58106,1.04987,1.04987,0,0,1,.0498.3125.99942.99942,0,0,1-1.37744.92578A8.98348,8.98348,0,0,1,4.94727,8.92773a8.51269,8.51269,0,0,1,1.9873-1.8623l.23047-.1875A7.017,7.017,0,0,0,9.63623,1.93555a1.00009,1.00009,0,0,1,1.49121-.80567,8.717,8.717,0,0,1,4.26709,9.0918,5.78155,5.78155,0,0,0,1.398-1.77734.99959.99959,0,0,1,1.39941-.41114,1.237,1.237,0,0,1,.23.17481,8.99474,8.99474,0,0,1-3.65381,14.86328A1.00594,1.00594,0,0,1,14.46,23.12012Zm-6.93017-15.25h0Z"></path></svg><span><a href="{{CONFIG site_url}}/premium" data-ajax="load.php?app=premium&apph=premium"> {{LANG premium}}</a></span>');
+					$('#explore_nav').html(' <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm3.5-11.5l-2 5-5 2 2-5 5-2z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm3.5-13.5l-5 2-2 5 5-2 2-5z" fill="none"></path></svg><span><a href="{{CONFIG site_url}}/explore" data-ajax="load.php?app=explore&apph=explore"> {{LANG explore}}</a></span>');
+					if ($('.home_script').length == 0) {
+						$('head').append($('<script>',{ src: "{{THEME_URL}}/main/static/js/libs/afterglow.min.js", class: "home_script"}),
+						$('<script>',{ src: "{{THEME_URL}}/main/static/js/libs/jquery.pause.js", class: "home_script"}));
+					}
+				}
+				if (data.app_name == 'posts') {
+					$('.home_script').remove();$('.profile_script').remove();
+					$('#home_nav').removeClass('active');$('#explore_nav').removeClass('active');$('#tiles_nav').removeClass('active');$('#premium_nav').removeClass('active');$('#message_nav').removeClass('active');$('#home_scnd_nav').removeClass('active');$('#tiles_scnd_nav').removeClass('active');$('#premium_scnd_nav').removeClass('active');$('#message_scnd_nav').removeClass('active');$('#explore_scnd_nav').removeClass('active');
+					$('#home_nav').html('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zm-6-2h5V9.157l-6-5.454-6 5.454V19h5v-6h2v6z"/><path d="M20 20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9zm-9-7v6h2v-6h-2z" fill="none"></path></svg><span><a href="{{CONFIG site_url}}" data-ajax="load.php?app=home&apph=home"> {{LANG home}}</a></span>');
+					$('#message_nav').html('<svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M12.003 2.001a9.705 9.705 0 110 19.4 10.876 10.876 0 01-2.895-.384.798.798 0 00-.533.04l-1.984.876a.801.801 0 01-1.123-.708l-.054-1.78a.806.806 0 00-.27-.569 9.49 9.49 0 01-3.14-7.175 9.65 9.65 0 0110-9.7z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="1.739"></path><path d="M17.79 10.132a.659.659 0 00-.962-.873l-2.556 2.05a.63.63 0 01-.758.002L11.06 9.47a1.576 1.576 0 00-2.277.42l-2.567 3.98a.659.659 0 00.961.875l2.556-2.049a.63.63 0 01.759-.002l2.452 1.84a1.576 1.576 0 002.278-.42z" fill-rule="evenodd"></path></svg><span><a href="{{CONFIG site_url}}/messages" data-ajax="load.php?app=messages&apph=messages"> {{LANG messages}}</a></span><small class="badge" id="new__messages"></small>');
+					$('#premium_nav').html('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor"><path fill="none" d="M14.46,23.12012a.9991.9991,0,0,1-.40723-.08692,9.004,9.004,0,0,1-4.3125-4.0166,6.977,6.977,0,0,0,.18995,2.58106,1.04987,1.04987,0,0,1,.0498.3125.99942.99942,0,0,1-1.37744.92578A8.98348,8.98348,0,0,1,4.94727,8.92773a8.51269,8.51269,0,0,1,1.9873-1.8623l.23047-.1875A7.017,7.017,0,0,0,9.63623,1.93555a1.00009,1.00009,0,0,1,1.49121-.80567,8.717,8.717,0,0,1,4.26709,9.0918,5.78155,5.78155,0,0,0,1.398-1.77734.99959.99959,0,0,1,1.39941-.41114,1.237,1.237,0,0,1,.23.17481,8.99474,8.99474,0,0,1-3.65381,14.86328A1.00594,1.00594,0,0,1,14.46,23.12012Zm-6.93017-15.25h0Z"></path></svg><span><a href="{{CONFIG site_url}}/premium" data-ajax="load.php?app=premium&apph=premium"> {{LANG premium}}</a></span>');
+					$('#explore_nav').html(' <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm3.5-11.5l-2 5-5 2 2-5 5-2z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm3.5-13.5l-5 2-2 5 5-2 2-5z" fill="none"></path></svg><span><a href="{{CONFIG site_url}}/explore" data-ajax="load.php?app=explore&apph=explore"> {{LANG explore}}</a></span>');
+					if ($('.posts_script').length == 0) {
+						$('head').append($('<script>',{ src: "{{THEME_URL}}/main/static/js/libs/afterglow.min.js", class: "posts_script"}));
+					}
+				}
+				if (data.app_name == 'tile') {
+					$('.home_script').remove();$('.profile_script').remove();
+				}
+				if (data.app_name == 'profile') {
+					$('.home_script').remove();
+					$('.posts_script').remove();
+					if ($('.profile_script').length == 0) {
+						$('head').append($('<script>',{ src: "{{THEME_URL}}/main/static/js/libs/jquery.equalheights.js", class: "profile_script"}));
+					}
+				}
+				if (data.app_name == 'explore' || data.app_name == 'tags' || data.app_name == 'profile' || data.app_name == 'home') {
+					if ( $('.grid_a').length == 0 ) {
+						$('head').append($('<script>',{ src: "{{THEME_URL}}/main/static/js/libs/gridAlicious/jquery.grid-a-licious.js", class: "grid_a" }));
+					}
+				} else{$('.grid_a').remove();}
+				$('#main-page').attr('class', 'container container-'+data.app_name+' container-'+data.app_name+'-main');
+				$('body').attr('data-app', data.app_name);
+				$('body').attr('class', 'body-'+data.app_name);
+				$('#header_').attr('class','container container-'+data.app_name+' container-'+data.app_name+'-header');
+				if (data.app_name != 'profile' || data.app_name != 'explore') {
+				$('#footer_').attr('class','container container-'+data.app_name+' container-'+data.app_name+'-main');
+				}else{$('#footer_').attr('class','container container-'+data.app_name);}
+				if (data.app_name == 'startup') {$('footer').attr('class', 'footer_class');}
+				slide_init();
+				slide_left();
+				slide_right();
+				slide_finish();
+				tippy('.plays', {arrow: true,content: '{{LANG plays}}'});
+				tippy('.veri', {arrow: true,content: '{{LANG verified}}'});
+				tippy('.like_comment', {arrow: true,content: '{{LANG like}}'});
+				tippy('.dlc', {arrow: true,content: '{{LANG delete_comment}}'});
+				tippy('.save-post', {arrow: true,content: '{{LANG favourite}}'});
+				tippy('.rxcls', { placement: 'bottom',arrow: true, content: '{{LANG close}}'});
+				$('#tiles-cr').flickity({ freeScroll: true, pageDots: false, contain: true, resize: true, cellAlign: 'left', autoPlay: false, friction: 0.2 });
+				$('.tl-follow-suggestions').flickity({ freeScroll: true, pageDots: false, contain: true, resize: true, cellAlign: 'left', autoPlay: true, friction: 0.2 });
+				$('#premium-slick').slick({ prevArrow: '<button type="button" class="slick-prev" title="Previous" style="width: 35px;height: 35px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="feather"><path fill="currentColor" d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"></path></svg></button>', nextArrow: '<button type="button" class="slick-next" title="Next" style="width: 35px;height: 35px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="feather"><path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"></path></svg></button>', infinite: true,lazyLoad: 'ondemand',slidesToShow: 6,variableWidth: true,slidesToScroll: 1,autoplay: false,autoplaySpeed: 2000, responsive: [{breakpoint: 1024,settings: {slidesToShow: 6}},{breakpoint: 800,settings: {slidesToShow: 5}},{breakpoint: 600,settings: {slidesToShow: 5.6}},{breakpoint: 500,settings: {slidesToShow: 5}},{breakpoint: 300,settings: {slidesToShow: 2.5}}] });
+				const items = document.querySelectorAll('.accordion button');
+				function Faq() {
+				const Toggle = this.getAttribute('aria-expanded');
+				for (i = 0; i < items.length; i++) {items[i].setAttribute('aria-expanded', 'false')}
+				if (Toggle == 'false') {this.setAttribute('aria-expanded', 'true')} }
+				items.forEach((item) => item.addEventListener('click', Faq));
+				document.getElementById('one-hour').addEventListener('click', function(e) {$('.pay-with').removeClass('hidden');$('.payment').html('<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" style="position:relative;top:-1px"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="currentColor"></path></svg> {{LANG pay}} ' + Price() + ' {{LANG credits}}</span>');});
+				document.getElementById('daily').addEventListener('click', function(e) {$('.pay-with').removeClass('hidden');$('.payment').html('<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" style="position:relative;top:-1px"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="currentColor"></path></svg> {{LANG pay}} ' + Price() + ' {{LANG credits}}</span>');});
+				document.getElementById('three-days').addEventListener('click', function(e) {$('.pay-with').removeClass('hidden');$('.payment').html('<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" style="position:relative;top:-1px"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="currentColor"></path></svg> {{LANG pay}} ' + Price() + ' {{LANG credits}}</span>');});
+				document.getElementById('weekly').addEventListener('click', function(e) {$('.pay-with').removeClass('hidden');$('.payment').html('<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" style="position:relative;top:-1px"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="currentColor"></path></svg> {{LANG pay}} ' + Price() + ' {{LANG credits}}</span>');});
+				document.getElementById('monthly').addEventListener('click', function(e) {$('.pay-with').removeClass('hidden');$('.payment').html('<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" style="position:relative;top:-1px"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="currentColor"></path></svg> {{LANG pay}} ' + new Intl.NumberFormat().format(Price()) + ' {{LANG credits}}</span>');});
+				document.getElementById('yearly').addEventListener('click', function(e) {$('.pay-with').removeClass('hidden');$('.payment').html('<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" style="position:relative;top:-1px"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="currentColor"></path></svg> {{LANG pay}} ' + new Intl.NumberFormat().format(Price()) + ' {{LANG credits}}</span>');});
+				document.getElementById('life-time').addEventListener('click', function(e) {$('.pay-with').removeClass('hidden');$('.payment').html('<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" style="position:relative;top:-1px"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="currentColor"></path></svg> {{LANG pay}} ' + new Intl.NumberFormat().format(Price()) + ' {{LANG credits}}</span>');});
+				$("body").on("contextmenu", "img", function(e) {
+					<?php if($context['me']['is_pro'] == 0){ ?>
+						$.toast("{{LANG right_click_image}}",{duration: 5000, type: '',align: 'bottom',singleton: false});
+						return false;
+					<?php } ?>
+				});
+				$('body').removeClass('app-loading');
+			} 
+		});
+	});
+</script>
+<script src="{{THEME_URL}}/main/static/js/libs/tippy/popper.min.js"></script>
+<script src="{{THEME_URL}}/main/static/js/libs/tippy/tippy-bundle.umd.min.js"></script>
+<body data-app="<?php echo($context['app_name']); ?>" class="body-<?php echo($context['app_name']); ?>">
+	<div class="animation bar_loading"></div>
+	<a id="ajax_redirect" href="" data-ajax="" data-sent="0"></a>
+	<input type="hidden" class="hidden csrf-token" value="<?php echo($context['csrf_token']) ?>">
+	{{HEADER}}
+	<main class="container container-<?php echo($context['app_name']); ?> container-<?php echo($context['app_name']); ?>-main" id="main-page">
+		{{CONTENT}}
+	</main>
+	<?php if (!empty($context['app_name']) && $context['app_name'] != 'signup' && $context['app_name'] != 'login' && $context['app_name'] != 'login' && $context['app_name'] != 'embed' && $context['app_name'] != 'tile') { ?>
+		{{FOOTER}}
+	<?php } ?>
+	<?php include $context['direct'].'/main/templates/js/extra-js.html'; ?>
+    <?php include $context['direct'].'/main/templates/includes/timeago.html'; ?>
+	<div class="lightbox__container"></div>
+	<script src="{{THEME_URL}}/main/static/js/libs/lightGallery/src/js/lightgallery.js"></script>
+	<script src="{{THEME_URL}}/main/static/js/libs/lightGallery/modules/lg-zoom.js"></script>
+	<script src="{{THEME_URL}}/main/static/js/libs/lightGallery/modules/lg-fullscreen.js"></script>
+	<link rel="stylesheet" href="{{THEME_URL}}/main/static/js/libs/lightGallery/src/css/lightgallery.css">
+	<link rel="stylesheet" href="{{THEME_URL}}/main/static/js/libs/lightGallery/src/css/lg-transitions.css">
+	<!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZLLZX5GC6Z"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-ZLLZX5GC6Z');
+    </script>
+	<script type="module">
+		import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwainstall';
+		const el = document.createElement('pwa-update');
+		document.body.appendChild(el);
+	</script>
+	<script type="text/javascript">
+		if (is_logged()) {
+			setInterval(function(){
+				$.post(rita()+'main/session-status', function(data, textStatus, xhr) {});
+			},5000);
+		}
+		if (is_logged()) {
+			$(window).on('load', function() {
+                if ("serviceWorker" in navigator) {
+                    navigator.serviceWorker.register("{{THEME_URL}}/main/static/js/pwa-sw.js");
+                }
+            });
+	    }
+		<?php if ($context['app_name'] == 'home') { ?>
+			$('footer').hide();
+		<?php } ?>
+		$(window).on("popstate", function (e) {
+	        location.reload();
+	    });
+		$("body").on("contextmenu", "img", function(e) {
+			<?php if($context['me']['is_pro'] == 0){ ?>
+				$.toast("{{LANG right_click_image}}",{duration: 5000, type: '',align: 'bottom',singleton: false});
+				return false;
+			<?php } ?>
+	    });
+		tippy('.veri', {arrow: true,content: '{{LANG verified}}'});
+	</script>
+<?php echo $ui->intel('main/templates/modals/wallet'); ?>
+<!--
+<div class="internet-toast-wrapper">
+    <div class="internet-toast">
+        <div class="internet-content">
+            <div class="internet-icon"><svg xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" viewBox="0 0 24 24"><path d="M12,15a3,3,0,1,0,3,3A3,3,0,0,0,12,15Zm0,4a1,1,0,1,1,1-1A1,1,0,0,1,12,19Zm0-8a7.06,7.06,0,0,0-4.95,2.05,1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0,5,5,0,0,1,7.08,0,1,1,0,0,0,.7.3A1,1,0,0,0,17,13.05,7.06,7.06,0,0,0,12,11Zm0-4a11.08,11.08,0,0,0-7.78,3.22,1,1,0,0,0,1.42,1.42,9,9,0,0,1,12.72,0,1,1,0,0,0,.71.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.42A11.08,11.08,0,0,0,12,7Zm10.61.39a15,15,0,0,0-21.22,0A1,1,0,0,0,2.81,8.81a13,13,0,0,1,18.38,0,1,1,0,0,0,1.42,0A1,1,0,0,0,22.61,7.39Z"/></svg></div>
+            <div class="internet-details">
+                <span>{{LANG now_online}}</span>
+                <p>{{LANG now_online_dec}}</p>
+            </div>
+        </div>
+        <div class="internet-close-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.41,12l4.3-4.29a1,1,0,1,0-1.42-1.42L12,10.59,7.71,6.29A1,1,0,0,0,6.29,7.71L10.59,12l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l4.29,4.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"/></svg></div>
+    </div>
+</div>
+-->
+	<script>
+	const internet_wrapper = document.querySelector(".internet-toast-wrapper"),
+	toast = internet_wrapper.querySelector(".internet-toast"),
+	wifiIcon = internet_wrapper.querySelector(".internet-icon"),
+	title = internet_wrapper.querySelector("span"),
+	subTitle = internet_wrapper.querySelector("p"),
+	closeIcon = internet_wrapper.querySelector(".internet-close-icon");
+	window.onload = () => {
+		function ajax(){
+			let xhr = new XMLHttpRequest();
+			xhr.open("GET", "https://jsonplaceholder.typicode.com/posts", true);
+			xhr.onload = () =>{
+			if(xhr.status == 200 && xhr.status < 300){
+				online();
+			} else { offline(); }
+			}
+			xhr.onerror = () =>{ offline(); }
+			xhr.send();
+		}
+		function online(){
+			toast.classList.remove("offline");
+			title.innerText = "{{LANG now_online}}";
+			subTitle.innerText = "{{LANG now_online_dec}}";
+			wifiIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" viewBox="0 0 24 24"><path d="M12,15a3,3,0,1,0,3,3A3,3,0,0,0,12,15Zm0,4a1,1,0,1,1,1-1A1,1,0,0,1,12,19Zm0-8a7.06,7.06,0,0,0-4.95,2.05,1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0,5,5,0,0,1,7.08,0,1,1,0,0,0,.7.3A1,1,0,0,0,17,13.05,7.06,7.06,0,0,0,12,11Zm0-4a11.08,11.08,0,0,0-7.78,3.22,1,1,0,0,0,1.42,1.42,9,9,0,0,1,12.72,0,1,1,0,0,0,.71.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.42A11.08,11.08,0,0,0,12,7Zm10.61.39a15,15,0,0,0-21.22,0A1,1,0,0,0,2.81,8.81a13,13,0,0,1,18.38,0,1,1,0,0,0,1.42,0A1,1,0,0,0,22.61,7.39Z"/></svg>';
+			closeIcon.onclick = ()=>{ internet_wrapper.classList.add("hide"); }
+			setTimeout(() =>{ internet_wrapper.classList.add("hide"); }, 4000);
+		}
+		function offline(){
+			internet_wrapper.classList.remove("hide")
+			toast.classList.add("offline");
+			title.innerText = "{{LANG now_offline}}";
+			subTitle.innerText = "{{LANG now_offline_dec}}";
+			wifiIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" viewBox="0 0 24 24"><path d="M6.92,5.51h0L3.71,2.29A1,1,0,0,0,2.29,3.71L4.56,6A15.21,15.21,0,0,0,1.4,8.39a1,1,0,0,0,0,1.41,1,1,0,0,0,.71.3,1,1,0,0,0,.7-.29A13.07,13.07,0,0,1,6.05,7.46L7.54,9a10.78,10.78,0,0,0-3.32,2.27,1,1,0,1,0,1.42,1.4,8.8,8.8,0,0,1,3.45-2.12l1.62,1.61a7.07,7.07,0,0,0-3.66,1.94,1,1,0,1,0,1.42,1.4A5,5,0,0,1,12,14a4.13,4.13,0,0,1,.63.05l7.66,7.66a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42ZM12,16a3,3,0,1,0,3,3A3,3,0,0,0,12,16Zm0,4a1,1,0,1,1,1-1A1,1,0,0,1,12,20ZM22.61,8.39A15,15,0,0,0,10.29,4.1a1,1,0,1,0,.22,2A13.07,13.07,0,0,1,21.2,9.81a1,1,0,0,0,1.41-1.42Zm-4.25,4.24a1,1,0,0,0,1.42-1.4,10.75,10.75,0,0,0-4.84-2.82,1,1,0,1,0-.52,1.92A8.94,8.94,0,0,1,18.36,12.63Z"/></svg>';
+			closeIcon.onclick = ()=>{ internet_wrapper.classList.add("hide"); }
+		}
+		setInterval(()=>{ ajax(); }, 1110);
+	}
+	</script>
+</body>
+</html>

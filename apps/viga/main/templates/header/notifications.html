@@ -1,0 +1,1096 @@
+<?php foreach ($context['notifications'] as $key => $notif_data) { ?>
+	<?php if ($notif_data['type'] == 'verification_approved') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="<?php echo($notif_data['ajax_url']) ?>">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span><?php echo lang($notif_data['type']) ?></span><br>
+						<span class="notify-timestamp"  title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="margin-top:-1.5px" viewBox="0 0 24 24"><path fill="#ff235d" d="M19.965,8.521C19.988,8.347,20,8.173,20,8c0-2.379-2.143-4.288-4.521-3.965C14.786,2.802,13.466,2,12,2 S9.214,2.802,8.521,4.035C6.138,3.712,4,5.621,4,8c0,0.173,0.012,0.347,0.035,0.521C2.802,9.215,2,10.535,2,12 s0.802,2.785,2.035,3.479C4.012,15.653,4,15.827,4,16c0,2.379,2.138,4.283,4.521,3.965C9.214,21.198,10.534,22,12,22 s2.786-0.802,3.479-2.035C17.857,20.283,20,18.379,20,16c0-0.173-0.012-0.347-0.035-0.521C21.198,14.785,22,13.465,22,12 S21.198,9.215,19.965,8.521z M10.955,16.416l-3.667-3.714l1.424-1.404l2.257,2.286l4.327-4.294l1.408,1.42L10.955,16.416z"></path></svg> <?php echo(time2str($notif_data['time'])) ?></span>
+					</span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot">
+					<?php } ?>
+					<b class="coloredText-green">{{LANG approved}}!</b>
+				</div>
+			</div>
+		</a>
+	<?php } elseif ($notif_data['type'] == 'we_verified_ur_account') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="<?php echo($notif_data['ajax_url']) ?>">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span><?php echo lang($notif_data['type']) ?></span><br>
+						<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="margin-top:-1.5px" viewBox="0 0 24 24"><path fill="#ff235d" d="M19.965,8.521C19.988,8.347,20,8.173,20,8c0-2.379-2.143-4.288-4.521-3.965C14.786,2.802,13.466,2,12,2 S9.214,2.802,8.521,4.035C6.138,3.712,4,5.621,4,8c0,0.173,0.012,0.347,0.035,0.521C2.802,9.215,2,10.535,2,12 s0.802,2.785,2.035,3.479C4.012,15.653,4,15.827,4,16c0,2.379,2.138,4.283,4.521,3.965C9.214,21.198,10.534,22,12,22 s2.786-0.802,3.479-2.035C17.857,20.283,20,18.379,20,16c0-0.173-0.012-0.347-0.035-0.521C21.198,14.785,22,13.465,22,12 S21.198,9.215,19.965,8.521z M10.955,16.416l-3.667-3.714l1.424-1.404l2.257,2.286l4.327-4.294l1.408,1.42L10.955,16.416z"></path></svg> <?php echo(time2str($notif_data['time'])) ?></span>
+					</span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot">
+					<?php } ?>
+					<b class="coloredText-green">{{LANG verified_member}}!</b>
+				</div>
+			</div>
+		</a>
+	<?php } elseif ($notif_data['type'] == 'verification_decline') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="<?php echo($notif_data['ajax_url']) ?>">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span><?php echo lang($notif_data['type']) ?></span><br>
+						<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="margin-top:-1.5px" viewBox="0 0 24 24"><path fill="#ff235d" d="M19.965,8.521C19.988,8.347,20,8.173,20,8c0-2.379-2.143-4.288-4.521-3.965C14.786,2.802,13.466,2,12,2 S9.214,2.802,8.521,4.035C6.138,3.712,4,5.621,4,8c0,0.173,0.012,0.347,0.035,0.521C2.802,9.215,2,10.535,2,12 s0.802,2.785,2.035,3.479C4.012,15.653,4,15.827,4,16c0,2.379,2.138,4.283,4.521,3.965C9.214,21.198,10.534,22,12,22 s2.786-0.802,3.479-2.035C17.857,20.283,20,18.379,20,16c0-0.173-0.012-0.347-0.035-0.521C21.198,14.785,22,13.465,22,12 S21.198,9.215,19.965,8.521z M10.955,16.416l-3.667-3.714l1.424-1.404l2.257,2.286l4.327-4.294l1.408,1.42L10.955,16.416z"></path></svg> <?php echo(time2str($notif_data['time'])) ?></span>
+					</span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot">
+					<?php } ?>
+					<b class="coloredText-red">{{LANG declined}}!</b>
+				</div>
+			</div>
+		</a>
+	<?php } elseif ($notif_data['type'] == 'we_removed_ur_verification') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="<?php echo($notif_data['ajax_url']) ?>">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span><?php echo lang($notif_data['type']) ?></span><br>
+						<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="margin-top:-1.5px" viewBox="0 0 24 24"><path fill="#ff235d" d="M19.965,8.521C19.988,8.347,20,8.173,20,8c0-2.379-2.143-4.288-4.521-3.965C14.786,2.802,13.466,2,12,2 S9.214,2.802,8.521,4.035C6.138,3.712,4,5.621,4,8c0,0.173,0.012,0.347,0.035,0.521C2.802,9.215,2,10.535,2,12 s0.802,2.785,2.035,3.479C4.012,15.653,4,15.827,4,16c0,2.379,2.138,4.283,4.521,3.965C9.214,21.198,10.534,22,12,22 s2.786-0.802,3.479-2.035C17.857,20.283,20,18.379,20,16c0-0.173-0.012-0.347-0.035-0.521C21.198,14.785,22,13.465,22,12 S21.198,9.215,19.965,8.521z M10.955,16.416l-3.667-3.714l1.424-1.404l2.257,2.286l4.327-4.294l1.408,1.42L10.955,16.416z"></path></svg> <?php echo(time2str($notif_data['time'])) ?></span>
+					</span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot">
+					<?php } ?>
+					
+				</div>
+			</div>
+		</a>
+	<?php } elseif ($notif_data['type'] == 'ad_deleted' || $notif_data['type'] == 'ads_deleted') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="load.php?app=campaign&apph=campaign">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span><?php echo lang($notif_data['type']) ?></span><br>
+						<span class="notify-timestamp"  title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="#f23552" d="M14 19h7v2h-9l-3.998.002-6.487-6.487a1 1 0 0 1 0-1.414L12.12 2.494a1 1 0 0 1 1.415 0l7.778 7.778a1 1 0 0 1 0 1.414L14 19zm1.657-4.485l3.535-3.536-6.364-6.364-3.535 3.536 6.364 6.364z"></path><path fill="currentColor" d="M8.586 8.858l-4.95 4.95 5.194 5.194H10V19h1.172l3.778-3.778-6.364-6.364zM10 7.444l6.364 6.364 2.828-2.829-6.364-6.364L10 7.444zM14 19h7v2h-9l-3.998.002-6.487-6.487a1 1 0 0 1 0-1.414L12.12 2.494a1 1 0 0 1 1.415 0l7.778 7.778a1 1 0 0 1 0 1.414L14 19z"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+					</span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot">
+					<?php } ?>
+					<b class="coloredText-red">{{LANG deleted}}!</b>
+				</div>
+			</div>
+		</a>	
+	<?php } elseif ( $notif_data['type'] == 'membership_canceled') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="<?php echo($notif_data['ajax_url']) ?>">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span><?php echo lang($notif_data['type']) ?></span><br>
+						<span class="notify-timestamp"  title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" width="14.5" height="14.5" style="margin-top:-3px" viewBox="0 0 24 24" fill="none" stroke="#ff235d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" color="#ff235d"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+					</span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot">
+					<?php } ?>
+					<b class="coloredText-orange">{{LANG canceled}}!</b>
+				</div>
+			</div>
+		</a>
+	<?php } elseif ($notif_data['type'] == 'membership_plan_activated' || $notif_data['type'] == 'free_membership_activated') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="<?php echo($notif_data['ajax_url']) ?>">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span><?php echo lang($notif_data['type']) ?></span><br>
+						<span class="notify-timestamp"  title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" style="margin-top:-3px"><path fill="#ff4406" d="M14.46,23.12012a.9991.9991,0,0,1-.40723-.08692,9.004,9.004,0,0,1-4.3125-4.0166,6.977,6.977,0,0,0,.18995,2.58106,1.04987,1.04987,0,0,1,.0498.3125.99942.99942,0,0,1-1.37744.92578A8.98348,8.98348,0,0,1,4.94727,8.92773a8.51269,8.51269,0,0,1,1.9873-1.8623l.23047-.1875A7.017,7.017,0,0,0,9.63623,1.93555a1.00009,1.00009,0,0,1,1.49121-.80567,8.717,8.717,0,0,1,4.26709,9.0918,5.78155,5.78155,0,0,0,1.398-1.77734.99959.99959,0,0,1,1.39941-.41114,1.237,1.237,0,0,1,.23.17481,8.99474,8.99474,0,0,1-3.65381,14.86328A1.00594,1.00594,0,0,1,14.46,23.12012Zm-6.93017-15.25h0Z"></path></svg>&nbsp<?php echo(time2str($notif_data['time'])) ?></span>
+					</span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot">
+					<?php } ?>
+					<img class="notify-preview" src="{{CONFIG site_url}}/media/img/icons/confetti.png">
+				</div>
+			</div>
+		</a>
+    <?php } elseif ($notif_data['type'] == 'followed_u') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo($notif_data['username']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')">
+			<div class="notify-wraper">
+				<img src="<?php echo(media($notif_data['avatar'])) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($notif_data['username']) ?></strong>
+						<span class="notify-type"><?php echo lang($notif_data['type']) ?></span><br>
+						<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff0033" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+					</span>
+					<span class="notify-subtitle"></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot">
+					<?php } else { ?>
+						<span class="read-dot"></span>
+					<?php } ?>
+					<?php if ($notif_data['follow'] == 0) { ?>
+						<button class="nbtn notify-primary notify-btn" onclick="notify_follow('<?php echo($notif_data['notifier_id']) ?>')">
+							<span>{{LANG follow_back}}</span>
+						</button>
+					<?php } else { ?>
+						<button class="nbtn notify-primary notify-btn" disabled>
+							<span>{{LANG following}}</span>
+						</button>
+					<?php } ?>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'follow_request') { ?>
+		<a id="request_menu_<?php echo($notif_data['notifier_id']) ?>">
+			<div class="notify-wraper">
+				<img src="<?php echo(media($notif_data['avatar'])) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($notif_data['username']) ?></strong>
+						<span class="notify-type"><?php echo lang($notif_data['type']) ?></span><br>
+						<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>">
+							<svg width="16" height="16" style="margin-top: -3px;" viewBox="0 -64 640 640" fill="#ff0033" xmlns="http://www.w3.org/2000/svg"><path d="M496 224c-79.6 0-144 64.4-144 144s64.4 144 144 144 144-64.4 144-144-64.4-144-144-144zm64 150.3c0 5.3-4.4 9.7-9.7 9.7h-60.6c-5.3 0-9.7-4.4-9.7-9.7v-76.6c0-5.3 4.4-9.7 9.7-9.7h12.6c5.3 0 9.7 4.4 9.7 9.7V352h38.3c5.3 0 9.7 4.4 9.7 9.7v12.6zM320 368c0-27.8 6.7-54.1 18.2-77.5-8-1.5-16.2-2.5-24.6-2.5h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h347.1c-45.3-31.9-75.1-84.5-75.1-144zm-96-112c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128z"/></svg>
+							&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+					</span>
+					<span class="notify-subtitle"></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot">
+					<?php } else { ?>
+						<span class="read-dot"></span>
+					<?php } ?>
+					<?php if ($notif_data['follow'] == 0) { ?>
+						<button class="nbtn notify-primary notify-btn accept" onclick="Pxp_AcceptFollowRequest(this,<?php echo($notif_data['notifier_id']) ?>)">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+						</button>
+						<button class="nbtn notify-default notify-btn decline" onclick="Pxp_DeleteFollowRequest(this,<?php echo($notif_data['notifier_id']) ?>)">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+						</button>
+					<?php } else { ?>
+						<button class="nbtn notify-default notify-btn" disabled>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+						</button>
+						<button class="nbtn notify-default notify-btn" disabled>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+						</button>
+					<?php } ?>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'accept_request') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo($notif_data['username']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')">
+			<div class="notify-wraper">
+				<span class="notify-user-img notify-avatar">
+					<img src="<?php echo(media($notif_data['avatar'])) ?>" alt="Picture" class="img-full">
+				</span>
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($notif_data['username']) ?></strong>
+						<span><?php echo lang($notif_data['type']) ?></span><br>
+						<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg width="18.5" height="18.5" style="margin-top:-3px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#fd0043"><path d="M8 12.052c1.995 0 3.5-1.505 3.5-3.5s-1.505-3.5-3.5-3.5-3.5 1.505-3.5 3.5 1.505 3.5 3.5 3.5zM9 13H7c-2.757 0-5 2.243-5 5v1h12v-1c0-2.757-2.243-5-5-5zm11.294-4.708-4.3 4.292-1.292-1.292-1.414 1.414 2.706 2.704 5.712-5.702z"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+					</span>
+					<span class="notify-subtitle"></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<b class="coloredText-green">{{LANG accepted}}!</b>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'rejected_request') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo($notif_data['username']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')">
+			<div class="notify-wraper">
+				<span class="notify-user-img notify-avatar">
+					<img src="<?php echo(media($notif_data['avatar'])) ?>" alt="Picture" class="img-full">
+				</span>
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($notif_data['username']) ?></strong>
+						<span><?php echo lang($notif_data['type']) ?></span><br>
+						<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="#ff0000" d="M15,14C17.67,14 23,15.33 23,18V20H7V18C7,15.33 12.33,14 15,14M15,12A4,4 0 0,1 11,8A4,4 0 0,1 15,4A4,4 0 0,1 19,8A4,4 0 0,1 15,12M5,9.59L7.12,7.46L8.54,8.88L6.41,11L8.54,13.12L7.12,14.54L5,12.41L2.88,14.54L1.46,13.12L3.59,11L1.46,8.88L2.88,7.46L5,9.59Z"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+					</span>
+					<span class="notify-subtitle"></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<b class="coloredText-red">{{LANG rejected}}!</b>
+				</div>
+			</div>
+	   </a>
+    <?php } elseif ($notif_data['type'] == 'commented_ur_post') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" <?php if ($notif_data['ftype'] == 'tile') { ?>data-ajax="load.php?app=tile&apph=view_tile&pid=<?php echo($notif_data['post_id']) ?>" <?php } else { ?>data-ajax="load.php?app=posts&apph=view_post&pid=<?php echo($notif_data['post_id']) ?>"<?php } ?>>
+			<div class="notify-wraper">
+				<span class="notify-user-img notify-avatar">
+					<img src="<?php echo(media($notif_data['avatar'])) ?>" alt="Picture" class="img-full">
+				</span>
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($notif_data['username']) ?></strong>
+						<span><?php echo lang($notif_data['type']) ?></span>
+					</span>
+					<span class="notify-subtitle comm"><b>{{LANG comment}}:</b> <?php echo($notif_data['comment_text']) ?></span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg fill="#0073ff" height="13" viewBox="0 0 24 24" width="13"><path d="M20.656 17.008a9.993 9.993 0 10-3.59 3.615L22 22z" fill="#0073ff" stroke="#0073ff" stroke-linejoin="round" stroke-width="2"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<?php if ($notif_data['ftype'] == 'image' || $notif_data['ftype'] == 'gif' || $notif_data['ftype'] == 'fetched') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['file']) ?>">
+					<?php } elseif ($notif_data['ftype'] == 'video' || $notif_data['ftype'] == 'tile' || $notif_data['ftype'] == 'mp4') { ?>
+						<?php if ($config['video_notify'] == 'on') { ?>
+							<video class="notify-preview" autoplay muted loop>
+								<source src="<?php echo($notif_data['file']) ?>" type="video/mp4">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/mov">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/webm">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/3gp">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/ogg">
+							</video>
+						<?php } else { ?>
+							<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+						<?php } ?>
+					<?php } elseif ($notif_data['ftype'] == 'youtube') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } elseif ($notif_data['ftype'] == 'vimeo') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } elseif ($notif_data['ftype'] == 'dailymotion') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } ?>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'liked_ur_comment') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="load.php?app=posts&apph=view_post&pid=<?php echo($notif_data['post_id']) ?>">
+			<div class="notify-wraper">
+				<span class="notify-user-img notify-avatar">
+					<img src="<?php echo(media($notif_data['avatar'])) ?>" alt="Picture" class="img-full">
+				</span>
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($notif_data['username']) ?></strong>
+						<span><?php echo lang($notif_data['type']) ?></span>
+					</span>
+					<span class="notify-subtitle comm"><b>{{LANG comment}}:</b> <?php echo($notif_data['comment_text']) ?></span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="#ff004c" d="M4 21h1V8H4c-1.104 0-2 .896-2 2v9C2 20.104 2.896 21 4 21zM20 8h-7l1.122-3.368C14.554 3.337 13.59 2 12.225 2H12L7 7.438V21h11l3.912-8.596C21.937 12.291 21.976 12.114 22 12v-2C22 8.896 21.104 8 20 8z"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'reply_ur_comment') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="load.php?app=posts&apph=view_post&pid=<?php echo($notif_data['post_id']) ?>">
+			<div class="notify-wraper">
+				<span class="notify-user-img notify-avatar">
+					<img src="<?php echo(media($notif_data['avatar'])) ?>" alt="Picture" class="img-full">
+				</span>
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($notif_data['username']) ?></strong>
+						<span><?php echo lang($notif_data['type']) ?></span>
+					</span>
+					<span class="notify-subtitle reply"><b>{{LANG reply}}:</b> <?php echo($notif_data['comment_text']) ?></span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16" style="transform: rotate(180deg);"><path fill="#5628EE" d="M7 7.56c0-.94-1.14-1.42-1.81-.75L.71 11.29c-.39.39-.39 1.02 0 1.41l4.48 4.48c.67.68 1.81.2 1.81-.74 0-.28-.11-.55-.31-.75L3 12l3.69-3.69c.2-.2.31-.47.31-.75zM13 9V7.41c0-.89-1.08-1.34-1.71-.71L6.7 11.29c-.39.39-.39 1.02 0 1.41l4.59 4.59c.63.63 1.71.18 1.71-.71V14.9c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'earn_new_point') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="load.php?app=points&apph=points">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span class="points"><?php echo lang($notif_data['type']) ?> <b>+<?php echo $notif_data['points'] ?></b> {{LANG points}}</span>
+					</span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="#ff6303" d="M12 5C7.031 5 2 6.546 2 9.5S7.031 14 12 14c4.97 0 10-1.546 10-4.5S16.97 5 12 5zM7 14.938v3c1.237.299 2.605.482 4 .541v-3C9.605 15.419 8.237 15.236 7 14.938zM13 15.478v3c1.395-.059 2.764-.242 4-.541v-3C15.764 15.236 14.395 15.419 13 15.478zM19 14.297v3c1.801-.755 3-1.857 3-3.297v-3C22 12.44 20.801 13.542 19 14.297zM5 17.297v-3C3.2 13.542 2 12.439 2 11v3C2 15.439 3.2 16.542 5 17.297z"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<div class="notify-points">
+						<img src="<?php echo($config['site_url'].'/media/img/icons/points.png') ?>">
+						<h2><?php echo FormattedNumber($notif_data['points']) ?></h2>
+					</div>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'lost_earned_point') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="load.php?app=loose_points&apph=loose_points">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span class="lost-points"><?php echo lang($notif_data['type']) ?> <b>-<?php echo $notif_data['points'] ?></b> {{LANG points}}</span>
+					</span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="#ff0000" d="M12 5C7.031 5 2 6.546 2 9.5S7.031 14 12 14c4.97 0 10-1.546 10-4.5S16.97 5 12 5zM7 14.938v3c1.237.299 2.605.482 4 .541v-3C9.605 15.419 8.237 15.236 7 14.938zM13 15.478v3c1.395-.059 2.764-.242 4-.541v-3C15.764 15.236 14.395 15.419 13 15.478zM19 14.297v3c1.801-.755 3-1.857 3-3.297v-3C22 12.44 20.801 13.542 19 14.297zM5 17.297v-3C3.2 13.542 2 12.439 2 11v3C2 15.439 3.2 16.542 5 17.297z"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<div class="notify-points">
+						<img src="<?php echo($config['site_url'].'/media/img/icons/points.png') ?>">
+						<h2><?php echo FormattedNumber($notif_data['points']) ?></h2>
+					</div>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'ur_ccount_has_been_credited') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="load.php?app=points&apph=points">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span class="points"><?php echo lang($notif_data['type']) ?> <b>+<?php echo $notif_data['points'] ?></b> {{LANG points}}</span>
+					</span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="#ff6303" d="M12 5C7.031 5 2 6.546 2 9.5S7.031 14 12 14c4.97 0 10-1.546 10-4.5S16.97 5 12 5zM7 14.938v3c1.237.299 2.605.482 4 .541v-3C9.605 15.419 8.237 15.236 7 14.938zM13 15.478v3c1.395-.059 2.764-.242 4-.541v-3C15.764 15.236 14.395 15.419 13 15.478zM19 14.297v3c1.801-.755 3-1.857 3-3.297v-3C22 12.44 20.801 13.542 19 14.297zM5 17.297v-3C3.2 13.542 2 12.439 2 11v3C2 15.439 3.2 16.542 5 17.297z"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<div class="notify-points _stacked">
+						<img src="<?php echo($config['site_url'].'/media/img/icons/points.png') ?>">
+						<h2><?php echo FormattedNumber($notif_data['points']) ?></h2>
+					</div>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'ur_ccount_has_been_credited_with_tokens') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="load.php?app=tokens&apph=tokens">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span class="tokens"><?php echo lang($notif_data['type']) ?> <b>+<?php echo $notif_data['tokens'] ?></b> {{LANG tokens}}</span>
+					</span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg width="16.5" height="16.5" style="margin-top: -2px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M18 8C18 11.3137 15.3137 14 12 14C8.68629 14 6 11.3137 6 8C6 4.68629 8.68629 2 12 2C15.3137 2 18 4.68629 18 8ZM13.9932 14.7121C13.3615 14.8995 12.6925 15 12 15C8.71646 15 5.96095 12.7392 5.2052 9.6893C3.29924 10.6944 2 12.6955 2 15C2 18.3137 4.68629 21 8 21C11.3137 21 14 18.3137 14 15C14 14.9035 13.9977 14.8075 13.9932 14.7121ZM14.9693 14.3408C16.8562 13.4557 18.2833 11.7532 18.7948 9.68929C20.7007 10.6944 22 12.6955 22 15C22 18.3137 19.3137 21 16 21C14.8285 21 13.7355 20.6643 12.8119 20.0839C14.1594 18.808 15 17.0022 15 15C15 14.7777 14.9896 14.5578 14.9693 14.3408Z" fill="#0044ff"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<div class="notify-points _stacked">
+						<img src="<?php echo($config['site_url'].'/media/img/tokens/tokens.png') ?>">
+						<h2><?php echo FormattedNumber($notif_data['tokens']) ?></h2>
+					</div>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'top_up_success') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="load.php?app=campaign&apph=campaign&page=wallet">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span class="tokens">{{LANG ur_ccount_has_been_credited}} <b><?php echo $context['currency_symbol'];?><?php echo $notif_data['money'] ?></b> {{LANG dollars}}</span>
+					</span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16.5" height="16.5" style="margin-top: -2px;"><path fill="none" d="M0 0h24v24H0z"></path><path fill="#ff6303" d="M14 2a8 8 0 0 1 3.292 15.293A8 8 0 1 1 6.706 6.707 8.003 8.003 0 0 1 14 2zm-3 7H9v1a2.5 2.5 0 0 0-.164 4.995L9 15h2l.09.008a.5.5 0 0 1 0 .984L11 16H7v2h2v1h2v-1a2.5 2.5 0 0 0 .164-4.995L11 13H9l-.09-.008a.5.5 0 0 1 0-.984L9 12h4v-2h-2V9zm3-5a5.985 5.985 0 0 0-4.484 2.013 8 8 0 0 1 8.47 8.471A6 6 0 0 0 14 4z"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<div class="notify-points _stacked">
+						<img src="<?php echo($config['site_url'].'/media/img/credits/dollar.png') ?>">
+						<h2><?php echo FormattedNumber($notif_data['money']) ?></h2>
+					</div>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'you_have_been_credited_with_chest_tokens') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="load.php?app=tokens&apph=tokens">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span class="tokens"><?php echo lang($notif_data['type']) ?> <b>+<?php echo $notif_data['tokens'] ?></b> {{LANG tokens}}</span>
+					</span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M18 8C18 11.3137 15.3137 14 12 14C8.68629 14 6 11.3137 6 8C6 4.68629 8.68629 2 12 2C15.3137 2 18 4.68629 18 8ZM13.9932 14.7121C13.3615 14.8995 12.6925 15 12 15C8.71646 15 5.96095 12.7392 5.2052 9.6893C3.29924 10.6944 2 12.6955 2 15C2 18.3137 4.68629 21 8 21C11.3137 21 14 18.3137 14 15C14 14.9035 13.9977 14.8075 13.9932 14.7121ZM14.9693 14.3408C16.8562 13.4557 18.2833 11.7532 18.7948 9.68929C20.7007 10.6944 22 12.6955 22 15C22 18.3137 19.3137 21 16 21C14.8285 21 13.7355 20.6643 12.8119 20.0839C14.1594 18.808 15 17.0022 15 15C15 14.7777 14.9896 14.5578 14.9693 14.3408Z" fill="#0044ff"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<div class="notify-points _stacked">
+						<img src="<?php echo($config['site_url'].'/media/img/tokens/treasure-chest.png') ?>">
+						<h2><?php echo FormattedNumber($notif_data['tokens']) ?></h2>
+					</div>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'ur_ccount_has_been_credited_with_boosts') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="load.php?app=boosts&apph=boosts">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span class="boosts"><?php echo lang($notif_data['type']) ?> <b>+<?php echo $notif_data['boosts'] ?></b> <?php if($notif_data['boosts'] > 1) { ?>{{LANG boosts}}<?php } else { ?>{{LANG boost}}<?php } ?></span>
+					</span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"><path fill="#c803ff" d="M8.04492,22a.99922.99922,0,0,1-.96533-1.25879L8.88574,14H5.04541a1.00007,1.00007,0,0,1-.96582-1.25879l2.67969-10A.99954.99954,0,0,1,7.7251,2h7a1.00008,1.00008,0,0,1,.96582,1.25879L14.42041,8h4.53418a1,1,0,0,1,.73975,1.67285l-10.90918,12A.99947.99947,0,0,1,8.04492,22Z"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<div class="notify-points _stacked">
+						<?php if($notif_data['boosts'] > 1) { ?>
+							<img src="<?php echo($config['site_url'].'/media/img/boosts/boosts.png') ?>">
+						<?php } else { ?>
+							<img src="<?php echo($config['site_url'].'/media/img/boosts/boost.png') ?>">
+						<?php } ?>
+						<h2><?php echo $notif_data['boosts'] ?></h2>
+					</div>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'ur_boost_timer_has_been_updated') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="load.php?app=boosts&apph=boosts">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span class="boosts"><?php echo lang($notif_data['type']) ?> <b>+ <?php echo lang($notif_data['boosts']) ?> {{LANG days}}</b> {{LANG sm_bx_timer}} <b><?php echo($context['me']['boost_timer']) ?> {{LANG days}}</b></span>
+					</span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg width="15" height="15" style="margin-top:-2.5px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g><path d="M16,0A16,16,0,1,0,32,16,16,16,0,0,0,16,0Zm0,28A12,12,0,1,1,28,16,12.013,12.013,0,0,1,16,28Z" fill="#ff00dd"/><path d="M20.02,16H17a1,1,0,0,1-1-1V11.98A1.979,1.979,0,0,0,14.02,10h-.04A1.979,1.979,0,0,0,12,11.98v6.04A1.979,1.979,0,0,0,13.98,20h6.04A1.979,1.979,0,0,0,22,18.02v-.04A1.979,1.979,0,0,0,20.02,16Z" fill="#ff00dd"/></g></svg>&nbsp; <?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<div class="notify-points _stacked">
+						<img src="<?php echo($config['site_url'].'/media/img/boosts/boost-timer.png') ?>">
+						<h2><?php echo $config['boost_timer_count']; ?></h2>
+					</div>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'you_have_been_credited_with_boosts') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="load.php?app=boosts&apph=boosts">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span class="boosts"><?php echo lang($notif_data['type']) ?> <b>+<?php echo $notif_data['boosts']; ?></b> {{LANG boosts}}</span>
+					</span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="#c803ff" d="M8.04492,22a.99922.99922,0,0,1-.96533-1.25879L8.88574,14H5.04541a1.00007,1.00007,0,0,1-.96582-1.25879l2.67969-10A.99954.99954,0,0,1,7.7251,2h7a1.00008,1.00008,0,0,1,.96582,1.25879L14.42041,8h4.53418a1,1,0,0,1,.73975,1.67285l-10.90918,12A.99947.99947,0,0,1,8.04492,22Z"></path></svg>&nbsp; <?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<div class="notify-points _stacked">
+						<img src="<?php echo($config['site_url'].'/media/img/boosts/boosts.png') ?>">
+						<h2><?php echo $notif_data['boosts'] ?></h2>
+					</div>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'boosted_post_time_up') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="load.php?app=posts&apph=view_post&pid=<?php echo($notif_data['post_id']) ?>">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span class="boosts"><?php echo lang($notif_data['type']) ?> <b>{{LANG expired}}</b> {{LANG boost_automatically_canceled}}</span>
+					</span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg width="15" height="15" style="margin-top:-2.5px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g><path d="M16,0A16,16,0,1,0,32,16,16,16,0,0,0,16,0Zm0,28A12,12,0,1,1,28,16,12.013,12.013,0,0,1,16,28Z" fill="#ff00dd"/><path d="M20.02,16H17a1,1,0,0,1-1-1V11.98A1.979,1.979,0,0,0,14.02,10h-.04A1.979,1.979,0,0,0,12,11.98v6.04A1.979,1.979,0,0,0,13.98,20h6.04A1.979,1.979,0,0,0,22,18.02v-.04A1.979,1.979,0,0,0,20.02,16Z" fill="#ff00dd"/></g></svg>&nbsp; <?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+
+					<?php if ($notif_data['ftype'] == 'image' || $notif_data['ftype'] == 'gif' || $notif_data['ftype'] == 'fetched') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } elseif ($notif_data['ftype'] == 'video' || $notif_data['ftype'] == 'tiles' || $notif_data['ftype'] == 'mp4') { ?>
+						<?php if ($config['video_notify'] == 'on') { ?>
+							<video class="notify-preview" autoplay muted>
+								<source src="<?php echo($notif_data['file']) ?>" type="video/mp4">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/mov">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/webm">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/3gp">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/ogg">
+							</video>
+						<?php } else { ?><img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>"><?php } ?>
+					<?php } elseif ($notif_data['ftype'] == 'youtube') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } elseif ($notif_data['ftype'] == 'vimeo') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } elseif ($notif_data['ftype'] == 'dailymotion') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } ?>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'ref_credited_wit_credits') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="<?php echo($notif_data['ajax_url']) ?>">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span class="points"><?php echo lang($notif_data['type']) ?> <b>{{LANG affiliate}}</b> {{LANG lnk_so_ur_account}} <b>+<?php echo lang($notif_data['credits']) ?></b> {{LANG credits}}</span>
+					</span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="#ff6303"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<div class="notify-points _stacked">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="#fca524"></path></svg>
+						<h2><?php echo FormattedNumber($notif_data['credits']) ?></h2>
+					</div>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'ur_ak_has_been_credited_with_credits') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="<?php echo($notif_data['ajax_url']) ?>">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span class="points"><?php echo lang($notif_data['type']) ?> <b>+<?php echo lang($notif_data['credits']) ?></b> <?php if($notif_data['credits'] > 1) { ?>{{LANG credits}}<?php } else { ?>{{LANG credit}}. {{LANG click_to_view_bal}}<?php } ?></span>
+					</span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="#ff6303"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<div class="notify-points _stacked">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="#fca524"></path></svg>
+						<h2><?php echo FormattedNumber($notif_data['credits']) ?></h2>
+					</div>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ( $notif_data['type'] == 'have_new_subscriber') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="<?php echo($notif_data['ajax_url']) ?>">
+			<div class="notify-wraper">
+				<span class="notify-user-img notify-avatar">
+					<img src="<?php echo(media($notif_data['avatar'])) ?>" alt="Picture" class="img-full">
+				</span>
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($notif_data['username']) ?></strong>
+						<span class="points"><?php echo lang($notif_data['type']) ?></span><br>
+						<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="15" height="15" style="margin-top:-3px" fill="#25d25e" viewBox="0 0 458.714 458.714" xml:space="preserve"><g><path d="M210.163,22.11c3.605-7.304,11.044-11.929,19.189-11.929c8.146-0.001,15.585,4.624,19.19,11.928l54.307,110.03c3.117,6.315,9.142,10.693,16.112,11.706l121.43,17.646c8.061,1.171,14.758,6.818,17.275,14.564c2.517,7.747,0.418,16.251-5.415,21.937l-87.869,85.648c-5.044,4.916-7.345,11.999-6.155,18.941l20.739,120.936c1.377,8.028-1.924,16.142-8.513,20.929c-6.59,4.788-15.326,5.419-22.536,1.629l-108.606-57.095c-6.234-3.277-13.681-3.277-19.915,0l-108.608,57.094c-7.21,3.791-15.946,3.159-22.536-1.629c-6.59-4.788-9.89-12.902-8.513-20.93l20.744-120.934c1.19-6.942-1.111-14.025-6.154-18.942L6.463,197.991c-5.832-5.686-7.932-14.189-5.415-21.937c2.517-7.747,9.214-13.393,17.274-14.564l121.431-17.647c6.97-1.013,12.996-5.391,16.113-11.707L210.163,22.11z"></path></g></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+					</span>
+					<span class="notify-subtitle"></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<img class="notify-preview" src="{{CONFIG site_url}}/media/img/Tzuki/684362.gif">
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ( $notif_data['type'] == 'new_subscribe_earn') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="<?php echo($notif_data['ajax_url']) ?>">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span class="points"><?php echo lang($notif_data['type']) ?> <b>+<?php echo lang($notif_data['credits']) ?></b> {{LANG new}} {{LANG sm_credits}}</span>
+					</span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="#ff6303"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<div class="notify-points _stacked">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="#fca524"></path></svg>
+						<h2><?php echo FormattedNumber($notif_data['credits']) ?></h2>
+					</div>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ( $notif_data['type'] == 'your_ak_has_been_debited') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="<?php echo($notif_data['ajax_url']) ?>">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span class="lost-points">{{LANG hello}} <?php echo($notif_data['username']) ?> <b>-<?php echo $notif_data['credits'] ?></b> {{LANG sm_credits}} <?php echo lang($notif_data['type']) ?> </span>
+					</span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="#ff2525"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<div class="notify-points _stacked">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="#fca524"></path></svg>
+						<h2><?php echo FormattedNumber($notif_data['credits']) ?></h2>
+					</div>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'renewed_his_subscription') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="<?php echo($notif_data['ajax_url']) ?>">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span class="points"><b style="color:#1abcff;"><?php echo($notif_data['username']) ?>'s</b> <?php echo lang($notif_data['type']) ?>! <b>+<?php echo lang($notif_data['credits']) ?></b> {{LANG new}} {{LANG sm_credits}} {{LANG has_been_credited}}</span>
+					</span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="15" height="15" style="margin-top:-3px" fill="#5628EE" viewBox="0 0 458.714 458.714" xml:space="preserve"><g><path d="M210.163,22.11c3.605-7.304,11.044-11.929,19.189-11.929c8.146-0.001,15.585,4.624,19.19,11.928l54.307,110.03c3.117,6.315,9.142,10.693,16.112,11.706l121.43,17.646c8.061,1.171,14.758,6.818,17.275,14.564c2.517,7.747,0.418,16.251-5.415,21.937l-87.869,85.648c-5.044,4.916-7.345,11.999-6.155,18.941l20.739,120.936c1.377,8.028-1.924,16.142-8.513,20.929c-6.59,4.788-15.326,5.419-22.536,1.629l-108.606-57.095c-6.234-3.277-13.681-3.277-19.915,0l-108.608,57.094c-7.21,3.791-15.946,3.159-22.536-1.629c-6.59-4.788-9.89-12.902-8.513-20.93l20.744-120.934c1.19-6.942-1.111-14.025-6.154-18.942L6.463,197.991c-5.832-5.686-7.932-14.189-5.415-21.937c2.517-7.747,9.214-13.393,17.274-14.564l121.431-17.647c6.97-1.013,12.996-5.391,16.113-11.707L210.163,22.11z"></path></g></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<div class="notify-points _stacked">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="#fca524"></path></svg>
+						<h2><?php echo FormattedNumber($notif_data['credits']) ?></h2>
+					</div>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ( $notif_data['type'] == 'subscription_has_been_renewed') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="<?php echo($notif_data['ajax_url']) ?>">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span class="lost-points"><?php echo lang($notif_data['type']) ?> <b style="color:#5628EE;"><?php echo($notif_data['username']) ?>'s</b> {{LANG account}} {{LANG has_been}}! <b>-<?php echo $notif_data['credits'] ?></b> {{LANG sm_credits}} {{LANG has_been_debited}}</span>
+					</span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="15" height="15" style="margin-top:-3px" fill="#ff235d" viewBox="0 0 458.714 458.714" xml:space="preserve"><g><path d="M210.163,22.11c3.605-7.304,11.044-11.929,19.189-11.929c8.146-0.001,15.585,4.624,19.19,11.928l54.307,110.03c3.117,6.315,9.142,10.693,16.112,11.706l121.43,17.646c8.061,1.171,14.758,6.818,17.275,14.564c2.517,7.747,0.418,16.251-5.415,21.937l-87.869,85.648c-5.044,4.916-7.345,11.999-6.155,18.941l20.739,120.936c1.377,8.028-1.924,16.142-8.513,20.929c-6.59,4.788-15.326,5.419-22.536,1.629l-108.606-57.095c-6.234-3.277-13.681-3.277-19.915,0l-108.608,57.094c-7.21,3.791-15.946,3.159-22.536-1.629c-6.59-4.788-9.89-12.902-8.513-20.93l20.744-120.934c1.19-6.942-1.111-14.025-6.154-18.942L6.463,197.991c-5.832-5.686-7.932-14.189-5.415-21.937c2.517-7.747,9.214-13.393,17.274-14.564l121.431-17.647c6.97-1.013,12.996-5.391,16.113-11.707L210.163,22.11z"></path></g></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<div class="notify-points _stacked">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="#fca524"></path></svg>
+						<h2><?php echo FormattedNumber($notif_data['credits']) ?></h2>
+					</div>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ( $notif_data['type'] == 'your_subscription_has_been_expired') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="<?php echo($notif_data['ajax_url']) ?>">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span class="points"><b style="color:#1abcff;"><?php echo($notif_data['username']) ?>'s</b> <?php echo lang($notif_data['type']) ?></span>
+					</span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"> • <?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<img class="notify-preview" src="{{CONFIG site_url}}/media/img/Tzuki/tzuki-16.png">
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ( $notif_data['type'] == 'username_timer_up') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="<?php echo($notif_data['ajax_url']) ?>">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span class="points"><?php echo lang($notif_data['type']) ?></span>
+					</span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg width="15" height="15" style="margin-top:-2.5px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g><path d="M16,0A16,16,0,1,0,32,16,16,16,0,0,0,16,0Zm0,28A12,12,0,1,1,28,16,12.013,12.013,0,0,1,16,28Z" fill="#ffa901"/><path d="M20.02,16H17a1,1,0,0,1-1-1V11.98A1.979,1.979,0,0,0,14.02,10h-.04A1.979,1.979,0,0,0,12,11.98v6.04A1.979,1.979,0,0,0,13.98,20h6.04A1.979,1.979,0,0,0,22,18.02v-.04A1.979,1.979,0,0,0,20.02,16Z" fill="#ffa901"/></g></svg>&nbsp; <?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<img class="notify-preview" src="{{CONFIG site_url}}/media/img/icons/clock.png">
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ( $notif_data['type'] == 'membership_plan_expired') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="load.php?app=premium&apph=premium">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span class="points"><?php echo lang($notif_data['type']) ?></span>
+					</span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path fill="#002fff" d="M17.73657 14.62189l-2.426 2.23065a11.60327 11.60327 0 0 1-4.29847 2.36987l.64368 3.00318a1.0003 1.0003 0 0 0 1.46924.66162l3.90527-2.20264a3.03526 3.03526 0 0 0 1.375-3.30371zM7.26562 8.77588L9.35431 6.296l-2.6048-.62848A2.77711 2.77711 0 0 0 3.36279 7.0249L1.1626 10.9248A.99989.99989 0 0 0 1.82422 12.394l3.07275.65869A12.88652 12.88652 0 0 1 7.26562 8.77588zM16.73373 8.81626a1.5 1.5 0 1 0-1.5-1.5A1.50055 1.50055 0 0 0 16.73373 8.81626z"></path><path fill="#002fff" opacity=".5" d="M22.60107,2.062a1.00088,1.00088,0,0,0-.71289-.71289A11.24875,11.24875,0,0,0,10.46924,4.97217L7.26562,8.77588A12.93634,12.93634,0,0,0,4.3418,15.48682a1.00031,1.00031,0,0,0,.28466.83642l3.1001,3.1001a.99941.99941,0,0,0,.707.293c.02881,0,.05762-.00147.08692-.00391a11.84707,11.84707,0,0,0,6.79-2.85986l3.66308-3.36816A11.20387,11.20387,0,0,0,22.60107,2.062ZM16.7337,8.81622a1.5,1.5,0,1,1,1.5-1.5A1.50054,1.50054,0,0,1,16.7337,8.81622Z"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<img class="notify-preview" src="{{CONFIG site_url}}/media/img/icons/timer.png">
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ( $notif_data['type'] == 'membership_plan_renewed') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="load.php?app=upgraded&apph=upgraded">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span class="points"><?php echo lang($notif_data['type']) ?></span>
+					</span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="#3c5fff" d="M17.73657 14.62189l-2.426 2.23065a11.60327 11.60327 0 0 1-4.29847 2.36987l.64368 3.00318a1.0003 1.0003 0 0 0 1.46924.66162l3.90527-2.20264a3.03526 3.03526 0 0 0 1.375-3.30371zM7.26562 8.77588L9.35431 6.296l-2.6048-.62848A2.77711 2.77711 0 0 0 3.36279 7.0249L1.1626 10.9248A.99989.99989 0 0 0 1.82422 12.394l3.07275.65869A12.88652 12.88652 0 0 1 7.26562 8.77588zM16.73373 8.81626a1.5 1.5 0 1 0-1.5-1.5A1.50055 1.50055 0 0 0 16.73373 8.81626z"></path><path fill="currentColor" opacity=".5" d="M22.60107,2.062a1.00088,1.00088,0,0,0-.71289-.71289A11.24875,11.24875,0,0,0,10.46924,4.97217L7.26562,8.77588A12.93634,12.93634,0,0,0,4.3418,15.48682a1.00031,1.00031,0,0,0,.28466.83642l3.1001,3.1001a.99941.99941,0,0,0,.707.293c.02881,0,.05762-.00147.08692-.00391a11.84707,11.84707,0,0,0,6.79-2.85986l3.66308-3.36816A11.20387,11.20387,0,0,0,22.60107,2.062ZM16.7337,8.81622a1.5,1.5,0,1,1,1.5-1.5A1.50054,1.50054,0,0,1,16.7337,8.81622Z"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<img class="notify-preview" src="{{CONFIG site_url}}/media/img/icons/confetti_.png">
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ( $notif_data['type'] == 'low_balance_to_upgrade') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="load.php?app=premium&apph=premium">
+			<div class="notify-wraper">
+				<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="notify-image" alt="...">
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span class="points"><?php echo lang($notif_data['type']) ?></span>
+					</span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" style="margin-top:-3px"><path fill="#002fff" d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.6 18.6 20 18 20H6C5.4 20 5 19.6 5 19V18H19V19Z"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<img class="notify-preview" src="{{CONFIG site_url}}/media/img/icons/theatre-mask.png">
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ( $notif_data['type'] == 'unlock_user_image') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="load.php?app=posts&apph=view_post&pid=<?php echo($notif_data['post_id']) ?>">
+			<div class="notify-wraper">
+				<span class="notify-user-img notify-avatar">
+					<img src="<?php echo(media($notif_data['avatar'])) ?>" alt="Picture" class="img-full">
+				</span>
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($notif_data['username']) ?></strong>
+						<span class="points"><?php echo lang($notif_data['type']) ?> <b style="color:#1abcff;"><?php echo($notif_data['credits']) ?></b> {{LANG sm_credits}} {{LANG to_see_ur_image}}</span><br>
+						<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="17" height="17" fill="#4c16ff" style="margin-top: -2px;" stroke-width="4" ><g><path d="M54,42H53V41a3,3,0,0,0-6,0v1H46a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1h8a1,1,0,0,0,1-1V43A1,1,0,0,0,54,42Zm-5-1a1,1,0,0,1,2,0v1H49Zm4,7H47V44h6Zm-4-2a1,1,0,1,1,1,1A.9994.9994,0,0,1,49,46Zm2-12.9493V12a3.0033,3.0033,0,0,0-3-3H6a3.0033,3.0033,0,0,0-3,3V43a3.0033,3.0033,0,0,0,3,3H39.1911A10.996,10.996,0,1,0,51,33.0507ZM6,11H48a1.001,1.001,0,0,1,1,1V33.0507a10.9108,10.9108,0,0,0-4.8367,1.6425l-7.6848-8.446A2.0044,2.0044,0,0,0,35.0273,25.5a1.9705,1.9705,0,0,0-1.5244.5825l-5.501,5.501-5.42-7.0889a1.9826,1.9826,0,0,0-1.5732-.8369,2.04,2.04,0,0,0-1.6162.75L5,42.3989V12A1.001,1.001,0,0,1,6,11ZM34.9763,44H6.2822L20.9736,25.6836Zm2.5185,0L29.2306,33.191l5.7274-5.6456,7.6109,8.3679A10.9607,10.9607,0,0,0,39,44ZM50,53a9,9,0,1,1,9-9A9.01,9.01,0,0,1,50,53ZM40,23a5,5,0,1,0-5-5A5.0059,5.0059,0,0,0,40,23Zm0-8a3,3,0,1,1-3,3A3.0033,3.0033,0,0,1,40,15Z"/></g></svg>
+							<?php echo(time2str($notif_data['time'])) ?></span>
+					</span>
+					<span class="notify-subtitle"></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<?php if ($notif_data['ftype'] == 'image') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } ?>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'we_approved_ur_campaign') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="load.php?app=campaign&apph=campaign">
+			<div class="notify-wraper">
+				<span class="notify-user-img notify-avatar">
+					<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="img-full" alt="...">
+				</span>
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span><?php echo lang($notif_data['type']) ?></span><br>
+						<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16.5" height="16.5" viewBox="0 0 24 24" style="margin-top: -4px;"><path fill="#ff235d" d="M12,8H4A2,2 0 0,0 2,10V14A2,2 0 0,0 4,16H5V20A1,1 0 0,0 6,21H8A1,1 0 0,0 9,20V16H12L17,20V4L12,8M21.5,12C21.5,13.71 20.54,15.26 19,16V8C20.53,8.75 21.5,10.3 21.5,12Z"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+					</span>
+					<span class="notify-subtitle"></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<img class="notify-preview" src="<?php echo($notif_data['file']) ?>">
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'we_deactivated_ur_campaign') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" data-ajax="load.php?app=campaign&apph=campaign">
+			<div class="notify-wraper">
+				<span class="notify-user-img notify-avatar">
+					<img src="<?php echo($config['site_url'].'/media/img/icon.'.$config['favicon_extension']) ?>" class="img-full" alt="...">
+				</span>
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($config['site_name']) ?></strong>
+						<span><?php echo lang($notif_data['type']) ?></span><br>
+						<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16.5" height="16.5" viewBox="0 0 24 24" style="margin-top: -4px;"><path fill="#ff235d" d="M12,8H4A2,2 0 0,0 2,10V14A2,2 0 0,0 4,16H5V20A1,1 0 0,0 6,21H8A1,1 0 0,0 9,20V16H12L17,20V4L12,8M21.5,12C21.5,13.71 20.54,15.26 19,16V8C20.53,8.75 21.5,10.3 21.5,12Z"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+					</span>
+					<span class="notify-subtitle"></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<img class="notify-preview" src="<?php echo($notif_data['file']) ?>">
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'unlock_user_video') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" <?php if ($notif_data['ftype'] == 'tile') { ?>data-ajax="load.php?app=tile&apph=view_tile&pid=<?php echo($notif_data['post_id']) ?>" <?php } else { ?>data-ajax="load.php?app=posts&apph=view_post&pid=<?php echo($notif_data['post_id']) ?>"<?php } ?>>
+			<div class="notify-wraper">
+				<span class="notify-user-img notify-avatar">
+					<img src="<?php echo(media($notif_data['avatar'])) ?>" alt="..." class="img-full">
+				</span>
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($notif_data['username']) ?></strong>
+						<span class="points"><?php echo lang($notif_data['type']) ?> <b style="color:#1abcff;"><?php echo($notif_data['credits']) ?></b> {{LANG sm_credits}} {{LANG to_watch_ur_video}}</span><br>
+						<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>">
+							<svg enable-background="new 0 0 60 60" height="18" viewBox="0 0 60 60" width="18" xmlns="http://www.w3.org/2000/svg" fill="#0073ff" style="margin-top: -3px;"><path d="m28 50c2.75 0 5.46-.52 8-1.51v-6.49c0-1.68 1.04-3.11 2.5-3.71v-.79c0-4.14 3.36-7.5 7.5-7.5 1.39 0 2.68.38 3.79 1.04.14-1 .21-2.01.21-3.04 0-12.13-9.87-22-22-22s-22 9.87-22 22 9.87 22 22 22zm-7-28c0-.35.18-.67.47-.85.3-.18.67-.2.98-.04l12 6c.34.16.55.51.55.89s-.21.73-.55.89l-12 6c-.14.07-.3.11-.45.11-.18 0-.37-.05-.53-.15-.29-.18-.47-.5-.47-.85z"/><path d="m52 40h-.5v-2.5c0-3.03-2.47-5.5-5.5-5.5s-5.5 2.47-5.5 5.5v2.5h-.5c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-10c0-1.1-.9-2-2-2zm-5 8c0 .55-.45 1-1 1s-1-.45-1-1v-2c0-.55.45-1 1-1s1 .45 1 1zm2.5-8h-7v-2.5c0-1.93 1.57-3.5 3.5-3.5s3.5 1.57 3.5 3.5z"/></svg>
+							<?php echo(time2str($notif_data['time'])) ?></span>
+					</span>
+					<span class="notify-subtitle"></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<?php if ($notif_data['ftype'] == 'video') { ?>
+						<?php if ($config['video_notify'] == 'on') { ?>
+							<video class="notify-preview" autoplay muted loop>
+								<source src="<?php echo($notif_data['file']) ?>" type="video/mp4">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/mov">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/webm">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/3gp">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/ogg">
+							</video>
+						<?php } else { ?>
+							<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+						<?php } ?>
+					<?php } ?>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'shared_your_post') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" <?php if ($notif_data['ftype'] == 'tile') { ?>data-ajax="load.php?app=tile&apph=view_tile&pid=<?php echo($notif_data['post_id']) ?>" <?php } else { ?>data-ajax="load.php?app=posts&apph=view_post&pid=<?php echo($notif_data['post_id']) ?>"<?php } ?>>
+			<div class="notify-wraper">
+				<span class="notify-user-img notify-avatar">
+					<img src="<?php echo(media($notif_data['avatar'])) ?>" alt="Picture" class="img-full">
+				</span>
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($notif_data['username']) ?></strong>
+						<span><?php echo lang($notif_data['type']) ?></span><br>
+						<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="#3c00ff" d="M3,12c0,1.654,1.346,3,3,3c0.794,0,1.512-0.315,2.049-0.82l5.991,3.424C14.022,17.734,14,17.864,14,18c0,1.654,1.346,3,3,3 s3-1.346,3-3s-1.346-3-3-3c-0.794,0-1.512,0.315-2.049,0.82L8.96,12.397C8.978,12.266,9,12.136,9,12s-0.022-0.266-0.04-0.397 l5.991-3.423C15.488,8.685,16.206,9,17,9c1.654,0,3-1.346,3-3s-1.346-3-3-3s-3,1.346-3,3c0,0.136,0.022,0.266,0.04,0.397 L8.049,9.82C7.512,9.315,6.794,9,6,9C4.346,9,3,10.346,3,12z"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+					</span>
+					<span class="notify-subtitle"></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<?php if ($notif_data['ftype'] == 'image' || $notif_data['ftype'] == 'gif' || $notif_data['ftype'] == 'fetched') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['file']) ?>">
+					<?php } elseif ($notif_data['ftype'] == 'video' || $notif_data['ftype'] == 'tile' || $notif_data['ftype'] == 'mp4') { ?>
+						<?php if ($config['video_notify'] == 'on') { ?>
+							<video class="notify-preview" autoplay muted loop>
+								<source src="<?php echo($notif_data['file']) ?>" type="video/mp4">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/mov">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/webm">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/3gp">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/ogg">
+							</video>
+						<?php } else { ?>
+							<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+						<?php } ?>
+					<?php } elseif ($notif_data['ftype'] == 'youtube') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } elseif ($notif_data['ftype'] == 'vimeo') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } elseif ($notif_data['ftype'] == 'dailymotion') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } ?>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'mentioned_u_in_comment') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" <?php if ($notif_data['ftype'] == 'tile') { ?>data-ajax="load.php?app=tile&apph=view_tile&pid=<?php echo($notif_data['post_id']) ?>" <?php } else { ?>data-ajax="load.php?app=posts&apph=view_post&pid=<?php echo($notif_data['post_id']) ?>"<?php } ?>>
+			<div class="notify-wraper">
+				<span class="notify-user-img notify-avatar">
+					<img src="<?php echo(media($notif_data['avatar'])) ?>" alt="Picture" class="img-full">
+				</span>
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($notif_data['username']) ?></strong>
+						<span><?php echo lang($notif_data['type']) ?></span>
+					</span>
+					<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"></path><path fill="#0073ff" d="M20 12a8 8 0 1 0-3.562 6.657l1.11 1.664A9.953 9.953 0 0 1 12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10v1.5a3.5 3.5 0 0 1-6.396 1.966A5 5 0 1 1 15 8H17v5.5a1.5 1.5 0 0 0 3 0V12zm-8-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<?php if ($notif_data['ftype'] == 'image' || $notif_data['ftype'] == 'gif' || $notif_data['ftype'] == 'fetched') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } elseif ($notif_data['ftype'] == 'video' || $notif_data['ftype'] == 'tile' || $notif_data['ftype'] == 'mp4') { ?>
+						<?php if ($config['video_notify'] == 'on') { ?>
+							<video class="notify-preview" autoplay muted loop>
+								<source src="<?php echo($notif_data['file']) ?>" type="video/mp4">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/mov">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/webm">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/3gp">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/ogg">
+							</video>
+						<?php } else { ?>
+							<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+						<?php } ?>
+					<?php } elseif ($notif_data['ftype'] == 'youtube') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } elseif ($notif_data['ftype'] == 'vimeo') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } elseif ($notif_data['ftype'] == 'dailymotion') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } ?>
+				</div>
+			</div>
+	   </a>
+	<?php } elseif ($notif_data['type'] == 'saved_your_post') { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" <?php if ($notif_data['ftype'] == 'tile') { ?>data-ajax="load.php?app=tile&apph=view_tile&pid=<?php echo($notif_data['post_id']) ?>" <?php } else { ?>data-ajax="load.php?app=posts&apph=view_post&pid=<?php echo($notif_data['post_id']) ?>"<?php } ?>>
+			<div class="notify-wraper">
+				<span class="notify-user-img notify-avatar">
+					<img src="<?php echo(media($notif_data['avatar'])) ?>" alt="Picture" class="img-full">
+				</span>
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($notif_data['username']) ?></strong>
+						<span><?php echo lang($notif_data['type']) ?></span><br>
+						<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="#ff1150" d="M17,3H7A2,2 0 0,0 5,5V21L12,18L19,21V5C19,3.89 18.1,3 17,3Z"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+					</span>
+					<span class="notify-subtitle"></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<?php if ($notif_data['ftype'] == 'image' || $notif_data['ftype'] == 'gif' || $notif_data['ftype'] == 'fetched') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } elseif ($notif_data['ftype'] == 'video' || $notif_data['ftype'] == 'tile' || $notif_data['ftype'] == 'mp4') { ?>
+						<?php if ($config['video_notify'] == 'on') { ?>
+							<video class="notify-preview" autoplay muted loop>
+								<source src="<?php echo($notif_data['file']) ?>" type="video/mp4">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/mov">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/webm">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/3gp">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/ogg">
+							</video>
+						<?php } else { ?>
+							<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+						<?php } ?>
+					<?php } elseif ($notif_data['ftype'] == 'youtube') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } elseif ($notif_data['ftype'] == 'vimeo') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } elseif ($notif_data['ftype'] == 'dailymotion') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } ?>
+				</div>
+			</div>
+	   </a>
+    <?php } else { ?>
+		<a href="<?php echo($notif_data['url']) ?>" onclick="notif_cl('<?php echo($notif_data['id']) ?>')" <?php if ($notif_data['ftype'] == 'tile') { ?>data-ajax="load.php?app=tile&apph=view_tile&pid=<?php echo($notif_data['post_id']) ?>" <?php } else { ?>data-ajax="load.php?app=posts&apph=view_post&pid=<?php echo($notif_data['post_id']) ?>"<?php } ?>>
+			<div class="notify-wraper">
+				<span class="notify-user-img notify-avatar">
+					<img src="<?php echo(media($notif_data['avatar'])) ?>" alt="Picture" class="img-full">
+				</span>
+				<div class="notify-details">
+					<span class="notify-textTitle">
+						<strong><?php echo($notif_data['username']) ?></strong>
+						<span><?php echo lang($notif_data['type']) ?></span><br>
+						<span class="notify-timestamp" title="<?php echo(ToDate($notif_data['time'])) ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="#ff0044" d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"></path></svg>&nbsp;<?php echo(time2str($notif_data['time'])) ?></span>
+					</span>
+					<span class="notify-subtitle"></span>
+				</div>
+				<div class="notify-rightBar">
+					<?php if ($notif_data['click'] == 0) { ?>
+						<span class="noti-dot"><img src="{{CONFIG site_url}}/media/img/dot.png" class="notify-dot"></span>
+					<?php } ?>
+					<?php if ($notif_data['ftype'] == 'image' || $notif_data['ftype'] == 'gif' || $notif_data['ftype'] == 'fetched') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } elseif ($notif_data['ftype'] == 'video' || $notif_data['ftype'] == 'tile' || $notif_data['ftype'] == 'mp4') { ?>
+						<?php if ($config['video_notify'] == 'on') { ?>
+							<video class="notify-preview" autoplay muted loop>
+								<source src="<?php echo($notif_data['file']) ?>" type="video/mp4">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/mov">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/webm">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/3gp">
+								<source src="<?php echo($notif_data['file']) ?>" type="video/ogg">
+							</video>
+						<?php } else { ?>
+							<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+						<?php } ?>
+					<?php } elseif ($notif_data['ftype'] == 'youtube') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } elseif ($notif_data['ftype'] == 'vimeo') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } elseif ($notif_data['ftype'] == 'dailymotion') { ?>
+						<img class="notify-preview" src="<?php echo($notif_data['thumb']) ?>">
+					<?php } ?>
+				</div>
+			</div>
+	   </a>
+    <?php } ?>
+<?php } ?>
+<script>tippy('.accept', { placement: 'bottom',arrow: true, content: '{{LANG accept}}' });tippy('.decline', { placement: 'bottom',arrow: true, content: '{{LANG decline}}' });</script>

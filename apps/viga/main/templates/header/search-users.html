@@ -1,0 +1,12 @@
+<div class="search-result--item">
+	<a href="<?php echo(un2url($udata['username'])) ?>" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo($udata['username']) ?>" class="fluid">
+		<div class="avatar">
+			<img src="<?php echo(media($udata['avatar'])) ?>" alt="Picture" class="img-circle img-res">
+		</div>
+		<div class="user-info">
+			<h5><?php echo($udata['username']) ?></h5>
+			<span><?php if ($udata['fname'] && $udata['lname']) { echo $udata['fname'].' '.$udata['lname']; } else { echo $udata['username']; } ?></span>
+		</div>
+	</a>
+</div>
+<script>tippy('.verified-color', {arrow: true,content: '{{LANG verified}}'});</script>

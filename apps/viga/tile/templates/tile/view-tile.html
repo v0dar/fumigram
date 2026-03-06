@@ -1,0 +1,599 @@
+<div class="tilebox-container" data-post-id="<?php echo($context['post_data']['post_id']) ?>">
+    <div class="tilebox-backgrond"></div>
+    <div class="tilebox-content tile-box">
+        <input type="text" value="<?php echo(pid3url($context['post_data']['post_id'])) ?>" id="copyLink" class="copyPostlink" tabindex='-1' aria-hidden='true'>
+        <div class="rx-img">
+            <div class="valign rx-tools">
+                <div class="valign">
+                    <h4 class="rx-title">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24" height="24" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="none" opacity="1" stroke="none" d="M135.000000,1.000001 C260.957306,1.000000 386.914581,1.000000 512.935913,1.000000 C512.935913,171.566101 512.935913,342.132233 512.935913,513.000000 C387.310181,513.000000 261.620087,513.000000 135.121796,512.708618 C135.914856,511.756866 137.463959,510.892365 139.125504,510.467834 C155.100082,506.386475 167.831024,496.205841 181.545593,487.909821 C202.844894,475.025726 224.009979,461.919952 245.265488,448.963104 C269.984039,433.895264 294.751587,418.907837 319.473297,403.845123 C336.833588,393.267639 354.156769,382.629181 371.489197,372.005981 C391.315125,359.854645 411.107208,347.647888 430.963806,335.546997 C442.976288,328.226349 455.138916,321.349854 463.949829,309.714478 C482.341309,285.427338 486.774445,258.733185 477.795380,230.072662 C471.739563,210.742798 460.189880,194.883209 441.745850,185.449020 C415.449463,171.998352 388.888611,159.057510 362.281403,146.229385 C358.173798,144.248993 353.262756,143.634811 348.640625,143.089737 C340.983002,142.186737 334.402039,145.698563 327.548859,149.102417 C315.623505,142.021805 304.032135,135.051102 292.500061,127.983696 C281.653137,121.336159 270.868713,114.586594 260.049805,107.481079 C265.363190,93.238197 258.842560,77.266609 246.514923,69.175453 C223.436432,54.028080 200.327408,38.927124 177.264099,23.756683 C164.261780,15.204104 151.729126,5.757496 135.869522,2.841305 C135.479980,2.769681 135.285461,1.637525 135.000000,1.000001z"/><path fill="currentColor" opacity="1" stroke="none" d="M134.531342,1.000001 C135.285461,1.637525 135.479980,2.769681 135.869522,2.841305 C151.729126,5.757496 164.261780,15.204104 177.264099,23.756683 C200.327408,38.927124 223.436432,54.028080 246.514923,69.175453 C258.842560,77.266609 265.363190,93.238197 259.762817,107.683319 C250.049103,129.109085 226.909164,133.579605 208.387817,120.507454 C182.268448,102.072693 155.192352,84.988953 128.405441,67.511261 C125.591148,65.675011 122.037048,64.321411 118.713509,64.030327 C104.802193,62.811947 95.009842,72.587784 95.008232,87.287872 C94.995827,200.451797 95.001396,313.615723 95.001923,426.779633 C95.001923,427.612915 94.983528,428.447266 95.017395,429.279358 C95.350662,437.466431 99.121246,443.651825 106.295570,447.476013 C113.603386,451.371307 120.981285,451.236938 128.140717,446.789429 C142.712555,437.737335 157.248596,428.626434 171.883575,419.677429 C250.752899,371.450317 329.636505,323.246613 408.553253,275.097107 C415.847107,270.646912 419.243103,264.229401 418.877869,255.943741 C418.528351,248.014618 414.752777,242.499313 407.229431,238.876602 C382.926849,227.174179 358.780060,215.140594 334.717957,202.948914 C314.973450,192.944855 310.850006,169.189575 325.680756,152.821320 C326.621155,151.783417 327.175049,150.395279 327.908752,149.170074 C334.402039,145.698563 340.983002,142.186737 348.640625,143.089737 C353.262756,143.634811 358.173798,144.248993 362.281403,146.229385 C388.888611,159.057510 415.449463,171.998352 441.745850,185.449020 C460.189880,194.883209 471.739563,210.742798 477.795380,230.072662 C486.774445,258.733185 482.341309,285.427338 463.949829,309.714478 C455.138916,321.349854 442.976288,328.226349 430.963806,335.546997 C411.107208,347.647888 391.315125,359.854645 371.489197,372.005981 C354.156769,382.629181 336.833588,393.267639 319.473297,403.845123 C294.751587,418.907837 269.984039,433.895264 245.265488,448.963104 C224.009979,461.919952 202.844894,475.025726 181.545593,487.909821 C167.831024,496.205841 155.100082,506.386475 139.125504,510.467834 C137.463959,510.892365 135.914856,511.756866 134.656784,512.708618 C122.979103,513.000000 110.958214,513.000000 98.811813,512.708252 C98.348839,512.049988 98.069969,511.453033 97.665451,511.350189 C79.123489,506.634827 63.335228,497.594452 51.042820,482.619446 C39.485947,468.540558 32.229366,452.478546 32.176178,434.419800 C31.832327,317.667603 31.990473,200.913879 32.041561,84.160683 C32.043278,80.234688 32.536694,76.294441 33.006599,72.385559 C35.254524,53.686275 43.702576,37.917408 56.851223,24.821215 C67.662827,14.052748 80.949669,7.140052 95.642807,2.956470 C96.541374,2.700619 97.219376,1.670086 98.000000,1.000000 C110.020897,1.000000 122.041786,1.000000 134.531342,1.000001z"/><path fill="none" opacity="1" stroke="none" d="M97.531342,1.000000 C97.219376,1.670086 96.541374,2.700619 95.642807,2.956470 C80.949669,7.140052 67.662827,14.052748 56.851223,24.821215 C43.702576,37.917408 35.254524,53.686275 33.006599,72.385559 C32.536694,76.294441 32.043278,80.234688 32.041561,84.160683 C31.990473,200.913879 31.832327,317.667603 32.176178,434.419800 C32.229366,452.478546 39.485947,468.540558 51.042820,482.619446 C63.335228,497.594452 79.123489,506.634827 97.665451,511.350189 C98.069969,511.453033 98.348839,512.049988 98.343155,512.708252 C65.686714,513.000000 33.373425,513.000000 1.060603,513.000000 C1.061071,342.333313 1.061071,171.666656 1.061071,1.000000 C33.102322,1.000000 65.082504,1.000000 97.531342,1.000000z"/><path fill="#ff0070" class=""  opacity="1" stroke="none" d="M327.548859,149.102417 C327.175049,150.395279 326.621155,151.783417 325.680756,152.821320 C310.850006,169.189575 314.973450,192.944855 334.717957,202.948914 C358.780060,215.140594 382.926849,227.174179 407.229431,238.876602 C414.752777,242.499313 418.528351,248.014618 418.877869,255.943741 C419.243103,264.229401 415.847107,270.646912 408.553253,275.097107 C329.636505,323.246613 250.752899,371.450317 171.883575,419.677429 C157.248596,428.626434 142.712555,437.737335 128.140717,446.789429 C120.981285,451.236938 113.603386,451.371307 106.295570,447.476013 C99.121246,443.651825 95.350662,437.466431 95.017395,429.279358 C94.983528,428.447266 95.001923,427.612915 95.001923,426.779633 C95.001396,313.615723 94.995827,200.451797 95.008232,87.287872 C95.009842,72.587784 104.802193,62.811947 118.713509,64.030327 C122.037048,64.321411 125.591148,65.675011 128.405441,67.511261 C155.192352,84.988953 182.268448,102.072693 208.387817,120.507454 C226.909164,133.579605 250.049103,129.109085 259.769836,108.084152 C270.868713,114.586594 281.653137,121.336159 292.500061,127.983696 C304.032135,135.051102 315.623505,142.021805 327.548859,149.102417 M192.731079,319.908691 C198.487473,318.540619 205.132233,318.565674 209.844696,315.560577 C229.078537,303.295349 248.003342,290.492188 266.471863,277.100922 C276.815186,269.601135 280.165253,258.310760 277.340515,245.894806 C272.435089,224.333344 248.227066,214.681183 229.623901,226.874496 C212.487701,238.106308 195.659683,249.808960 178.716965,261.335144 C166.244278,269.820343 160.922104,281.979095 163.833832,295.164124 C166.825851,308.712769 176.602081,317.331085 192.731079,319.908691z"/><path fill="#fff" class="" opacity="1" stroke="none" d="M192.290009,319.884888 C176.602081,317.331085 166.825851,308.712769 163.833832,295.164124 C160.922104,281.979095 166.244278,269.820343 178.716965,261.335144 C195.659683,249.808960 212.487701,238.106308 229.623901,226.874496 C248.227066,214.681183 272.435089,224.333344 277.340515,245.894806 C280.165253,258.310760 276.815186,269.601135 266.471863,277.100922 C248.003342,290.492188 229.078537,303.295349 209.844696,315.560577 C205.132233,318.565674 198.487473,318.540619 192.290009,319.884888z"/></svg> {{LANG tiles}}</span>
+                    </h4>
+                </div>
+                <a class="btn main close rxcls" href="{{CONFIG site_url}}/tiles" data-ajax="load.php?app=tiles&apph=tiles">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+				</a>
+            </div>
+			<div class="valign xl-tools">
+				<?php if ($context['post_data']['is_owner'] == true) { ?>
+					<a class="btn main rx-volume" onclick="px_mute(<?php echo($context['post_data']['post_id']) ?>)">
+						<?php if ($context['post_data']['muted'] > 0) { ?>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-volume-x"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+						<?php } else { ?>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-volume-2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+						<?php } ?>
+					</a>
+				<?php } ?>
+			</div>
+			<div class="valign arrows">
+				<button class="btn main rx-prev" disabled>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#fff" d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z"></path></svg>
+				</button>
+				<button class="btn main rx-next" onclick="nextTile()" disabled>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="#fff" d="M12 13.172l4.95-4.95 1.414 1.414L12 16 5.636 9.636 7.05 8.222z"></path></svg>
+				</button>
+			</div>
+            <div class="blur-rxt">
+                <?php if ($context['post_data']['type'] == 'tile') { ?>
+                    <?php if (!empty($context['post_data']['media_set']) && !empty($context['post_data']['media_set'][0]) && !empty($context['post_data']['media_set'][0]['extra'])) { ?>
+                        <div class="rx-blur">
+                            <img src="<?php echo(media($context['post_data']['media_set'][0]['extra'])) ?>" width="100%">
+                        </div>
+                    <?php } ?>
+                <?php } ?>
+            </div>
+            <div class="rxt-story">
+                <section class="rx-section">
+                    <div class="rx-app">
+                        <?php if ($context['post_data']['type'] == 'tile') { ?>
+                            <?php foreach ($context['post_data']['media_set'] as $key => $media_file) { ?>
+                                <div class="rx-video">
+                                    <div class="rxo rxs-title">
+                                        <div class="rxs-button"></div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24" height="24" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="none" opacity="1" stroke="none" d="M135.000000,1.000001 C260.957306,1.000000 386.914581,1.000000 512.935913,1.000000 C512.935913,171.566101 512.935913,342.132233 512.935913,513.000000 C387.310181,513.000000 261.620087,513.000000 135.121796,512.708618 C135.914856,511.756866 137.463959,510.892365 139.125504,510.467834 C155.100082,506.386475 167.831024,496.205841 181.545593,487.909821 C202.844894,475.025726 224.009979,461.919952 245.265488,448.963104 C269.984039,433.895264 294.751587,418.907837 319.473297,403.845123 C336.833588,393.267639 354.156769,382.629181 371.489197,372.005981 C391.315125,359.854645 411.107208,347.647888 430.963806,335.546997 C442.976288,328.226349 455.138916,321.349854 463.949829,309.714478 C482.341309,285.427338 486.774445,258.733185 477.795380,230.072662 C471.739563,210.742798 460.189880,194.883209 441.745850,185.449020 C415.449463,171.998352 388.888611,159.057510 362.281403,146.229385 C358.173798,144.248993 353.262756,143.634811 348.640625,143.089737 C340.983002,142.186737 334.402039,145.698563 327.548859,149.102417 C315.623505,142.021805 304.032135,135.051102 292.500061,127.983696 C281.653137,121.336159 270.868713,114.586594 260.049805,107.481079 C265.363190,93.238197 258.842560,77.266609 246.514923,69.175453 C223.436432,54.028080 200.327408,38.927124 177.264099,23.756683 C164.261780,15.204104 151.729126,5.757496 135.869522,2.841305 C135.479980,2.769681 135.285461,1.637525 135.000000,1.000001z"/><path fill="#fff" opacity="1" stroke="none" d="M134.531342,1.000001 C135.285461,1.637525 135.479980,2.769681 135.869522,2.841305 C151.729126,5.757496 164.261780,15.204104 177.264099,23.756683 C200.327408,38.927124 223.436432,54.028080 246.514923,69.175453 C258.842560,77.266609 265.363190,93.238197 259.762817,107.683319 C250.049103,129.109085 226.909164,133.579605 208.387817,120.507454 C182.268448,102.072693 155.192352,84.988953 128.405441,67.511261 C125.591148,65.675011 122.037048,64.321411 118.713509,64.030327 C104.802193,62.811947 95.009842,72.587784 95.008232,87.287872 C94.995827,200.451797 95.001396,313.615723 95.001923,426.779633 C95.001923,427.612915 94.983528,428.447266 95.017395,429.279358 C95.350662,437.466431 99.121246,443.651825 106.295570,447.476013 C113.603386,451.371307 120.981285,451.236938 128.140717,446.789429 C142.712555,437.737335 157.248596,428.626434 171.883575,419.677429 C250.752899,371.450317 329.636505,323.246613 408.553253,275.097107 C415.847107,270.646912 419.243103,264.229401 418.877869,255.943741 C418.528351,248.014618 414.752777,242.499313 407.229431,238.876602 C382.926849,227.174179 358.780060,215.140594 334.717957,202.948914 C314.973450,192.944855 310.850006,169.189575 325.680756,152.821320 C326.621155,151.783417 327.175049,150.395279 327.908752,149.170074 C334.402039,145.698563 340.983002,142.186737 348.640625,143.089737 C353.262756,143.634811 358.173798,144.248993 362.281403,146.229385 C388.888611,159.057510 415.449463,171.998352 441.745850,185.449020 C460.189880,194.883209 471.739563,210.742798 477.795380,230.072662 C486.774445,258.733185 482.341309,285.427338 463.949829,309.714478 C455.138916,321.349854 442.976288,328.226349 430.963806,335.546997 C411.107208,347.647888 391.315125,359.854645 371.489197,372.005981 C354.156769,382.629181 336.833588,393.267639 319.473297,403.845123 C294.751587,418.907837 269.984039,433.895264 245.265488,448.963104 C224.009979,461.919952 202.844894,475.025726 181.545593,487.909821 C167.831024,496.205841 155.100082,506.386475 139.125504,510.467834 C137.463959,510.892365 135.914856,511.756866 134.656784,512.708618 C122.979103,513.000000 110.958214,513.000000 98.811813,512.708252 C98.348839,512.049988 98.069969,511.453033 97.665451,511.350189 C79.123489,506.634827 63.335228,497.594452 51.042820,482.619446 C39.485947,468.540558 32.229366,452.478546 32.176178,434.419800 C31.832327,317.667603 31.990473,200.913879 32.041561,84.160683 C32.043278,80.234688 32.536694,76.294441 33.006599,72.385559 C35.254524,53.686275 43.702576,37.917408 56.851223,24.821215 C67.662827,14.052748 80.949669,7.140052 95.642807,2.956470 C96.541374,2.700619 97.219376,1.670086 98.000000,1.000000 C110.020897,1.000000 122.041786,1.000000 134.531342,1.000001z"/><path fill="none" opacity="1" stroke="none" d="M97.531342,1.000000 C97.219376,1.670086 96.541374,2.700619 95.642807,2.956470 C80.949669,7.140052 67.662827,14.052748 56.851223,24.821215 C43.702576,37.917408 35.254524,53.686275 33.006599,72.385559 C32.536694,76.294441 32.043278,80.234688 32.041561,84.160683 C31.990473,200.913879 31.832327,317.667603 32.176178,434.419800 C32.229366,452.478546 39.485947,468.540558 51.042820,482.619446 C63.335228,497.594452 79.123489,506.634827 97.665451,511.350189 C98.069969,511.453033 98.348839,512.049988 98.343155,512.708252 C65.686714,513.000000 33.373425,513.000000 1.060603,513.000000 C1.061071,342.333313 1.061071,171.666656 1.061071,1.000000 C33.102322,1.000000 65.082504,1.000000 97.531342,1.000000z"/><path fill="none" class=""  opacity="1" stroke="none" d="M327.548859,149.102417 C327.175049,150.395279 326.621155,151.783417 325.680756,152.821320 C310.850006,169.189575 314.973450,192.944855 334.717957,202.948914 C358.780060,215.140594 382.926849,227.174179 407.229431,238.876602 C414.752777,242.499313 418.528351,248.014618 418.877869,255.943741 C419.243103,264.229401 415.847107,270.646912 408.553253,275.097107 C329.636505,323.246613 250.752899,371.450317 171.883575,419.677429 C157.248596,428.626434 142.712555,437.737335 128.140717,446.789429 C120.981285,451.236938 113.603386,451.371307 106.295570,447.476013 C99.121246,443.651825 95.350662,437.466431 95.017395,429.279358 C94.983528,428.447266 95.001923,427.612915 95.001923,426.779633 C95.001396,313.615723 94.995827,200.451797 95.008232,87.287872 C95.009842,72.587784 104.802193,62.811947 118.713509,64.030327 C122.037048,64.321411 125.591148,65.675011 128.405441,67.511261 C155.192352,84.988953 182.268448,102.072693 208.387817,120.507454 C226.909164,133.579605 250.049103,129.109085 259.769836,108.084152 C270.868713,114.586594 281.653137,121.336159 292.500061,127.983696 C304.032135,135.051102 315.623505,142.021805 327.548859,149.102417 M192.731079,319.908691 C198.487473,318.540619 205.132233,318.565674 209.844696,315.560577 C229.078537,303.295349 248.003342,290.492188 266.471863,277.100922 C276.815186,269.601135 280.165253,258.310760 277.340515,245.894806 C272.435089,224.333344 248.227066,214.681183 229.623901,226.874496 C212.487701,238.106308 195.659683,249.808960 178.716965,261.335144 C166.244278,269.820343 160.922104,281.979095 163.833832,295.164124 C166.825851,308.712769 176.602081,317.331085 192.731079,319.908691z"/><path fill="#fff" class="" opacity="1" stroke="none" d="M192.290009,319.884888 C176.602081,317.331085 166.825851,308.712769 163.833832,295.164124 C160.922104,281.979095 166.244278,269.820343 178.716965,261.335144 C195.659683,249.808960 212.487701,238.106308 229.623901,226.874496 C248.227066,214.681183 272.435089,224.333344 277.340515,245.894806 C280.165253,258.310760 276.815186,269.601135 266.471863,277.100922 C248.003342,290.492188 229.078537,303.295349 209.844696,315.560577 C205.132233,318.565674 198.487473,318.540619 192.290009,319.884888z"/></svg>
+                                    </div>
+                                    <video class="rx-player afterglow" onplay="px_add_plays(<?php echo($context['post_data']['post_id']) ?>)" autoplay loop <?php if ($context['post_data']['muted'] > 0) { ?>muted<?php } ?> id="player">
+                                        <source src="<?php echo(media($media_file['file'])) ?>" type="video/mp4">
+                                        <source src="<?php echo(media($media_file['file'])) ?>" type="video/mov">
+                                        <source src="<?php echo(media($media_file['file'])) ?>" type="video/webm">
+                                        <source src="<?php echo(media($media_file['file'])) ?>" type="video/3gp">
+                                        <source src="<?php echo(media($media_file['file'])) ?>" type="video/ogg">
+                                    </video>  
+                                    <div class="rx-sidebar">
+										<?php if ($context['post_data']['type'] == 'tile') { ?>
+											<div class="rxo rx-plays" title="{{LANG plays}}">
+												<span style="cursor: default;"><svg width="28px" height="28px" viewBox="0 0 24 24" fill="#fff" style="width: 30px; height:30px;" xmlns="http://www.w3.org/2000/svg"><path d="M6 6.741c0-1.544 1.674-2.505 3.008-1.728l9.015 5.26c1.323.771 1.323 2.683 0 3.455l-9.015 5.258C7.674 19.764 6 18.803 6 17.26V6.741zM17.015 12L8 6.741V17.26L17.015 12z" fill="#fff"/></svg></span>
+												<p class="rx-zone rx_plays"><?php echo FormattedNumber($context['post_data']['plays']); ?></p>
+											</div>
+										<?php } ?>
+                                        <div class="rxo rx-comment" title="{{LANG comments}}">
+                                            <span><svg viewBox="0 0 24 24" height="24" width="24"><path d="M20.656 17.008a9.993 9.993 0 10-3.59 3.615L22 22z" fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="2"></path></svg></span>
+                                            <p class="rx-zone"><?php echo FormattedNumber($context['post_data']['votes']); ?></p>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="rx-content">
+                                        <div class="rx-center">
+                                            <div class="rx-user">
+                                                <img class="rx-avatar" src="<?php echo(media($post_data['avatar'])) ?>" alt="..."/>
+                                                <a class="rx-name" href="<?php echo(un2url($context['post_data']['username'])) ?>" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo($post_data['username']) ?>">
+                                                    <?php echo($context['post_data']['username']) ?>
+                                                    <?php if ($context['post_data']['is_verified'] > 0) { ?>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="#fff" class="veri bxv"><path d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path></svg>
+                                                    <?php } ?>
+                                                </a>
+                                                <?php if (IS_LOGGED && $context['user']['user_id'] != $context['post_data']['user_id']) { ?>
+                                                    <button class="btn rx-btn <?php if($context['is_following']){ ?>active<?php } ?>" id="xd-follow" data-user-id="<?php echo($context['post_data']['user_id']) ?>"><?php if($context['is_following']){ ?>{{LANG following}}<?php } else{ ?>{{LANG follow}}<?php } ?></button>
+                                                <?php } ?>
+                                            </div>
+                                            <h4 class="rx-h4"><?php if ($post_data['title']) { echo Limit($context['post_data']['title'], 100); } ?></h4>
+                                            <p class="rx-caption"><?php if ($post_data['description']) { echo Limit($context['post_data']['description'], 160); } ?></p>
+                                        </div>
+                                    </div> -->
+									<script>jQuery(document).ready(function($) {afterglow.init();});</script>
+                                </div> 
+                                <!-- Rx-Video -->
+                            <?php } ?>
+                        <?php } ?>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="rxt-comment-pad">
+            <div class="rx-box-right">
+                <div class="rx-inner">
+                    <div>
+                        <div class="valign rx-owner">
+                            <div class="avatar">
+                                <a><img src="<?php echo(media($post_data['avatar'])) ?>"></a>
+                            </div>
+                            <div>
+                                <h4>
+                                    <a class="<?php if($config['popover'] == 'on') { ?>udata<?php } ?>" data-id="<?php echo($context['post_data']['user_id']) ?>" href="<?php echo(un2url($context['post_data']['username'])) ?>" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo($post_data['username']) ?>"><?php echo($context['post_data']['username']) ?>
+                                        <?php if ($context['post_data']['is_verified'] > 0) { ?> 
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" class="veri cv"><path d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path></svg>
+                                        <?php } ?>
+                                    </a>
+                                </h4>
+                                <span class="ajax-time" title="<?php echo(ToDate($context['post_data']['time'])) ?>"><?php echo(time2str($context['post_data']['time'])) ?></span>
+                            </div>
+                        </div>
+                        <a class="btn main close-bar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        </a>
+                        <div class="post-info scroll">
+                            <div class="post-text">
+                                <?php if ($post_data['description']) { ?>
+                                    <span data-caption><?php echo $context['post_data']['description']; ?></span>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="comments">
+					<ul class="post-comments-list">
+						<span class="main_post_comm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M14 22.5L11.2 19H6a1 1 0 0 1-1-1V7.103a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1V18a1 1 0 0 1-1 1h-5.2L14 22.5zm1.839-5.5H21V8.103H7V17H12.161L14 19.298 15.839 17zM2 2h17v2H3v11H1V3a1 1 0 0 1 1-1z"></path></svg> <?php echo number_format($context['post_data']['votes']); ?> {{LANG comments}}</span>
+						<?php foreach ($context['post_data']['comments'] as $key => $comment) { ?>
+							<li data-post-comment="<?php echo($comment['id']) ?>">
+								<div class="user-avatar">
+									<img src="<?php echo(media($comment['avatar'])) ?>" class="img-circle" />
+								</div>
+								<div class="pp_com_body">
+									<span>
+										<strong><a class="<?php if($config['popover'] == 'on') { ?>udata<?php } ?>" data-id="<?php echo($comment['user_id']) ?>" href="<?php echo(un2url($comment['username'])) ?>" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo($comment['username']) ?>"><?php echo($comment['username']) ?></a></strong> <?php echo($comment['text']) ?>
+										<div onclick="like_dis_comment(<?php echo($comment['id']) ?>,this)" class="like_comment comment_like_<?php echo($comment['id']) ?>">
+											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="<?php echo($comment['is_liked'] ? 'liked_color' : '') ?>"><path fill="currentColor" d="M12 22l-9.192-9.192c-2.18-2.568-2.066-6.42.353-8.84A6.5 6.5 0 0 1 12 3.64a6.5 6.5 0 0 1 9.179 9.154L12 22zm7.662-10.509a4.5 4.5 0 0 0-6.355-6.337L12 6.282l-1.307-1.128a4.5 4.5 0 0 0-6.355 6.337l.114.132L12 19.172l7.548-7.549.114-.132z"/><path fill="currentColor" class="lk_act_svg" d="M21.179 12.794l.013.014L12 22l-9.192-9.192.013-.014A6.5 6.5 0 0 1 12 3.64a6.5 6.5 0 0 1 9.179 9.154z"/></svg>
+										</div>
+									</span>
+								</div>
+								<div class="events_container" id="reply-<?php echo $post_data['post_id']; ?>">
+									<span class="evnt_cont_btns comment_like_span_<?php echo($comment['id']) ?>"><span><?php echo number_format($comment['likes']) ?></span> {{LANG likes}}</span>
+									<span class="middot">·</span>
+									<span onclick="get_comment_reply(<?php echo($comment['id']) ?>,this)" id="comment_reply_<?php echo($comment['id']) ?>" class="evnt_cont_btns pointer"><span><?php echo($comment['replies']) ?></span> {{LANG reply}}</span>
+									<span class="middot">·</span>
+									<span class="ajax-tile comment_time" title="<?php echo(time2str($comment['time'])) ?>"><?php echo(time1str($comment['time'])); ?></span>
+									<div class="reply_list"></div>
+									<form class="form add-comment" style="display: none;" id="add_reply_form_<?php echo $comment['id']; ?>">
+										<div class="fluid">
+											<div class="form-group">
+												<input type="text" class="form-control comment" onkeydown="reply_comment(<?php echo $comment['id']; ?>,event);" placeholder="{{LANG write_a_reply}}" autocomplete="off">
+											</div>
+											<div class="dropdown">
+												<span class="dropdown-toggle btn-emoji" data-toggle="dropdown" onclick="echo_emoji('<?php echo $post_data['post_id']; ?>','view-tile');">
+													<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22">
+														<path fill="currentColor" d="M9.153 11.603c.795 0 1.439-.879 1.439-1.962s-.644-1.962-1.439-1.962-1.439.879-1.439 1.962.644 1.962 1.439 1.962zm-3.204 1.362c-.026-.307-.131 5.218 6.063 5.551 6.066-.25 6.066-5.551 6.066-5.551-6.078 1.416-12.129 0-12.129 0zm11.363 1.108s-.669 1.959-5.051 1.959c-3.505 0-5.388-1.164-5.607-1.959 0 0 5.912 1.055 10.658 0zM11.804 1.011C5.609 1.011.978 6.033.978 12.228s4.826 10.761 11.021 10.761S23.02 18.423 23.02 12.228c.001-6.195-5.021-11.217-11.216-11.217zM12 21.354c-5.273 0-9.381-3.886-9.381-9.159s3.942-9.548 9.215-9.548 9.548 4.275 9.548 9.548c-.001 5.272-4.109 9.159-9.382 9.159zm3.108-9.751c.795 0 1.439-.879 1.439-1.962s-.644-1.962-1.439-1.962-1.439.879-1.439 1.962.644 1.962 1.439 1.962z"></path>
+													</svg>
+												</span>
+												<ul class="dropdown-menu <?php if ($config['emoji_zoom_in'] == 'on') { ?>zoom<?php } ?> pull-right ultimate-menu demoji emoji-comment-<?php echo $post_data['post_id']; ?>"></ul>
+											</div>
+										</div>
+										<div class="reply_commenting_overlay hidden">
+											<div id="pp_loader"><div class="speeding_wheel"></div></div>
+										</div>
+									</form>
+								</div>
+								<?php if ($comment['is_owner']) { ?>
+									<span class="pull-right delcomment dlc" onclick="delete_commnet(<?php echo($comment['id']) ?>);">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-9.414l2.828-2.829 1.415 1.415L13.414 12l2.829 2.828-1.415 1.415L12 13.414l-2.828 2.829-1.415-1.415L10.586 12 7.757 9.172l1.415-1.415L12 10.586z"></path></svg>
+									</span>
+								<?php } ?>
+							</li>
+						<?php } ?>
+					</ul>
+				</div>
+				<div class="comment-box">
+					<div class="valign votes">
+						<div class="valign">
+							<span class="like-post <?php if ($context['post_data']['is_liked']) { ?>active<?php } ?>" id="px-like">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"></path></svg>
+							</span>
+							<div onclick="view_post_likes('<?php echo($context['post_data']['post_id']) ?>');" title="{{LANG likes}}">
+								<span class="xlikes" data-likes="" data-post-likes="<?php echo($context['post_data']['post_id']) ?>"><?php echo FormattedNumber($context['post_data']['likes']); ?></span>
+							</div>
+						</div>
+						<div class="dropup">
+							<span class="dropdown-toggle" data-toggle="dropdown">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z"></path></svg>
+							</span>
+							<ul class="dropdown-menu zoom pull-right ultimate-menu">
+								<li onclick="copyLinkX();">
+									<div class="menu-option pointer">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24" height="24" viewBox="0 0 460 460" style="enable-background:new 0 0 460 460;" xml:space="preserve" fill="currentColor"><g><g><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"/><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001C291.206,428.715,289.92,430,288.341,430z"/></g></g></g></svg>&nbsp;&nbsp;&nbsp;
+										<div>
+											<b>{{LANG copy_link}}</b>
+											<p>{{LANG copy_post_link}}</p>
+										</div>
+									</div>
+								</li>
+								<?php if ($context['post_data']['is_owner'] == true) { ?>
+									<li onclick="delete_post(<?php echo($context['post_data']['post_id']) ?>);">
+										<div class="menu-option pointer">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>&nbsp;&nbsp;&nbsp;
+											<div>
+												<b>{{LANG delete_post}}</b>
+												<p>{{LANG delete_post_from_timeline}}</p>
+											</div>
+										</div>
+									</li>
+									<li id="edit-post">
+										<div class="menu-option pointer">
+											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="feather"><path d="M9.243 19H21v2H3v-4.243l9.9-9.9 4.242 4.244L9.242 19zm5.07-13.556l2.122-2.122a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414l-2.122 2.121-4.242-4.242z"></path><path fill="currentColor" d="M5 19h1.414l9.314-9.314-1.414-1.414L5 17.586V19zm16 2H3v-4.243L16.435 3.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L9.243 19H21v2zM15.728 6.858l1.414 1.414 1.414-1.414-1.414-1.414-1.414 1.414z"></path></svg>&nbsp;&nbsp;&nbsp;
+											<div>
+												<b>{{LANG edit_post}}</b>
+												<p>{{LANG edit_post_to_make_changes}}</p>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="menu-option pointer">
+											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" class="feather" d="M14 19h7v2h-9l-3.998.002-6.487-6.487a1 1 0 0 1 0-1.414L12.12 2.494a1 1 0 0 1 1.415 0l7.778 7.778a1 1 0 0 1 0 1.414L14 19zm1.657-4.485l3.535-3.536-6.364-6.364-3.535 3.536 6.364 6.364z"></path><path fill="currentColor" d="M8.586 8.858l-4.95 4.95 5.194 5.194H10V19h1.172l3.778-3.778-6.364-6.364zM10 7.444l6.364 6.364 2.828-2.829-6.364-6.364L10 7.444zM14 19h7v2h-9l-3.998.002-6.487-6.487a1 1 0 0 1 0-1.414L12.12 2.494a1 1 0 0 1 1.415 0l7.778 7.778a1 1 0 0 1 0 1.414L14 19z"></path></svg>&nbsp;&nbsp;&nbsp;
+											<div>
+												<b>{{LANG clear_comments}}</b>
+												<p>This feature is coming soon...</p>
+											</div>
+										</div>
+									</li>
+									<?php if ($post_data['post_comments'] == 0) { ?>
+										<li onclick="comment_status(<?php echo $post_data['post_id']; ?>);">
+											<div class="menu-option pointer"  id="comments_stats_<?php echo $post_data['post_id']; ?>">
+												<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" class="feather"><path fill="currentColor" d="M20,2H4C2.897,2,2,2.897,2,4v18l4-4h14c1.103,0,2-0.897,2-2V4C22,2.897,21.103,2,20,2z M16.706,13.543l-1.414,1.414 l-3.293-3.292l-3.292,3.292l-1.414-1.414l3.292-3.292L7.293,6.958l1.414-1.414l3.292,3.292l3.293-3.292l1.414,1.414l-3.292,3.293 L16.706,13.543z"></path></svg>&nbsp;&nbsp;&nbsp;
+												<div>
+													<b>{{LANG disable_comments}}</b>
+													<p>{{LANG disable_commenting_for_post}}</p>
+												</div>
+											</div>
+										</li>
+									<?php } else { ?>
+										<li onclick="comment_status(<?php echo $post_data['post_id']; ?>);">
+											<div class="menu-option pointer" id="comments_stats_<?php echo $post_data['post_id']; ?>">
+												<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" class="feather"><path fill="currentColor" d="M20,2H4C2.897,2,2,2.897,2,4v18l4-4h14c1.103,0,2-0.897,2-2V4C22,2.897,21.103,2,20,2z M9,12c-1.104,0-2-0.896-2-2 s0.896-2,2-2s2,0.896,2,2S10.104,12,9,12z M15,12c-1.104,0-2-0.896-2-2s0.896-2,2-2s2,0.896,2,2S16.104,12,15,12z"></path></svg>&nbsp;&nbsp;&nbsp;
+												<div>
+													<b>{{LANG enable_comments}}</b>
+													<p>{{LANG emable_commenting_for_post}}</p>
+												</div>
+											</div>
+										</li>
+									<?php } ?>
+								<?php } ?>
+								<!--
+								<li onclick="embed_post(<?php echo $post_data['post_id']; ?>,this);">
+									<div class="menu-option pointer">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="feather" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>&nbsp;&nbsp;&nbsp;
+										<div>
+											<b>{{LANG embed_post}}</b>
+											<p>{{LANG embed_post_in_other_website}}</p>
+										</div>
+									</div>
+								</li>
+							    -->
+								<?php if ($context['post_data']['is_owner'] == false) { ?>
+									<?php if ($post_data['reported']) { ?>
+										<li onclick="tx_rep(<?php echo $post_data['post_id']; ?>,this);">
+											<div class="menu-option pointer" id="reportPost">
+												<svg viewBox="0 0 24 24" class="feather"><path fill="currentColor" d="M13 13H11V7H13M11 15H13V17H11M15.73 3H8.27L3 8.27V15.73L8.27 21H15.73L21 15.73V8.27L15.73 3Z"></path></svg>&nbsp;&nbsp;&nbsp;
+												<div>
+													<b>{{LANG cancel_report}}</b>
+													<p>{{LANG cancel_the_sent_report}}</p>
+												</div>
+											</div>
+										</li>
+									<?php } else{ ?>
+										<li onclick="report_post(<?php echo $post_data['post_id']; ?>,this);">
+											<div class="menu-option pointer" id="reportPost">
+												<svg class="feather" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 330 330" style="enable-background:new 0 0 330 330;" fill="currentColor" xml:space="preserve"><path d="M299,21.042C280.121,6.883,259.896,0,237.169,0c-26.777,0-52.532,9.658-77.44,18.997c-23.432,8.786-45.563,17.085-66.898,17.087c-0.003,0-0.006,0-0.009,0c-13.852,0-26.033-3.503-37.821-10.92V15.017c0-8.284-6.716-15-15-15s-15,6.716-15,15v18.025v180.149V315c0,8.284,6.716,15,15,15s15-6.716,15-15v-76.05c11.9,4.868,24.428,7.283,37.831,7.283c26.776,0,52.53-9.657,77.436-18.997c23.434-8.787,45.566-17.087,66.902-17.087c16.22,0,30.148,4.78,43.831,15.042c4.545,3.409,10.626,3.958,15.708,1.417S305,218.873,305,213.191V33.042C305,28.321,302.777,23.875,299,21.042z M275,187.409c-11.898-4.867-24.43-7.26-37.831-7.26c-26.775,0-52.529,9.658-77.436,18.997c-23.433,8.787-45.566,17.087-66.902,17.087c-13.857,0-26.042-3.489-37.831-10.905V58.825c11.896,4.866,24.425,7.26,37.821,7.259c0.003,0,0.009,0,0.012,0c26.772-0.003,52.524-9.659,77.429-18.997C193.696,38.3,215.831,30,237.169,30c13.858,0,26.042,3.489,37.831,10.905V187.409z"/></svg>&nbsp;&nbsp;&nbsp;
+												<div>
+													<b>{{LANG report_post}}</b>
+													<p>{{LANG report_this_post}}</p>
+												</div>
+											</div>
+										</li>
+									<?php } ?>	
+									<?php if (IS_LOGGED) { ?>
+										<li onclick="block_user('<?php echo $post_data['user_id']; ?>',1);">
+											<div class="menu-option pointer">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-slash" color="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>&nbsp;&nbsp;&nbsp;
+												<div>
+													<b>{{LANG block}} @<?php echo($post_data['username']) ?></b>
+													<p>{{LANG you_will_no_more_see_post}}</p>
+												</div>
+											</div>
+										</li>
+									<?php } ?>
+								<?php } ?>
+							</ul>
+						</div>
+						<div class="valign">
+							<span class="save-post <?php if($context['post_data']['is_saved']){ ?>active<?php } ?>" data-id="<?php echo($context['post_data']['post_id']) ?>">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M17,3H7A2,2 0 0,0 5,5V21L12,18L19,21V5C19,3.89 18.1,3 17,3Z"></path></svg>
+							</span>
+						</div>
+					</div>
+					<form class="form" action="javascript:void(0);">
+						<input type="hidden" name="hash" value="<?php echo($context['csrf_token']) ?>">
+						<?php if ($post_data['post_comments'] > 0) { ?>
+							<div class="text-input no-comm">	
+								<?php if (IS_LOGGED) { ?>
+									<div class="no_comments">
+										<p>{{LANG comment_disabled}} <?php echo($context['post_data']['username']) ?></p>
+									</div>
+								<?php } else{ ?>
+									<div class="login2comment"><a href="<?php echo(pxp_link('home')) ?>">{{LANG login}}</a> {{LANG login_to_lc_post}}</div>
+								<?php } ?>
+						    </div>
+						<?php } else { ?>
+							<div class="text-input" id="section-<?php echo $post_data['post_id']; ?>">	
+								<?php if (IS_LOGGED) { ?>
+									<div class="start2comment">
+										<div class="user-avatar post_avatar_">
+										    <img class="img-circle" src="<?php echo($context['user']['avatar']) ?>" alt="avatar" />
+										</div>
+										<div class="post_input_ tile-input">
+											<input type="text" class="form-control comment" id="post_c" placeholder="Write a comment" data-post-id="<?php echo($context['post_data']['post_id']) ?>" autocomplete="off">
+										</div>
+										<div class="dropup dropdown">
+											<span class="dropdown-toggle btn-emoji" style="top: -2em;" data-toggle="dropdown" onclick="echo_emoji('<?php echo $post_data['post_id']; ?>','view-post');">
+												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22">
+													<path fill="currentColor" d="M9.153 11.603c.795 0 1.439-.879 1.439-1.962s-.644-1.962-1.439-1.962-1.439.879-1.439 1.962.644 1.962 1.439 1.962zm-3.204 1.362c-.026-.307-.131 5.218 6.063 5.551 6.066-.25 6.066-5.551 6.066-5.551-6.078 1.416-12.129 0-12.129 0zm11.363 1.108s-.669 1.959-5.051 1.959c-3.505 0-5.388-1.164-5.607-1.959 0 0 5.912 1.055 10.658 0zM11.804 1.011C5.609 1.011.978 6.033.978 12.228s4.826 10.761 11.021 10.761S23.02 18.423 23.02 12.228c.001-6.195-5.021-11.217-11.216-11.217zM12 21.354c-5.273 0-9.381-3.886-9.381-9.159s3.942-9.548 9.215-9.548 9.548 4.275 9.548 9.548c-.001 5.272-4.109 9.159-9.382 9.159zm3.108-9.751c.795 0 1.439-.879 1.439-1.962s-.644-1.962-1.439-1.962-1.439.879-1.439 1.962.644 1.962 1.439 1.962z"></path>
+												</svg>
+											</span>
+											<ul class="dropdown-menu <?php if ($config['emoji_zoom_in'] == 'on') { ?>zoom<?php } ?> pull-right ultimate-menu demoji emoji-comment-<?php echo $post_data['post_id']; ?>"></ul>
+										</div>
+										<div class="commenting-overlay hidden">
+											<div id="pp_loader"><div class="speeding_wheel"></div></div>
+										</div>
+									</div>
+								<?php } else{ ?>
+									<div class="login2comment"><a href="<?php echo(pxp_link('home')) ?>">{{LANG login}}</a> {{LANG login_to_lc_post}}</div>
+								<?php } ?>
+							</div>
+						<?php } ?>
+					</form>
+				</div>
+            </div>
+        </div> 
+		<div class="confirm--modal block-user" style="display: none !important;">
+			<div class="confirm--modal--inner">
+				<div class="confirm--modal--body">
+					<h5><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-slash" color="#ff235d" style="background-color: rgba(255, 0, 68, 0.25)"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg> {{LANG block}} @<?php echo($post_data['username']) ?>?</h5>
+					<p>{{LANG confirm_block_user}}.</p>
+				</div>
+				<div class="confirm--modal--footer">
+					<button class="btn btn-mat default" data-confirm--modal-dismiss>{{LANG cancel}}</button>
+					<button class="btn btn-mat main start-block">{{LANG block}}</button>
+				</div>
+			</div>
+		</div>
+		<div class="modal--menu" id="report-post" style="display: none !important;">
+			<div class="modal-outer">
+				<div class="modal-inner">
+					<h5 class="title">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users" color="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16"></line></svg> 
+						{{LANG report_post}}
+						<span class="pull-right cls" data-modal-dismiss>
+							<div class="popup-close cancel">
+								<svg class="popup-close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+							</div>
+						</span>
+					</h5>
+					<ul class="list-group">
+						<li class="list-group-item">
+							<p><label><input type="radio" name="report" value="3" data-id="<?php echo $post_data['post_id']; ?>"><span class="type"><span class="r-text">{{LANG report_t3}}</span></span></label></p>
+						</li>
+						<li class="list-group-item">
+							<p><label><input type="radio" name="report" value="4" data-id="<?php echo $post_data['post_id']; ?>"><span class="type"><span class="r-text">{{LANG report_t4}}</span></span></label></p>
+						</li>
+						<li class="list-group-item">
+							<p><label><input type="radio" name="report" value="7" data-id="<?php echo $post_data['post_id']; ?>"><span class="type"><span class="r-text">{{LANG report_t7}}</span></span></label></p>
+						</li>
+						<li class="list-group-item">
+							<p><label><input type="radio" name="report" value="8" data-id="<?php echo $post_data['post_id']; ?>"><span class="type"><span class="r-text">{{LANG report_t8}}</span></span></label></p>
+						</li>
+						<br>
+						<form id="verify-profile-settings">
+							<div class="pg_mat_input">
+								<textarea placeholder="{{LANG write_your_report}}" rows="4" name="message" data-id="<?php echo $post_data['post_id']; ?>"></textarea>
+								<label>{{LANG write_your_report}}</label>
+							</div>
+						</form>
+						<div class="report-modal-footer">
+							<button class="btn btn-mat main rxp" onclick="tx_report()"><span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 330 330" width="20" height="20" style="enable-background:new 0 0 330 330;" fill="currentColor" xml:space="preserve"><path d="M299,21.042C280.121,6.883,259.896,0,237.169,0c-26.777,0-52.532,9.658-77.44,18.997c-23.432,8.786-45.563,17.085-66.898,17.087c-0.003,0-0.006,0-0.009,0c-13.852,0-26.033-3.503-37.821-10.92V15.017c0-8.284-6.716-15-15-15s-15,6.716-15,15v18.025v180.149V315c0,8.284,6.716,15,15,15s15-6.716,15-15v-76.05c11.9,4.868,24.428,7.283,37.831,7.283c26.776,0,52.53-9.657,77.436-18.997c23.434-8.787,45.566-17.087,66.902-17.087c16.22,0,30.148,4.78,43.831,15.042c4.545,3.409,10.626,3.958,15.708,1.417S305,218.873,305,213.191V33.042C305,28.321,302.777,23.875,299,21.042z M275,187.409c-11.898-4.867-24.43-7.26-37.831-7.26c-26.775,0-52.529,9.658-77.436,18.997c-23.433,8.787-45.566,17.087-66.902,17.087c-13.857,0-26.042-3.489-37.831-10.905V58.825c11.896,4.866,24.425,7.26,37.821,7.259c0.003,0,0.009,0,0.012,0c26.772-0.003,52.524-9.659,77.429-18.997C193.696,38.3,215.831,30,237.169,30c13.858,0,26.042,3.489,37.831,10.905V187.409z"></path></svg> {{LANG report}}</span></button>
+						</div>
+					</ul>
+				</div>
+				<div class="overlay hidden">
+					<div id="pp_loader"><div class="speeding_wheel"></div></div>
+				</div>
+			</div>
+		</div>
+    </div>
+</div>
+<?php 
+	include $context['direct'].'/main/templates/modals/delete-post.html';
+	include $context['direct'].'/main/templates/modals/delete-comment.html';
+	include $context['direct'].'/main/templates/modals/embed_post.html';
+	include $context['direct'].'/main/templates/modals/edit-post.html'; ?>
+<script>
+    tippy('.plays', {arrow: true,content: '{{LANG plays}}'});
+    tippy('.like_comment', {arrow: true,content: '{{LANG like}}'});
+    tippy('.dlc', {arrow: true,content: '{{LANG delete_comment}}'});
+	tippy('.save-post', {arrow: true,content: '{{LANG favourite}}'});
+    tippy('.close', { placement: 'bottom',arrow: true, content: '{{LANG close}}'});
+    $(document).on("click",".cls",function(event) {$("#report-post").fadeOut(200)});
+    $(document).on('click',".rx-comment",function(event) { 
+        var box = $('.tile-box');
+        if (box.hasClass('active')) {
+            box.removeClass('active');
+            $('.rx-comment > span').html('<svg viewBox="0 0 24 24" height="24" width="24"><path d="M20.656 17.008a9.993 9.993 0 10-3.59 3.615L22 22z" fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="2"></path></svg>')
+        } else {
+            box.addClass('active');
+            $('.rx-comment > span').html('<svg viewBox="0 0 24 24" height="24" width="24"><path d="M20.656 17.008a9.993 9.993 0 10-3.59 3.615L22 22z" fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-width="2"></path></svg>')
+        }
+    });
+    $(document).on('click',".close-bar",function(event) { 
+        var box = $('.tile-box');
+        if (box.hasClass('active')) {
+            box.removeClass('active');
+            $('.rx-comment > span').html('<svg viewBox="0 0 24 24" height="24" width="24"><path d="M20.656 17.008a9.993 9.993 0 10-3.59 3.615L22 22z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>')
+        }
+    });
+	function px_mute(post_id){
+		if (!post_id) {return false;}
+		$.post(link('posts/on_mute'), {post_id: post_id}, function(data, textStatus, xhr) {
+			if (data.status == 200) {
+				if (data.code == 1) {
+					$('#ajax_redirect').attr('href', data.turl);
+					$('#ajax_redirect').attr('data-ajax', data.t_ajax);
+					$('#ajax_redirect').click();
+				}else{
+					$('#ajax_redirect').attr('href', data.turl);
+					$('#ajax_redirect').attr('data-ajax', data.t_ajax);
+					$('#ajax_redirect').click();
+				}
+			}
+		});
+	}
+	// function nextTile() {
+	// 	$.post(link('posts/next_tile'), function(data, textStatus, xhr) {
+	// 		if (data.status == 200) {
+	// 			$('#ajax_redirect').attr('href', data.turl);
+	// 				$('#ajax_redirect').attr('data-ajax', data.t_ajax);
+	// 				$('#ajax_redirect').click();
+	// 			$.toast(data.pid,{duration: 5000, type: '',align: 'bottom',singleton: true});
+	// 		}
+	// 	});
+	// }
+    jQuery(document).ready(function($) {
+		var rx_cont = $(".tilebox-container");
+		function insert_p_comment() {
+			$(".tilebox-container").find('.commenting-overlay').removeClass('hidden');
+			var zis  = $("#post_c");
+			var text = zis.val();
+			var list = $(".tilebox-container").find('.post-comments-list');
+			var id   = $("#post_c").data('post-id');
+			if (!text) { return false; }
+			$.post(link('posts/add-comment'), {post_id:id,text:text}, function(data, textStatus, xhr) {
+				if (data.status == 200) {
+					$(data.html).insertAfter(list.find('span.main_post_comm'));
+				}
+				zis.val('');
+				$(".tilebox-container").find('.commenting-overlay').addClass('hidden');
+			});
+		}
+
+		rx_cont.find('input[type="text"]').keydown(function(event) {
+		if (event.keyCode == 13 && event.shiftKey == 0) {
+			event.preventDefault();
+			event.stopPropagation();
+			rx_cont.find('.commenting-overlay').removeClass('hidden');
+			var zis  = $(this);
+			var text = zis.val();
+			var list = rx_cont.find('.post-comments-list');
+			var id   = $(this).data('post-id');
+			if (!text) { return false; }
+			$.post(link('posts/add-comment'), {post_id:id,text:text}, function(data, textStatus, xhr) {
+				if (data.status == 200) {
+					$(data.html).insertAfter(list.find('span.main_post_comm'));
+				}
+				zis.val('');
+				rx_cont.find('.commenting-overlay').addClass('hidden');
+			});
+		}
+		});
+
+		rx_cont.find("#px-like").click(function(event) {
+			var zis = $(this);
+			var drx = rx_cont.find('[rx-likes]');
+			var lks = rx_cont.find('[data-likes]');
+			var pid = rx_cont.data('post-id');
+			if (not(is_logged())) {
+				redirect('home');
+				return false;
+			}
+			if (zis.hasClass('active')) {
+				zis.removeClass('active');
+				if (lks) {
+					let likes = int(lks.text());
+					if (likes >= 1) {
+						lks.text(likes - 1);
+					}
+				}
+			}else{
+				zis.addClass('active');
+				if (lks) {
+					let likes = int(lks.text()) + 1;
+					lks.text(likes);
+				}
+			}		
+			$.ajax({url: link('posts/like'),type: 'POST',dataType: 'json',data: {id:pid}}).done(function(data) {});
+		});
+		
+		rx_cont.find(".save-post").click(function(event) {
+			if (not(is_logged())) {
+				redirect('home');
+				return false;
+			}
+			var pid     = $(this).data('id');
+			var pix     = $(this);
+			if (!post_id) {return false;}
+			if (pix.hasClass('active')) {
+				pix.removeClass('active');
+			}else{
+				pix.addClass('active');
+			}
+			$.ajax({url: link('posts/star'),type: 'POST',dataType: 'json',data: {id:pid}})
+			.done(function(data) {
+				Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+			});
+		});
+
+		rx_cont.find('#xd-follow').click(function(event) {
+			var uid = $(this).data('user-id');
+			var zis = $(this);
+			if (not(is_logged())) {
+				redirect('home');
+				return false;
+			}
+			if (zis.hasClass('active')) {
+				zis.removeClass('active');
+				zis.html('{{LANG follow}}');
+			}
+			else{
+				zis.addClass('active');
+				zis.html('{{LANG following}}');
+			}
+			$.ajax({url: link('main/follow'),type: 'GET',dataType: 'json',data: {user_id:uid}}).done(function(data) {
+				Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+ " " +"<?php echo($context['post_data']['username']) ?>"+'</div>'});
+			});
+		});
+
+		rx_cont.find('#edit-post').click(function(event) {
+			if (not(is_logged())) {
+				redirect('home');
+				return false;
+			}
+			$("#edit-post-modal").fadeIn(300, function() {
+				var text = rx_cont.find('[data-caption]').text();
+				$(this).find('#caption').val($.trim(text));
+			});
+		});
+		$("#edit-post-modal").find('button[type="button"]').click(function(event) {
+			$("#edit-post-modal").fadeOut(200, function() {
+				$(this).find('#caption').val('');
+			});
+		});
+		$("#edit-post-modal").find('form').submit(function(event) {
+			event.preventDefault();
+			var text    = $(this).find('#caption').val();
+			var post_id = $(this).find('#post_id').val();
+			if (int(post_id) == 0) {return false;}
+			rx_cont.find('[data-caption]').html(linkify_htags(text));
+			$("#edit-post-modal").fadeOut(200, function() {
+				$(this).find('#caption').val('');
+			});
+			$.ajax({url: link('posts/update'),type: 'POST',dataType: 'json',data: {text:text,id:post_id},
+			}).done(function(data) {
+				if (data.message) {
+					Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+				}
+			});
+		});
+	});
+</script>

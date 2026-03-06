@@ -1,0 +1,447 @@
+<style>.premium-page-head.premium:before {background: url('{{CONFIG site_url}}/media/img/str/942099.png') center center no-repeat;}</style>
+<div class="premium-page-head premium">
+	<div class="premium-coverbg"></div>
+	<div class="container">
+		<h2>{{LANG features_ucant_live_without}}</h2>
+		<p>{{LANG activating_remium_txt}}</p>
+		<div class="top-premium-users">
+			<div class="val-wra title">
+				<h3 class="val-wra"><span><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke="none"><path fill="#e4982a" d="M14.46,23.12012a.9991.9991,0,0,1-.40723-.08692,9.004,9.004,0,0,1-4.3125-4.0166,6.977,6.977,0,0,0,.18995,2.58106,1.04987,1.04987,0,0,1,.0498.3125.99942.99942,0,0,1-1.37744.92578A8.98348,8.98348,0,0,1,4.94727,8.92773a8.51269,8.51269,0,0,1,1.9873-1.8623l.23047-.1875A7.017,7.017,0,0,0,9.63623,1.93555a1.00009,1.00009,0,0,1,1.49121-.80567,8.717,8.717,0,0,1,4.26709,9.0918,5.78155,5.78155,0,0,0,1.398-1.77734.99959.99959,0,0,1,1.39941-.41114,1.237,1.237,0,0,1,.23.17481,8.99474,8.99474,0,0,1-3.65381,14.86328A1.00594,1.00594,0,0,1,14.46,23.12012Zm-6.93017-15.25h0Z"></path></svg></span>{{LANG premium_users}}</h3>
+			</div>
+			<div class="premium-users" id="premium-slick">
+				<?php if ($context['users']) {
+					foreach ($context['users'] as $key => $udata) { ?>
+						<div class="users-list" id="<?php echo($udata['user_id']) ?>">
+							<a><svg class="squircle" viewBox="0 0 200 200"><defs><pattern id="squircle<?php echo($udata['username']) ?>" patternUnits="userSpaceOnUse" width="200" height="200"><image xlink:href="<?php echo(media($udata['avatar'])) ?>" x="0" y="0" width="200" height="200" /></pattern></defs><path d="M100,200c43.8,0,68.2,0,84.1-15.9C200,168.2,200,143.8,200,100s0-68.2-15.9-84.1C168.2,0,143.8,0,100,0S31.8,0,15.9,15.9C0,31.8,0,56.2,0,100s0,68.2,15.9,84.1C31.8,200,56.2,200,100,200z" fill="url(#squircle<?php echo($udata['username']) ?>)" /></svg></a>
+							<p><a class="<?php if($config['popover'] == 'on') { ?>udata<?php } ?>" data-id="<?php echo($udata['user_id']) ?>" href="<?php echo(un2url($udata['username'])) ?>" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo($udata['username']) ?>"><?php echo($udata['username']) ?></a></p>
+						</div>
+					<?php } ?>
+				<?php } ?>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container premium-section pr">
+	<div class="premium-padd">
+		<div class="padd-head">
+			<div class="logo-pad"><img class="logo" src="{{CONFIG site_url}}/media/img/logo/<?php if ($_COOKIE['mode'] == 'night') { ?>logo-night<?php } else { ?>logo-day<?php } ?>.{{CONFIG logo_extension}}" alt="..."><span>{{LANG premium}}</span></div>
+			<h4>{{LANG burning_sensation}}</h4>
+			<img class="icon" src="{{CONFIG site_url}}/media/img/pnga/pngegg26.png"/>
+		</div>
+	</div>
+	<div class="premium-main">
+		<div class="col-md-2">
+			<img class="main-icon" src="{{CONFIG site_url}}/media/img/pnga/pngegg.png" alt="..." height="550px">
+		</div>
+		<div class="col-md-10">
+			<div class="premium-pag">
+				<div class="pag-head">
+					<div class="circle-1"></div>
+					<div class="circle-2"></div>
+					<div class="circle-3"></div>
+					<img src="{{CONFIG site_url}}/media/img/pnga/fire.png" alt="...">
+					<h2>{{LANG ready_to_activate_premium}}</h2>
+					<p class="bold">{{LANG scroll_to_pick}}</p>
+				</div>
+				<div class="features">
+					<h2>{{LANG why_choose_premium}}</h2>
+					<div class="row">
+						<div class="col s12 m12 l6">
+							<div class="val-wra featrr">
+								<img src="{{CONFIG site_url}}/media/img/icons/gif.png" alt="...">
+								<p>{{LANG gif_profile}}</p>
+							</div>
+						</div>
+						<div class="col s12 m12 l6">
+							<div class="val-wra featrr">
+								<img src="{{CONFIG site_url}}/media/img/icons/safety.png" alt="...">
+								<p>{{LANG featured_member}}</p>
+							</div>
+						</div>
+						<div class="col s12 m12 l6">
+							<div class="val-wra featrr">
+								<img src="{{CONFIG site_url}}/media/img/boosts/box-boosts.png" alt="...">
+								<p>{{LANG plus}} <b style="font-weight: 500;color: #ff3a04;font-size: 17px;">{{CONFIG boosts_extra}}</b> {{LANG boosts_extra}}</p>
+							</div>
+						</div>
+						<div class="col s12 m12 l6">
+							<div class="val-wra featrr">
+								<img src="{{CONFIG site_url}}/media/img/credits/credit.svg" alt="...">
+								<p>x2 {{LANG affiliate_credits}}</p>
+							</div>
+						</div>
+						<div class="col s12 m12 l6">
+							<div class="val-wra featrr">
+								<img src="{{CONFIG site_url}}/media/img/icons/vip-pass.png" alt="...">
+								<p>{{LANG profile_style}}</p>
+							</div>
+						</div>
+						<?php if ($config['watermark'] == 'on') { ?>
+						<div class="col s12 m12 l6">
+							<div class="val-wra featrr">
+								<img src="{{CONFIG site_url}}/media/img/logo.png" alt="...">
+								<p>{{LANG remove_img_watermark}}</p>
+							</div>
+						</div>
+						<?php } ?>
+						<div class="col s12 m12 l6">
+							<div class="val-wra featrr">
+								<img src="{{CONFIG site_url}}/media/img/points/pointsx2.png" alt="...">
+								<p>x2 {{LANG exp_points_earn}}</p>
+							</div>
+						</div>
+						<div class="col s12 m12 l6">
+							<div class="val-wra featrr">
+								<img src="{{CONFIG site_url}}/media/img/icons/upload-file.png" alt="...">
+								<p>{{LANG unlimited_storage}}</p>
+							</div>
+						</div>
+						<div class="col s12 m12 l6">
+							<div class="val-wra featrr">
+								<img src="{{CONFIG site_url}}/media/img/icons/camera.png" alt="...">
+								<p>{{LANG change_profile_banner}}</p>
+							</div>
+						</div>
+						<div class="col s12 m12 l6">
+							<div class="val-wra featrr">
+								<img src="{{CONFIG site_url}}/media/img/icons/id-card.png" alt="...">
+								<p>{{LANG update_ur_username}}</p>
+							</div>
+						</div>
+						<?php if ($config['boosted_posts'] > 0) { ?>
+						<div class="col s12 m12 l6">
+							<div class="val-wra featrr">
+								<img src="{{CONFIG site_url}}/media/img/icons/bullhorn.png" alt="...">
+								<p>{{LANG posts_promote_up}} <b style="font-weight: 500;color: #ff3a04;font-size: 17px;">{{CONFIG boosted_posts}}</b>  <?php if ($config['boosted_posts'] > 1) { ?>{{LANG posts}}<?php }else{ ?>{{LANG post}}<?php } ?></p>
+							</div>
+						</div>
+						<?php } ?>
+						<div class="col s12 m12 l6">
+							<div class="val-wra featrr">
+								<img src="{{CONFIG site_url}}/media/img/points/points.png" alt="...">
+								<p>{{LANG plus}} <b style="font-weight: 500;color: #ff3a04;font-size: 17px;"><?php echo number_format($config['points_extra']) ?></b> {{LANG points_extra}}</p>
+							</div>
+						</div>
+						<div class="col s12 m12 l6">
+							<div class="val-wra featrr">
+								<img src="{{CONFIG site_url}}/media/img/icons/woman.png" alt="...">
+								<p>{{LANG request_for_veri}}</p>
+							</div>
+						</div>
+						<div class="col s12 m12 l6">
+							<div class="val-wra featrr">
+								<img src="{{CONFIG site_url}}/media/img/icons/portfolio.png" alt="...">
+								<p>{{LANG unlock_buss_account}}</p>
+							</div>
+						</div>
+						<!-- <div class="col s12 m12 l6">
+							<div class="val-wra featrr">
+								<img src="{{CONFIG site_url}}/media/img/icons/hexagon.png" alt="...">
+								<p>Unlock Hexagon Profile</p>
+							</div>
+						</div> -->
+					</div>
+				</div><br>
+				<div class="row prem-row">
+					<div class="choose-pro">
+						<h2>{{LANG choose_ur_plan}}</h2>
+						<div class="val-wra pick-plan">
+							<div>
+								<label for="one-hour">
+									<input class="with-gap" id="one-hour" name="plans" type="radio" value="{{LANG hour}}" data-price="<?php echo($config['one_hour_premium_price']) ?>" data-type="1" <?php if($me['pro_type'] == 1) { ?>checked<?php } ?>/>
+									<span class="plan-name">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m21.28 4.473c-.848-.721-2.109-.604-2.817.262l-8.849 10.835-4.504-3.064c-.918-.626-2.161-.372-2.773.566s-.364 2.205.555 2.83l7.494 5.098 11.151-13.653c.707-.866.592-2.152-.257-2.874z" /></svg>
+										<span class="duration">1 {{LANG hour}}</span>
+										<span class="price"><img src="{{CONFIG site_url}}/media/img/credits/credit.svg" alt="..." height="25px" width="25px"><?php echo($config['one_hour_premium_price']) ?></span>
+									</span>
+								</label>
+							</div>
+							<div>
+								<label for="daily">
+									<input class="with-gap" id="daily" name="plans" type="radio" value="{{LANG daily}}" data-price="<?php echo($config['daily_premium_price']) ?>" data-type="2" <?php if($me['pro_type'] == 2) { ?>checked<?php } ?>/>
+									<span class="plan-name">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m21.28 4.473c-.848-.721-2.109-.604-2.817.262l-8.849 10.835-4.504-3.064c-.918-.626-2.161-.372-2.773.566s-.364 2.205.555 2.83l7.494 5.098 11.151-13.653c.707-.866.592-2.152-.257-2.874z" /></svg>
+										<span class="duration">{{LANG daily}}</span>
+										<span class="price"><img src="{{CONFIG site_url}}/media/img/credits/credit.svg" alt="..." height="25px" width="25px"><?php echo($config['daily_premium_price']) ?></span>
+										<span class="most-popular">{{LANG most_popular}}</span>
+									</span>
+								</label>
+							</div>
+							<div>
+								<label for="three-days">
+									<input class="with-gap" id="three-days" name="plans" type="radio" value="{{LANG days}}" data-price="<?php echo($config['three_days_premium_price']) ?>" data-type="3" <?php if($me['pro_type'] == 3) { ?>checked<?php } ?>/>
+									<span class="plan-name">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m21.28 4.473c-.848-.721-2.109-.604-2.817.262l-8.849 10.835-4.504-3.064c-.918-.626-2.161-.372-2.773.566s-.364 2.205.555 2.83l7.494 5.098 11.151-13.653c.707-.866.592-2.152-.257-2.874z" /></svg>
+										<span class="duration">3 {{LANG days}}</span>
+										<span class="price"><img src="{{CONFIG site_url}}/media/img/credits/credit.svg" alt="..." height="25px" width="25px"><?php echo($config['three_days_premium_price']) ?></span>
+									</span>
+								</label>
+							</div>
+							<div>
+								<label for="weekly">
+									<input class="with-gap" id="weekly" name="plans" type="radio" value="{{LANG weekly}}" data-price="<?php echo($config['weekly_premium_price']) ?>" data-type="4" <?php if($me['pro_type'] == 4) { ?>checked<?php } ?>/>
+									<span class="plan-name">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m21.28 4.473c-.848-.721-2.109-.604-2.817.262l-8.849 10.835-4.504-3.064c-.918-.626-2.161-.372-2.773.566s-.364 2.205.555 2.83l7.494 5.098 11.151-13.653c.707-.866.592-2.152-.257-2.874z" /></svg>
+										<span class="duration">{{LANG weekly}}</span>
+										<span class="price"><img src="{{CONFIG site_url}}/media/img/credits/credit.svg" alt="..." height="25px" width="25px"><?php echo($config['weekly_premium_price']) ?></span>
+									</span>
+								</label>
+							</div>
+						</div>
+						<br>
+						<p>
+							<label for="monthly">
+								<input class="with-gap" id="monthly" name="plans" type="radio" value="{{LANG monthly}}" data-price="<?php echo($config['monthly_premium_price']) ?>" data-type="5" <?php if($me['pro_type'] == 5) { ?>checked<?php } ?>/>
+								<span class="plan-name">
+									<span class="duration">{{LANG monthly}}</span>
+									<span class="price"><img src="{{CONFIG site_url}}/media/img/credits/credit.svg" alt="..." height="25px" width="25px"><?php echo number_format($config['monthly_premium_price']) ?></span>
+								</span>
+							</label>
+						</p>
+						<p>
+							<label for="yearly">
+								<input class="with-gap" id="yearly" name="plans" type="radio" value="{{LANG yearly}" data-price="<?php echo($config['yearly_premium_price']) ?>" data-type="6" <?php if($me['pro_type'] == 6) { ?>checked<?php } ?>/>
+								<span class="plan-name">
+									<span class="recommended"><span>{{LANG recommended}}</span><span class="recommended-tail"></span></span>
+									<span class="duration">{{LANG yearly}}</span>
+									<span class="price"><img src="{{CONFIG site_url}}/media/img/credits/credit.svg" alt="..." height="25px" width="25px"><?php echo number_format($config['yearly_premium_price']) ?></span>
+								</span>
+							</label>
+						</p>
+						<p>
+							<label for="life-time">
+								<input class="with-gap" id="life-time" name="plans" type="radio" value="{{LANG life_time}}" data-price="<?php echo($config['life_time_premium_price']) ?>" data-type="7" <?php if($me['pro_type'] == 7) { ?>checked<?php } ?>/>
+								<span class="plan-name">
+									<span class="duration">{{LANG life_time}}</span>
+									<span class="price"><img src="{{CONFIG site_url}}/media/img/credits/credit.svg" alt="..." height="25px" width="25px"><?php echo number_format($config['life_time_premium_price']) ?></span>
+								</span>
+							</label>
+						</p>
+						<?php if (IS_LOGGED) { ?>
+							<div class="pay-with credit-pay hidden">
+								<p class="text-center">{{LANG ready_to_activate_premium}}</p>
+								<div class="pay_u_btns valign">
+									<button onclick="Payment()" class="btn payment valign" <?php if($me['pro_type'] == 1 || $me['pro_type'] == 2 || $me['pro_type'] == 3 || $me['pro_type'] == 4 || $me['pro_type'] == 5 || $me['pro_type'] == 6 || $me['pro_type'] == 7) { ?>disabled<?php } ?>><span>
+										<?php if($me['pro_type'] == 1 || $me['pro_type'] == 2 || $me['pro_type'] == 3 || $me['pro_type'] == 4 || $me['pro_type'] == 5 || $me['pro_type'] == 6 || $me['pro_type'] == 7) { ?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M11.602 13.76l1.412 1.412 8.466-8.466 1.414 1.414-9.88 9.88-6.364-6.364 1.414-1.414 2.125 2.125 1.413 1.412zm.002-2.828l4.952-4.953 1.41 1.41-4.952 4.953-1.41-1.41zm-2.827 5.655L7.364 18 1 11.636l1.414-1.414 1.413 1.413-.001.001 4.951 4.951z"></path></svg> {{LANG activated}}<?php } else { ?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" style="position:relative;top:-1px"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="currentColor"></path></svg> {{LANG pay}} <?php echo($config['daily_premium_price']) ?> {{LANG credits}} <?php } ?></span></button>
+								</div>
+							</div>
+						<?php } else { ?>
+							<div class="pay-with credit-pay hidden">
+								<p class="text-center">{{LANG login_to_activate}}</p>
+								<div class="pay_u_btns valign">
+									<a class="btn btn-mat main valign" href="<?php echo(pxp_link('login')); ?>"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M14 14.252V22H4a8 8 0 0 1 10-7.748zM12 13c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm6 4v-3h2v3h3v2h-3v3h-2v-3h-3v-2h3z"></path></svg> {{LANG login}}</span></a>
+								</div>
+							</div>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container ask-faq">
+	<h2>{{LANG frequently_aq}}</h2>
+	<div class="accordion">
+		<div class="accordion-item">
+			<button id="accordion-button-1" aria-expanded="false">
+				<span class="accordion-title">{{LANG gif_profile}}</span>
+				<span class="icon" aria-hidden="true"></span>
+			</button>
+			<div class="accordion-content">
+			    <p>Gives you the ability to use a gif picture in your profile page.</p>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<button id="accordion-button-2" aria-expanded="false">
+				<span class="accordion-title">{{LANG featured_member}}</span>
+				<span class="icon" aria-hidden="true"></span>
+			</button>
+			<div class="accordion-content">
+			    <p>Get your profile page featured in every important pages of fumigram. This could be very useful for getting more followers on your profile and having more people visit your page on a regular basics.</p>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<button id="accordion-button-3" aria-expanded="false">
+				<span class="accordion-title">{{LANG plus}} <b style="font-weight: 500;color: #ff3a04">{{CONFIG boosts_extra}}</b> {{LANG boosts_extra}}</span>
+				<span class="icon" aria-hidden="true"></span>
+			</button>
+			<div class="accordion-content">
+			    <p>You can promote your post with this energy by boosting it. All promoted post will be displayed at the very top of your feed & timeline. Take note that all your boost post will be visible for 3 days as the default but it is possible to increase the day and time by buying extra boost time in your inventory.</p>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<button id="accordion-button-4" aria-expanded="false">
+				<span class="accordion-title">x2 {{LANG affiliate_credits}}</span>
+				<span class="icon" aria-hidden="true"></span>
+			</button>
+			<div class="accordion-content">
+			    <p>Your affiliate credits will be doubled <b>x2</b> when new users join fumigram with your affiliate link. </p>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<button id="accordion-button-5" aria-expanded="false">
+				<span class="accordion-title">{{LANG profile_style}}</span>
+				<span class="icon" aria-hidden="true"></span>
+			</button>
+			<div class="accordion-content">
+			    <p>Fumigram's profile page provides you with different page styling. You can change how your profile style looks by changing it's name. 
+					<!-- By upgrading your account the Hexagon profile page is also unlocked for you. This profile is limited and cannot be used without premium -->
+				</p>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<button id="accordion-button-6" aria-expanded="false">
+				<span class="accordion-title">{{LANG remove_img_watermark}}</span>
+				<span class="icon" aria-hidden="true"></span>
+			</button>
+			<div class="accordion-content">
+				<p>There's a watermark on all images you upload if you're a free member of fumigram but with a premium membership all watermark will be removed from any image you upload. Please note that watermark on images will be automatically resized based on the quality of the image. In order words bad image quality means large image watermark.</p>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<button id="accordion-button-7" aria-expanded="false">
+				<span class="accordion-title">{{LANG exp_points_earn}}</span>
+				<span class="icon" aria-hidden="true"></span>
+			</button>
+			<div class="accordion-content">
+			    <p>The points you earn will be doubled <b>x2</b> with any point earning activities you perform. Limited to only premium members</p>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<button id="accordion-button-8" aria-expanded="false">
+			<span class="accordion-title">{{LANG unlimited_storage}}</span>
+			<span class="icon" aria-hidden="true"></span>
+			</button>
+			<div class="accordion-content">
+			<p>
+				Your account storage is limited as a free member of fumigram and when such limit is reached your ability to post will be null and void.
+				However you can prevent such a thing from happening by upgrading your account with our premium membership. We can't have too much free lunches now can we? if you aggree with me join our discord with ziz <a href="<?php echo($config['server']) ?>" target="_blank">Link</a> and say <b>HI</b>
+			</p>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<button id="accordion-button-9" aria-expanded="false">
+				<span class="accordion-title">{{LANG change_profile_banner}}</span>
+				<span class="icon" aria-hidden="true"></span>
+			</button>
+			<div class="accordion-content">
+			    <p>You will be able to change your profile banner as long as your premium membership is activated. <br>An Icon will be displayed at the top of your profile banner. You can use that to change your banner.</p>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<button id="accordion-button-10" aria-expanded="false">
+				<span class="accordion-title">{{LANG update_ur_username}}</span>
+				<span class="icon" aria-hidden="true"></span>
+			</button>
+			<div class="accordion-content">
+				<p>We know you might not like your current username or you just want to change it. We have you covered on that. With our premium membership you can do just that. Keep in mind that you can only update your username once every <b>30 days</b>.</p>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<button id="accordion-button-11" aria-expanded="false">
+				<span class="accordion-title">{{LANG posts_promote_up}} <b style="font-weight: 500;color: #ff3a04"><?php echo number_format($config['boosted_posts']) ?></b> <?php if ($config['boosted_posts'] > 1) { ?>{{LANG posts}}<?php }else{ ?>{{LANG post}}<?php } ?></span>
+				<span class="icon" aria-hidden="true"></span>
+			</button>
+			<div class="accordion-content">
+				<p>You can only promote up to <b>9</b> posts when you activate premium as long as you have a boost in your account. <br>That's the standard limit count for promoting posts. All promoted post will only last for <b>3 days</b> but you can alter that by buying a boost timer. Please take note that there's only <b>1</b> item in stock per person. That means you can only buy this item only once.</p>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<button id="accordion-button-12" aria-expanded="false">
+				<span class="accordion-title">{{LANG plus}} <b style="font-weight: 500;color: #ff3a04"><?php echo number_format($config['points_extra']) ?></b> {{LANG points_extra}}</span>
+				<span class="icon" aria-hidden="true"></span>
+			</button>
+			<div class="accordion-content">
+				<p>We will reward you with <b><?php echo number_format($config['points_extra']) ?></b> extra points with you activate a premium plan.</p>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<button id="accordion-button-13" aria-expanded="false">
+				<span class="accordion-title">{{LANG request_for_veri}}</span>
+				<span class="icon" aria-hidden="true"></span>
+			</button>
+			<div class="accordion-content">
+				<p>You can request to have your profile page verified by fumigram when you activate premium. <br>Take note that your verification request will take a few days. <b>3 days</b> at most to be reviewed and answered.</p>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<button id="accordion-button-14" aria-expanded="false">
+				<span class="accordion-title">{{LANG unlock_buss_account}}</span>
+				<span class="icon" aria-hidden="true"></span>
+			</button>
+			<div class="accordion-content">
+			    <p>The business account provides you with extra settings on your account page with more ways for people to reach you. </p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+$('#premium-slick').slick({ prevArrow: '<button type="button" class="slick-prev" title="Previous" style="width: 35px;height: 35px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="feather"><path fill="currentColor" d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"></path></svg></button>', nextArrow: '<button type="button" class="slick-next" title="Next" style="width: 35px;height: 35px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="feather"><path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"></path></svg></button>', infinite: true,lazyLoad: 'ondemand',slidesToShow: 6,variableWidth: true,slidesToScroll: 1,autoplay: false,autoplaySpeed: 2000, responsive: [{breakpoint: 1024,settings: {slidesToShow: 6}},{breakpoint: 800,settings: {slidesToShow: 5}},{breakpoint: 600,settings: {slidesToShow: 5.6}},{breakpoint: 500,settings: {slidesToShow: 5}},{breakpoint: 300,settings: {slidesToShow: 2.5}}] });
+const items = document.querySelectorAll('.accordion button');
+function toggleFaq() {
+  const Toggle = this.getAttribute('aria-expanded');
+  for (i = 0; i < items.length; i++) {items[i].setAttribute('aria-expanded', 'false');}
+  if (Toggle == 'false') {this.setAttribute('aria-expanded', 'true');}
+}
+items.forEach((item) => item.addEventListener('click', toggleFaq));
+$("body").on("contextmenu", "img", function(e) {return false});
+document.getElementById('one-hour').addEventListener('click', function(e) {
+	$('.pay-with').removeClass('hidden');
+	$('.payment').html('<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" style="position:relative;top:-1px"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="currentColor"></path></svg> {{LANG pay}} ' + Price() + ' {{LANG credits}}</span>');
+});
+document.getElementById('daily').addEventListener('click', function(e) {
+	$('.pay-with').removeClass('hidden');
+	$('.payment').html('<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" style="position:relative;top:-1px"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="currentColor"></path></svg> {{LANG pay}} ' + Price() + ' {{LANG credits}}</span>');
+});
+document.getElementById('three-days').addEventListener('click', function(e) {
+	$('.pay-with').removeClass('hidden');
+	$('.payment').html('<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" style="position:relative;top:-1px"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="currentColor"></path></svg> {{LANG pay}} ' + Price() + ' {{LANG credits}}</span>');
+});
+document.getElementById('weekly').addEventListener('click', function(e) {
+	$('.pay-with').removeClass('hidden');
+	$('.payment').html('<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" style="position:relative;top:-1px"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="currentColor"></path></svg> {{LANG pay}} ' + Price() + ' {{LANG credits}}</span>');
+});
+document.getElementById('monthly').addEventListener('click', function(e) {
+	$('.pay-with').removeClass('hidden');
+	$('.payment').html('<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" style="position:relative;top:-1px"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="currentColor"></path></svg> {{LANG pay}} ' + new Intl.NumberFormat().format(Price()) + ' {{LANG credits}}</span>');
+});
+document.getElementById('yearly').addEventListener('click', function(e) {
+	$('.pay-with').removeClass('hidden');
+	$('.payment').html('<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" style="position:relative;top:-1px"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="currentColor"></path></svg> {{LANG pay}} ' + new Intl.NumberFormat().format(Price()) + ' {{LANG credits}}</span>');
+});
+document.getElementById('life-time').addEventListener('click', function(e) {
+	$('.pay-with').removeClass('hidden');
+	$('.payment').html('<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" style="position:relative;top:-1px"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="currentColor"></path></svg> {{LANG pay}} ' + new Intl.NumberFormat().format(Price()) + ' {{LANG credits}}</span>');
+});
+function Type() {
+	var plans = document.getElementsByName('plans');
+	for (index=0; index < plans.length; index++) {
+		if (plans[index].checked) {
+			return plans[index].getAttribute('data-type');
+			break;
+		}
+	}
+}
+function Payment(){
+	$('.payment').attr('disabled','true');
+	$.post(link('payment/premium'), {description:description(), price:Price(), type:Type(), mode: "premium"}, function(data, textStatus, xhr) {
+		Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">{{LANG activating_premium}}</div>'});
+		if (data.status == 200) {
+			setTimeout(function () {
+				Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+				window.location.href = data.upgraded;
+			}, 3000);			
+		} else {
+			setTimeout(function () {
+				Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+				$('#ajax_redirect').attr('href', "{{CONFIG site_url}}/premium");
+				$('#ajax_redirect').attr('data-ajax', "load.php?app=premium&apph=premium");
+				$('#ajax_redirect').click();
+			}, 3000);
+		}
+		});
+}
+</script>

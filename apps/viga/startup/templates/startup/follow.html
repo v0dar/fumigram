@@ -1,0 +1,67 @@
+<style>footer{display: none !important;}</style>
+<div class="container">
+	<div class="setup-step step-three-active">
+		<div class="line">
+			<div class="line_sec"></div>
+			<div class="dot one"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg><span>{{LANG profile}}</span></div>
+			<div class="dot two"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg><span>{{LANG about}}</span></div>
+			<div class="dot three"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg><span>{{LANG follow}}</span></div>
+		</div>
+	</div>
+	<div class="pg_page padd pp_startup">
+		<form id="startup_follow">
+			<div class="start_head">
+				<h3>{{LANG follow_new_users}}</h3>
+			</div>
+			<?php if ($context['follow']) { ?>
+				<div class="pg_folw_sugg_carousel tl-follow-suggestions">
+					<?php foreach ($context['follow'] as $key => $follow_sugg) { ?>
+						<div class="item">
+							<div class="avatar">
+								<img src="<?php echo($follow_sugg['avatar']) ?>" alt="Picture">
+								<div class="valign uname">
+									<a class="<?php if($config['popover'] == 'on') { ?>udata<?php } ?>" data-id="<?php echo($follow_sugg['user_id']) ?>" href="<?php echo($follow_sugg['url']) ?>"><h4><?php echo($follow_sugg['username']) ?></h4></a>
+								</div>
+							</div>
+						</div>
+					<?php } ?>
+				</div>
+			<?php } ?>
+			<div class="valign pg_start_subtn">
+				<small onclick="skip_startup()">{{LANG skip_step}}</small>
+				<button class="btn btn-mat main" type="submit">{{LANG follow_c}}</button>
+			</div>
+			<input type="hidden" name="hash" value="<?php echo($context['csrf_token']) ?>">
+			<input type="hidden" name="ids" value="<?php echo($context['ids']) ?>">
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+function skip_startup() {
+	$.post(link('startup/skip'), function(data, textStatus, xhr) {
+		$('#ajax_redirect').attr('href', "{{CONFIG site_url}}");
+		$('#ajax_redirect').attr('data-ajax', "load.php?app=home&apph=home");
+		$('#ajax_redirect').click();
+	});
+}
+$('.tl-follow-suggestions').flickity({ freeScroll: true, pageDots: false, contain: true, resize: true, cellAlign: 'left', autoPlay: true, friction: 0.2 });
+jQuery(document).ready(function($) {
+	var form = $("form#startup_follow");
+	form.ajaxForm({
+		url: link('startup/follow'),
+		type: 'POST',
+		dataType: 'json',
+		beforeSend: function(){
+			$('form').find('button[type="submit"]').attr('disabled','true');
+		}, success: function(data){
+			if (data.status == 200) {
+				$('#ajax_redirect').attr('href', "{{CONFIG site_url}}");
+				$('#ajax_redirect').attr('data-ajax', "load.php?app=home&apph=home");
+				$('#ajax_redirect').click();
+			}
+	        $('form').find('button[type="submit"]').removeAttr('disabled');
+		}
+	});	
+});
+</script>

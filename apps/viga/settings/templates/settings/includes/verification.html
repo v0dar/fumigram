@@ -1,0 +1,74 @@
+<div class="verf-active">
+	<div class="valign settings-holder verification">
+		<img src="<?php echo($context['me']['avatar']) ?>" class="avatar cha" alt="...">
+		<div class="infoz">
+			<h5 title="<?php echo($context['me']['name']) ?>"><a><?php echo($context['me']['name']) ?></a></h5>
+			<p>{{LANG verify_p}}</p>
+			<?php if ($context['me']['verified'] > 0) { ?>
+				<span>{{LANG ps_account_is_verified}}</span>
+			<?php } else { ?>
+				<span>{{LANG request_for_verification}}</span>
+			<?php } ?>
+		</div>
+	</div>
+	<?php if ($context['is_verified'] > 0) { ?>
+	<div class="verify_h"> 
+		<div class="verify_requested">
+			<img class="usr_prof_badge" src="{{CONFIG site_url}}/media/img/icons/problem-solve.png" width="190px" height="190px">
+		</div>
+		<h4 class="text-center">{{LANG verfiy_request_done}}</h4>
+		<p class="text-center">{{LANG small_verfiy_text}}</p>
+		<p class="text-center" style="font-size: 11px">{{LANG verify_mini_txt}}</p>
+	</div>
+	<?php } elseif ($context['me']['verified'] > 0) { ?>
+		<div class="verify_h"> 
+			<div class="verify_requested">
+				<img class="usr_prof_badge" src="{{CONFIG site_url}}/media/img/icons/verified.png" width="190px" height="190px">
+			</div>
+			<h4 class="text-center">{{LANG ur_verified}}</h4>
+			<p class="text-center">{{LANG small_verified_text}}</p>
+		</div>
+	<?php } else { ?>
+	<form class="form pp_sett_form" id="verify-profile-settings">
+		<div class="pg_mat_input">
+			<input type="text" name="name" placeholder="{{LANG message}}" value="<?php echo($context['me']['name']) ?>">
+			<label>{{LANG name}}</label>
+		</div>
+		<div class="pg_mat_input">
+			<textarea placeholder="{{LANG write_a_message}}" name="message" rows="3"></textarea>
+			<label>{{LANG write_a_message}}</label>
+		</div>
+
+		<p class="verify_text_1">{{LANG upload_docs}}</p>
+		<p class="verify_text_2">{{LANG select_verif_images}}</p>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="fak_image pg_fak_img" onclick="document.getElementById('user-photo').click(); return false">
+					<div class="upload_fk_image">
+						<img src="{{CONFIG site_url}}/media/img/icons/picture.png" alt="..." style="height: 100px;width: 100px;">
+						<p>{{LANG your_photo}}</p>
+					</div>
+					<div id="user_image"></div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="fak_image pg_fak_img" onclick="document.getElementById('ip-photo').click(); return false">
+					<div class="upload_fk_image">
+						<img src="{{CONFIG site_url}}/media/img/icons/theatre-mask.png" alt="..." style="height: 100px;width: 100px;">
+						<p>{{LANG your_fav_anime}}</p>
+					</div>
+					<div id="user_fav"></div>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div class="pg_sett_save"><button type="submit" class="btn btn-mat verification"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M11.602 13.76l1.412 1.412 8.466-8.466 1.414 1.414-9.88 9.88-6.364-6.364 1.414-1.414 2.125 2.125 1.413 1.412zm.002-2.828l4.952-4.953 1.41 1.41-4.952 4.953-1.41-1.41zm-2.827 5.655L7.364 18 1 11.636l1.414-1.414 1.413 1.413-.001.001 4.951 4.951z"></path></svg> {{LANG save_changes}}</span></button></div>
+		<input type="hidden" name="user_id" value="<?php echo($context['me']['user_id']) ?>">
+		<input type="hidden" name="hash" value="<?php echo($context['csrf_token']) ?>">
+		<input type="file" name="character" class="hidden" id="ip-photo" accept="image/x-png,image/jpg,image/jpeg">
+		<input type="file" name="photo" class="hidden" id="user-photo" accept="image/x-png,image/jpg,image/jpeg">
+	</form>
+	<?php } ?>
+</div>
+
+<?php include $context['direct'].'/settings/templates/settings/js/script.html';?>

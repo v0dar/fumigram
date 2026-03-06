@@ -1,0 +1,305 @@
+<script class="update-chat">
+	jQuery(document).ready(function($) {
+		form = $('#message-form');
+		conv = $("#conversation-list");
+		scroll_el(conv,100);
+		$('#text-input').keydown(function(event){
+            if(event.keyCode == 13) {
+				// event.preventDefault();
+				// return false
+			}
+		});
+		form.ajaxForm({
+			url: link('messages/send'),
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function(){
+				var mtext = form.find('#text-input').val();
+			}, success: function(data){
+				if (data.status == 200) {
+					conv.append(data.html);
+				}else if(data.status == 400){
+					Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+				}
+				scroll_el(conv,500);
+				form.get(0).reset();
+			}
+		});
+
+		$("#delete__chat").click(function(event) {
+			$('div.delchat--modal').fadeIn(250); 
+		});
+		$("#clear_messages").click(function(event) {
+			$('div.clearchat--modal').fadeIn(250); 
+		});
+		$('.clear--chat').click(function(event) {
+			var zis = $(this);
+			zis.parents('.confirm--modal').fadeOut();
+			conv.empty();
+			$.get(link('messages/clear-chat'), function(data) {
+			  	if (data.status == 200) {
+					Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+			  	}
+			}); 
+		});
+		$('.delete--chat').click(function(event) {
+			var zis = $(this);
+			zis.parents('.confirm--modal').fadeOut();
+			conv.empty();
+			$.get(link('messages/delete-chat'), function(data) {
+			  	if (data.status == 200) {
+			  		$("div.chat-list").find('li.active').slideUp(200,function(){
+			  			$(this).remove();
+			  		});
+			  		delay(function(){
+						$('#ajax_redirect').attr('href', "{{CONFIG site_url}}/messages");
+						$('#ajax_redirect').attr('data-ajax', "load.php?app=messages&apph=messages");
+						$('#ajax_redirect').click();
+			  		},1000);
+			  	}
+			}); 
+		});
+		$('.del-msg').click(function(event) {
+			var ids = [];
+			$('div.delete-message').fadeIn(250); 
+			$(this).toggleClass('active');
+			$(this).closest(".message-list-item").toggleClass('active');
+			$('.message-list-item.active').each(function(index, el) {
+				ids[index] = $(el).data('id');
+				if (ids.length) {
+					$('.del-type').attr('data-id', ids);
+				}
+			});
+		});
+		$(document).on('click', '.user__avatar', function(event) {
+			event.preventDefault();
+			$(this).toggleClass('active');
+			$(this).closest(".message-list-item").toggleClass('active');
+			var selected = $("#conversation-list").find('.user__avatar.active').length;
+			if(selected){
+				$("#conversation-list").addClass('active');
+				$('.delete-selected').removeClass('hidden').find('b').text(selected);
+			}
+			else{
+				$("#conversation-list").removeClass('active');
+				$('.delete-selected').addClass('hidden').find('b').text('');
+			}
+		});
+
+		$('.deselect-messages').click(function(event) {
+			$('.user__avatar').each(function(index, el) {
+				$(el).removeClass('active');
+				$(".message-list-item").removeClass('active');
+			});
+			$('.delete-selected').addClass('hidden').find('b').text('');
+		});
+
+		$('.delselected-messages').click(function(event) {
+			$('div.delmessages--modal').fadeIn(250); 
+		});
+
+		$('.delete-single').click(function(event) {
+			var ids = [];
+			$('.message-list-item.active').each(function(index, el) {
+				ids[index] = $(el).data('id');
+				$(el).fadeOut(400,function(){$(this).remove();});
+			});
+			if (ids.length) {
+				$.post(link('messages/delete-message'),{messages:ids, t:DelType()},function(data) {},dataType = 'json')
+				.done(function(data) {
+					$('div.delete-message').fadeOut(250); 
+					$('.del-type').removeAttr('data-id');
+					$(".message-list-item").removeClass('active');
+					Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+				});
+			}
+		});
+
+		$('.delete--messages').click(function(event) {
+			var zis = $(this);
+			var lst = [];
+			zis.parents('.confirm--modal').fadeOut();
+			$('.message-list-item.active').each(function(index, el) {
+				lst[index] = $(el).data('id');
+				$(el).fadeOut(400,function(){
+					$(this).remove();
+				});
+			});
+			$("#conversation-list").removeClass('active');
+			$('.delete-selected').addClass('hidden').find('b').text('');
+			if (lst.length) {
+				$.post(link('messages/delete-messages'),{messages:lst},function(data) {},dataType = 'json')
+				.done(function(data) {
+					$(".message-list-item").removeClass('active');
+					Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+				});
+			}
+		});
+
+		$('.block--user').click(function(event) {
+			var zis = $(this);
+			var uid = zis.closest('.confirm--modal').data('id');
+			if ($.isNumeric(uid)) {
+				zis.closest('.confirm--modal').fadeOut(250);
+				$.ajax({
+					url: link('main/block-user'),
+					type: 'POST',
+					dataType: 'json',
+					data: {id:uid},
+				}).done(function(data) {
+					delay(function(){
+						$('#ajax_redirect').attr('href', "{{CONFIG site_url}}/messages");
+						$('#ajax_redirect').attr('data-ajax', "load.php?app=messages&apph=messages");
+						$('#ajax_redirect').click();
+					},3000);
+					Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+				});
+			}
+		});
+	});
+	
+	window.chat_interval = setInterval(function(){
+		var last_msg = 0;
+        var data     = new Object();
+		if (conv.find('.message-list-item').length > 0) {
+			last_msg    = conv.find('.message-list-item:last').data('id');
+			data['lid'] = last_msg;
+		}
+		$.ajax({
+			url: link('messages/update-chat'),
+			type: 'GET',
+			dataType: 'json',
+			data: data,
+		}).done(function(data) {
+			if (data.status == 200) {
+				if (data.html) {
+					conv.append(data.html);
+					scroll_el(conv,100);
+				}
+			}
+		});
+	}, 600);
+	
+	$(document).on('click','.mobile_msg_close',function(){
+		select_chat();
+	});
+	$('#conversation-list').on('scroll', function() {
+	  var scrollTop = $(this).scrollTop();
+	  if (scrollTop + $(this).innerHeight() >= this.scrollHeight) {
+	    $('#load-msg').hide();
+	  } else if (scrollTop <= 0) {
+	  	$('#load-msg').show();
+	  } else {
+	    $('#load-msg').hide();
+	  }
+	});
+
+	$(document).on("click","[modal-dismiss]",function(event) {
+		$(this).closest('.modal--menu').fadeOut(250, function() {
+			$(this).data('id', '');
+			$('.del-type').removeAttr('data-id');
+			$(".message-list-item").removeClass('active');
+		});
+	});
+
+	function load_messages() {
+		last_msg    = conv.find('.message-list-item:first').data('id');
+		$.ajax({
+			url: link('messages/get_old_messages'),
+			type: 'GET',
+			dataType: 'json',
+			data: {last_msg:last_msg},
+		}).done(function(data) {
+			if (data.status == 200) {
+				if (data.html) {
+					conv.prepend(data.html);
+				}
+			}else{
+				$('#load-msg').remove();
+			}
+		});
+	}
+
+	function submit_form() {
+        $('#message-form').submit();
+    }
+
+	function upload_image() {
+		$('#image').click();
+	}
+
+	function upload_video() {
+		$('#video').click();
+	}
+
+	function report(){
+		$('#report-profile').fadeIn(300);
+	}
+
+	function report_(){
+		$('#r-btn').attr('disabled','true');
+		$("#report-profile").find('.overlay').removeClass('hidden');
+		$.post(link('main/report-profile'), {id:ID(), t:Type(), m:Msg()}, function(data, textStatus, xhr) {
+			if (data.status == 200 && data.code == '1') {
+				setTimeout(function () {
+					Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+				}, 2000);
+			}
+			setTimeout(function () {
+				$(".modal--menu").each(function(index, el) {
+					$(el).removeClass('open').find('.overlay').addClass('hidden');
+				});
+				$('.modal--menu').fadeOut(250, function() {
+					$(this).data('id', '');
+				});
+				$('#r-btn').removeAttr('disabled');
+			}, 2000);
+		});
+	}
+
+	function block_user(user_id,a){
+		if (user_id && a) {
+			if (a == 1) {
+				$('.blockuser-modal').data('id',user_id).fadeIn(300);
+			}
+	   }
+	}
+
+	function ID() {
+		var reports = document.getElementsByName('report');
+		for (index=0; index < reports.length; index++) {
+			if (reports[index].checked) {
+				return reports[index].getAttribute('data-id');
+				break;
+			}
+		}
+	}
+
+	function Type() {
+		var reports = document.getElementsByName('report');
+		for (index=0; index < reports.length; index++) {
+			if (reports[index].checked) {
+				return reports[index].value;
+				break;
+			}
+		}
+	}
+
+	function Msg() {
+		var reports = document.getElementsByName('message');
+		for (index=0; index < reports.length; index++) {
+			return reports[index].value;
+			break;
+		}
+	}
+
+	function DelType() {
+		var deletes = document.getElementsByName('deletes');
+		for (index=0; index < deletes.length; index++) {
+			if (deletes[index].checked) {
+				return deletes[index].value;
+				break;
+			}
+		}
+	}
+</script>

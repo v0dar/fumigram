@@ -1,0 +1,52 @@
+<div class="sett-active">
+	<div class="valign settings-holder general">
+		<img src="<?php echo($context['me']['avatar']) ?>" class="avatar cha" alt="..." onclick="$('#avatar').trigger('click');">
+		<div class="infoz">
+			<h5 title="<?php echo($context['me']['name']) ?>"><a href="{{ME url}}" data-ajax="load.php?app=profile&apph=profile&uname={{ME username}}"><?php echo($context['me']['name']) ?></a></h5>
+			<p>{{LANG general_settings}}</p>
+			<span>{{LANG personalize_your_account}}</span>
+		</div>
+		<form id="edit-avatar">
+			<input type="file" accept="image/*" name="avatar" id="avatar" class="hidden">
+			<input type="hidden" name="hash" value="<?php echo($context['csrf_token']) ?>">
+		</form>
+	</div>
+	<form class="form pp_sett_form" id="edit-general-settings">
+		<div class="pg_mat_input alret_info">
+			<input required="true" type="email" name="email" placeholder="{{LANG email}}" value="<?php echo($context['me']['email']) ?>">
+			<label>{{LANG email}}</label>
+			<span>{{LANG ur_confirmed_email}}</span>
+		</div>
+		<div class="pg_mat_input alret_info">
+			<select name="gender" class="pg_select_has_label" required="true">
+				<option value="male" <?php if($context['me']['gender'] == 'male'){ ?> selected <?php } ?>>{{LANG male}}</option>
+				<option value="female" <?php if($context['me']['gender'] == 'female'){ ?> selected <?php } ?>>{{LANG female}}</option>
+			</select>
+			<label for="gender">{{LANG gender}}</label>
+			<!-- <span>{{LANG let_us_know_ur_gender}}</span> -->
+		</div>
+		<div class="pg_mat_input alret_info">
+			<select name="country" class="pg_select_has_label">
+				<?php foreach ($context['cnames'] as $cid => $cname) { ?>
+					<option value="<?php echo($cid) ?>" <?php if($context['me']['country_id'] == $cid){ ?> selected <?php } ?>><?php echo $cname; ?></option>
+				<?php } ?>
+			</select>
+			<label>{{LANG country}}</label>
+			<!-- <span>{{LANG let_us_know_ur_country}}</span> -->
+		</div>
+		<?php if ($config['private_photos'] == 'on' || $config['private_photos'] == 'on') { ?><hr>
+			<div class="pg_mat_input sub_price alret_info">
+				<input required="true" type="number" name="subscribe_price" value="<?php echo($context['me']['subscribe_price']) ?>">
+				<label>{{LANG monthly_subscribe_price}}</label>
+				<span>{{LANG month_sub_price}}</span><br>
+				<span>{{LANG month_zis_amount}}</span>
+			</div>
+		<?php } ?>
+		<div class="pg_sett_save"><button type="submit" class="btn btn-mat general"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M11.602 13.76l1.412 1.412 8.466-8.466 1.414 1.414-9.88 9.88-6.364-6.364 1.414-1.414 2.125 2.125 1.413 1.412zm.002-2.828l4.952-4.953 1.41 1.41-4.952 4.953-1.41-1.41zm-2.827 5.655L7.364 18 1 11.636l1.414-1.414 1.413 1.413-.001.001 4.951 4.951z"></path></svg> {{LANG save_changes}}</span></button></div>
+		<div class="clear"></div>
+		<input type="hidden" name="user_id" value="<?php echo($context['me']['user_id']) ?>">
+		<input type="hidden" name="hash" value="<?php echo($context['csrf_token']) ?>">
+	</form>
+</div>
+<?php include $context['direct'].'/settings/templates/settings/js/script.html'; ?>
+<script>tippy('.cha', {arrow: true,content: "{{LANG change_avatar}}"});</script>

@@ -1,0 +1,375 @@
+<div class="upload-video pg_sett_row" style="margin-top: -10px">
+	<div class="col-md-12 page-content">
+		<div class="pg_page padd">
+			<div class="video-pad">
+				<div class="upload-step step-one-active">
+					<div class="line">
+						<div class="line_sec"></div>
+						<div class="dot one"><span></span><p>{{LANG upload}}</p></div>
+						<div class="dot two"><span></span><p>{{LANG details}}</p></div>
+						<div class="dot three"><span></span><p>{{LANG finalizing}}</p></div>
+						<div class="dot four"><span></span><p>{{LANG uploaded}}</p></div>
+					</div>
+				</div>
+				 <div class="edit-video-mode">
+					<form class="form-horizontal pt_forms" id="upload-tile">
+						<div class="video-pad-two">
+							<div class="row edit-video">
+								<div class="col-md-4">
+									<div class="rx-app" style="display: none;">
+										<div class="rx-video">
+											<div class="rxo rxs-title">
+												<div class="rxs-button"></div>
+												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24" height="24" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="none" opacity="1" stroke="none" d="M135.000000,1.000001 C260.957306,1.000000 386.914581,1.000000 512.935913,1.000000 C512.935913,171.566101 512.935913,342.132233 512.935913,513.000000 C387.310181,513.000000 261.620087,513.000000 135.121796,512.708618 C135.914856,511.756866 137.463959,510.892365 139.125504,510.467834 C155.100082,506.386475 167.831024,496.205841 181.545593,487.909821 C202.844894,475.025726 224.009979,461.919952 245.265488,448.963104 C269.984039,433.895264 294.751587,418.907837 319.473297,403.845123 C336.833588,393.267639 354.156769,382.629181 371.489197,372.005981 C391.315125,359.854645 411.107208,347.647888 430.963806,335.546997 C442.976288,328.226349 455.138916,321.349854 463.949829,309.714478 C482.341309,285.427338 486.774445,258.733185 477.795380,230.072662 C471.739563,210.742798 460.189880,194.883209 441.745850,185.449020 C415.449463,171.998352 388.888611,159.057510 362.281403,146.229385 C358.173798,144.248993 353.262756,143.634811 348.640625,143.089737 C340.983002,142.186737 334.402039,145.698563 327.548859,149.102417 C315.623505,142.021805 304.032135,135.051102 292.500061,127.983696 C281.653137,121.336159 270.868713,114.586594 260.049805,107.481079 C265.363190,93.238197 258.842560,77.266609 246.514923,69.175453 C223.436432,54.028080 200.327408,38.927124 177.264099,23.756683 C164.261780,15.204104 151.729126,5.757496 135.869522,2.841305 C135.479980,2.769681 135.285461,1.637525 135.000000,1.000001z"/><path fill="#fff" opacity="1" stroke="none" d="M134.531342,1.000001 C135.285461,1.637525 135.479980,2.769681 135.869522,2.841305 C151.729126,5.757496 164.261780,15.204104 177.264099,23.756683 C200.327408,38.927124 223.436432,54.028080 246.514923,69.175453 C258.842560,77.266609 265.363190,93.238197 259.762817,107.683319 C250.049103,129.109085 226.909164,133.579605 208.387817,120.507454 C182.268448,102.072693 155.192352,84.988953 128.405441,67.511261 C125.591148,65.675011 122.037048,64.321411 118.713509,64.030327 C104.802193,62.811947 95.009842,72.587784 95.008232,87.287872 C94.995827,200.451797 95.001396,313.615723 95.001923,426.779633 C95.001923,427.612915 94.983528,428.447266 95.017395,429.279358 C95.350662,437.466431 99.121246,443.651825 106.295570,447.476013 C113.603386,451.371307 120.981285,451.236938 128.140717,446.789429 C142.712555,437.737335 157.248596,428.626434 171.883575,419.677429 C250.752899,371.450317 329.636505,323.246613 408.553253,275.097107 C415.847107,270.646912 419.243103,264.229401 418.877869,255.943741 C418.528351,248.014618 414.752777,242.499313 407.229431,238.876602 C382.926849,227.174179 358.780060,215.140594 334.717957,202.948914 C314.973450,192.944855 310.850006,169.189575 325.680756,152.821320 C326.621155,151.783417 327.175049,150.395279 327.908752,149.170074 C334.402039,145.698563 340.983002,142.186737 348.640625,143.089737 C353.262756,143.634811 358.173798,144.248993 362.281403,146.229385 C388.888611,159.057510 415.449463,171.998352 441.745850,185.449020 C460.189880,194.883209 471.739563,210.742798 477.795380,230.072662 C486.774445,258.733185 482.341309,285.427338 463.949829,309.714478 C455.138916,321.349854 442.976288,328.226349 430.963806,335.546997 C411.107208,347.647888 391.315125,359.854645 371.489197,372.005981 C354.156769,382.629181 336.833588,393.267639 319.473297,403.845123 C294.751587,418.907837 269.984039,433.895264 245.265488,448.963104 C224.009979,461.919952 202.844894,475.025726 181.545593,487.909821 C167.831024,496.205841 155.100082,506.386475 139.125504,510.467834 C137.463959,510.892365 135.914856,511.756866 134.656784,512.708618 C122.979103,513.000000 110.958214,513.000000 98.811813,512.708252 C98.348839,512.049988 98.069969,511.453033 97.665451,511.350189 C79.123489,506.634827 63.335228,497.594452 51.042820,482.619446 C39.485947,468.540558 32.229366,452.478546 32.176178,434.419800 C31.832327,317.667603 31.990473,200.913879 32.041561,84.160683 C32.043278,80.234688 32.536694,76.294441 33.006599,72.385559 C35.254524,53.686275 43.702576,37.917408 56.851223,24.821215 C67.662827,14.052748 80.949669,7.140052 95.642807,2.956470 C96.541374,2.700619 97.219376,1.670086 98.000000,1.000000 C110.020897,1.000000 122.041786,1.000000 134.531342,1.000001z"/><path fill="none" opacity="1" stroke="none" d="M97.531342,1.000000 C97.219376,1.670086 96.541374,2.700619 95.642807,2.956470 C80.949669,7.140052 67.662827,14.052748 56.851223,24.821215 C43.702576,37.917408 35.254524,53.686275 33.006599,72.385559 C32.536694,76.294441 32.043278,80.234688 32.041561,84.160683 C31.990473,200.913879 31.832327,317.667603 32.176178,434.419800 C32.229366,452.478546 39.485947,468.540558 51.042820,482.619446 C63.335228,497.594452 79.123489,506.634827 97.665451,511.350189 C98.069969,511.453033 98.348839,512.049988 98.343155,512.708252 C65.686714,513.000000 33.373425,513.000000 1.060603,513.000000 C1.061071,342.333313 1.061071,171.666656 1.061071,1.000000 C33.102322,1.000000 65.082504,1.000000 97.531342,1.000000z"/><path fill="none" class=""  opacity="1" stroke="none" d="M327.548859,149.102417 C327.175049,150.395279 326.621155,151.783417 325.680756,152.821320 C310.850006,169.189575 314.973450,192.944855 334.717957,202.948914 C358.780060,215.140594 382.926849,227.174179 407.229431,238.876602 C414.752777,242.499313 418.528351,248.014618 418.877869,255.943741 C419.243103,264.229401 415.847107,270.646912 408.553253,275.097107 C329.636505,323.246613 250.752899,371.450317 171.883575,419.677429 C157.248596,428.626434 142.712555,437.737335 128.140717,446.789429 C120.981285,451.236938 113.603386,451.371307 106.295570,447.476013 C99.121246,443.651825 95.350662,437.466431 95.017395,429.279358 C94.983528,428.447266 95.001923,427.612915 95.001923,426.779633 C95.001396,313.615723 94.995827,200.451797 95.008232,87.287872 C95.009842,72.587784 104.802193,62.811947 118.713509,64.030327 C122.037048,64.321411 125.591148,65.675011 128.405441,67.511261 C155.192352,84.988953 182.268448,102.072693 208.387817,120.507454 C226.909164,133.579605 250.049103,129.109085 259.769836,108.084152 C270.868713,114.586594 281.653137,121.336159 292.500061,127.983696 C304.032135,135.051102 315.623505,142.021805 327.548859,149.102417 M192.731079,319.908691 C198.487473,318.540619 205.132233,318.565674 209.844696,315.560577 C229.078537,303.295349 248.003342,290.492188 266.471863,277.100922 C276.815186,269.601135 280.165253,258.310760 277.340515,245.894806 C272.435089,224.333344 248.227066,214.681183 229.623901,226.874496 C212.487701,238.106308 195.659683,249.808960 178.716965,261.335144 C166.244278,269.820343 160.922104,281.979095 163.833832,295.164124 C166.825851,308.712769 176.602081,317.331085 192.731079,319.908691z"/><path fill="#fff" class="" opacity="1" stroke="none" d="M192.290009,319.884888 C176.602081,317.331085 166.825851,308.712769 163.833832,295.164124 C160.922104,281.979095 166.244278,269.820343 178.716965,261.335144 C195.659683,249.808960 212.487701,238.106308 229.623901,226.874496 C248.227066,214.681183 272.435089,224.333344 277.340515,245.894806 C280.165253,258.310760 276.815186,269.601135 266.471863,277.100922 C248.003342,290.492188 229.078537,303.295349 209.844696,315.560577 C205.132233,318.565674 198.487473,318.540619 192.290009,319.884888z"/></svg>
+											</div>
+											<span id="thumb-holder"></span>
+										</div> 
+									</div>
+									<div class="upload-box box-pad">
+										<div class="loading-cover" style="display: none;">
+											<img class="covers" src="{{CONFIG site_url}}/media/img/gifs/loading.gif" width="100%"/>
+										</div>
+										<div class="upload-box upload-card" data-block="drop-zone">
+											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" class="upload-box cloud-icon" width="54px" height="54px" viewBox="0 0 452.373 452.373" style="enable-background:new 0 0 452.373 452.373;" xml:space="preserve"><g><g><path style="fill:#73D0F4;" d="M166.38,313.347h10.032c6.628,0,12,5.373,12,12v37.014h75.549v-37.014c0-6.627,5.373-12,12-12h10.033l-59.807-43.82L166.38,313.347z"/><path style="fill:#3D6889;" d="M349.127,173.868c-1.223,0-2.448,0.023-3.673,0.066c-6.007-60.509-57.203-107.921-119.267-107.921c-62.063,0-113.26,47.413-119.267,107.922c-1.226-0.044-2.452-0.066-3.675-0.066C46.316,173.868,0,220.185,0,277.114C0,334.045,46.316,380.36,103.246,380.36c6.628,0,12-5.372,12-12c0-6.627-5.372-12-12-12C59.551,356.36,24,320.811,24,277.114s35.551-79.246,79.246-79.246c4.373,0,8.791,0.366,13.135,1.088c3.507,0.583,7.094-0.42,9.79-2.738c2.696-2.318,4.226-5.713,4.176-9.269l-0.007-0.433c-0.004-0.216-0.008-0.432-0.008-0.649c0-52.854,43-95.855,95.856-95.855c52.855,0,95.855,43.001,95.855,95.855c0,0.204-0.004,0.407-0.007,0.61l-0.007,0.499c-0.043,3.552,1.492,6.939,4.188,9.251c2.697,2.311,6.275,3.311,9.783,2.727c4.33-0.721,8.746-1.087,13.127-1.087c43.697,0,79.246,35.55,79.246,79.246s-35.549,79.246-79.246,79.246c-6.627,0-12,5.373-12,12c0,6.628,5.373,12,12,12c56.931,0,103.246-46.315,103.246-103.246C452.373,220.185,406.058,173.868,349.127,173.868z"/><path style="fill:#3D6889;" d="M168.883,181.607c0-28.45,23.145-51.596,51.596-51.596c6.628,0,12-5.372,12-12c0-6.627-5.372-12-12-12c-41.684,0-75.596,33.912-75.596,75.596c0,6.628,5.372,12,12,12C163.51,193.607,168.883,188.235,168.883,181.607z"/><path style="fill:#3D6889;" d="M329.328,315.346l-96.049-70.376c-4.222-3.094-9.963-3.094-14.185,0l-96.488,70.697c-4.187,3.067-5.928,8.478-4.313,13.411c1.614,4.933,6.216,8.269,11.406,8.269h34.713v37.014c0,6.628,5.373,12,12,12h99.549c6.628,0,12-5.372,12-12v-37.014h34.715c0.006,0,0.013,0,0.02,0c6.627,0,12-5.372,12-12C334.695,321.172,332.564,317.495,329.328,315.346z M275.961,313.347c-6.627,0-12,5.373-12,12v37.014h-75.549v-37.014c0-6.627-5.372-12-12-12H166.38l59.808-43.82l59.807,43.82H275.961z"/></g></g></svg>
+											<div class="upload-box text-main">
+												<span>{{LANG choose_vid_file}}</span>
+											</div>
+											<div class="upload-box text-sub">
+												<span>{{LANG darg_drop_to_upload}}</span>
+											</div>
+											<div class="upload-box text-video-info">
+												<div class="upload-box">
+													<span>mp4, mkv, mov, webm, mpeg</span>
+												</div>
+												<div class="upload-box">
+													<span>720x1280 resolution or higher</span>
+												</div>
+												<div class="upload-box">
+													<span>{{LANG up_to}} <?php echo $config['max_video_duration']; ?> {{LANG seconds}} video</span>
+												</div>
+												<div class="upload-box">
+													<span>{{LANG less_than}}
+														<?php if($config['max_upload'] == '2000000') { ?>2MB
+														<?php }elseif($config['max_upload'] == '6000000') { ?>6MB
+														<?php }elseif($config['max_upload'] == '12000000') { ?>12MB
+														<?php }elseif($config['max_upload'] == '24000000') { ?>24MB
+														<?php }elseif($config['max_upload'] == '48000000') { ?>48MB
+														<?php }elseif($config['max_upload'] == '96000000') { ?>96MB
+														<?php }elseif($config['max_upload'] == '256000000') { ?>256MB
+														<?php }elseif($config['max_upload'] == '512000000') { ?>512MB
+														<?php }elseif($config['max_upload'] == '1000000000') { ?>1GB
+														<?php }elseif($config['max_upload'] == '10000000000') { ?>10GB<?php } ?>
+													</span>
+												</div>
+											</div>
+											<div class="upload-box file-button">
+												<button class="select-btn">
+													<div class="btn-mak">
+														<div class="css-1z070dx">{{LANG select_media}}</div>
+													</div>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-8">
+									<div class="pg_mat_input">
+										<textarea class="tap-area" placeholder="{{LANG add_post_caption}}" rows="2" name="caption" id="caption" required></textarea>
+										<div class="dropdown til">
+											<span class="dropdown-toggle btn-emoji" data-toggle="dropdown" onclick="show_emoji('taption');">
+												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9.153 11.603c.795 0 1.439-.879 1.439-1.962s-.644-1.962-1.439-1.962-1.439.879-1.439 1.962.644 1.962 1.439 1.962zm-3.204 1.362c-.026-.307-.131 5.218 6.063 5.551 6.066-.25 6.066-5.551 6.066-5.551-6.078 1.416-12.129 0-12.129 0zm11.363 1.108s-.669 1.959-5.051 1.959c-3.505 0-5.388-1.164-5.607-1.959 0 0 5.912 1.055 10.658 0zM11.804 1.011C5.609 1.011.978 6.033.978 12.228s4.826 10.761 11.021 10.761S23.02 18.423 23.02 12.228c.001-6.195-5.021-11.217-11.216-11.217zM12 21.354c-5.273 0-9.381-3.886-9.381-9.159s3.942-9.548 9.215-9.548 9.548 4.275 9.548 9.548c-.001 5.272-4.109 9.159-9.382 9.159zm3.108-9.751c.795 0 1.439-.879 1.439-1.962s-.644-1.962-1.439-1.962-1.439.879-1.439 1.962.644 1.962 1.439 1.962z"></path></svg>
+											</span>
+											<ul class="dropdown-menu <?php if ($config['emoji_zoom_in'] == 'on') { ?>zoom<?php } ?> pull-right ultimate-menu demoji emoji-part"></ul>
+										</div>
+										<label>{{LANG add_post_caption}}</label>
+									</div>
+									<div class="pg_mat_input">
+										<select name="privacy" class="pg_select_has_label" required="true">
+											<option value="1">{{LANG public}}</option>
+											<option value="0">{{LANG private}}</option>
+										</select>
+										<label for="privacy">Video Privacy</label>
+									</div>
+									<p class="pg_mat_switch switch">
+										<label>
+											{{LANG allow_users_to_comment}}
+											<input type="checkbox" id="comment" name="comment" checked>
+											<span class="lever"></span>
+										</label>
+									</p>
+									<div class="video-thumb">
+										<h5>{{LANG thumbnail}}</h5>
+										<p>{{LANG select_thumbnail}}</p>
+										<div class="video-thumbnail">
+											<div class="video-image" onclick="document.getElementById('video-thumb').click(); return false">
+												<div class="image-content">
+													<div><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.9436 2.25H11H12C12.4142 2.25 12.75 2.58579 12.75 3C12.75 3.41421 12.4142 3.75 12 3.75H11C9.09318 3.75 7.73851 3.75159 6.71085 3.88976C5.70476 4.02502 5.12511 4.27869 4.7019 4.7019C4.27869 5.12511 4.02502 5.70476 3.88976 6.71085C3.75159 7.73851 3.75 9.09318 3.75 11V13C3.75 14.7777 3.75138 16.0755 3.86353 17.0758L4.46967 16.4697L6.14124 14.7981L6.17801 14.7613C6.81331 14.126 7.34307 13.5962 7.82019 13.2322C8.32379 12.8479 8.85587 12.5784 9.5 12.5784C10.1441 12.5784 10.6762 12.8479 11.1798 13.2322C11.6569 13.5962 12.1867 14.126 12.822 14.7613L12.822 14.7613L12.8588 14.7981L14.0003 15.9396C14.496 15.4467 14.9261 15.0329 15.3202 14.7322C15.8238 14.3479 16.3559 14.0784 17 14.0784C17.6441 14.0784 18.1762 14.3479 18.6798 14.7322C19.128 15.0741 19.6227 15.5624 20.2077 16.1471C20.2493 15.2994 20.25 14.2727 20.25 13V12C20.25 11.5858 20.5858 11.25 21 11.25C21.4142 11.25 21.75 11.5858 21.75 12V13V13.0564V13.0565C21.75 14.8942 21.75 16.3498 21.5969 17.489C21.4392 18.6614 21.1071 19.6104 20.3588 20.3588C19.6104 21.1071 18.6614 21.4392 17.489 21.5969C16.3498 21.75 14.8942 21.75 13.0565 21.75H13.0564H13H11H10.9436H10.9435C9.1058 21.75 7.65018 21.75 6.51098 21.5969C5.33856 21.4392 4.38961 21.1071 3.64124 20.3588C2.89288 19.6104 2.56076 18.6614 2.40313 17.489C2.24997 16.3498 2.24998 14.8942 2.25 13.0564V13V11V10.9436C2.24998 9.10582 2.24997 7.65019 2.40313 6.51098C2.56076 5.33855 2.89288 4.38961 3.64124 3.64124C4.38961 2.89288 5.33856 2.56076 6.51098 2.40313C7.65019 2.24997 9.10582 2.24998 10.9436 2.25ZM4.7019 19.2981C4.54709 19.1433 4.41496 18.9675 4.30302 18.7576L5.53033 17.5303L7.2019 15.8588C7.88356 15.1771 8.34258 14.7203 8.73006 14.4247C9.10023 14.1423 9.3157 14.0784 9.5 14.0784C9.6843 14.0784 9.89977 14.1423 10.2699 14.4247C10.6574 14.7203 11.1164 15.1771 11.7981 15.8588L13.4697 17.5303L16.1471 20.2077C15.2994 20.2493 14.2727 20.25 13 20.25H11C9.09318 20.25 7.73851 20.2484 6.71085 20.1102C5.70476 19.975 5.12511 19.7213 4.7019 19.2981ZM19.2981 19.2981C18.9917 19.6045 18.6034 19.822 18.0307 19.97L18.0303 19.9697L15.0611 17.0004C15.5523 16.5123 15.9149 16.1652 16.2301 15.9247C16.6002 15.6423 16.8157 15.5784 17 15.5784C17.1843 15.5784 17.3998 15.6423 17.7699 15.9247C18.1574 16.2203 18.6164 16.6771 19.2981 17.3588L19.9697 18.0303L19.97 18.0307C19.822 18.6034 19.6045 18.9917 19.2981 19.2981ZM18.5303 2.46967C18.2374 2.17678 17.7626 2.17678 17.4697 2.46967L14.9697 4.96967C14.6768 5.26256 14.6768 5.73744 14.9697 6.03033C15.2626 6.32322 15.7374 6.32322 16.0303 6.03033L17.25 4.81066V9C17.25 9.41421 17.5858 9.75 18 9.75C18.4142 9.75 18.75 9.41421 18.75 9V4.81066L19.9697 6.03033C20.2626 6.32322 20.7374 6.32322 21.0303 6.03033C21.3232 5.73744 21.3232 5.26256 21.0303 4.96967L18.5303 2.46967Z" fill="currentColor"/></svg>{{LANG upload}} {{LANG thumbnail}}</div>
+												</div>
+											</div>
+											<div id="image-holder"></div>
+										</div>
+									</div>
+									<button type="button" class="btn upld_vid discard" disabled>{{LANG discard}}</button>&nbsp;&nbsp;
+									<button type="submit" class="btn upld_vid public" disabled>{{LANG publish}}</button>
+								</div>
+							</div>
+						</div>
+						<div class="video-pad-four" style="display: none;">
+							<div class="row">
+								<div class="video-uploaded">
+									<label>
+										<input type="radio">
+										<div class="video-uploaded-in vdo">
+											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24" height="24" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="none" opacity="1" stroke="none" d="M135.000000,1.000001 C260.957306,1.000000 386.914581,1.000000 512.935913,1.000000 C512.935913,171.566101 512.935913,342.132233 512.935913,513.000000 C387.310181,513.000000 261.620087,513.000000 135.121796,512.708618 C135.914856,511.756866 137.463959,510.892365 139.125504,510.467834 C155.100082,506.386475 167.831024,496.205841 181.545593,487.909821 C202.844894,475.025726 224.009979,461.919952 245.265488,448.963104 C269.984039,433.895264 294.751587,418.907837 319.473297,403.845123 C336.833588,393.267639 354.156769,382.629181 371.489197,372.005981 C391.315125,359.854645 411.107208,347.647888 430.963806,335.546997 C442.976288,328.226349 455.138916,321.349854 463.949829,309.714478 C482.341309,285.427338 486.774445,258.733185 477.795380,230.072662 C471.739563,210.742798 460.189880,194.883209 441.745850,185.449020 C415.449463,171.998352 388.888611,159.057510 362.281403,146.229385 C358.173798,144.248993 353.262756,143.634811 348.640625,143.089737 C340.983002,142.186737 334.402039,145.698563 327.548859,149.102417 C315.623505,142.021805 304.032135,135.051102 292.500061,127.983696 C281.653137,121.336159 270.868713,114.586594 260.049805,107.481079 C265.363190,93.238197 258.842560,77.266609 246.514923,69.175453 C223.436432,54.028080 200.327408,38.927124 177.264099,23.756683 C164.261780,15.204104 151.729126,5.757496 135.869522,2.841305 C135.479980,2.769681 135.285461,1.637525 135.000000,1.000001z"/><path fill="#fff" opacity="1" stroke="none" d="M134.531342,1.000001 C135.285461,1.637525 135.479980,2.769681 135.869522,2.841305 C151.729126,5.757496 164.261780,15.204104 177.264099,23.756683 C200.327408,38.927124 223.436432,54.028080 246.514923,69.175453 C258.842560,77.266609 265.363190,93.238197 259.762817,107.683319 C250.049103,129.109085 226.909164,133.579605 208.387817,120.507454 C182.268448,102.072693 155.192352,84.988953 128.405441,67.511261 C125.591148,65.675011 122.037048,64.321411 118.713509,64.030327 C104.802193,62.811947 95.009842,72.587784 95.008232,87.287872 C94.995827,200.451797 95.001396,313.615723 95.001923,426.779633 C95.001923,427.612915 94.983528,428.447266 95.017395,429.279358 C95.350662,437.466431 99.121246,443.651825 106.295570,447.476013 C113.603386,451.371307 120.981285,451.236938 128.140717,446.789429 C142.712555,437.737335 157.248596,428.626434 171.883575,419.677429 C250.752899,371.450317 329.636505,323.246613 408.553253,275.097107 C415.847107,270.646912 419.243103,264.229401 418.877869,255.943741 C418.528351,248.014618 414.752777,242.499313 407.229431,238.876602 C382.926849,227.174179 358.780060,215.140594 334.717957,202.948914 C314.973450,192.944855 310.850006,169.189575 325.680756,152.821320 C326.621155,151.783417 327.175049,150.395279 327.908752,149.170074 C334.402039,145.698563 340.983002,142.186737 348.640625,143.089737 C353.262756,143.634811 358.173798,144.248993 362.281403,146.229385 C388.888611,159.057510 415.449463,171.998352 441.745850,185.449020 C460.189880,194.883209 471.739563,210.742798 477.795380,230.072662 C486.774445,258.733185 482.341309,285.427338 463.949829,309.714478 C455.138916,321.349854 442.976288,328.226349 430.963806,335.546997 C411.107208,347.647888 391.315125,359.854645 371.489197,372.005981 C354.156769,382.629181 336.833588,393.267639 319.473297,403.845123 C294.751587,418.907837 269.984039,433.895264 245.265488,448.963104 C224.009979,461.919952 202.844894,475.025726 181.545593,487.909821 C167.831024,496.205841 155.100082,506.386475 139.125504,510.467834 C137.463959,510.892365 135.914856,511.756866 134.656784,512.708618 C122.979103,513.000000 110.958214,513.000000 98.811813,512.708252 C98.348839,512.049988 98.069969,511.453033 97.665451,511.350189 C79.123489,506.634827 63.335228,497.594452 51.042820,482.619446 C39.485947,468.540558 32.229366,452.478546 32.176178,434.419800 C31.832327,317.667603 31.990473,200.913879 32.041561,84.160683 C32.043278,80.234688 32.536694,76.294441 33.006599,72.385559 C35.254524,53.686275 43.702576,37.917408 56.851223,24.821215 C67.662827,14.052748 80.949669,7.140052 95.642807,2.956470 C96.541374,2.700619 97.219376,1.670086 98.000000,1.000000 C110.020897,1.000000 122.041786,1.000000 134.531342,1.000001z"/><path fill="none" opacity="1" stroke="none" d="M97.531342,1.000000 C97.219376,1.670086 96.541374,2.700619 95.642807,2.956470 C80.949669,7.140052 67.662827,14.052748 56.851223,24.821215 C43.702576,37.917408 35.254524,53.686275 33.006599,72.385559 C32.536694,76.294441 32.043278,80.234688 32.041561,84.160683 C31.990473,200.913879 31.832327,317.667603 32.176178,434.419800 C32.229366,452.478546 39.485947,468.540558 51.042820,482.619446 C63.335228,497.594452 79.123489,506.634827 97.665451,511.350189 C98.069969,511.453033 98.348839,512.049988 98.343155,512.708252 C65.686714,513.000000 33.373425,513.000000 1.060603,513.000000 C1.061071,342.333313 1.061071,171.666656 1.061071,1.000000 C33.102322,1.000000 65.082504,1.000000 97.531342,1.000000z"/><path fill="none" class=""  opacity="1" stroke="none" d="M327.548859,149.102417 C327.175049,150.395279 326.621155,151.783417 325.680756,152.821320 C310.850006,169.189575 314.973450,192.944855 334.717957,202.948914 C358.780060,215.140594 382.926849,227.174179 407.229431,238.876602 C414.752777,242.499313 418.528351,248.014618 418.877869,255.943741 C419.243103,264.229401 415.847107,270.646912 408.553253,275.097107 C329.636505,323.246613 250.752899,371.450317 171.883575,419.677429 C157.248596,428.626434 142.712555,437.737335 128.140717,446.789429 C120.981285,451.236938 113.603386,451.371307 106.295570,447.476013 C99.121246,443.651825 95.350662,437.466431 95.017395,429.279358 C94.983528,428.447266 95.001923,427.612915 95.001923,426.779633 C95.001396,313.615723 94.995827,200.451797 95.008232,87.287872 C95.009842,72.587784 104.802193,62.811947 118.713509,64.030327 C122.037048,64.321411 125.591148,65.675011 128.405441,67.511261 C155.192352,84.988953 182.268448,102.072693 208.387817,120.507454 C226.909164,133.579605 250.049103,129.109085 259.769836,108.084152 C270.868713,114.586594 281.653137,121.336159 292.500061,127.983696 C304.032135,135.051102 315.623505,142.021805 327.548859,149.102417 M192.731079,319.908691 C198.487473,318.540619 205.132233,318.565674 209.844696,315.560577 C229.078537,303.295349 248.003342,290.492188 266.471863,277.100922 C276.815186,269.601135 280.165253,258.310760 277.340515,245.894806 C272.435089,224.333344 248.227066,214.681183 229.623901,226.874496 C212.487701,238.106308 195.659683,249.808960 178.716965,261.335144 C166.244278,269.820343 160.922104,281.979095 163.833832,295.164124 C166.825851,308.712769 176.602081,317.331085 192.731079,319.908691z"/><path fill="#fff" class="" opacity="1" stroke="none" d="M192.290009,319.884888 C176.602081,317.331085 166.825851,308.712769 163.833832,295.164124 C160.922104,281.979095 166.244278,269.820343 178.716965,261.335144 C195.659683,249.808960 212.487701,238.106308 229.623901,226.874496 C248.227066,214.681183 272.435089,224.333344 277.340515,245.894806 C280.165253,258.310760 276.815186,269.601135 266.471863,277.100922 C248.003342,290.492188 229.078537,303.295349 209.844696,315.560577 C205.132233,318.565674 198.487473,318.540619 192.290009,319.884888z"/></svg>
+											<b>{{LANG uploaded}}</b>
+										</div>
+									</label>
+								</div>
+								<br>
+								<h3 class="text-center up-title">
+									<a class="btn btn-mat success" id="watch">{{LANG watch_tile}}</a>
+									<a class="btn btn-mat main" href="{{CONFIG site_url}}/upload/tile" data-ajax="load.php?app=upload&apph=upload&ui=tile">{{LANG upload_more}}</a>
+									<a class="btn btn-mat primary" href="{{CONFIG site_url}}/upload/video" data-ajax="load.php?app=upload&apph=upload&ui=video">{{LANG add_vid}}</a>
+								</h3>
+							</div>
+						</div>
+						<input type="hidden" name="video" id="ready-video">
+						<input type="hidden" name="extra" id="video-thumnail">
+						<input type="hidden" name="hash" value="<?php echo($context['csrf_token']) ?>">
+					</form>
+					<div class="progress hidden"><br>
+						<span class="percent">0%</span>
+						<div class="video-parent">
+							<div class="bar upload-progress-bar progress-bar active"></div>
+						</div>
+						<div class="clear"></div>
+						<div class="text-center percent_age"></div>
+					</div>
+					<!-- <?php if (IS_ADMIN) { ?><hr>
+						<div class="upload-alert alert-info">
+							<h4>Only you can see this message as an admin</h4>
+							<p>Note: Your server max upload size is: <?php echo ini_get('upload_max_filesize')?>, that means you can't upload files that are larger than: <?php echo ini_get('upload_max_filesize')?><br><br> If you want to increase the limit or If you can't upload large files, go to Settings > File upload system > Max upload size and increase the value, if you still can't upload large files, please contact your host provider and let them increase the upload limit and max_execution_time.</p>
+						</div>
+					<?php } ?> -->
+				 </div>
+				 <div class="upload-mode">
+					<form id="process-video" action="{{CONFIG site_url}}/aj/upload/process-video">
+						<input type="hidden" name="type" id="type" value="tile">
+						<input class="hidden" type="file" name="video" id="video-file" accept="video/*">
+						<input type="hidden" name="hash" value="<?php echo($context['csrf_token']) ?>">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<form id="thumb-form">
+	<input type="hidden" name="extra" id="video-thumnail" value="">
+	<input type="hidden" name="hash" value="<?php echo($context['csrf_token']) ?>">
+	<input class="hidden" id="video-thumb" name="thumb" type="file" accept="image/x-png,image/jpg,image/jpeg">
+</form>
+<div class="confirm--modal discard--modal" style="display: none !important;">
+	<div class="confirm--modal--inner">
+		<div class="confirm--modal--body">
+			<h5>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" class="feather" color="#ff235d" d="M14 19h7v2h-9l-3.998.002-6.487-6.487a1 1 0 0 1 0-1.414L12.12 2.494a1 1 0 0 1 1.415 0l7.778 7.778a1 1 0 0 1 0 1.414L14 19zm1.657-4.485l3.535-3.536-6.364-6.364-3.535 3.536 6.364 6.364z"></path><path fill="currentColor" d="M8.586 8.858l-4.95 4.95 5.194 5.194H10V19h1.172l3.778-3.778-6.364-6.364zM10 7.444l6.364 6.364 2.828-2.829-6.364-6.364L10 7.444zM14 19h7v2h-9l-3.998.002-6.487-6.487a1 1 0 0 1 0-1.414L12.12 2.494a1 1 0 0 1 1.415 0l7.778 7.778a1 1 0 0 1 0 1.414L14 19z"></path></svg> {{LANG discard_video}}?</h5>
+			<p>{{LANG confirm_discard_video}}</p>
+		</div>
+		<div class="confirm--modal--footer">
+			<button class="btn btn-mat default" data-confirm--modal-dismiss>{{LANG cancel}}</button>
+			<button class="btn btn-mat main discard--video">{{LANG discard}}</button>
+		</div>
+	</div>
+</div>
+
+<script>
+$(document).on('click',"#image-holder .covers", function() {
+	$('#thumb-holder').html('<img class="rendered" src="' + $(this).attr('src') + '">');
+	$('#video-thumnail').val($(this).attr('src'));
+});
+$(document).on('click',".discard", function() {
+	$('.discard--modal').fadeIn(300);
+});
+$(document).on('click',".discard--video", function() {
+	$('#caption').val('');
+	$('#video-file').val('');
+	$('#ready-video').val('');
+	$('#video-thumnail').val('');
+	$('#image-holder').html('');
+	$('.progress').addClass('hidden');
+	$('.discard--modal').fadeOut(300);
+	delay(function () {
+		$('#ajax_redirect').attr('href', "{{CONFIG site_url}}/upload");
+		$('#ajax_redirect').attr('data-ajax', "load.php?app=upload&apph=upload");
+		$('#ajax_redirect').click();
+	}, 1000);
+});
+var video_thumb = Array();
+$('#video-thumb').change(function(event) {
+	$.ajax({
+		url: '<?php echo($context["rita"]) ?>/upload-thumb',
+		type: 'POST',
+		dataType: 'json',
+		data: new FormData($("#thumb-form")[0]),
+        processData: false,
+        contentType: false,
+        success: function(data) {
+			if (data.status == 200) {
+				video_thumb.push(data.thumbnail);
+				$('#video-thumnail').val(data.thumbnail);
+				$('#image-holder').prepend('<img class="covers" src="' + data.video_thumb + '">');
+			} else {
+				Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+			}
+        }
+    });
+});
+
+$(function () {
+	var video_drop = $("[data-block='drop-zone']");
+	if (typeof(window.FileReader)){
+		video_drop[0].ondragover = function() {
+		 $('.upload-card.upload-box').addClass('active');
+		 return false;
+	};
+	video_drop[0].ondragleave = function() {
+		 $('.upload-card.upload-box').removeClass('active');
+		 return false;
+	};
+	video_drop[0].ondrop = function(event) {
+		 event.preventDefault();
+		 $('.upload-card.upload-box').removeClass('active');
+		 var file = event.dataTransfer.files;
+		 $('#process-video').find('input').prop('files', file);
+		 $('#process-video').find('input').trigger("change");
+	  };
+	}
+});
+afterglow.init();
+function progress(e) {
+    if (e.lengthComputable) {
+        var max = e.total;
+        var cur = e.loaded;
+		var bar         = $('.bar');
+        var percent     = $('.percent');
+		var prcsvdo    = $('.percent_age');
+        var Percentage = (cur * 100) / max;
+		var percentVal = Percentage.toFixed(0) + '%';
+		prcsvdo.html('<svg width="30" height="10" viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg" fill="#<?php echo ($_COOKIE["mode"] == "night") ? "fff" : "222"?>"><circle cx="15" cy="15" r="15"><animate attributeName="r" from="15" to="15" begin="0s" dur="0.8s" values="15;9;15" calcMode="linear" repeatCount="indefinite" /><animate attributeName="fill-opacity" from="1" to="1" begin="0s" dur="0.8s" values="1;.5;1" calcMode="linear" repeatCount="indefinite" /></circle><circle cx="60" cy="15" r="9" fill-opacity="0.3"><animate attributeName="r" from="9" to="9" begin="0s" dur="0.8s" values="9;15;9" calcMode="linear" repeatCount="indefinite" /><animate attributeName="fill-opacity" from="0.5" to="0.5" begin="0s" dur="0.8s" values=".5;1;.5" calcMode="linear" repeatCount="indefinite" /></circle><circle cx="105" cy="15" r="15"><animate attributeName="r" from="15" to="15" begin="0s" dur="0.8s" values="15;9;15" calcMode="linear" repeatCount="indefinite" /><animate attributeName="fill-opacity" from="1" to="1" begin="0s" dur="0.8s" values="1;.5;1" calcMode="linear" repeatCount="indefinite" /></circle></svg> {{LANG porcessing_video}}');
+		$('.progress').find('.bar').removeClass('upload-progress-bar');
+		bar.width(percentVal);
+        percent.html(percentVal);
+        if (Percentage >= 100) {
+			var percentVal = '100%';
+	    	bar.width(percentVal);
+        }
+    }
+}
+jQuery(document).ready(function ($) {
+	$('.upload-card').on('click', function(e) {
+        $('#video-file').trigger("click");
+    });
+	$('#video-file').change(function (event) {
+		try {
+			window.URL = window.URL || window.webkitURL;
+			var vfile = $(this).prop('files')[0];
+			window.URL.createObjectURL(vfile);
+			$(".utitle").html(vfile.name);
+			delay(function () {$('#process-video').submit();}, 200);
+		} catch (e) {
+			Snackbar.show({showAction: false,text: '<div>Failed to collect the video file</div>'});
+		}
+    });
+
+	$("#process-video").submit(function (event) {
+        event.preventDefault();
+		let type = $(this).find('#type').val();
+		let video = $(this).find('#video-file').prop('files')[0];
+		if (!video) {return false;}
+		var formData = new FormData();
+		formData.append('type', type);
+		formData.append('video', video);
+		var action = $(this).attr('action') + '?hash=' + $(this).find('input[name=hash]').val();
+		$('.progress').removeClass('hidden');
+        $.ajax({
+            url: action,
+            type: 'POST',
+            dataType: 'json',
+            data: formData,
+			processData: false,
+            contentType: false,
+            xhr: function () {
+                var myXhr = $.ajaxSettings.xhr();
+                if (myXhr.upload) {
+					$(".upload-card").slideUp();
+					$(".loading-cover").slideDown();
+                    myXhr.upload.addEventListener('progress', progress, false);
+                } return myXhr;
+            }
+        }).done(function (data) {
+			if (data.status == 200) {
+				delay(function () {
+					$(".box-pad").slideUp();
+					$(".rx-app").slideDown();
+					$('#video-file').val('');
+					$('#caption').val(data.flname);
+					$('#ready-video').val(data.video);
+					$('.progress').addClass('hidden');
+					$('#video-thumnail').val(data.extra);
+					$(".upld_vid").removeAttr('disabled');
+					$(".discard").removeAttr('disabled');
+					$('.upload-step').addClass('step-two-active');
+					$('#thumb-holder').html('<img class="rendered" src="' + data.extra + '">');
+					Snackbar.show({showAction: false,backgroundColor: '#fff', pos: 'bottom-center', text: '<div class="snack-div">'+data.flname+' {{LANG successfully_uplaoded}}</div>'});
+
+					var i = 0;
+					thumbnails = data.images;
+					$.each(thumbnails, function(index, value) {
+						$('#image-holder').append('<img class="covers" src="' + value + '">');
+						i++;
+					});
+					$("#video-thumnail").val(thumbnails[0]);
+				}, 2000);
+			} else {
+				$('#video-file').val('');
+				$(".upload-card").slideDown();
+				$(".loading-cover").slideUp();
+				$('.progress').addClass('hidden');
+				Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+			}
+		});
+	});
+});
+
+
+$("form#upload-tile").ajaxForm({
+	url: '<?php echo($context["rita"]) ?>/upload-tile',
+	type: 'POST',
+	dataType: 'json',
+	beforeSubmit: function(arr,form){
+		$('#caption').attr('disabled','true');
+		$('#comment').attr('disabled','true');
+		$('.pg_select_has_label').attr('disabled','true');
+		$('.upload-step').addClass('step-three-active');
+		$(form).find('button[type="submit"]').attr('disabled','true');
+	}, success: function(data,stat,xhr,form){
+		if (data.status == 200) {
+			delay(function () {
+				$('#ready-video').val('');
+			    $('#video-thumnail').val('');
+				$(".video-pad-two").slideUp();
+				$(".video-pad-four").slideDown();
+				$('#watch').attr('href', data.pidurl);
+				$('.upload-step').addClass('step-four-active');
+				$(form).find('button[type="submit"]').removeAttr('disabled');	
+				Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+			}, 3000);
+		} else {
+			$('#ready-video').val('');
+			$('#video-thumnail').val('');
+			$(form).find('button[type="submit"]').removeAttr('disabled');	
+			Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+		}	
+	}
+});
+</script>

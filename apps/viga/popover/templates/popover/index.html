@@ -1,0 +1,43 @@
+
+<div class="fetch-user">
+    <div class="user-cover" style="background-image: url('<?php echo($udata['banner']) ?>');"></div>
+    <div class="valign udata-popover">
+        <div class="user-avatar">
+            <img src="<?php echo($udata['avatar']) ?>" alt="...">
+        </div>
+        <div class="max-width">
+            <div class="user-name">
+                <a href="<?php echo(un2url($udata['username'])) ?>" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo($udata['username']) ?>"><?php echo($udata['name']) ?></a> <?php if($udata['verified'] > 0) { ?><svg class="verified" xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24"><path fill="currentColor" class="verified-color" d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path></svg><?php } ?>
+            </div>
+            <div class="block-info">
+                <div class="udetails">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20 22H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1zm-1-2V4H5v16h14zM8 7h8v2H8V7zm0 4h8v2H8v-2zm0 4h5v2H8v-2z"></path></svg>
+                    <?php echo($udata['posts_count']) ?> <?php if($udata['posts_count'] > 1) { ?>{{LANG posts}}<?php } else { ?>{{LANG cpost}} <?php } ?>
+                </div>
+                <div class="udetails">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M14 14.252v2.09A6 6 0 0 0 6 22l-2-.001a8 8 0 0 1 10-7.748zM12 13c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm6 6v-3h2v3h3v2h-3v3h-2v-3h-3v-2h3z"></path></svg>
+                    <?php echo FormattedNumber($context['following']); ?> {{LANG following}}
+                </div>
+                <div class="udetails">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M2 22a8 8 0 1 1 16 0h-2a6 6 0 1 0-12 0H2zm8-9c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm8.284 3.703A8.002 8.002 0 0 1 23 22h-2a6.001 6.001 0 0 0-3.537-5.473l.82-1.824zm-.688-11.29A5.5 5.5 0 0 1 21 8.5a5.499 5.499 0 0 1-5 5.478v-2.013a3.5 3.5 0 0 0 1.041-6.609l.555-1.943z"></path></svg>
+                    <?php echo FormattedNumber($context['followers']); ?> {{LANG followers}}
+                </div>
+            </div>
+            <?php if (IS_LOGGED) { ?>
+                <div class="valign user-buttons">
+                    <?php if ($context['is_owner'] == false) { ?>
+                        <?php if($context['is_following'] > 0){ ?>
+                            <button class="btn btn-mat main btn-following user-button" onclick="follow(<?php echo($udata['user_id']) ?>,this);"><span>{{LANG following}}</span></button>&nbsp;&nbsp;
+                        <?php } else { ?>
+                            <button class="btn btn-mat main" onclick="follow(<?php echo($udata['user_id']) ?>,this);"><span>{{LANG follow}}</span></button>&nbsp;&nbsp;
+                        <?php } ?>
+                        <?php if ($context['chat_privacy'] == 1) { ?>
+                            <a class="btn btn-mat primary user-button" href="{{CONFIG site_url}}/messages/<?php echo($udata['username']) ?>" data-ajax="load.php?app=messages&apph=messages&uname=<?php echo($udata['username']) ?>">{{LANG message}}</a>
+                        <?php } ?>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+</div>
+<script>tippy('.verified', {arrow: true,content: '{{LANG verified}}'});</script>

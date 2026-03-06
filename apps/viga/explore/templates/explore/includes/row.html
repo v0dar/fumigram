@@ -1,0 +1,14 @@
+<div class="pg_folw_sugg_carousel explore-people__item" id="<?php echo($udata['user_id']) ?>">
+	<div class="item">
+		<div class="avatar">
+			<img src="<?php echo(media($udata['avatar'])) ?>" alt="...">
+			<div class="valign uname cq">
+				<a class="<?php if($config['popover'] == 'on') { ?>udata<?php } ?>" data-id="<?php echo($udata['user_id']) ?>" href="<?php echo(un2url($udata['username'])) ?>" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo($udata['username']) ?>"><h4><?php echo($udata['username']) ?></h4></a>
+			</div>
+		</div>
+		<div class="button">
+			<button class="btn btn-mat" onclick="follow(<?php echo($udata['user_id']) ?>,this);"><span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-user-plus"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg> {{LANG follow}}</span></button>
+			<a class="btn btn-mat primary" href="{{CONFIG site_url}}/messages/<?php echo($udata['username']) ?>" data-ajax="load.php?app=messages&apph=messages&uname=<?php echo($udata['username']) ?>"><span><svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M12.003 2.001a9.705 9.705 0 110 19.4 10.876 10.876 0 01-2.895-.384.798.798 0 00-.533.04l-1.984.876a.801.801 0 01-1.123-.708l-.054-1.78a.806.806 0 00-.27-.569 9.49 9.49 0 01-3.14-7.175 9.65 9.65 0 0110-9.7z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="1.739"></path><path d="M17.79 10.132a.659.659 0 00-.962-.873l-2.556 2.05a.63.63 0 01-.758.002L11.06 9.47a1.576 1.576 0 00-2.277.42l-2.567 3.98a.659.659 0 00.961.875l2.556-2.049a.63.63 0 01.759-.002l2.452 1.84a1.576 1.576 0 002.278-.42z" fill-rule="evenodd"></path></svg> {{LANG say_hi}}</span></a>
+		</div>
+	</div>
+</div>

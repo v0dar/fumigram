@@ -1,0 +1,66 @@
+<div id="create-newpost"></div>
+<template class="template" id="post-editing">
+	<div class="content post-editing-form">
+		<div class="user-heading">
+			<img src="{{ME avatar}}" class="img-circle">
+			<span>{{ME username}}</span>
+		</div>
+		<form class="form" id="edit-post-caption" action="{{CONFIG site_url}}/aj/posts/update" autocomplete="true">
+			<div class="form-group">
+				<textarea class="form-control px-post" name="caption" rows="4" id="caption" placeholder="{{LANG add_post_caption}}"></textarea>
+				<div class="dropdown">
+					<span class="dropdown-toggle btn-emoji" data-toggle="dropdown" onclick="show_emoji('post-cap');">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9.153 11.603c.795 0 1.439-.879 1.439-1.962s-.644-1.962-1.439-1.962-1.439.879-1.439 1.962.644 1.962 1.439 1.962zm-3.204 1.362c-.026-.307-.131 5.218 6.063 5.551 6.066-.25 6.066-5.551 6.066-5.551-6.078 1.416-12.129 0-12.129 0zm11.363 1.108s-.669 1.959-5.051 1.959c-3.505 0-5.388-1.164-5.607-1.959 0 0 5.912 1.055 10.658 0zM11.804 1.011C5.609 1.011.978 6.033.978 12.228s4.826 10.761 11.021 10.761S23.02 18.423 23.02 12.228c.001-6.195-5.021-11.217-11.216-11.217zM12 21.354c-5.273 0-9.381-3.886-9.381-9.159s3.942-9.548 9.215-9.548 9.548 4.275 9.548 9.548c-.001 5.272-4.109 9.159-9.382 9.159zm3.108-9.751c.795 0 1.439-.879 1.439-1.962s-.644-1.962-1.439-1.962-1.439.879-1.439 1.962.644 1.962 1.439 1.962z"></path></svg>
+					</span>
+					<ul class="dropdown-menu <?php if ($config['emoji_zoom_in'] == 'on') { ?>zoom<?php } ?> pull-right ultimate-menu demoji emoji-part"></ul>
+			    </div>
+			</div>
+			  <div class="form-group publish">
+				    <button type="reset" class="btn btn-mat default" id="close-anim-image-modal">{{LANG close}}</button>&nbsp;&nbsp;
+				    <button type="submit" class="btn btn-mat main">{{LANG save_changes}}</button>
+			  </div>
+			  <input type="hidden" id="post_id" name="post_id">
+			  <input type="hidden" name="hash" value="<?php echo($context['csrf_token']) ?>">
+		  </form>
+	</div>
+</template>
+<script>
+$(function(){
+    $(".create-new-post, .hub").click(function(event) {
+        var post_type = $(this).attr('data-type');
+    	if (post_type) {
+    		$.ajax({url: link('posts/new-' + post_type),type: 'GET',dataType: 'json'})
+            .done(function(data) {
+    			if (data.status == 200) {
+    				$('body').addClass('active');
+    				$("#create-newpost").html(data.html).fadeIn(300);
+    			}else{
+                    if (data.message) {
+						Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+					}
+                }
+    		});
+    	}
+    });
+	$(document).on('click','#close-anim-modal',function(event) {
+        $("#create-newpost").fadeOut(200,function(){
+            $(this).empty();
+            $("body").removeClass('active');
+        });
+    });
+    $(document).on('click','#close-anim-image-modal',function(event) {
+		$("#create-newpost").fadeOut(200,function(){
+			$(this).empty();
+			$("body").removeClass('active');
+		});      
+	});
+	$(document).keyup(function(e) {
+		if (e.keyCode == 27) {
+			$("#create-newpost").fadeOut(200,function(){
+			$(this).empty();
+			$("body").removeClass('active');
+		});
+		}
+	});
+ });
+</script>

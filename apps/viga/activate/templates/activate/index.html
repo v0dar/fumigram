@@ -1,0 +1,46 @@
+<div class="pg_auth_page pg_auth_full">
+	<div class="login_page">
+		<div class="login-pagez">
+			<a href="{{CONFIG site_url}}" class="logo"><img src="{{CONFIG site_url}}/media/img/<?php if ($_COOKIE['mode'] == 'night') { ?>logo<?php } else { ?>logo<?php } ?>.{{CONFIG logo_extension}}" alt="logo"></a>
+			<h3>
+				{{LANG activate_account}}
+			</h3>
+			<span>
+				<?php if ($context['me']['active'] == 1) { ?>
+					{{LANG account_already_active}}
+				<?php } else { ?>
+					{{LANG account_not_activated}}
+				<?php } ?>
+		    </span><br><br>
+			<form action="" class="form" id="activate">
+				<div class="pg_mat_input">
+					<input maxlength="6" type="text" name="ac_code" id="ac_code" placeholder="{{LANG account_activation}}" autofocus autocomplete="off" />
+					<label for="password">{{LANG 6_digit_code}}</label>
+				</div>
+				<input type="hidden" name="hash" value="<?php echo($context['csrf_token']) ?>">
+				<button class="btn btn-large btn-main btn-mat" id="sign_submit" type="submit">{{LANG activate}}</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script>
+  jQuery(document).ready(function($) {
+        $("form#activate").ajaxForm({
+            url:'<?php echo($context["rita"]) ?>/activate',dataType:'json',type:'POST',
+             beforeSend:function(){
+                $('form').find('.pp_load_loader').addClass('loadingg');
+                $('form').find('button[type="submit"]').attr('disabled','true');
+            }, success:function(data){
+                if (data.status == 200) {
+					Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+                    setTimeout(function(){
+                        window.location.href = data.link;
+                    },5000);
+                }else{Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});}
+                $('form').find('.pp_load_loader').removeClass('loadingg');
+                $('form').find('button[type="submit"]').removeAttr('disabled');
+            },
+        })
+    });
+</script>

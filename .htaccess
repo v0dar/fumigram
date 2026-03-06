@@ -1,0 +1,139 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^$ index.php?app=home&apph=home [QSA]
+RewriteRule ^aj/(.*)/(.*)$ ajax.php?app=$1&a=$2 [QSA]
+RewriteRule ^404(\/?|)$ index.php?app=404&apph=404 [QSA]
+RewriteRule ^oops(?:\/?|)$ index.php?app=oops&apph=oops [QSA]
+RewriteRule ^startup$ index.php?app=startup&apph=startup [QSA]
+RewriteRule ^login(?:\/?|)$ index.php?app=login&apph=login [QSA]
+RewriteRule ^tiles(?:\/?|)$ index.php?app=tiles&apph=tiles [QSA]
+RewriteRule ^forgot(?:\/?|)$ index.php?app=login&apph=forgot [QSA]
+RewriteRule ^points(?:\/?|)$ index.php?app=points&apph=points [QSA]
+RewriteRule ^tokens(?:\/?|)$ index.php?app=tokens&apph=tokens [QSA]
+RewriteRule ^boosts(?:\/?|)$ index.php?app=boosts&apph=boosts [QSA]
+RewriteRule ^signup(?:\/?|)$ index.php?app=signup&apph=signup [QSA]
+RewriteRule ^upload(?:\/?|)$ index.php?app=upload&apph=upload [QSA]
+RewriteRule ^premium(?:\/?|)$ index.php?app=premium&apph=premium [QSA]
+RewriteRule ^signout(?:\/?|)$ index.php?app=signout&apph=signout [QSA]
+RewriteRule ^explore(?:\/?|)$ index.php?app=explore&apph=explore [QSA]
+RewriteRule ^upload/(.*)$ index.php?app=upload&apph=upload&ui=$1 [QSA]
+RewriteRule ^help(?:\/([a-zA-Z0-9_-]{0,50})){0,1}$ help.php?ui=$1 [QSA]
+RewriteRule ^upgraded(?:\/?|)$ index.php?app=upgraded&apph=upgraded [QSA]
+RewriteRule ^edit_ad/(.*)$ index.php?app=edit_ad&apph=edit_ad&id=$1 [QSA]
+RewriteRule ^campaign(?:\/?|)$ index.php?app=campaign&apph=campaign [QSA]
+#RewriteRule ^stories(?:\/?|)$ index.php?app=stories&apph=stories [QSA]
+RewriteRule ^timeline(?:\/?|)$ index.php?app=timeline&apph=timeline [QSA]
+RewriteRule ^activate(?:\/?|)$ index.php?app=activate&apph=activate [QSA]
+RewriteRule ^messages(?:\/?|)$ index.php?app=messages&apph=messages [QSA]
+RewriteRule ^stories/(.*)$ index.php?app=stories&apph=stories&ui=$1 [QSA]
+RewriteRule ^startup/(.*)$ index.php?app=startup&apph=startup&uis=$1 [QSA]
+RewriteRule ^cpanel(?:\/([a-zA-Z0-9_-]{0,50})){0,1}$ cpanel.php?ui=$1 [QSA]
+RewriteRule ^campaign/(.*)$ index.php?app=campaign&apph=campaign&ui=$1 [QSA]
+RewriteRule ^explore/people(?:\/?|)$ index.php?app=explore&apph=people [QSA]
+RewriteRule ^co/(.*)$ index.php?app=confirm&apph=confirm_email&code=$1 [QSA]
+RewriteRule ^tile/(\d+)(?:\/?)$ index.php?app=tile&apph=view_tile&pid=$1 [QSA]
+RewriteRule ^reset-password/(.*)$ index.php?app=login&apph=reset&code=$1 [QSA]
+RewriteRule ^post/(\d+)(?:\/?)$ index.php?app=posts&apph=view_post&pid=$1 [QSA]
+RewriteRule ^contact_us(?:\/?|)$ index.php?app=contact_us&apph=contact_us [QSA]
+RewriteRule ^deactivated(?:\/?|)$ index.php?app=deactivated&apph=deactivated [QSA]
+RewriteRule ^hashtag/([^\/]+)(\/|)$ index.php?app=hashtag&apph=hashtag&htag=$1 [QSA]
+RewriteRule ^loose_points(?:\/?|)$ index.php?app=loose_points&apph=loose_points [QSA]
+RewriteRule ^explore/tags/([^\/]+)(\/?|)$ index.php?app=explore&apph=tags&tag=$1 [QSA]
+RewriteRule ^embed/(\d+)(?:\/?)$ index.php?app=posts&apph=view_post&type=embed&pid=$1 [QSA]
+RewriteRule ^messages/([^\/]+)(?:\/?|)$ index.php?app=messages&apph=messages&uname=$1 [QSA]
+RewriteRule ^settings(?:\/(\w+)\/(\w+)){0,1}(?:\/?|)$ index.php?app=settings&apph=settings&page=$1&user=$2 [QSA]
+
+## Load 
+RewriteRule ^load/(.*)/(.*)$ load.php?app=$1&apph=$2 [QSA]
+RewriteRule ^load/(.*)/(.*)/(.*)$ load.php?app=$1&apph=$2&uname=$3 [QSA]
+RewriteRule ^load/explore/(tags)/(.*)$ load.php?app=explore&apph=tags&tag=$1 [QSA]
+RewriteRule ^load/messages/(.*)$ load.php?app=messages&apph=messages&uname=$1 [QSA]
+RewriteRule ^load/tile/(view_tile)/(.*)$ load.php?app=tile&apph=view_tile&pid=$2 [QSA]
+RewriteRule ^load/posts/(view_post)/(.*)$ load.php?app=posts&apph=view_post&pid=$2 [QSA]
+RewriteRule ^load/(.*)/(following|followers|posts|favourites|boosted_posts|subscriptions|tiles)(?:\/?|)$ load.php?app=profile&apph=profile&uname=$1&page=$2 [QSA]
+RewriteRule ^load/(.*)/(account|general|delete|credits|password|password_reset|profile|notifications|privacy|verification|social_account|business_account|store|administration|manage_sessions|blocked)(?:\/?|)$ load.php?app=settings&apph=settings&user=$1&page=$2 [QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^\/]+)(\/|)$ index.php?app=profile&apph=profile&uname=$1 [QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/(following|followers|posts|favourites|boosted_posts|subscriptions|tiles)(?:\/?|)$ index.php?app=profile&apph=profile&uname=$1&page=$2 [QSA]
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE text/xml
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE image/x-icon
+  AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE application/rss+xml
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/x-javascript
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE application/xhtml+xml
+  AddOutputFilterByType DEFLATE application/x-font
+  AddOutputFilterByType DEFLATE application/x-font-truetype
+  AddOutputFilterByType DEFLATE application/x-font-ttf
+  AddOutputFilterByType DEFLATE application/x-font-otf
+  AddOutputFilterByType DEFLATE application/x-font-opentype
+  AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+  AddOutputFilterByType DEFLATE font/ttf
+  AddOutputFilterByType DEFLATE font/otf
+  AddOutputFilterByType DEFLATE font/opentype
+  BrowserMatch ^Mozilla/4 gzip-only-text/html
+  BrowserMatch ^Mozilla/4\.0[678] no-gzip
+  BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+</IfModule>
+<IfModule mod_security.c>
+  SecFilterScanPOST Off
+</IfModule>
+## EXPIRES CACHING ##
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType image/jpg "access plus 1 year"
+ExpiresByType image/jpeg "access plus 1 year"
+ExpiresByType image/gif "access plus 1 year"
+ExpiresByType image/png "access plus 1 year"
+ExpiresByType text/css "access plus 1 month"
+ExpiresByType application/pdf "access plus 1 month"
+ExpiresByType text/x-javascript "access plus 1 month"
+ExpiresByType application/x-shockwave-flash "access plus 1 month"
+ExpiresByType image/x-icon "access plus 1 year"
+ExpiresDefault "access plus 2 days"
+</IfModule>
+## EXPIRES CACHING ##
+
+# BEGIN cPanel-generated php ini directives, do not edit
+# Manual editing of this file may result in unexpected behavior.
+# To make changes to this file, use the cPanel MultiPHP INI Editor (Home >> Software >> MultiPHP INI Editor)
+# For more information, read our documentation (https://go.cpanel.net/EA4ModifyINI)
+<IfModule php8_module>
+   php_flag display_errors On
+   php_value max_execution_time 5000
+   php_value max_input_time 5000
+   php_value max_input_vars 3000
+   php_value memory_limit 5024M
+   php_value post_max_size 5024M
+   php_value session.gc_maxlifetime 1440
+   php_value upload_max_filesize 5024M
+   php_flag zlib.output_compression On
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php81"
+</IfModule>
+<IfModule lsapi_module>
+   php_flag display_errors On
+   php_value max_execution_time 5000
+   php_value max_input_time 5000
+   php_value max_input_vars 3000
+   php_value memory_limit 5024M
+   php_value post_max_size 5024M
+   php_value session.gc_maxlifetime 1440
+   php_value upload_max_filesize 5024M
+   php_flag zlib.output_compression On
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php81"
+</IfModule>
+# END cPanel-generated php ini directives, do not edit

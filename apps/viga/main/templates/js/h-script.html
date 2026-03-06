@@ -1,0 +1,58 @@
+<script>
+jQuery(document).ready(function($) {
+    <?php if (IS_LOGGED) { ?>
+    $("#open-notifiy").click(function(event) {
+        var notf_list = $("#notifications__list");
+        var preloader = notf_list.next('.preloader').clone().removeClass('hidden');
+        notf_list.html(preloader);
+        notifications();
+        delay(function(){},400);
+    });
+    <?php } ?>
+    $("input#head-search").blur(function(event) {
+        delay(function(){
+            $(".search-result").fadeOut(500);
+			$("input#head-search").removeClass('srch_brdr');
+        },100);
+    });
+    $("input#head-search").focus(function(event) {
+        delay(function(){
+            $(".search-result").fadeOut(300);
+        },500);
+    });
+    $("input#head-search").keydown(function(event){
+        if(event.keyCode == 13) {
+            event.preventDefault();
+            return false;
+        }
+    });
+    $("input#head-search").keyup(function(event) {
+        var keyword =  $(this).val();
+        var desturl = link('main/search-users');
+        var zis     = $(this);
+        if (/^\#(.+)/.test(keyword)) {
+			desturl = link('main/search-posts');
+			keyword = keyword.substring(1);
+		}
+        if (keyword.length >= 1) {
+			zis.addClass('srch_brdr');
+            $(".search-result").html('<div class="pg_srch_empty"><div class="avatar"></div><div class="line"></div><div class="line"></div></div><div class="pg_srch_empty"><div class="avatar"></div><div class="line"></div><div class="line"></div></div><div class="pg_srch_empty"><div class="avatar"></div><div class="line"></div><div class="line"></div></div><div class="pg_srch_empty"><div class="avatar"></div><div class="line"></div><div class="line"></div></div><div class="pg_srch_empty"><div class="avatar"></div><div class="line"></div><div class="line"></div></div><div class="pg_srch_empty"><div class="avatar"></div><div class="line"></div><div class="line"></div></div><div class="pg_srch_empty"><div class="avatar"></div><div class="line"></div><div class="line"></div></div>').fadeIn(300);
+			$.ajax({url: desturl,type: 'POST',dataType: 'json',data: {kw:keyword}})
+			.done(function(data) {
+				if (data.status == 200) {
+                    setTimeout(function (){$(".search-result").html(data.html);}, 1000);
+				}else{
+                    setTimeout(function (){
+                        $(".search-result").empty();
+                        $(".search-result").html('');
+                    }, 1000);
+                    console.log()
+				}
+			});
+            delay(function(){
+                zis.removeClass('srch_brdr');
+            },500);
+		}
+    });
+});
+</script>

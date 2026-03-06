@@ -1,0 +1,132 @@
+<style>.login_aside {background-image:linear-gradient(rgba(0, 0, 0, 0.332), rgba(0, 0, 0, 0.321)), url('{{CONFIG site_url}}/media/img/str/612547.jpg');}</style>
+<div class="pg_auth_page">
+	<div class="login_aside">
+		<div class="to_auth_circle-1"></div>
+		<div class="to_auth_circle-2"></div>
+		<div class="login_aside_innr">
+			<span class="user_avatar avatar_male">
+				<img src="{{CONFIG site_url}}/media/img/user-male.png" class="male_ava" alt="...">
+				<img src="{{CONFIG site_url}}/media/img/user-female.png" class="female_ava" alt="...">
+			</span>
+			<p class="animated fadeInUpBig">{{LANG min_to_get_start}}</p>
+			<a class="btn" href="{{CONFIG site_url}}/login"><span>{{LANG sign_in}}</span></a>
+		</div>
+	</div>
+	<div class="login_page">
+		<div class="login-pagez">
+			<a href="{{CONFIG site_url}}" class="logo"><img src="{{CONFIG site_url}}/media/img/<?php if ($_COOKIE['mode'] == 'night') { ?>logo<?php } else { ?>logo<?php } ?>.{{CONFIG logo_extension}}" alt="logo"></a>
+			<h3 class="animated fadeInUpBig">{{LANG let_set_up}}</h3>
+			<p class="animated fadeInUpBig">{{LANG create_acc_proceed}} {{CONFIG site_name}}</p>
+			<form action="" class="form" id="signup">
+				<div class="signup-alert"></div>
+				<div class="pg_mat_input">
+					<input required="true" type="text" name="username" id="username" placeholder="{{LANG username}}" autofocus />
+					<label for="username">{{LANG username}}</label>
+				</div>
+				<div class="pg_mat_input">
+					<input required="true" type="email" name="email" id="email" placeholder="{{LANG email_addr}}" />
+					<label for="email">{{LANG email_addr}}</label>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="pg_mat_input">
+							<input required="true" class="show_password" type="password" name="password" id="password" placeholder="{{LANG password}}" />
+							<label for="password">{{LANG password}}</label>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="pg_mat_input">
+							<input required="true" class="show_password" type="password" name="conf_password" id="conf_password" placeholder="{{LANG confirm_passwd}}" />
+							<label for="conf_password">{{LANG confirm_passwd}}</label>
+							<div class="icon-wrapper">
+								<span toggle=".show_password" class="field-icon toggle-password">
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="eye"><path fill="currentColor" d="M1.181 12C2.121 6.88 6.608 3 12 3c5.392 0 9.878 3.88 10.819 9-.94 5.12-5.427 9-10.819 9-5.392 0-9.878-3.88-10.819-9zM12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0-2a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="eye-off"><path fill="currentColor" d="M4.52 5.934L1.393 2.808l1.415-1.415 19.799 19.8-1.415 1.414-3.31-3.31A10.949 10.949 0 0 1 12 21c-5.392 0-9.878-3.88-10.819-9a10.982 10.982 0 0 1 3.34-6.066zm10.237 10.238l-1.464-1.464a3 3 0 0 1-4.001-4.001L7.828 9.243a5 5 0 0 0 6.929 6.929zM7.974 3.76C9.221 3.27 10.58 3 12 3c5.392 0 9.878 3.88 10.819 9a10.947 10.947 0 0 1-2.012 4.592l-3.86-3.86a5 5 0 0 0-5.68-5.68L7.974 3.761z"/></svg>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="pg_mat_input">
+					<select name="gender" id="gender">
+						<option value="male" selected="selected">{{LANG male}}</option>
+						<option value="female">{{LANG female}}</option>
+					</select>
+				</div>
+				<input type="hidden" name="hash" value="<?php echo($context['csrf_token']) ?>">
+				<div class="pp_terms">
+					<input type="checkbox" name="terms" id="terms" onchange="activateButton(this)">
+					<label for="terms"> I agree to the <a href="<?php echo(pxp_link('help')); ?>/terms-of-use" target="_blank">{{LANG terms_of_use}}</a></label>
+				</div>
+				<button class="btn btn-large btn-main" id="sign_submit" type="submit">{{LANG signup}}</button>
+			</form>
+			<p class="to_altr_auth_opt">{{LANG already_hv_an_account}} <a href="{{CONFIG site_url}}/login">{{LANG sign_in}}</a></p>
+		</div>
+		
+	</div>
+</div>
+
+<script>
+	jQuery(document).ready(function($) {
+		$("form#signup").ajaxForm({
+			url:'<?php echo($context["rita"]) ?>/signup',
+			dataType:'json',
+			type:'POST',
+			beforeSend:function(){
+				$('form').find('button[type="submit"]').attr('disabled','true');
+			},
+			success:function(data){
+				scroll2top();
+				if (data.status == 200) {
+					Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+					setTimeout(function(){
+						window.location.href = "{{CONFIG site_url}}";
+					},1500);
+				}
+				else{
+					Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+				}
+				$('form').find('button[type="submit"]').removeAttr('disabled');
+			},
+			error: function(data){
+				console.log(data);
+				$.toast(data,{duration: 5000, type: 'danger',align: 'bottom',singleton: false});
+			}
+		})
+	});
+		
+	$(document).ready(function() {
+		// hide/show password
+		$(".icon-wrapper").click(function() {
+			$(this).toggleClass("show_eye");
+			var input = $($(".toggle-password").attr("toggle"));
+			if (input.attr("type") == "password") {
+				input.attr("type", "text");
+			} else {
+				input.attr("type", "password");
+			}
+		});
+			
+		$("select#gender").change(function(){
+			var ddl = document.getElementById("gender");
+			var selectedValue = ddl.options[ddl.selectedIndex].value;
+			if (selectedValue == "male"){
+				$('.user_avatar').removeClass('avatar_female');
+				$('.user_avatar').addClass('avatar_male');
+			}
+			else if (selectedValue == "female"){
+				$('.user_avatar').removeClass('avatar_male');
+				$('.user_avatar').addClass('avatar_female');
+			}
+		});
+	});
+		
+	function activateButton(element) {
+		if(element.checked) {
+			document.getElementById("sign_submit").disabled = false;
+		}
+		else  {
+			document.getElementById("sign_submit").disabled = true;
+		}
+	};
+</script>

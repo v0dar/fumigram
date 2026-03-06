@@ -1,0 +1,16 @@
+
+<div class="container container-profile user-posts__container">
+	<div class="user-posts pg_grid_posts pg_grid_posts_tag">
+		<?php if ($context['boosted_posts'] > 0) {
+			foreach ($context['boosted_posts'] as $key => $post_data) {
+				include 'includes/boost.html';
+			}
+		} else{
+			include 'includes/no-posted.html'; } ?>
+	</div>
+</div>
+
+<script>
+	var ajax_url = '<?php echo($context["rita"]); ?>';
+	var user_id  = '<?php echo($context["user_data"]["user_id"]) ?>';
+</script>

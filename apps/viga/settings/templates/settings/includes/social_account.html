@@ -1,0 +1,110 @@
+<div class="social-active">
+	<div class="valign settings-holder social">
+		<img src="<?php echo($context['me']['avatar']) ?>" class="avatar cha" alt="...">
+		<div class="infoz">
+			<h5 title="<?php echo($context['me']['name']) ?>"><a href="{{ME url}}" data-ajax="load.php?app=profile&apph=profile&uname={{ME username}}"><?php echo($context['me']['name']) ?></a></h5>
+			<p>{{LANG social_settings}}</p>
+			<span>{{LANG link_social_account}}</span>
+		</div>
+	</div>
+	<form class="form pp_sett_form" id="edit-social-settings">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="pg_mat_input">
+					<input type="url2" name="facebook" placeholder="{{LANG ur_facebook}}" value="<?php echo($context['me']['facebook']) ?>">
+			        <label>{{LANG ur_facebook}}</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="pg_mat_input">
+					<input type="url2" name="twitter" placeholder="{{LANG ur_twitter}}" value="<?php echo($context['me']['twitter']) ?>">
+			        <label>{{LANG ur_twitter}}</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="pg_mat_input">
+					<input type="url2" name="instagram" placeholder="{{LANG ur_instagram}}" value="<?php echo($context['me']['instagram']) ?>">
+			        <label>{{LANG ur_instagram}}</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="pg_mat_input">
+					<input type="url2" name="discord" placeholder="{{LANG ur_discord}}" value="<?php echo($context['me']['discord']) ?>">
+					<label>{{LANG ur_discord}}</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="pg_mat_input">
+					<input type="url2" name="deviantart" placeholder="{{LANG ur_deviantart}}" value="<?php echo($context['me']['deviantart']) ?>">
+			        <label>{{LANG ur_deviantart}}</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="pg_mat_input">
+					<input type="url2" name="github" placeholder="{{LANG ur_github}}" value="<?php echo($context['me']['github']) ?>">
+					<label>{{LANG ur_github}}</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="pg_mat_input">
+					<input type="url2" name="pinterest" placeholder="{{LANG ur_pinterest}}" value="<?php echo($context['me']['pinterest']) ?>">
+			        <label>{{LANG ur_pinterest}}</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="pg_mat_input">
+					<input type="url2" name="tiktok" placeholder="{{LANG ur_tiktok}}" value="<?php echo($context['me']['tiktok']) ?>">
+			        <label>{{LANG ur_tiktok}}</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="pg_mat_input">
+					<input type="url2" name="youtube" placeholder="{{LANG ur_youtube}}" value="<?php echo($context['me']['youtube']) ?>">
+					<label>{{LANG ur_youtube}}</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="pg_mat_input">
+					<input type="url2" name="spotify" placeholder="{{LANG ur_spotify}}" value="<?php echo($context['me']['spotify']) ?>">
+			        <label>{{LANG ur_spotify}}</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="pg_mat_input">
+					<input type="url2" name="twitch" placeholder="{{LANG ur_twitch}}" value="<?php echo($context['me']['twitch']) ?>">
+					<label>{{LANG ur_twitch}}</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="pg_mat_input">
+					<input type="url2" name="patreon" placeholder="{{LANG ur_patreon}}" value="<?php echo($context['me']['patreon']) ?>">
+			        <label>{{LANG ur_patreon}}</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="pg_mat_input hidden">
+			<input type="url2" name="google" placeholder="{{LANG ur_google}}" value="<?php echo($context['me']['google']) ?>">
+			<label>{{LANG ur_google}}</label>
+		</div>
+		<div class="pg_sett_save"><button type="submit" class="btn btn-mat social"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M11.602 13.76l1.412 1.412 8.466-8.466 1.414 1.414-9.88 9.88-6.364-6.364 1.414-1.414 2.125 2.125 1.413 1.412zm.002-2.828l4.952-4.953 1.41 1.41-4.952 4.953-1.41-1.41zm-2.827 5.655L7.364 18 1 11.636l1.414-1.414 1.413 1.413-.001.001 4.951 4.951z"></path></svg> {{LANG save_changes}}</span></button></div>
+		<input type="hidden" name="user_id" value="<?php echo($context['me']['user_id']) ?>">
+		<input type="hidden" name="hash" value="<?php echo($context['csrf_token']) ?>">
+	</form>
+</div>
+<?php include $context['direct'].'/settings/templates/settings/js/script.html';?>

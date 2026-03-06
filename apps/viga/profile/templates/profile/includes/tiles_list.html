@@ -1,0 +1,38 @@
+<div class="item wrapper lazy_" data-post-id="<?php echo($post_data['post_id']) ?>">
+	<div class="user-postset explore-postset" id="<?php echo $post_data['post_id']; ?>">
+		<?php if ($post_data['type'] == 'tile') { 
+			if ($post_data['is_should_hide']) {	?>
+			<div class="valign is_should_hide1 text_m_reprted-<?php echo($post_data['post_id']) ?>">
+				<p class="is_should_hide3">{{LANG post_m_report}}</p>
+				<div class="is_should_hide4">
+					<a class="btn btn-mat is_should_hide5" href="javascript:void(0);" onclick="show_m_reprted(<?php echo($post_data['post_id']) ?>)">{{LANG click_to_see}}</a>
+				</div>
+			</div>
+		<?php } } ?>
+		<a href="<?php echo(pid3url($post_data['post_id'])) ?>" data-ajax="load.php?app=tile&apph=view_tile&pid=<?php echo($post_data['post_id']) ?>">
+			<div class="image" onclick="lightbox('<?php echo $post_data['post_id']; ?>','<?php echo $context['page']; ?>');">
+				<img src="<?php echo media($post_data['thumb']); ?>" />
+				<?php if ($post_data['type'] == 'tile') { ?>
+					<span class="category">
+						<?php echo ($config['tiles_logo']) ?>
+					</span>
+				<?php } ?>
+				<div class="valign caption">
+					<p>
+						<?php if($post_data['likes'] >= 10000) { ?>
+							<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M21.179 12.794l.013.014L12 22l-9.192-9.192.013-.014A6.5 6.5 0 0 1 12 3.64a6.5 6.5 0 0 1 9.179 9.154z"/></svg> <?php echo tenkFormat($post_data['likes']) ?></span>
+						<?php } else { ?>
+							<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M21.179 12.794l.013.014L12 22l-9.192-9.192.013-.014A6.5 6.5 0 0 1 12 3.64a6.5 6.5 0 0 1 9.179 9.154z"/></svg> <?php echo number_format($post_data['likes']) ?></span>
+						<?php } ?>
+	
+						<?php if($post_data['comments'] >= 10000) { ?>
+							<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M14.45 19L12 22.5 9.55 19H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-6.55z"/></svg> <?php echo tenkFormat($post_data['comments']) ?></span>
+						<?php } else { ?>
+							<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M14.45 19L12 22.5 9.55 19H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-6.55z"/></svg> <?php echo number_format($post_data['comments']) ?></span>
+						<?php } ?>
+					</p>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>

@@ -1,0 +1,113 @@
+<div class="home-sidebar-right">
+	<div id="home-sidebar-sticky">
+		<?php if (!IS_LOGGED) { ?>
+		<div class="feed-btn timeline-picker">
+			<div class="feed-space">
+				<div class="feed-item first">
+					<a class="line-badge" href="<?php echo(pxp_link('login')); ?>">
+						<label class="timeline-wrapper join-btn" style="<?php if ($_COOKIE['mode'] == 'night') { ?>background: var(--blue) !important;<?php } else { ?>background: var(--fumigram) !important;<?php } ?>">
+							<span class="timeline-button"></span>
+							<span>
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="feed-icon" fill="#fff" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+								<article class="timeline-title" style="color: #fff;">{{LANG login}}</article>
+							</span>
+						</label>
+					</a>
+				</div>
+			</div>
+		</div>
+		<?php } ?>
+		
+		<?php if ($config['pro_system'] == 'on' && !empty($context['premium'])) { ?>
+			<div class="widgets pro_usr">
+				<h5 class="pre-h5">
+					<span>{{LANG pro_members}}</span> 
+					<span class="see_all pull-right all-pro">
+						<a href="javascript:void(0)">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="feather"><path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"></path></svg>
+						</a>
+					</span>
+				</h5>
+				<div class="mb-15 sidebar-widget">
+					<div class="widget-innr">
+						<?php if (IS_LOGGED) { ?>
+							<div class="upgrade-me">
+								<img src="{{CONFIG site_url}}/media/img/icons/pro-me.png">
+								<p>{{LANG buy_premium_put_me_here}}</p>
+								<?php if ($me['is_pro'] > 0) { ?>
+									<button type="button" class="btn btn-mat"disabled>{{LANG activated}}</button>
+								<?php } else { ?>
+									<a class="btn btn-mat main" href="{{CONFIG site_url}}/premium" data-ajax="load.php?app=premium&apph=premium">{{LANG buy_premium}}</a>
+								<?php } ?>
+							</div>
+						<?php } ?>
+						<div class="valign widget-users">
+							<?php if ($context['premium']) {
+								foreach ($context['premium'] as $key => $story) { ?>
+									<div>
+										<a class="user <?php if($config['popover'] == 'on') { ?>udata<?php } ?>" data-id="<?php echo $story->user_id; ?>" href="<?php echo $story->url; ?>" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo $story->username; ?>">
+											<img alt="<?php echo $wo['user-list']['name'];?>" src="<?php echo($story->avatar) ?>" alt="..."/>
+											<h4 class="text-center truncate"><?php echo $story->name; ?></h4>
+										</a>
+									</div>
+							<?php } } ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+
+		<?php if ($config['sidebar_hashtags'] == 'on') { ?>
+			<?php if ($context['hashtags'] && count($context['hashtags']) > 0) { ?>
+				<div class="widgets">
+					<h5 class="trending"><?php if($config['timeline_htag_type'] == 'latest') { ?>{{LANG trending}}<?php } else { ?>{{LANG popular}}<?php } ?></h5>
+					<div class="fluid list">
+						<div class="hashtags">
+							<?php foreach ($context['hashtags'] as $key => $htag) {  ?>
+								<div class="htag">
+									<a href="<?php echo $htag['url']; ?>" data-ajax="load.php?app=hashtag&apph=hashtag&htag=<?php echo $htag['tag']; ?>">
+										<span class="htag-text"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M16,6L18.29,8.29L13.41,13.17L9.41,9.17L2,16.59L3.41,18L9.41,12L13.41,16L19.71,9.71L22,12V6H16Z"></path></svg> #<?php echo $htag['tag']; ?></span><br>
+										<span class="htag-posts"><?php echo number_format($htag['used']); ?> {{LANG posts_}}</span>
+									</a>
+								</div>
+							<?php } ?>
+							<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+			<?php } ?>
+		<?php } ?>
+
+		<?php if (!empty($context['sidebar_ad'])) { ?>
+			<div class="widgets">
+				<h5 class="sidebar_ad_title">
+					<svg style="margin: -2px 2px;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="20" height="20" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><path style="fill:#fff;" d="M64,150.072H33c-18.203,0.053-32.947,14.797-33,33v110c0.053,18.203,14.797,32.947,33,33h31C64,326.072,65.376,148.696,64,150.072z"/><polygon style="fill: var(--fumigram);" points="88,148.208 88,328.64 156.096,342.017 187.609,447.072 231.608,447.072 231.608,356.849 448,399.353 448,77.497 "/><polygon style="fill:#fff;" points="512,64.928 472,72.784 472,404.065 512,411.92 "/></svg>
+					{{LANG sponsored}}
+				</h5>
+				<div class="fluid">
+					<div class="sidebar_ad">
+				 		<a href="<?php echo($context['sidebar_ad']->url) ?>" target="_blank" class="side_ad_img" <?php if ($context['sidebar_ad']->bidding == 'clicks') { ?> onclick="ad_click(<?php echo $context['sidebar_ad']->id; ?>)" <?php } ?>>
+							<img src="<?php echo(media($context['sidebar_ad']->ad_media)) ?>" width="100%" alt="..." />
+						</a>
+					  	<div class="caption">
+					  		<div class="side_ad_title">
+								<?php echo $context['sidebar_ad']->headline; ?>
+							</div>
+					  		<p><?php echo $context['sidebar_ad']->description; ?></p>
+							  <a class="sidebar_ad_main_title" href="<?php echo($context['sidebar_ad']->url) ?>" target="_blank" <?php if ($context['sidebar_ad']->bidding == 'clicks') { ?> onclick="ad_click(<?php echo $context['sidebar_ad']->id; ?>)" <?php } ?>><?php echo($context['sidebar_ad']->name) ?></a>
+					  	</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+
+		<div class="clear"></div>
+		<div class="footer__container">
+			<?php if ($config['footer']) {
+				include $context['direct'].'/main/templates/footer/sidebar-footer.html';
+			} ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<script>tippy('.all-pro', {arrow: true,content: '{{LANG see_all_premium_members}}'});</script>

@@ -1,0 +1,62 @@
+<div class="container user-posts__container">
+	<div class="container user-posts__container">
+		<?php if ($context['user_data']['profile'] == 3) { ?>
+			<div class="user-posts new_prof_user_posts pg_grid_posts pg_grid_posts_tag">
+				<?php if (count($context['posts']) > 0) {
+					foreach ($context['posts'] as $key => $post_data) {
+						include 'includes/tiles_list.html';
+					}
+				} else{
+					include 'includes/no-posted.html';
+				} ?>
+			</div>
+		<?php } else { ?>
+			<div class="user-posts pg_grid_posts pg_grid_posts_tag">
+				<?php if (count($context['posts']) > 0) {
+					foreach ($context['posts'] as $key => $post_data) {
+						include 'includes/tiles_list.html';
+					}
+				} else{
+					include 'includes/no-posted.html';
+				} ?>
+			</div>
+		<?php } ?>
+	</div>
+</div>
+
+<script>
+	var ajax_url = '<?php echo($context["rita"]); ?>';
+	var user_id  = '<?php echo($context["user_data"]["user_id"]) ?>';
+	jQuery(document).ready(function($) {
+		var scrolled = 0;
+		var last_id  = 0;
+		$(window).scroll(function() {
+		    if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+		    	if (scrolled == 0 && $('.user-postset').length > 0) {
+	                scrolled = 1;
+	                var list_ids = $("div.user-postset[id]").map(function() {
+	                	if($(this).attr('id') > 0) {
+							return $(this).attr('id');
+						}
+		            }).get();
+		            if (!list_ids) {return false;}
+    				var last_id  = Math.min.apply(Math,list_ids);
+					$.ajax({
+						url: ajax_url + '/load-user-tiles',
+						type: 'GET',
+						dataType: 'json',
+						data: {offset:last_id,user_id:user_id},
+					}).done(function(data) {
+						if (data.status == 200) {
+							$(".user-posts").gridalicious('append', $(data.html));
+							scrolled = 0;
+						}
+						else{
+							$(window).unbind('scroll');
+						}
+					});
+	       		}
+		    }
+		});
+	});
+</script>

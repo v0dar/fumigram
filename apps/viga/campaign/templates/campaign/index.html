@@ -1,0 +1,66 @@
+
+<div class="row index campaign">
+	<div class="col-md-3">
+		<?php include 'header.html'; ?>
+	</div>
+	<div class="col-md-9">
+		<div class="create-ad-bar">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M9.243 19H21v2H3v-4.243l9.9-9.9 4.242 4.244L9.242 19zm5.07-13.556l2.122-2.122a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414l-2.122 2.121-4.242-4.242z"></path></svg> {{LANG advertising}}&nbsp;&nbsp;<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"></path></svg> 
+			{{LANG campaigns}}
+		</div>	
+		<div class="pg_page padd">
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr class="ads-table">
+							<th>{{LANG id}}</th>
+							<th>{{LANG company}}</th>
+							<th>{{LANG bidding}}</th>
+							<th>{{LANG clicks}}</th>
+							<th>{{LANG views}}</th>
+							<th>{{LANG status}}</th>
+							<th>{{LANG action}}</th>
+						</tr>
+					</thead>
+					<tbody id="user-ads">
+						<?php foreach ($context['campaigns'] as $key => $context['ad']) {
+							include 'list.html';
+						} ?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<?php include $context['direct'].'/main/templates/modals/delete_ad.html'; ?>
+<script type="text/javascript">
+	$(document).on('click', '.delete-ad', function(event) {
+		var self = $(this);	
+		var id = self.attr('id');
+		$('div.delad--modal').data('id',id).fadeIn(300);
+	});
+	$(document).on('click', '.analyze', function(event) {
+		Snackbar.show({showAction: false,backgroundColor: '#fff',text: "<div class='snack-div'>This feature hasn't been developed yet</div>"});
+	});
+	$(document).on('click','.delete--ad',function(event) {
+		var zis = $(this);
+		var id  = zis.parents('.confirm--modal').data('id');
+		if (id) {
+			zis.parents('.confirm--modal').data('id',"").fadeOut(300);
+			$.ajax({
+				url: link('profile/delete_ad'),
+				type: 'POST',
+				dataType: 'json',
+				data: {id:id},
+			}).done(function(data) {
+				if (data.status == 200) {
+					$("tr[data-ad-id="+id+"]").slideUp(function(){
+						$(this).remove();
+					})
+				}else{
+					Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+				}
+			});
+		}
+	});
+</script>

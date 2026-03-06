@@ -1,0 +1,683 @@
+<?php if ($_COOKIE['mode'] == 'night') { ?>
+<style>
+	.hexagon-nav-banner {background: url('{{CONFIG site_url}}/media/img/layers/layer2.jpg') no-repeat 50%;}
+	.hexagon-nav-banner.notallow {background: url('{{CONFIG site_url}}/media/img/layers/layer3.jpg') no-repeat 50%;}
+	.hexagon-nav-banner.foll2see {background: url('{{CONFIG site_url}}/media/img/layers/layer4.jpg') no-repeat 50%;}
+</style>
+<?php } else { ?>
+	<style>
+		.hexagon-nav-banner {background: url('{{CONFIG site_url}}/media/img/layers/layer2_light.jpg') no-repeat 50%;}
+		.hexagon-nav-banner.notallow {background: url('{{CONFIG site_url}}/media/img/layers/layer3_light.jpg') no-repeat 50%;}
+		.hexagon-nav-banner.foll2see {background: url('{{CONFIG site_url}}/media/img/layers/layer4_light.jpg') no-repeat 50%;}
+	</style>
+<?php } ?>
+<style>.oceana-profile-page-content .user-heading::before {background-image:linear-gradient(rgba(0, 0, 0, 0.062), rgba(0, 0, 0, 0.14)), url('<?php echo $context["user_data"]["banner"]; ?>')}</style>
+	<div class="oceana-profile-page-content">
+		<div class="user-heading">
+			<div class="container container-profile">
+			  <div class="user-info-prnt">
+			   <div class="user-info">
+				<div>
+					<?php if ($context['user_data']['verified'] > 0) { ?>
+						<div class="img-circle avatar verified">
+							<img src="<?php echo $context['user_data']['avatar']; ?>" class="img-circle">
+						</div>
+					<?php } else { ?>
+						<div class="avatar">
+							<img src="<?php echo $context['user_data']['avatar']; ?>" class="img-circle">
+						</div>
+					<?php } ?>
+				</div>
+				<?php if($context['is_owner']){ ?>
+					<?php if ($context['user_data']['banner_key'] > 0 || IS_DEVEL) { ?>
+						<div class="oceana-banner-icon change-banner" onclick="ubanner();">
+							<span class="valign btn-file" id="change-cover-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24"><path fill="currentColor" d="M4,4H7L9,2H15L17,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z"></path></svg>
+							</span>
+						</div>
+					<?php } ?>
+				<?php } ?>
+				<div class="info">	
+					<div class="uname">
+						<a>
+							<h4>
+								<?php echo $context['user_data']['username']; ?>
+								<?php if ($context['user_data']['verified'] > 0) { ?>
+									<svg class="verify" xmlns="http://www.w3.org/2000/svg" style="margin-top: -4px;" width="23" height="23" viewBox="0 0 24 24"><path fill="currentColor" d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path></svg>
+								<?php } ?>
+							</h4>
+						</a>
+						<?php if (IS_LOGGED) {  ?>
+						<div class="modal-menu dropdown">
+							<span class="dropdown-toggle" data-toggle="dropdown">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+							</span>
+							<ul class="dropdown-menu zoom ultimate-menu">
+								<?php if ($context['is_owner']) { ?>
+									<li>
+										<div class="menu-option pointer" onclick="about();">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,8.39C13.57,9.4 15.42,10 17.42,10C18.2,10 18.95,9.91 19.67,9.74C19.88,10.45 20,11.21 20,12C20,16.41 16.41,20 12,20C9,20 6.39,18.34 5,15.89L6.75,14V13A1.25,1.25 0 0,1 8,11.75A1.25,1.25 0 0,1 9.25,13V14H12M16,11.75A1.25,1.25 0 0,0 14.75,13A1.25,1.25 0 0,0 16,14.25A1.25,1.25 0 0,0 17.25,13A1.25,1.25 0 0,0 16,11.75Z"></path></svg>&nbsp;&nbsp;&nbsp;
+											<div>
+												<b>{{LANG about_me}}</b>
+												<p>{{LANG see_more_info_about_u}}</p>
+											</div>
+										</div>
+									</li>
+									<?php if (IS_DEVEL || $context['user_data']['is_pro'] > 0) { ?>
+										<?php if ($context['user_data']['switch'] > 0) { ?>
+											<li>
+												<div class="menu-option pointer" onclick="profile();">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.25 3.98932C4.25 2.47644 5.47644 1.25 6.98932 1.25H9H13H17.0107C18.5236 1.25 19.75 2.47644 19.75 3.98932V10V10.9203C19.75 12.474 18.9348 13.9137 17.6026 14.7131L15.9609 15.6981C15.2748 16.1098 14.9102 16.8992 15.0418 17.6885L15.2466 18.9175C15.581 20.9237 14.0339 22.75 12 22.75C9.96613 22.75 8.41903 20.9237 8.7534 18.9175L8.95825 17.6885C9.08979 16.8992 8.72525 16.1098 8.03913 15.6981L6.39743 14.7131C5.06517 13.9137 4.25 12.474 4.25 10.9203V10V3.98932ZM18.25 9.25H5.75V3.98932C5.75 3.30486 6.30486 2.75 6.98932 2.75H8.25V6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6V2.75H12.25V4C12.25 4.41421 12.5858 4.75 13 4.75C13.4142 4.75 13.75 4.41421 13.75 4V2.75H17.0107C17.6951 2.75 18.25 3.30486 18.25 3.98932V9.25Z" fill="currentColor"></path></svg>&nbsp;&nbsp;&nbsp;
+													<div>
+														<b>{{LANG switch_profile}}</b>
+														<p>{{LANG switch2_new_profile}}</p>
+													</div>
+												</div>
+											</li>
+										<?php } ?>
+									<?php } ?>
+									<li>
+										<a class="menu-option pointer" href="{{CONFIG site_url}}/settings/my_affiliates/{{ME username}}" data-ajax="load.php?app=settings&apph=settings&user=<?php echo($context['user_data']['username']) ?>&page=my_affiliates">
+											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M10 19.748V16.4c0-1.283.995-2.292 2.467-2.868A8.482 8.482 0 0 0 9.5 13c-1.89 0-3.636.617-5.047 1.66A8.017 8.017 0 0 0 10 19.748zm8.88-3.662C18.485 15.553 17.17 15 15.5 15c-2.006 0-3.5.797-3.5 1.4V20a7.996 7.996 0 0 0 6.88-3.914zM9.55 11.5a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5zm5.95 1a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"></path></svg>&nbsp;&nbsp;&nbsp;
+											<div>
+												<b>{{LANG my_affiliates}}</b>
+												<p>{{LANG see_my_affiliates}}</p>
+											</div>
+										</a>
+									</li>
+									<!-- <?php if ($config['business_account'] == 'on' && $context['user_data']['business_account']) { ?>
+										<li>
+											<a class="menu-option pointer" href="{{CONFIG site_url}}/account_analytics" data-ajax="load.php?app=account_analytics&apph=account_analytics">
+												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M11 2.05V13h10.95c-.501 5.053-4.765 9-9.95 9-5.523 0-10-4.477-10-10 0-5.185 3.947-9.449 9-9.95zm2 0A10.003 10.003 0 0 1 21.95 11H13V2.05z"></path><path fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12c0-4.478 2.943-8.268 7-9.542v2.124A8.003 8.003 0 0 0 12 20a8.003 8.003 0 0 0 7.418-5h2.124c-1.274 4.057-5.064 7-9.542 7zm9.95-9H11V2.05c.329-.033.663-.05 1-.05 5.523 0 10 4.477 10 10 0 .337-.017.671-.05 1zM13 4.062V11h6.938A8.004 8.004 0 0 0 13 4.062z"></path></svg>
+												&nbsp;&nbsp;&nbsp;
+												<div>
+													<b>{{LANG account_overview}}</b>
+													<p>{{LANG see_my_account_analytics}}</p>
+												</div>
+											</a>
+										</li>
+									<?php } ?> -->
+								<?php } ?>
+								<?php if (!$context['is_owner']) { ?>
+									<li>
+										<div class="menu-option pointer" onclick="about();">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,8.39C13.57,9.4 15.42,10 17.42,10C18.2,10 18.95,9.91 19.67,9.74C19.88,10.45 20,11.21 20,12C20,16.41 16.41,20 12,20C9,20 6.39,18.34 5,15.89L6.75,14V13A1.25,1.25 0 0,1 8,11.75A1.25,1.25 0 0,1 9.25,13V14H12M16,11.75A1.25,1.25 0 0,0 14.75,13A1.25,1.25 0 0,0 16,14.25A1.25,1.25 0 0,0 17.25,13A1.25,1.25 0 0,0 16,11.75Z"></path></svg>&nbsp;&nbsp;&nbsp;
+											<div>
+												<b>{{LANG about}} <?php echo $context["user_data"]["username"]; ?></b>
+												<p>{{LANG see_more_info_about}} <?php echo $context["user_data"]["username"]; ?></p>
+											</div>
+										</div>
+									</li>
+									<?php if ($context['is_blocked']) { ?>
+									<li>
+										<div class="menu-option pointer" onclick="bl_unblock_user('<?php echo($context['user_data']['user_id']) ?>',-1);">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M10 4A4 4 0 0 0 6 8A4 4 0 0 0 10 12A4 4 0 0 0 14 8A4 4 0 0 0 10 4M17.5 13C15 13 13 15 13 17.5C13 20 15 22 17.5 22C20 22 22 20 22 17.5C22 15 20 13 17.5 13M10 14C5.58 14 2 15.79 2 18V20H11.5A6.5 6.5 0 0 1 11 17.5A6.5 6.5 0 0 1 11.95 14.14C11.32 14.06 10.68 14 10 14M17.5 14.5C19.16 14.5 20.5 15.84 20.5 17.5C20.5 18.06 20.35 18.58 20.08 19L16 14.92C16.42 14.65 16.94 14.5 17.5 14.5M14.92 16L19 20.08C18.58 20.35 18.06 20.5 17.5 20.5C15.84 20.5 14.5 19.16 14.5 17.5C14.5 16.94 14.65 16.42 14.92 16Z"></path></svg>&nbsp;&nbsp;&nbsp;
+											<div>
+												<b>{{LANG unblock}} <?php echo $context["user_data"]["username"]; ?></b>
+												<p>{{LANG unblock2see_user}}</p>
+											</div>
+										</div>
+									</li>
+									<?php } else{ ?>
+										<li>
+											<div class="menu-option pointer" onclick="bl_unblock_user('<?php echo($context['user_data']['user_id']) ?>',1);">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M15,14C17.67,14 23,15.33 23,18V20H7V18C7,15.33 12.33,14 15,14M15,12A4,4 0 0,1 11,8A4,4 0 0,1 15,4A4,4 0 0,1 19,8A4,4 0 0,1 15,12M5,9.59L7.12,7.46L8.54,8.88L6.41,11L8.54,13.12L7.12,14.54L5,12.41L2.88,14.54L1.46,13.12L3.59,11L1.46,8.88L2.88,7.46L5,9.59Z"></path></svg>&nbsp;&nbsp;&nbsp;
+												<div>
+													<b>{{LANG block}} <?php echo $context["user_data"]["username"]; ?></b>
+													<p>{{LANG block}} {{LANG to_stop_seeing}}</p>
+												</div>
+											</div>
+										</li>
+									<?php } ?>
+									<li>
+										<div class="menu-option pointer" onclick="rep();">
+											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 330 330" style="enable-background:new 0 0 330 330;" fill="currentColor" xml:space="preserve"><path d="M299,21.042C280.121,6.883,259.896,0,237.169,0c-26.777,0-52.532,9.658-77.44,18.997c-23.432,8.786-45.563,17.085-66.898,17.087c-0.003,0-0.006,0-0.009,0c-13.852,0-26.033-3.503-37.821-10.92V15.017c0-8.284-6.716-15-15-15s-15,6.716-15,15v18.025v180.149V315c0,8.284,6.716,15,15,15s15-6.716,15-15v-76.05c11.9,4.868,24.428,7.283,37.831,7.283c26.776,0,52.53-9.657,77.436-18.997c23.434-8.787,45.566-17.087,66.902-17.087c16.22,0,30.148,4.78,43.831,15.042c4.545,3.409,10.626,3.958,15.708,1.417S305,218.873,305,213.191V33.042C305,28.321,302.777,23.875,299,21.042z M275,187.409c-11.898-4.867-24.43-7.26-37.831-7.26c-26.775,0-52.529,9.658-77.436,18.997c-23.433,8.787-45.566,17.087-66.902,17.087c-13.857,0-26.042-3.489-37.831-10.905V58.825c11.896,4.866,24.425,7.26,37.821,7.259c0.003,0,0.009,0,0.012,0c26.772-0.003,52.524-9.659,77.429-18.997C193.696,38.3,215.831,30,237.169,30c13.858,0,26.042,3.489,37.831,10.905V187.409z"/></svg>&nbsp;&nbsp;&nbsp;
+											<div>
+												<b>{{LANG flag}} <?php echo $context["user_data"]["username"]; ?></b>
+												<p>{{LANG flag2let_us_know}}</p>
+											</div>
+										</div>
+									</li>
+								<?php } ?>
+							</ul>
+						</div>
+						<?php } ?>
+					</div>
+		            <div class="clear"></div>
+		            <p class="fluid status">
+						<!-- <b class="name">
+						    <?php echo $context['user_data']['name']; ?>
+					    </b><br> -->
+						<?php echo($context['user_data']['about']) ?>
+					</p>
+					<ul class="navbar-nav nav justify-content-center social-links">
+						<?php if($context['user_data']['website']){ ?>
+							<li class="btn-social">
+								<a class="ocean-web" href="<?php echo($context['user_data']['website']) ?>" rel="nofollow" target="__blank">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#fff" d="M17.9,17.39C17.64,16.59 16.89,16 16,16H15V13A1,1 0 0,0 14,12H8V10H10A1,1 0 0,0 11,9V7H13A2,2 0 0,0 15,5V4.59C17.93,5.77 20,8.64 20,12C20,14.08 19.2,15.97 17.9,17.39M11,19.93C7.05,19.44 4,16.08 4,12C4,11.38 4.08,10.78 4.21,10.21L9,15V16A2,2 0 0,0 11,18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg>
+								</a>
+							</li>
+						<?php } ?>
+						<?php if($context['user_data']['facebook']){ ?>
+							<li class="btn-social">
+								<a class="facebook" href="<?php echo($context['user_data']['facebook']) ?>" rel="nofollow" target="__blank">
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="#fff" d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"></path></svg>
+								</a>
+							</li>
+						<?php } ?>
+						<?php if($context['user_data']['twitter']){ ?>
+							<li class="btn-social">
+								<a class="twitter" href="<?php echo($context['user_data']['twitter']) ?>" rel="nofollow" target="__blank">
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="#fff" d="M22.162 5.656a8.384 8.384 0 0 1-2.402.658A4.196 4.196 0 0 0 21.6 4c-.82.488-1.719.83-2.656 1.015a4.182 4.182 0 0 0-7.126 3.814 11.874 11.874 0 0 1-8.62-4.37 4.168 4.168 0 0 0-.566 2.103c0 1.45.738 2.731 1.86 3.481a4.168 4.168 0 0 1-1.894-.523v.052a4.185 4.185 0 0 0 3.355 4.101 4.21 4.21 0 0 1-1.89.072A4.185 4.185 0 0 0 7.97 16.65a8.394 8.394 0 0 1-6.191 1.732 11.83 11.83 0 0 0 6.41 1.88c7.693 0 11.9-6.373 11.9-11.9 0-.18-.005-.362-.013-.54a8.496 8.496 0 0 0 2.087-2.165z"></path></svg>
+								</a>
+							</li>
+						<?php } ?>
+						<?php if($context['user_data']['instagram']){ ?>
+							<li class="btn-social">
+								<a class="instagram" href="<?php echo($context['user_data']['instagram']) ?>" rel="nofollow" target="__blank">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="feather-instagram" fill="#fff"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"></path></svg>
+								</a>
+							</li>
+						<?php } ?>
+						<?php if($context['user_data']['discord']){ ?>
+							<li class="btn-social">
+								<a class="discord" href="<?php echo($context['user_data']['discord']) ?>" rel="nofollow" target="__blank">
+									<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 48 48"><rect width="68" height="68" fill="#7289DA" rx="24"></rect><path fill="#fff" d="M36.0367 15.7798C33.8349 14.0183 31.1927 13.1376 28.4037 12.9908L27.9633 13.4312C30.4587 14.0183 32.6606 15.1926 34.7156 16.8073C32.2202 15.4862 29.4312 14.6055 26.4954 14.3119C25.6147 14.1651 24.8807 14.1651 24 14.1651C23.1193 14.1651 22.3853 14.1651 21.5046 14.3119C18.5688 14.6055 15.7798 15.4862 13.2844 16.8073C15.3394 15.1926 17.5413 14.0183 20.0367 13.4312L19.5963 12.9908C16.8073 13.1376 14.1651 14.0183 11.9633 15.7798C9.46789 20.4771 8.14679 25.7615 8 31.1926C10.2018 33.5413 13.2844 35.0092 16.5138 35.0092C16.5138 35.0092 17.5413 33.8349 18.2752 32.8073C16.367 32.367 14.6055 31.3394 13.4312 29.7248C14.4587 30.3119 15.4862 30.8991 16.5138 31.3394C17.8349 31.9266 19.156 32.2202 20.4771 32.5138C21.6514 32.6605 22.8257 32.8073 24 32.8073C25.1743 32.8073 26.3486 32.6605 27.5229 32.5138C28.844 32.2202 30.1651 31.9266 31.4862 31.3394C32.5138 30.8991 33.5413 30.3119 34.5688 29.7248C33.3945 31.3394 31.633 32.367 29.7248 32.8073C30.4587 33.8349 31.4862 35.0092 31.4862 35.0092C34.7156 35.0092 37.7982 33.5413 40 31.1926C39.8532 25.7615 38.5321 20.4771 36.0367 15.7798ZM19.156 28.5504C17.6881 28.5504 16.367 27.2293 16.367 25.6147C16.367 24 17.6881 22.6789 19.156 22.6789C20.6239 22.6789 21.945 24 21.945 25.6147C21.945 27.2293 20.6239 28.5504 19.156 28.5504ZM28.844 28.5504C27.3761 28.5504 26.055 27.2293 26.055 25.6147C26.055 24 27.3761 22.6789 28.844 22.6789C30.3119 22.6789 31.633 24 31.633 25.6147C31.633 27.2293 30.3119 28.5504 28.844 28.5504Z"></path></svg>
+								</a>
+							</li>
+						<?php } ?>
+						<?php if($context['user_data']['deviantart']){ ?>
+							<li class="btn-social">
+								<a class="deviantart" href="<?php echo($context['user_data']['deviantart']) ?>" rel="nofollow" target="__blank">
+									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16" height="16" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><polygon style="fill:#fff;" points="403.118,280.58 314.542,280.58 400.227,117.195 400.227,10.199 311.305,10.199 258.382,109.243 111.05,109.243 111.05,229.974 193.868,229.974 108.881,389.022 108.881,501.801 198.525,501.801 251.226,401.312 403.118,401.312 "/><g><path style="fill:#fff;" d="M198.525,512h-89.645c-5.633,0-10.199-4.567-10.199-10.199V389.022c0-1.678,0.413-3.328,1.204-4.807l76.969-144.042H111.05c-5.633,0-10.199-4.567-10.199-10.199V109.242c0-5.632,4.566-10.199,10.199-10.199h141.217l50.042-93.65C304.084,2.072,307.542,0,311.305,0h88.922c5.633,0,10.199,4.567,10.199,10.199v106.996c0,1.65-0.401,3.276-1.167,4.738l-77.852,148.448h71.712c5.633,0,10.199,4.567,10.199,10.199v120.732c0,5.632-4.566,10.199-10.199,10.199H257.394l-49.835,95.027C205.797,509.897,202.319,512,198.525,512z M119.08,491.602h73.278l49.835-95.027c1.761-3.359,5.24-5.462,9.032-5.462h141.693V290.779h-78.378c-3.57,0-6.88-1.866-8.727-4.921c-1.847-3.055-1.962-6.854-0.305-10.015l84.518-161.16V20.398h-72.608l-50.042,93.65c-1.774,3.32-5.231,5.392-8.996,5.392H121.249v100.334h72.619c3.584,0,6.905,1.882,8.748,4.955c1.843,3.074,1.937,6.89,0.248,10.05l-83.783,156.794v100.028H119.08z"/><path style="fill:#fff;" d="M329.434,378.39h-63.235c-5.633,0-10.199-4.567-10.199-10.199c0-5.632,4.566-10.199,10.199-10.199h63.235c5.633,0,10.199,4.567,10.199,10.199C339.633,373.823,335.067,378.39,329.434,378.39z"/><path style="fill:#fff;" d="M369.211,378.39h-6.12c-5.633,0-10.199-4.567-10.199-10.199c0-5.632,4.566-10.199,10.199-10.199h6.12c5.633,0,10.199,4.567,10.199,10.199C379.41,373.823,374.844,378.39,369.211,378.39z"/></g></svg>
+								</a>
+							</li>
+						<?php } ?>
+						<?php if($context['user_data']['github']){ ?>
+							<li class="btn-social">
+								<a class="github" href="<?php echo($context['user_data']['github']) ?>" rel="nofollow" target="__blank">
+									<svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2C6.475 2 2 6.475 2 12a9.994 9.994 0 0 0 6.838 9.488c.5.087.687-.213.687-.476 0-.237-.013-1.024-.013-1.862-2.512.463-3.162-.612-3.362-1.175-.113-.288-.6-1.175-1.025-1.413-.35-.187-.85-.65-.013-.662.788-.013 1.35.725 1.538 1.025.9 1.512 2.338 1.087 2.912.825.088-.65.35-1.087.638-1.337-2.225-.25-4.55-1.113-4.55-4.938 0-1.088.387-1.987 1.025-2.688-.1-.25-.45-1.275.1-2.65 0 0 .837-.262 2.75 1.026a9.28 9.28 0 0 1 2.5-.338c.85 0 1.7.112 2.5.337 1.912-1.3 2.75-1.024 2.75-1.024.55 1.375.2 2.4.1 2.65.637.7 1.025 1.587 1.025 2.687 0 3.838-2.337 4.688-4.562 4.938.362.312.675.912.675 1.85 0 1.337-.013 2.412-.013 2.75 0 .262.188.574.688.474A10.016 10.016 0 0 0 22 12c0-5.525-4.475-10-10-10z" fill="#fff"/></g></svg>
+								</a>
+							</li>
+						<?php } ?>
+						<?php if($context['user_data']['pinterest']){ ?>
+							<li class="btn-social">
+								<a class="pinterest" href="<?php echo($context['user_data']['pinterest']) ?>" rel="nofollow" target="__blank">
+									<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24"><path fill="#fff" d="M9.04,21.54C10,21.83 10.97,22 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2A10,10 0 0,0 2,12C2,16.25 4.67,19.9 8.44,21.34C8.35,20.56 8.26,19.27 8.44,18.38L9.59,13.44C9.59,13.44 9.3,12.86 9.3,11.94C9.3,10.56 10.16,9.53 11.14,9.53C12,9.53 12.4,10.16 12.4,10.97C12.4,11.83 11.83,13.06 11.54,14.24C11.37,15.22 12.06,16.08 13.06,16.08C14.84,16.08 16.22,14.18 16.22,11.5C16.22,9.1 14.5,7.46 12.03,7.46C9.21,7.46 7.55,9.56 7.55,11.77C7.55,12.63 7.83,13.5 8.29,14.07C8.38,14.13 8.38,14.21 8.35,14.36L8.06,15.45C8.06,15.62 7.95,15.68 7.78,15.56C6.5,15 5.76,13.18 5.76,11.71C5.76,8.55 8,5.68 12.32,5.68C15.76,5.68 18.44,8.15 18.44,11.43C18.44,14.87 16.31,17.63 13.26,17.63C12.29,17.63 11.34,17.11 11,16.5L10.33,18.87C10.1,19.73 9.47,20.88 9.04,21.57V21.54Z"></path></svg>
+								</a>
+							</li>
+						<?php } ?>
+						<?php if($context['user_data']['tiktok']){ ?>
+							<li class="btn-social">
+								<a class="tiktok" href="<?php echo($context['user_data']['tiktok']) ?>" rel="nofollow" target="__blank">
+									<svg width="18" height="18" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="#fff"><path d="M16.708 0.027c1.745-0.027 3.48-0.011 5.213-0.027 0.105 2.041 0.839 4.12 2.333 5.563 1.491 1.479 3.6 2.156 5.652 2.385v5.369c-1.923-0.063-3.855-0.463-5.6-1.291-0.76-0.344-1.468-0.787-2.161-1.24-0.009 3.896 0.016 7.787-0.025 11.667-0.104 1.864-0.719 3.719-1.803 5.255-1.744 2.557-4.771 4.224-7.88 4.276-1.907 0.109-3.812-0.411-5.437-1.369-2.693-1.588-4.588-4.495-4.864-7.615-0.032-0.667-0.043-1.333-0.016-1.984 0.24-2.537 1.495-4.964 3.443-6.615 2.208-1.923 5.301-2.839 8.197-2.297 0.027 1.975-0.052 3.948-0.052 5.923-1.323-0.428-2.869-0.308-4.025 0.495-0.844 0.547-1.485 1.385-1.819 2.333-0.276 0.676-0.197 1.427-0.181 2.145 0.317 2.188 2.421 4.027 4.667 3.828 1.489-0.016 2.916-0.88 3.692-2.145 0.251-0.443 0.532-0.896 0.547-1.417 0.131-2.385 0.079-4.76 0.095-7.145 0.011-5.375-0.016-10.735 0.025-16.093z"/></svg>
+								</a>
+							</li>
+						<?php } ?>
+						<?php if($context['user_data']['youtube']){ ?>
+							<li class="btn-social">
+								<a class="youtube" href="<?php echo($context['user_data']['youtube']) ?>" rel="nofollow" target="__blank">
+									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 461.001 461.001" width="18" height="18" style="enable-background:new 0 0 461.001 461.001;" xml:space="preserve"><g><path style="fill:#fff;" d="M365.257,67.393H95.744C42.866,67.393,0,110.259,0,163.137v134.728c0,52.878,42.866,95.744,95.744,95.744h269.513c52.878,0,95.744-42.866,95.744-95.744V163.137C461.001,110.259,418.135,67.393,365.257,67.393z M300.506,237.056l-126.06,60.123c-3.359,1.602-7.239-0.847-7.239-4.568V168.607c0-3.774,3.982-6.22,7.348-4.514l126.06,63.881C304.363,229.873,304.298,235.248,300.506,237.056z"/></g></svg>
+								</a>
+							</li>
+						<?php } ?>
+						<?php if($context['user_data']['spotify']){ ?>
+							<li class="btn-social">
+								<a class="spotify" href="<?php echo($context['user_data']['spotify']) ?>" rel="nofollow" target="__blank">
+									<svg width="18" height="18" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="#fff"><path d="M16 0c-8.803 0-16 7.197-16 16s7.197 16 16 16c8.803 0 16-7.197 16-16s-7.12-16-16-16zM23.36 23.12c-0.319 0.479-0.881 0.64-1.36 0.317-3.76-2.317-8.479-2.797-14.083-1.52-0.557 0.165-1.037-0.235-1.199-0.72-0.156-0.557 0.24-1.036 0.719-1.197 6.084-1.36 11.365-0.803 15.521 1.76 0.563 0.24 0.64 0.88 0.401 1.36zM25.281 18.719c-0.401 0.563-1.12 0.803-1.683 0.401-4.317-2.641-10.88-3.437-15.916-1.839-0.641 0.156-1.365-0.161-1.521-0.803-0.161-0.64 0.156-1.359 0.797-1.52 5.844-1.761 13.041-0.876 18 2.161 0.484 0.24 0.724 1.041 0.323 1.599zM25.443 14.24c-5.125-3.043-13.683-3.36-18.563-1.839-0.801 0.239-1.599-0.24-1.839-0.964-0.239-0.797 0.24-1.599 0.959-1.839 5.683-1.681 15.041-1.359 20.964 2.161 0.719 0.401 0.957 1.36 0.557 2.079-0.401 0.563-1.36 0.801-2.079 0.401z"/></svg>
+								</a>
+							</li>
+						<?php } ?>
+						<?php if($context['user_data']['twitch']){ ?>
+							<li class="btn-social">
+								<a class="twitch" href="<?php echo($context['user_data']['twitch']) ?>" rel="nofollow" target="__blank">
+									<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.75 3.4C2.75 2.76487 3.26487 2.25 3.9 2.25H20.1C20.7351 2.25 21.25 2.76487 21.25 3.4V14.8716C21.25 15.1766 21.1288 15.4691 20.9132 15.6848L18.191 18.407C17.9753 18.6226 17.6828 18.7438 17.3778 18.7438H12.8386L9.38728 22.1951C8.78881 22.7936 7.76553 22.3697 7.76553 21.5234V18.7438H3.9C3.26487 18.7438 2.75 18.2289 2.75 17.5938V3.4ZM4.25 3.75V17.2438H8.11553C8.75066 17.2438 9.26553 17.7587 9.26553 18.3938V20.1955L11.8805 17.5806C12.0961 17.3649 12.3886 17.2438 12.6936 17.2438H17.2328L19.75 14.7266V3.75H4.25ZM10.4689 6.95C10.8832 6.95 11.2189 7.28579 11.2189 7.7V11.972C11.2189 12.3863 10.8832 12.722 10.4689 12.722C10.0547 12.722 9.71894 12.3863 9.71894 11.972V7.7C9.71894 7.28579 10.0547 6.95 10.4689 6.95ZM15.4845 6.95C15.8987 6.95 16.2345 7.28579 16.2345 7.7V11.972C16.2345 12.3863 15.8987 12.722 15.4845 12.722C15.0703 12.722 14.7345 12.3863 14.7345 11.972V7.7C14.7345 7.28579 15.0703 6.95 15.4845 6.95Z" fill="#fff"/></svg>
+								</a>
+							</li>
+						<?php } ?>
+						<?php if($context['user_data']['patreon']){ ?>
+							<li class="btn-social">
+								<a class="patreon" href="<?php echo($context['user_data']['patreon']) ?>" rel="nofollow" target="__blank">
+									<svg width="18" height="18" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="#fff"><path d="M 4 4 L 4 28 L 11 28 L 11 4 L 4 4 z M 21.5 4 C 16.813 4 13 7.813 13 12.5 C 13 17.187 16.813 21 21.5 21 C 26.187 21 30 17.187 30 12.5 C 30 7.813 26.187 4 21.5 4 z M 6 6 L 9 6 L 9 26 L 6 26 L 6 6 z M 21.5 6 C 25.084 6 28 8.916 28 12.5 C 28 16.084 25.084 19 21.5 19 C 17.916 19 15 16.084 15 12.5 C 15 8.916 17.916 6 21.5 6 z"/></svg>
+								</a>
+							</li>
+						<?php } ?>
+					</ul>					
+					<?php if(empty($context['user_data']['about'])) { ?><div style="margin-top: 15px;"></div><?php } ?>
+					<div class="oceana-buttons">
+						<?php if (!$context['is_owner'] && !$context['is_blocked'] && IS_LOGGED) { ?>
+							<?php if ($context['is_following'] === 2) { ?>
+								<button class="btn btn-mat requested" onclick="xh_follow(<?php echo $context['user_data']['user_id']; ?> ,this);" data-profile-type="<?php echo($context['user_data']['p_privacy']) ?>" id="data-btn">
+									<span><svg width="24" height="24" viewBox="0 -64 640 640" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M496 224c-79.6 0-144 64.4-144 144s64.4 144 144 144 144-64.4 144-144-64.4-144-144-144zm64 150.3c0 5.3-4.4 9.7-9.7 9.7h-60.6c-5.3 0-9.7-4.4-9.7-9.7v-76.6c0-5.3 4.4-9.7 9.7-9.7h12.6c5.3 0 9.7 4.4 9.7 9.7V352h38.3c5.3 0 9.7 4.4 9.7 9.7v12.6zM320 368c0-27.8 6.7-54.1 18.2-77.5-8-1.5-16.2-2.5-24.6-2.5h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h347.1c-45.3-31.9-75.1-84.5-75.1-144zm-96-112c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128z"/></svg> {{LANG requested}}</span>
+								</button>
+							<?php }elseif($context['is_following'] > 0){ ?>
+								<button class="btn btn-mat main following" onclick="unfollow_user();" id="unfollow-btn">
+									<span><svg style="width: 24px;height:24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M8 12.052c1.995 0 3.5-1.505 3.5-3.5s-1.505-3.5-3.5-3.5-3.5 1.505-3.5 3.5 1.505 3.5 3.5 3.5zM9 13H7c-2.757 0-5 2.243-5 5v1h12v-1c0-2.757-2.243-5-5-5zm11.294-4.708-4.3 4.292-1.292-1.292-1.414 1.414 2.706 2.704 5.712-5.702z"/></svg> {{LANG following}}</span>
+								</button>
+							<?php } else{ ?>
+								<button class="btn btn-mat follow" onclick="xh_follow(<?php echo $context['user_data']['user_id']; ?>,this);" data-profile-type="<?php echo($context['user_data']['p_privacy']) ?>" id="data-btn">
+									<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M14 14.252V22H4a8 8 0 0 1 10-7.748zM12 13c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm6 4v-3h2v3h3v2h-3v3h-2v-3h-3v-2h3z"></path></svg> {{LANG follow}}</span>
+								</button>
+							<?php } ?>
+							<?php if (($config['private_photos'] == 'on' || $config['private_videos'] == 'on') && $context['user_data']['subscribe_price'] > 0) { ?>
+								<?php if ($context['user_data']['am_i_subscribed'] > 0) { ?>
+									<button class="btn btn-mat subscribed" onclick="UnSubscribe(<?php echo $context['user_data']['user_id']; ?>,'unSubscribe');">
+										<span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="17" height="17" style="margin-top:-3px" fill="currentColor" viewBox="0 0 458.714 458.714" style="enable-background:new 0 0 458.714 458.714;" xml:space="preserve"><g><path d="M210.163,22.11c3.605-7.304,11.044-11.929,19.189-11.929c8.146-0.001,15.585,4.624,19.19,11.928l54.307,110.03c3.117,6.315,9.142,10.693,16.112,11.706l121.43,17.646c8.061,1.171,14.758,6.818,17.275,14.564c2.517,7.747,0.418,16.251-5.415,21.937l-87.869,85.648c-5.044,4.916-7.345,11.999-6.155,18.941l20.739,120.936c1.377,8.028-1.924,16.142-8.513,20.929c-6.59,4.788-15.326,5.419-22.536,1.629l-108.606-57.095c-6.234-3.277-13.681-3.277-19.915,0l-108.608,57.094c-7.21,3.791-15.946,3.159-22.536-1.629c-6.59-4.788-9.89-12.902-8.513-20.93l20.744-120.934c1.19-6.942-1.111-14.025-6.154-18.942L6.463,197.991c-5.832-5.686-7.932-14.189-5.415-21.937c2.517-7.747,9.214-13.393,17.274-14.564l121.431-17.647c6.97-1.013,12.996-5.391,16.113-11.707L210.163,22.11z"/></g></svg> {{LANG subscribed}}</span>
+									</button>
+								<?php }else{ ?>
+								<button class="btn btn-mat subscribe" onclick="Subscribe(<?php echo $context['user_data']['user_id']; ?>,<?php echo $context['user_data']['subscribe_price']; ?>,'hide');">
+									<span><svg width="24" height="24" viewBox="0 0 96 96" style="margin-top:-3px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" ><path d="M95.7073,36.5936a6.0024,6.0024,0,0,0-4.8457-4.084L64.963,28.742,53.3789,5.2751c-2.0156-4.1016-8.7422-4.1016-10.7578,0L31.037,28.742,5.1384,32.51A5.9979,5.9979,0,0,0,1.81,42.74L20.5545,61.01,16.1307,86.8029a5.9994,5.9994,0,0,0,8.7071,6.3223L48,80.9493,71.1622,93.1252a5.9994,5.9994,0,0,0,8.7071-6.3223L75.4455,61.01,94.19,42.74A6.0013,6.0013,0,0,0,95.7073,36.5936ZM64.8106,54.6171a5.9988,5.9988,0,0,0-1.7226,5.3087l2.9,16.9219L50.7949,68.8614a5.994,5.994,0,0,0-5.59,0L30.0116,76.8477l2.9-16.9219a5.9988,5.9988,0,0,0-1.7226-5.3087L18.8963,42.6347,35.8827,40.162A5.9891,5.9891,0,0,0,40.4,36.8807L48,21.4881l7.6,15.3926a5.9891,5.9891,0,0,0,4.5176,3.2813l16.9864,2.4727Z"/></svg> {{LANG subscribe}} <?php echo $context['user_data']['subscribe_price']; ?></span>
+								</button>
+								<?php } ?>
+							<?php } ?>
+							<?php if ($context['chat_privacy'] == 1) { ?>
+								<a class="btn btn-mat message" href="{{CONFIG site_url}}/messages/<?php echo($context['user_data']['username']) ?>" data-ajax="load.php?app=messages&apph=messages&uname=<?php echo($context['user_data']['username']) ?>">
+									<span><svg fill="currentColor" viewBox="0 0 24 24" style="width: 21px;height:21px"><path d="M12.003 1.131a10.487 10.487 0 00-10.87 10.57 10.194 10.194 0 003.412 7.771l.054 1.78a1.67 1.67 0 002.342 1.476l1.935-.872a11.767 11.767 0 003.127.416 10.488 10.488 0 0010.87-10.57 10.487 10.487 0 00-10.87-10.57zm5.786 9.001l-2.566 3.983a1.577 1.577 0 01-2.278.42l-2.452-1.84a.63.63 0 00-.759.002l-2.556 2.049a.659.659 0 01-.96-.874L8.783 9.89a1.576 1.576 0 012.277-.42l2.453 1.84a.63.63 0 00.758-.003l2.556-2.05a.659.659 0 01.961.874z"></path></svg> {{LANG message}}</span>
+								</a>
+							<?php } ?>
+						<?php } ?>
+						<?php if($context['is_blocked']){ ?>
+							<button class="btn btn-mat success" onclick="bl_unblock_user('<?php echo($context['user_data']['user_id']) ?>',-1);">
+								<span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-unlock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg> {{LANG unblock}}</span>
+							</button>
+						<?php } ?>
+						<?php if($context['is_owner']){ ?>
+							<a class="btn btn-mat settings" href="{{CONFIG site_url}}/settings/general/<?php echo($context['user_data']['username']) ?>" data-ajax="load.php?app=settings&apph=settings&user=<?php echo($context['user_data']['username']) ?>&page=general">
+								<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 20px;height:20px"><path fill="currentColor" d="M9.243 19H21v2H3v-4.243l9.9-9.9 4.242 4.244L9.242 19zm5.07-13.556l2.122-2.122a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414l-2.122 2.121-4.242-4.242z"></path><path fill="none" d="M5 19h1.414l9.314-9.314-1.414-1.414L5 17.586V19zm16 2H3v-4.243L16.435 3.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L9.243 19H21v2zM15.728 6.858l1.414 1.414 1.414-1.414-1.414-1.414-1.414 1.414z"></path></svg> {{LANG profile_settings}}</span>
+							</a>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+			<div class="navbar-bottom">
+				<ul class="navbar-nav nav justify-content-center">
+					<li class="nav-item <?php if($context['page'] == 'posts'){ ?>active<?php } ?>">
+						<a class="nav__item"  <?php if($context['navbar'] && $context['total_posts'] > 0 ){ ?>href="<?php echo($context['user_data']['url']) ?>/posts" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo($context['user_data']['username']) ?>&page=posts"<?php } ?>>
+							<?php if ($context['total_posts'] > 1) {?>
+								<?php echo FormattedNumber($context['total_posts']); ?>&nbsp;<span>{{LANG posts}}</span>
+							<?php } else { ?>
+								<?php echo $context['total_posts']; ?>&nbsp;<span>{{LANG cpost}}</span>
+							<?php } ?>
+						</a>
+					</li>
+					<?php if($config['upload_tiles'] == 'on') {?>
+					<li class="nav-item <?php if($context['page'] == 'tiles'){ ?>active<?php } ?>">
+						<a class="nav__item"  <?php if($context['navbar'] && $context['user_tiles']  > 0){ ?>href="<?php echo($context['user_data']['url']) ?>/tiles" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo($context['user_data']['username']) ?>&page=tiles"<?php } ?>>
+							<?php if ($context['user_tiles'] > 1) { ?>
+								<?php echo FormattedNumber($context['user_tiles']); ?>&nbsp;<span>{{LANG tiles}}</span>
+							<?php } else { ?>
+								<?php echo $context['user_tiles']; ?>&nbsp;<span>{{LANG tile}}</span>
+							<?php } ?>
+						</a>
+					</li>
+					<?php } ?>
+					<li class="nav-item <?php if($context['page'] == 'followers'){ ?>active<?php } ?>">
+						<a class="nav__item"  <?php if($context['navbar'] && $context['user_followers']){ ?>href="<?php echo($context['user_data']['url']) ?>/followers" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo($context['user_data']['username']) ?>&page=followers"<?php } ?>>
+							<?php echo FormattedNumber($context['user_followers']); ?>&nbsp;<span>{{LANG followers}}</span>
+						</a>
+					</li>
+					<li class="nav-item <?php if($context['page'] == 'following'){ ?>active<?php } ?>">
+						<a class="nav__item"  <?php if($context['navbar'] && $context['user_following']){ ?>href="<?php echo($context['user_data']['url']) ?>/following" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo($context['user_data']['username']) ?>&page=following"<?php } ?>>
+							<?php echo FormattedNumber($context['user_following']); ?>&nbsp;<span>{{LANG following}}</span>
+						</a>
+					</li>
+					<?php if (($config['private_photos'] == 'on' || $config['private_videos'] == 'on') && ($context['user_data']['show_subscribers'] == 1 || ($context['user_data']['show_subscribers'] != 1 && $context['is_owner']))) { ?>
+					<li class="nav-item <?php if($context['page'] == 'subscriptions'){ ?>active<?php } ?>">
+						<a class="nav__item"  <?php if(!empty($context['subscriptions_count'])){ ?>href="<?php echo($context['user_data']['url']) ?>/subscriptions" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo($context['user_data']['username']) ?>&page=subscriptions"<?php } ?>>
+							<?php echo FormattedNumber($context['subscriptions_count']); ?>&nbsp;<span>{{LANG subscriptions}}</span>
+						</a>
+					</li>
+					<?php } ?>
+					<?php if (($context['user_data']['show_favorites'] == 1 || ($context['user_data']['show_favorites'] != 1 && $context['is_owner']))) { ?>
+						<li class="nav-item <?php if($context['page'] == 'favourites'){ ?>active<?php } ?>">
+							<a class="nav__item"  <?php if($context['favourites']){ ?>href="<?php echo($context['user_data']['url']) ?>/favourites" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo($context['user_data']['username']) ?>&page=favourites"<?php } ?>>
+								<?php if ($context['favourites'] > 1) { ?>
+									<?php echo FormattedNumber($context['favourites']); ?>&nbsp;<span>{{LANG favourites}}</span>
+								<?php } else { ?>
+									<?php echo $context['favourites']; ?>&nbsp;<span>{{LANG favourite}}</span>
+								<?php } ?>
+							</a>
+						</li>
+					<?php } ?>
+					<?php if($context['is_owner']){ ?>
+						<?php if($context['user_data']['is_pro']){ ?>
+						<li class="nav-item <?php if($context['page'] == 'boosted_posts'){ ?>active<?php } ?>">
+							<a class="nav__item"  <?php if($context['boosted_count']){ ?>href="<?php echo($context['user_data']['url']) ?>/boosted_posts" data-ajax="load.php?app=profile&apph=profile&uname=<?php echo($context['user_data']['username']) ?>&page=boosted_posts"<?php } ?>>
+								<?php echo FormattedNumber($context['boosted_count']); ?>&nbsp;<span>{{LANG boosted_posts}}</span>
+							</a>
+						</li>
+						<?php } ?>
+					<?php } ?>
+				</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+		<?php if($context['is_blocked']){ ?>
+			<br><br><br>
+			<div class="hexagon-nav-banner container">
+                <img class="nav-banner-icon" src="{{CONFIG site_url}}/media/img/pnga/pngegg15.png" alt="...">
+                <p class="nav-banner-title"><?php echo $context["user_data"]["username"]; ?> {{LANG u_blocked_}}</p>
+                <p class="nav-banner-text">{{LANG u_should_nblock}} <?php if ($context["user_data"]["gender"] == 'male') { ?> {{LANG him}} <?php } else { ?> {{LANG her}} <?php } ?> {{LANG 2see_profile}}</p>
+            </div><br>
+			<?php } else { ?>
+			<?php if ($context['user_data']['p_privacy'] == 0 && !$context['is_owner']) { ?><br>
+				<div class="hexagon-nav-banner container notallow">
+					<img class="nav-banner-icon" src="{{CONFIG site_url}}/media/img/pnga/pngegg17.png" alt="...">
+					<p class="nav-banner-title">{{LANG prof_is_private}}</p>
+					<p class="nav-banner-text"><?php echo $context["user_data"]["username"]; ?> {{LANG isnot_allow}}</p>
+				</div>
+			<?php } elseif ($context['user_data']['p_privacy'] == 1 && !$context['is_owner'] && (!$context['is_following'] || $context['is_following'] === 2)) { ?><br><br><br>
+				<div class="hexagon-nav-banner container foll2see">
+					<img class="nav-banner-icon" src="{{CONFIG site_url}}/media/img/pnga/pngegg16.png" alt="...">
+					<p class="nav-banner-title">{{LANG prof_is_private}}</p>
+					<p class="nav-banner-text">{{LANG follow2see}} <?php echo $context["user_data"]["username"]; ?> {{LANG 2see_profile}}</p>
+				</div>
+			<?php } else { ?>
+				<div class="container container-profile">
+					<div class="fluid include">
+						<?php include $context['content_page']; ?>
+					</div>
+				</div>
+			<?php } ?>
+	    <?php } ?>
+	</div>
+<?php if ($context['user_data']['business_account'] == 1 && $config['business_account'] == 'on') { ?>
+	<?php if (!empty($context['user_data']['b_phone']) || !empty($context['user_data']['b_site']) || !empty($context['user_data']['b_email'])) { ?>
+		<nav class="cd-stretchy-nav">
+			<a class="cd-nav-trigger" href="javascript:void(0);"><span aria-hidden="true"></span></a>
+			<ul class="list-unstyled">
+				<?php if (!empty($context['user_data']['b_phone'])) { ?>
+					<li><a href="javascript:void(0);" onclick="window.location.href = 'tel:<?php echo($context['user_data']['b_phone']) ?>'"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z" /></svg> <span>{{LANG call_now}}</span></a></li>
+				<?php } ?>
+				<?php if (!empty($context['user_data']['b_site'])) { ?>
+					<li><a href="<?php echo($context['user_data']['b_site']) ?>" rel="nofollow" target="__blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z" /></svg> <span><?php echo lang($context['call_action'][$context['user_data']['b_site_action']]); ?></span></a></li>
+				<?php } ?>
+				<?php if (!empty($context['user_data']['b_email'])) { ?>
+					<li><a href="javascript:void(0);" onclick="window.location.href = 'mailto:<?php echo($context['user_data']['b_email']) ?>'"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" /></svg> <span>{{LANG send_email}}</span></a></li>
+				<?php } ?>
+			</ul>
+			<span aria-hidden="true" class="stretchy-nav-bg"></span>
+		</nav>
+	<?php } ?>
+<?php } ?>
+<?php
+include $context['direct'].'/main/templates/modals/delete-post.html';
+include $context['direct'].'/main/templates/modals/embed_post.html';
+include $context['direct'].'/main/templates/modals/delete-comment.html'; ?>
+<div class="confirm--modal blockuser-modal" style="display: none !important;">
+	<div class="confirm--modal--inner">
+		<div class="confirm--modal--body">
+			<h5><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-slash" color="var(--fumigram)" style="background-color: rgba(255, 0, 72, 0.25)"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg> 
+				{{LANG block}} <?php echo $context["user_data"]["username"]; ?>?
+			</h5>
+			<p>{{LANG confirm_block_user}}</p>
+		</div>
+		<div class="confirm--modal--footer">
+			<button class="btn btn-mat default" data-confirm--modal-dismiss>{{LANG cancel}}</button>
+			<button class="btn btn-mat main block--user">{{LANG block}}</button>
+		</div>
+	</div>
+</div>
+
+<div class="confirm--modal unblockuser-modal" style="display: none !important;">
+	<div class="confirm--modal--inner">
+		<div class="confirm--modal--body">
+			<h5><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user" color="#4caf50" style="background-color: rgba(43, 190, 48, 0.25)"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg> 
+				{{LANG unblock}} <?php echo $context["user_data"]["username"]; ?>?</h5>
+			<p>{{LANG confirm_unblock_user}}</p>
+		</div>
+		<div class="confirm--modal--footer">
+			<button class="btn btn-mat default" data-confirm--modal-dismiss>{{LANG cancel}}</button>
+			<button class="btn btn-mat success block--user">{{LANG unblock}}</button>
+		</div>
+	</div>
+</div>
+
+<div class="confirm--modal unfollow-modal" style="display: none !important;">
+	<div class="confirm--modal--inner">
+		<div class="confirm--modal--body">
+			<h5><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user" color="var(--fumigram)" style="background-color: rgba(255, 0, 72, 0.25)"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg> 
+				{{LANG unfollow}} <?php echo $context["user_data"]["username"]; ?>?
+			</h5>
+			<p>{{LANG unfollow_user}} <?php echo $context["user_data"]["name"]; ?> {{LANG u_loose}} <span style="color: var(--fumigram);"><?php echo $config['point_unfollow_users_cost']; ?> {{LANG points}}.</span> {{LANG consider_unfollow}}
+				 {{LANG confirm_unfollow_user}}</p>
+		</div>
+		<div class="confirm--modal--footer">
+			<button class="btn btn-mat default" data-confirm--modal-dismiss>{{LANG cancel}}</button>
+			<button class="btn btn-mat main" onclick="unfollow(<?php echo $context['user_data']['user_id']; ?>,this);" data-profile-type="<?php echo($context['user_data']['p_privacy']) ?>">{{LANG unfollow}}</button>
+		</div>
+	</div>
+</div>
+
+<div class="modal--menu" id="banner-modal" style="display: none !important">
+	<div class="modal-outer">
+		<div class="modal-inner">
+			<h5 class="title">
+				<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" class="feather"><path fill="currentColor" d="M23 18V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2zM8.9 12.98l2.1 2.53 3.1-3.99c.2-.26.6-.26.8.01l3.51 4.68c.25.33.01.8-.4.8H6.02c-.42 0-.65-.48-.39-.81L8.12 13c.19-.26.57-.27.78-.02z"></path></svg>
+				{{LANG update_banner}}
+				<span class="pull-right" data-confirm--modal-dismiss>
+					<div class="popup-close cancel">
+						<svg class="popup-close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+					</div>
+				</span>
+			</h5>
+			<form id="banner-form">
+				<div class="banner-preview small" onclick="document.getElementById('banner').click();" id="drop-banner">
+					<div class="fak_image" data-block="drop-zone">
+						<div class="banner-preview-cover">
+							<img src="<?php echo $context['user_data']['banner']; ?>" alt="..." id="banner_image">
+						</div>
+						<div class="banner-preview-info">
+							<img src="{{CONFIG site_url}}/media/img/pnga/pngegg13.png">
+						</div>
+						<input type="file" name="banner" id="banner" class="hidden" accept="image/x-png,image/jpg,image/jpeg" onchange="handleFiles(this.files)">
+						<input type="hidden" name="hash" value="<?php echo($context['csrf_token']) ?>">
+					</div>
+			    </div> 
+			</form>
+			<p class="text-center preview-text">{{LANG click2upload}}</p>
+		</div>
+	</div>
+</div>
+
+<div class="modal--menu" id="profile-modal" style="display: none !important;">
+	<div class="modal-outer">
+		<div class="modal-inner">
+			<h5 class="title">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,8.39C13.57,9.4 15.42,10 17.42,10C18.2,10 18.95,9.91 19.67,9.74C19.88,10.45 20,11.21 20,12C20,16.41 16.41,20 12,20C9,20 6.39,18.34 5,15.89L6.75,14V13A1.25,1.25 0 0,1 8,11.75A1.25,1.25 0 0,1 9.25,13V14H12M16,11.75A1.25,1.25 0 0,0 14.75,13A1.25,1.25 0 0,0 16,14.25A1.25,1.25 0 0,0 17.25,13A1.25,1.25 0 0,0 16,11.75Z"></path></svg>
+				{{LANG switch_profile}}
+				<span class="pull-right" data-confirm--modal-dismiss>
+					<div class="popup-close cancel">
+						<svg class="popup-close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+					</div>
+				</span>
+			</h5>
+			<div class="ac_points dt_sections tokens" style="padding: 26px;">
+				<div class="credit-plans">
+					<div class="cr-plans">
+						<p><input type="radio" name="profile" id="nova" value="nova" <?php if($context['user_data']['profile'] == 2){ ?> checked <?php } ?>>
+							<label for="nova" class="r-profile">
+								<span class="title">{{LANG nova_profile}}</span>
+							</label>
+						</p>
+						<p><input type="radio" name="profile" id="linear" value="linear" <?php if($context['user_data']['profile'] == 1){ ?> checked <?php } ?>>
+							<label for="linear" class="r-profile">
+								<span class="title">{{LANG default_profile}}</span>
+							</label>
+						</p>
+				    </div>
+					<br>
+					<div class="cr-plans">
+						<p><input type="radio" name="profile" id="oceana" value="oceana" <?php if($context['user_data']['profile'] == 5){ ?> checked <?php } ?>>
+							<label for="oceana" class="r-profile">
+								<span class="title">{{LANG oceana_profile}}</span>
+							</label>
+						</p>
+						<?php if($context['user_data']['hexagon'] > 0){ ?>
+							<p><input type="radio" name="profile" id="hexagon" value="hexagon" <?php if($context['user_data']['profile'] == 6){ ?> checked <?php } ?>>
+								<label for="hexagon" class="r-profile">
+									<span class="title">{{LANG hexagon_profile}}</span>
+								</label>
+							</p>
+						<?php } ?>
+				    </div>
+			    </div>
+		    </div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="about-modal" style="display: none !important;">
+    <div class="about-dialog about-centered modal-screen">
+        <div class="about-content">
+            <div class="modal-body">
+                <div class="mp modal-gx-n">
+                    <div class="about-img about-round">
+                        <div class="modal_cover" style="background-image: url('<?php echo $context['user_data']['banner']; ?>');">
+							<div class="mp-banner-coverbg"></div>
+						</div>
+                        <div class="m-close close" data-confirm--modal-dismiss><button type="button" class="btn-close btn-close-arrow"></button></div>
+                    </div>
+                    <div class="about-body">
+                        <div class="ma">
+                            <img class="avatar-img" src="<?php echo $context['user_data']['avatar']; ?>" alt="..">
+                        </div>
+                        <h4 class="mb-1"><?php echo $context['user_data']['name']; ?></h4>
+                    </div>
+					<div class="container about-bar">
+						<?php if(!empty($context['user_data']['about'])) { ?>
+						    <div class="about-txt"><?php echo $context['user_data']['about']; ?></div>
+						<?php } ?>
+						<div class="all-social">
+							<?php if($context['user_data']['website'] && $context['user_data']['web_name']){ ?>
+								<a class="hexagon-info-btn p-button social website" href="<?php echo ($context['user_data']['website']) ?>" rel="nofollow" target="__blank">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#fff" d="M17.9,17.39C17.64,16.59 16.89,16 16,16H15V13A1,1 0 0,0 14,12H8V10H10A1,1 0 0,0 11,9V7H13A2,2 0 0,0 15,5V4.59C17.93,5.77 20,8.64 20,12C20,14.08 19.2,15.97 17.9,17.39M11,19.93C7.05,19.44 4,16.08 4,12C4,11.38 4.08,10.78 4.21,10.21L9,15V16A2,2 0 0,0 11,18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg>
+									<?php echo $context['user_data']['web_name']; ?>
+								</a>
+							<?php } ?>
+							<?php if($context['user_data']['facebook']){ ?>&nbsp;
+								<a class="hexagon-info-btn p-button social facebook" href="<?php echo($context['user_data']['facebook']) ?>" rel="nofollow" target="__blank">
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="23" height="23"><path fill="#fff" d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"></path></svg> Facebook
+								</a>
+							<?php } ?>
+							<?php if($context['user_data']['twitter']){ ?>&nbsp;
+								<a class="hexagon-info-btn p-button social twitter" href="<?php echo($context['user_data']['twitter']) ?>" rel="nofollow" target="__blank">
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="#fff" d="M22.162 5.656a8.384 8.384 0 0 1-2.402.658A4.196 4.196 0 0 0 21.6 4c-.82.488-1.719.83-2.656 1.015a4.182 4.182 0 0 0-7.126 3.814 11.874 11.874 0 0 1-8.62-4.37 4.168 4.168 0 0 0-.566 2.103c0 1.45.738 2.731 1.86 3.481a4.168 4.168 0 0 1-1.894-.523v.052a4.185 4.185 0 0 0 3.355 4.101 4.21 4.21 0 0 1-1.89.072A4.185 4.185 0 0 0 7.97 16.65a8.394 8.394 0 0 1-6.191 1.732 11.83 11.83 0 0 0 6.41 1.88c7.693 0 11.9-6.373 11.9-11.9 0-.18-.005-.362-.013-.54a8.496 8.496 0 0 0 2.087-2.165z"></path></svg> Twitter
+								</a>
+							<?php } ?>
+							<?php if($context['user_data']['youtube']){ ?>&nbsp;
+								<a class="hexagon-info-btn p-button social youtube" href="<?php echo($context['user_data']['youtube']) ?>" rel="nofollow" target="__blank">
+									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 461.001 461.001" width="20" height="20" style="enable-background:new 0 0 461.001 461.001;" xml:space="preserve"><g><path style="fill:#fff;" d="M365.257,67.393H95.744C42.866,67.393,0,110.259,0,163.137v134.728c0,52.878,42.866,95.744,95.744,95.744h269.513c52.878,0,95.744-42.866,95.744-95.744V163.137C461.001,110.259,418.135,67.393,365.257,67.393z M300.506,237.056l-126.06,60.123c-3.359,1.602-7.239-0.847-7.239-4.568V168.607c0-3.774,3.982-6.22,7.348-4.514l126.06,63.881C304.363,229.873,304.298,235.248,300.506,237.056z"/></g></svg> Youtube
+								</a>
+							<?php } ?>
+							<?php if($context['user_data']['instagram']){ ?>&nbsp;
+								<a class="hexagon-info-btn p-button social instagram" href="<?php echo($context['user_data']['instagram']) ?>" rel="nofollow" target="__blank">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="feather-instagram" fill="#fff"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"></path></svg> Instagram
+								</a>
+							<?php } ?>
+							<?php if($context['user_data']['discord']){ ?>&nbsp;
+								<a class="hexagon-info-btn p-button social discord" href="<?php echo($context['user_data']['discord']) ?>" rel="nofollow" target="__blank">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 48 48"><rect width="68" height="68" fill="#7289DA" rx="24"></rect><path fill="#fff" d="M36.0367 15.7798C33.8349 14.0183 31.1927 13.1376 28.4037 12.9908L27.9633 13.4312C30.4587 14.0183 32.6606 15.1926 34.7156 16.8073C32.2202 15.4862 29.4312 14.6055 26.4954 14.3119C25.6147 14.1651 24.8807 14.1651 24 14.1651C23.1193 14.1651 22.3853 14.1651 21.5046 14.3119C18.5688 14.6055 15.7798 15.4862 13.2844 16.8073C15.3394 15.1926 17.5413 14.0183 20.0367 13.4312L19.5963 12.9908C16.8073 13.1376 14.1651 14.0183 11.9633 15.7798C9.46789 20.4771 8.14679 25.7615 8 31.1926C10.2018 33.5413 13.2844 35.0092 16.5138 35.0092C16.5138 35.0092 17.5413 33.8349 18.2752 32.8073C16.367 32.367 14.6055 31.3394 13.4312 29.7248C14.4587 30.3119 15.4862 30.8991 16.5138 31.3394C17.8349 31.9266 19.156 32.2202 20.4771 32.5138C21.6514 32.6605 22.8257 32.8073 24 32.8073C25.1743 32.8073 26.3486 32.6605 27.5229 32.5138C28.844 32.2202 30.1651 31.9266 31.4862 31.3394C32.5138 30.8991 33.5413 30.3119 34.5688 29.7248C33.3945 31.3394 31.633 32.367 29.7248 32.8073C30.4587 33.8349 31.4862 35.0092 31.4862 35.0092C34.7156 35.0092 37.7982 33.5413 40 31.1926C39.8532 25.7615 38.5321 20.4771 36.0367 15.7798ZM19.156 28.5504C17.6881 28.5504 16.367 27.2293 16.367 25.6147C16.367 24 17.6881 22.6789 19.156 22.6789C20.6239 22.6789 21.945 24 21.945 25.6147C21.945 27.2293 20.6239 28.5504 19.156 28.5504ZM28.844 28.5504C27.3761 28.5504 26.055 27.2293 26.055 25.6147C26.055 24 27.3761 22.6789 28.844 22.6789C30.3119 22.6789 31.633 24 31.633 25.6147C31.633 27.2293 30.3119 28.5504 28.844 28.5504Z"></path></svg> Discord
+								</a>
+							<?php } ?>
+							<?php if($context['user_data']['github']){ ?>&nbsp;
+								<a class="hexagon-info-btn p-button social github" href="<?php echo($context['user_data']['github']) ?>" rel="nofollow" target="__blank">
+									<svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2C6.475 2 2 6.475 2 12a9.994 9.994 0 0 0 6.838 9.488c.5.087.687-.213.687-.476 0-.237-.013-1.024-.013-1.862-2.512.463-3.162-.612-3.362-1.175-.113-.288-.6-1.175-1.025-1.413-.35-.187-.85-.65-.013-.662.788-.013 1.35.725 1.538 1.025.9 1.512 2.338 1.087 2.912.825.088-.65.35-1.087.638-1.337-2.225-.25-4.55-1.113-4.55-4.938 0-1.088.387-1.987 1.025-2.688-.1-.25-.45-1.275.1-2.65 0 0 .837-.262 2.75 1.026a9.28 9.28 0 0 1 2.5-.338c.85 0 1.7.112 2.5.337 1.912-1.3 2.75-1.024 2.75-1.024.55 1.375.2 2.4.1 2.65.637.7 1.025 1.587 1.025 2.687 0 3.838-2.337 4.688-4.562 4.938.362.312.675.912.675 1.85 0 1.337-.013 2.412-.013 2.75 0 .262.188.574.688.474A10.016 10.016 0 0 0 22 12c0-5.525-4.475-10-10-10z" fill="#fff"/></g></svg> Github
+								</a>
+							<?php } ?>
+							<?php if($context['user_data']['deviantart']){ ?>&nbsp;
+								<a class="hexagon-info-btn p-button social deviantart" href="<?php echo($context['user_data']['deviantart']) ?>" rel="nofollow" target="__blank">
+									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="20" height="20" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><polygon style="fill:#fff;" points="403.118,280.58 314.542,280.58 400.227,117.195 400.227,10.199 311.305,10.199 258.382,109.243 111.05,109.243 111.05,229.974 193.868,229.974 108.881,389.022 108.881,501.801 198.525,501.801 251.226,401.312 403.118,401.312 "/><g><path style="fill:#fff;" d="M198.525,512h-89.645c-5.633,0-10.199-4.567-10.199-10.199V389.022c0-1.678,0.413-3.328,1.204-4.807l76.969-144.042H111.05c-5.633,0-10.199-4.567-10.199-10.199V109.242c0-5.632,4.566-10.199,10.199-10.199h141.217l50.042-93.65C304.084,2.072,307.542,0,311.305,0h88.922c5.633,0,10.199,4.567,10.199,10.199v106.996c0,1.65-0.401,3.276-1.167,4.738l-77.852,148.448h71.712c5.633,0,10.199,4.567,10.199,10.199v120.732c0,5.632-4.566,10.199-10.199,10.199H257.394l-49.835,95.027C205.797,509.897,202.319,512,198.525,512z M119.08,491.602h73.278l49.835-95.027c1.761-3.359,5.24-5.462,9.032-5.462h141.693V290.779h-78.378c-3.57,0-6.88-1.866-8.727-4.921c-1.847-3.055-1.962-6.854-0.305-10.015l84.518-161.16V20.398h-72.608l-50.042,93.65c-1.774,3.32-5.231,5.392-8.996,5.392H121.249v100.334h72.619c3.584,0,6.905,1.882,8.748,4.955c1.843,3.074,1.937,6.89,0.248,10.05l-83.783,156.794v100.028H119.08z"/><path style="fill:#fff;" d="M329.434,378.39h-63.235c-5.633,0-10.199-4.567-10.199-10.199c0-5.632,4.566-10.199,10.199-10.199h63.235c5.633,0,10.199,4.567,10.199,10.199C339.633,373.823,335.067,378.39,329.434,378.39z"/><path style="fill:#fff;" d="M369.211,378.39h-6.12c-5.633,0-10.199-4.567-10.199-10.199c0-5.632,4.566-10.199,10.199-10.199h6.12c5.633,0,10.199,4.567,10.199,10.199C379.41,373.823,374.844,378.39,369.211,378.39z"/></g></svg> Deviantart
+								</a>
+							<?php } ?>
+							<?php if($context['user_data']['pinterest']){ ?>&nbsp;
+								<a class="hexagon-info-btn p-button social pinterest" href="<?php echo($context['user_data']['pinterest']) ?>" rel="nofollow" target="__blank">
+									<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="#fff" d="M9.04,21.54C10,21.83 10.97,22 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2A10,10 0 0,0 2,12C2,16.25 4.67,19.9 8.44,21.34C8.35,20.56 8.26,19.27 8.44,18.38L9.59,13.44C9.59,13.44 9.3,12.86 9.3,11.94C9.3,10.56 10.16,9.53 11.14,9.53C12,9.53 12.4,10.16 12.4,10.97C12.4,11.83 11.83,13.06 11.54,14.24C11.37,15.22 12.06,16.08 13.06,16.08C14.84,16.08 16.22,14.18 16.22,11.5C16.22,9.1 14.5,7.46 12.03,7.46C9.21,7.46 7.55,9.56 7.55,11.77C7.55,12.63 7.83,13.5 8.29,14.07C8.38,14.13 8.38,14.21 8.35,14.36L8.06,15.45C8.06,15.62 7.95,15.68 7.78,15.56C6.5,15 5.76,13.18 5.76,11.71C5.76,8.55 8,5.68 12.32,5.68C15.76,5.68 18.44,8.15 18.44,11.43C18.44,14.87 16.31,17.63 13.26,17.63C12.29,17.63 11.34,17.11 11,16.5L10.33,18.87C10.1,19.73 9.47,20.88 9.04,21.57V21.54Z"></path></svg> Pinterest
+								</a>
+							<?php } ?>
+							<?php if($context['user_data']['tiktok']){ ?>&nbsp;
+								<a class="hexagon-info-btn p-button social tiktok" href="<?php echo($context['user_data']['tiktok']) ?>" rel="nofollow" target="__blank">
+									<svg width="20" height="20" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="#fff"><path d="M16.708 0.027c1.745-0.027 3.48-0.011 5.213-0.027 0.105 2.041 0.839 4.12 2.333 5.563 1.491 1.479 3.6 2.156 5.652 2.385v5.369c-1.923-0.063-3.855-0.463-5.6-1.291-0.76-0.344-1.468-0.787-2.161-1.24-0.009 3.896 0.016 7.787-0.025 11.667-0.104 1.864-0.719 3.719-1.803 5.255-1.744 2.557-4.771 4.224-7.88 4.276-1.907 0.109-3.812-0.411-5.437-1.369-2.693-1.588-4.588-4.495-4.864-7.615-0.032-0.667-0.043-1.333-0.016-1.984 0.24-2.537 1.495-4.964 3.443-6.615 2.208-1.923 5.301-2.839 8.197-2.297 0.027 1.975-0.052 3.948-0.052 5.923-1.323-0.428-2.869-0.308-4.025 0.495-0.844 0.547-1.485 1.385-1.819 2.333-0.276 0.676-0.197 1.427-0.181 2.145 0.317 2.188 2.421 4.027 4.667 3.828 1.489-0.016 2.916-0.88 3.692-2.145 0.251-0.443 0.532-0.896 0.547-1.417 0.131-2.385 0.079-4.76 0.095-7.145 0.011-5.375-0.016-10.735 0.025-16.093z"/></svg> Tiktok
+								</a>
+							<?php } ?>
+							<?php if($context['user_data']['twitch']){ ?>&nbsp;
+								<a class="hexagon-info-btn p-button social twitch" href="<?php echo($context['user_data']['twitch']) ?>" rel="nofollow" target="__blank">
+									<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.75 3.4C2.75 2.76487 3.26487 2.25 3.9 2.25H20.1C20.7351 2.25 21.25 2.76487 21.25 3.4V14.8716C21.25 15.1766 21.1288 15.4691 20.9132 15.6848L18.191 18.407C17.9753 18.6226 17.6828 18.7438 17.3778 18.7438H12.8386L9.38728 22.1951C8.78881 22.7936 7.76553 22.3697 7.76553 21.5234V18.7438H3.9C3.26487 18.7438 2.75 18.2289 2.75 17.5938V3.4ZM4.25 3.75V17.2438H8.11553C8.75066 17.2438 9.26553 17.7587 9.26553 18.3938V20.1955L11.8805 17.5806C12.0961 17.3649 12.3886 17.2438 12.6936 17.2438H17.2328L19.75 14.7266V3.75H4.25ZM10.4689 6.95C10.8832 6.95 11.2189 7.28579 11.2189 7.7V11.972C11.2189 12.3863 10.8832 12.722 10.4689 12.722C10.0547 12.722 9.71894 12.3863 9.71894 11.972V7.7C9.71894 7.28579 10.0547 6.95 10.4689 6.95ZM15.4845 6.95C15.8987 6.95 16.2345 7.28579 16.2345 7.7V11.972C16.2345 12.3863 15.8987 12.722 15.4845 12.722C15.0703 12.722 14.7345 12.3863 14.7345 11.972V7.7C14.7345 7.28579 15.0703 6.95 15.4845 6.95Z" fill="#fff"/></svg> Twitch
+								</a>
+							<?php } ?>
+							<?php if($context['user_data']['spotify']){ ?>&nbsp;
+								<a class="hexagon-info-btn p-button social spotify" href="<?php echo($context['user_data']['spotify']) ?>" rel="nofollow" target="__blank">
+									<svg width="20" height="20" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="#fff"><path d="M16 0c-8.803 0-16 7.197-16 16s7.197 16 16 16c8.803 0 16-7.197 16-16s-7.12-16-16-16zM23.36 23.12c-0.319 0.479-0.881 0.64-1.36 0.317-3.76-2.317-8.479-2.797-14.083-1.52-0.557 0.165-1.037-0.235-1.199-0.72-0.156-0.557 0.24-1.036 0.719-1.197 6.084-1.36 11.365-0.803 15.521 1.76 0.563 0.24 0.64 0.88 0.401 1.36zM25.281 18.719c-0.401 0.563-1.12 0.803-1.683 0.401-4.317-2.641-10.88-3.437-15.916-1.839-0.641 0.156-1.365-0.161-1.521-0.803-0.161-0.64 0.156-1.359 0.797-1.52 5.844-1.761 13.041-0.876 18 2.161 0.484 0.24 0.724 1.041 0.323 1.599zM25.443 14.24c-5.125-3.043-13.683-3.36-18.563-1.839-0.801 0.239-1.599-0.24-1.839-0.964-0.239-0.797 0.24-1.599 0.959-1.839 5.683-1.681 15.041-1.359 20.964 2.161 0.719 0.401 0.957 1.36 0.557 2.079-0.401 0.563-1.36 0.801-2.079 0.401z"/></svg> Spotify
+								</a>
+							<?php } ?>
+							<?php if($context['user_data']['patreon']){ ?>&nbsp;
+								<a class="hexagon-info-btn p-button social patreon" href="<?php echo($context['user_data']['patreon']) ?>" rel="nofollow" target="__blank">
+									<svg width="20" height="20" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="#fff"><path d="M 4 4 L 4 28 L 11 28 L 11 4 L 4 4 z M 21.5 4 C 16.813 4 13 7.813 13 12.5 C 13 17.187 16.813 21 21.5 21 C 26.187 21 30 17.187 30 12.5 C 30 7.813 26.187 4 21.5 4 z M 6 6 L 9 6 L 9 26 L 6 26 L 6 6 z M 21.5 6 C 25.084 6 28 8.916 28 12.5 C 28 16.084 25.084 19 21.5 19 C 17.916 19 15 16.084 15 12.5 C 15 8.916 17.916 6 21.5 6 z"/></svg> Patreon
+								</a>
+							<?php } ?>
+						</div>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php if (!$context['is_owner']) { ?>
+	<div class="modal--menu" id="report-profile" style="display: none !important;">
+		<div class="modal-outer">
+			<div class="modal-inner">
+				<h5 class="title">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users" color="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16"></line></svg> 
+					{{LANG report}} <?php echo $context["user_data"]["username"]; ?>
+					<span class="pull-right" data-confirm--modal-dismiss>
+						<div class="popup-close cancel">
+							<svg class="popup-close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+						</div>
+					</span>
+				</h5>
+				<ul class="list-group">
+					<li class="list-group-item">
+						<p><label><input type="radio" name="report" value="3" data-id="<?php echo($context['user_data']['user_id']) ?>"><span class="type"><span class="r-text">{{LANG report_t3}}</span></span></label></p>
+					</li>
+					<li class="list-group-item">
+						<p><label><input type="radio" name="report" value="4" data-id="<?php echo($context['user_data']['user_id']) ?>"><span class="type"><span class="r-text">{{LANG report_t4}}</span></span></label></p>
+					</li>
+					<li class="list-group-item">
+						<p><label><input type="radio" name="report" value="7" data-id="<?php echo($context['user_data']['user_id']) ?>"><span class="type"><span class="r-text">{{LANG report_t7}}</span></span></label></p>
+					</li>
+					<li class="list-group-item">
+						<p><label><input type="radio" name="report" value="8" data-id="<?php echo($context['user_data']['user_id']) ?>"><span class="type"><span class="r-text">{{LANG report_t8}}</span></span></label></p>
+					</li>
+					<li class="list-group-item">
+						<p><label><input type="radio" name="report" value="2" data-id="<?php echo($context['user_data']['user_id']) ?>"><span class="type"><span class="r-text">{{LANG report_t2}}</span></span></label></p>
+					</li>
+					<li class="list-group-item">
+						<p><label><input type="radio" name="report" value="6" data-id="<?php echo($context['user_data']['user_id']) ?>"><span class="type"><span class="r-text">{{LANG report_t6}}</span></span></label></p>
+					</li>
+					<br>
+					<form id="verify-profile-settings">
+						<div class="pg_mat_input">
+							<textarea placeholder="{{LANG write_your_report}}" rows="3" name="message" value="" data-id="<?php echo($context['user_data']['user_id']) ?>"></textarea>
+							<label>{{LANG write_your_report}}</label>
+						</div>
+					</form>
+					<div class="report-modal-footer">
+						<button class="btn btn-mat main" onclick="Report()" id="r-btn"><span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 330 330" width="20" height="20" style="enable-background:new 0 0 330 330;" fill="currentColor" xml:space="preserve"><path d="M299,21.042C280.121,6.883,259.896,0,237.169,0c-26.777,0-52.532,9.658-77.44,18.997c-23.432,8.786-45.563,17.085-66.898,17.087c-0.003,0-0.006,0-0.009,0c-13.852,0-26.033-3.503-37.821-10.92V15.017c0-8.284-6.716-15-15-15s-15,6.716-15,15v18.025v180.149V315c0,8.284,6.716,15,15,15s15-6.716,15-15v-76.05c11.9,4.868,24.428,7.283,37.831,7.283c26.776,0,52.53-9.657,77.436-18.997c23.434-8.787,45.566-17.087,66.902-17.087c16.22,0,30.148,4.78,43.831,15.042c4.545,3.409,10.626,3.958,15.708,1.417S305,218.873,305,213.191V33.042C305,28.321,302.777,23.875,299,21.042z M275,187.409c-11.898-4.867-24.43-7.26-37.831-7.26c-26.775,0-52.529,9.658-77.436,18.997c-23.433,8.787-45.566,17.087-66.902,17.087c-13.857,0-26.042-3.489-37.831-10.905V58.825c11.896,4.866,24.425,7.26,37.821,7.259c0.003,0,0.009,0,0.012,0c26.772-0.003,52.524-9.659,77.429-18.997C193.696,38.3,215.831,30,237.169,30c13.858,0,26.042,3.489,37.831,10.905V187.409z"></path></svg> {{LANG report}}</span></button>
+					</div>
+				</ul>
+			</div>
+			<div class="overlay hidden">
+				<div id="pp_loader"><div class="speeding_wheel"></div></div>
+			</div>
+		</div>
+	</div>
+    <?php   
+	    include $context['direct'].'/main/templates/modals/block-user.html';
+	    include $context['direct'].'/main/templates/modals/unblock-user.html'; ?>
+<?php } ?>
+
+<?php
+    include 'js/script.html';
+	include $context['direct'].'/main/templates/includes/lazy-load.html'; ?>

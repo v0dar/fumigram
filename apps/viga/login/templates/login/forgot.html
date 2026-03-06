@@ -1,0 +1,51 @@
+<style>.login_aside {background-image:linear-gradient(rgba(0, 0, 0, 0.332), rgba(0, 0, 0, 0.321)), url('{{CONFIG site_url}}/media/img/str/1094022.jpg');}</style>
+<div class="pg_auth_page">
+	<div class="login_aside">
+		<div class="to_auth_circle-1"></div>
+		<div class="to_auth_circle-2"></div>
+		<div class="login_aside_innr">
+			<p>{{CONFIG site_name}} {{LANG pixel_media_pa}}</p>
+			<a class="btn" href="{{CONFIG site_url}}/login"><span>{{LANG sign_in}}</span></a>
+		</div>
+	</div>
+	<div class="login_page">
+		<div class="login-pagez">
+			<a href="{{CONFIG site_url}}" class="logo"><img src="{{CONFIG site_url}}/media/img/<?php if ($_COOKIE['mode'] == 'night') { ?>logo<?php } else { ?>logo<?php } ?>.{{CONFIG logo_extension}}" alt="logo"></a>
+			<h3>{{LANG reset_password}}</h3>
+			<span>{{LANG password_res_instructions}}</span><br><br>
+			<form action="" class="form" id="reset-password">
+				<div class="pg_mat_input">
+					<input required="true" type="email" name="email" id="email" placeholder="{{LANG email}}" autofocus/>
+					<label for="email">{{LANG email}}</label>
+				</div>
+				<?php if ($config['recaptcha'] == 'on') { ?>
+					<div class="form-group" style="margin-top:10px;">
+						<div class="g-recaptcha" data-sitekey="{{CONFIG recaptcha_site_key}}"></div>
+					</div>
+				<?php } ?>
+				<input type="hidden" name="hash" value="<?php echo($context['csrf_token']) ?>">
+				<button class="btn btn-large btn-main" id="sign_submit" type="submit">{{LANG reset}}</button>
+			</form>
+			<p class="to_altr_auth_opt">{{LANG already_hv_an_account}} <a href="{{CONFIG site_url}}/login">{{LANG sign_in}}</a></p>
+		</div>
+	</div>
+</div>
+
+<script>
+	jQuery(document).ready(function($) {
+		$("form#reset-password").ajaxForm({
+			url: '<?php echo($context["rita"]) ?>/reset',
+			type: 'POST', dataType: 'json',
+			beforeSend: function(){
+				$('form').find('button[type="submit"]').attr('disabled','true');
+			}, success: function(data){
+				if (data.status == 200) {
+					Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">{{LANG login_success}}</div>'});
+				}else{
+					Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+				}
+	            $('form').find('button[type="submit"]').removeAttr('disabled');
+			}
+		})
+	});
+</script>

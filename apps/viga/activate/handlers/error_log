@@ -1,0 +1,116 @@
+[19-Nov-2024 18:28:06 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[16-Dec-2024 11:44:00 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[18-Dec-2024 18:30:49 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[18-Dec-2024 21:25:10 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[21-Dec-2024 09:03:35 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[22-Dec-2024 07:41:15 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[25-Dec-2024 12:05:48 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[28-Dec-2024 20:29:24 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[31-Dec-2024 07:07:47 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[02-Jan-2025 10:51:48 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[08-Jan-2025 03:12:10 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[10-Jan-2025 13:07:28 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[13-Jan-2025 19:40:15 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[16-Jan-2025 15:32:15 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[17-Jan-2025 23:41:32 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[19-Jan-2025 07:31:12 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[22-Jan-2025 07:12:25 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[26-Jan-2025 05:45:16 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[05-Feb-2025 08:02:03 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[12-Feb-2025 05:16:26 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[15-Feb-2025 02:49:55 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[05-Mar-2025 06:09:28 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[07-Mar-2025 16:18:13 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[17-Apr-2025 08:28:53 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[19-Apr-2025 04:39:47 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[10-Jul-2025 14:41:51 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[07-Sep-2025 01:47:20 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[27-Oct-2025 04:34:30 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2
+[31-Oct-2025 07:36:56 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/activate/handlers/activate.php on line 2

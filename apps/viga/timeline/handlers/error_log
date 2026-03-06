@@ -1,0 +1,76 @@
+[09-Dec-2024 04:31:10 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php on line 2
+[11-Dec-2024 12:44:10 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php on line 2
+[14-Dec-2024 16:55:10 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php on line 2
+[18-Dec-2024 16:35:05 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php on line 2
+[18-Dec-2024 23:08:58 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php on line 2
+[24-Dec-2024 16:16:58 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php on line 2
+[25-Dec-2024 07:38:37 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php on line 2
+[07-Jan-2025 04:20:36 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php on line 2
+[08-Jan-2025 15:41:02 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php on line 2
+[05-Feb-2025 08:02:01 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php on line 2
+[12-Feb-2025 05:14:36 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php on line 2
+[28-Feb-2025 17:27:16 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php on line 2
+[01-Mar-2025 03:19:24 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php on line 2
+[03-Mar-2025 10:34:24 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php on line 2
+[17-Apr-2025 08:28:30 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php on line 2
+[19-Apr-2025 04:39:28 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php on line 2
+[07-Sep-2025 00:16:48 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php on line 2
+[27-Oct-2025 04:35:14 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php on line 2
+[31-Oct-2025 05:22:29 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "IS_LOGGED" in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/timeline/handlers/timeline.php on line 2

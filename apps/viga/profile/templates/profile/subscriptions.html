@@ -1,0 +1,42 @@
+<?php if (!empty($context['subscriptions'])) { ?>
+<div class="container pg_grid_ppl_sugg">
+	<div class="row people followers--ls subscriptions_list">
+		<?php foreach ($context['subscriptions'] as $key => $udata) {
+			include 'includes/subscriptions_list.html';
+		} ?>
+	</div>
+</div>
+<script>
+	var user_id  = '<?php echo($context["user_data"]["user_id"]) ?>';
+	jQuery(document).ready(function($) {
+		var scrolled = 0;
+		var last_id  = 0;
+		$(window).scroll(function() {
+		    if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+		    	if (scrolled == 0) {
+	                scrolled    = 1;
+	                var last_id = 0;
+	                if ($('.subscri_list').length > 0) {
+	                	last_id = $('.subscri_list:last').attr('id');
+	                }
+	                if (!last_id) { return; }
+					$.ajax({
+						url: rita() + 'profile/load-user-subscriptions',
+						type: 'GET',
+						dataType: 'json',
+						data: {offset:last_id,user_id:user_id},
+					}).done(function(data) {
+						if (data.status == 200) {
+							$(".subscriptions_list").append($(data.html));
+							scrolled = 0;
+						}
+						else{
+							$(window).unbind('scroll');
+						}
+					});
+	       		}
+		    }
+		});
+	});
+</script>
+<?php } ?>

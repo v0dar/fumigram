@@ -1,0 +1,113 @@
+<div class="notification-settings noti-active">
+	<div class="valign settings-holder notification">
+		<img src="<?php echo($context['me']['avatar']) ?>" class="avatar cha" alt="...">
+		<div class="infoz">
+			<h5 title="<?php echo($context['me']['name']) ?>"><a><?php echo($context['me']['name']) ?></a></h5>
+			<p>{{LANG notif_settings}}</p>
+			<span>{{LANG choose_your_notify}}</span>
+		</div>
+	</div>
+	<form class="form pp_sett_form" id="edit-notification-settings">
+		<div class="fluid">
+			<p class="recieve_not">{{LANG receive_notif_when}}</p>
+			&nbsp;
+		</div>
+		<p class="pg_mat_switch switch">
+			<label>
+				{{LANG followed_me}}
+				<input type="checkbox" <?php if($context['me']['n_on_follow']){ ?> checked <?php } ?> id="on_follow" name="on_follow">
+				<span class="lever"></span>
+			</label>
+		</p>
+		<p class="pg_mat_switch switch">
+			<label>
+				{{LANG liked_my_post}}
+				<input type="checkbox" <?php if($context['me']['n_on_like']){ ?> checked <?php } ?> id="on_like_post" name="on_like_post">
+				<span class="lever"></span>
+			</label>
+		</p>
+		<p class="pg_mat_switch switch">
+			<label>
+				{{LANG earn_new_points}}
+				<input type="checkbox" <?php if($context['me']['n_on_points_earn']){ ?> checked <?php } ?> id="on_points_earn" name="on_points_earn">
+				<span class="lever"></span>
+			</label>
+		</p>
+		<p class="pg_mat_switch switch">
+			<label>
+				{{LANG loose_some_points}}
+				<input type="checkbox" <?php if($context['me']['n_on_points_loose']){ ?> checked <?php } ?> id="on_points_loose" name="on_points_loose">
+				<span class="lever"></span>
+			</label>
+		</p>
+		<p class="pg_mat_switch switch">
+			<label>
+				{{LANG liked_my_comment}}
+				<input type="checkbox" <?php if($context['me']['n_on_comment_like']){ ?> checked <?php } ?> id="on_comment_like" name="on_comment_like">
+				<span class="lever"></span>
+			</label>
+		</p>
+		<p class="pg_mat_switch switch">
+			<label>
+				{{LANG mentioned_me}}
+				<input type="checkbox" <?php if($context['me']['n_on_mention']){ ?> checked <?php } ?> id="on_mention" name="on_mention">
+				<span class="lever"></span>
+			</label>
+		</p>
+		<p class="pg_mat_switch switch">
+			<label>
+				{{LANG commented_my_post}}
+				<input type="checkbox" <?php if($context['me']['n_on_comment']){ ?> checked <?php } ?> id="on_commnet_post" name="on_commnet_post">
+				<span class="lever"></span>
+			</label>
+		</p>
+		<p class="pg_mat_switch switch">
+			<label>
+				{{LANG replied_my_comment}}
+				<input type="checkbox" <?php if($context['me']['n_on_comment_reply']){ ?> checked <?php } ?> id="on_comment_reply" name="on_comment_reply">
+				<span class="lever"></span>
+			</label>
+		</p>
+		<?php if ($context['me']['p_privacy'] == 0 || $context['me']['p_privacy'] == 1) { ?>
+		<p class="pg_mat_switch switch">
+			<label>
+				{{LANG on_follow_request}}
+				<input type="checkbox" <?php if($context['me']['n_on_follow_request']){ ?> checked <?php } ?> id="on_follow_request" name="on_follow_request">
+				<span class="lever"></span>
+			</label>
+		</p>
+		<p class="pg_mat_switch switch">
+			<label>
+				{{LANG rejected_my_follow_request}}
+				<input type="checkbox" <?php if($context['me']['n_on_rejected_request']){ ?> checked <?php } ?> id="on_rejected_request" name="on_rejected_request">
+				<span class="lever"></span>
+			</label>
+		</p>
+		<p class="pg_mat_switch switch">
+			<label>
+				{{LANG accepted_my_follow_request}}
+				<input type="checkbox" <?php if($context['me']['n_on_accept_request']){ ?> checked <?php } ?> id="on_accept_request" name="on_accept_request">
+				<span class="lever"></span>
+			</label>
+		</p>
+		<?php } ?>
+		<p class="pg_mat_switch switch">
+			<label>
+				{{LANG post_shared}}
+				<input type="checkbox" <?php if($context['me']['n_on_post_shared']){ ?> checked <?php } ?> id="on_post_shared" name="on_post_shared">
+				<span class="lever"></span>
+			</label>
+		</p>
+		<p class="pg_mat_switch switch">
+			<label>
+				{{LANG added_post_to_favorites}}
+				<input type="checkbox" <?php if($context['me']['n_on_post_saved']){ ?> checked <?php } ?> id="on_post_saved" name="on_post_saved">
+				<span class="lever"></span>
+			</label>
+		</p>
+		<div class="pg_sett_save"><button type="submit" class="btn btn-mat notification"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M11.602 13.76l1.412 1.412 8.466-8.466 1.414 1.414-9.88 9.88-6.364-6.364 1.414-1.414 2.125 2.125 1.413 1.412zm.002-2.828l4.952-4.953 1.41 1.41-4.952 4.953-1.41-1.41zm-2.827 5.655L7.364 18 1 11.636l1.414-1.414 1.413 1.413-.001.001 4.951 4.951z"></path></svg> {{LANG save_changes}}</span></button></div>
+		<input type="hidden" name="user_id" value="<?php echo($context['me']['user_id']) ?>">
+		<input type="hidden" name="hash" value="<?php echo($context['csrf_token']) ?>">
+	</form>
+</div>
+<?php include $context['direct'].'/settings/templates/settings/js/script.html'; ?>

@@ -1,0 +1,253 @@
+[25-Dec-2024 07:38:08 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[25-Dec-2024 07:38:08 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[25-Dec-2024 07:38:08 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[25-Dec-2024 07:38:08 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[25-Dec-2024 07:38:08 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[25-Dec-2024 07:38:08 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[25-Dec-2024 07:38:08 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[25-Dec-2024 07:38:08 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[25-Dec-2024 09:45:11 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[25-Dec-2024 09:45:11 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[25-Dec-2024 09:45:11 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[25-Dec-2024 09:45:11 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[25-Dec-2024 09:45:11 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[25-Dec-2024 09:45:11 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[25-Dec-2024 09:45:11 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[25-Dec-2024 09:45:11 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[02-Jan-2025 09:48:00 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[02-Jan-2025 09:48:00 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[02-Jan-2025 09:48:00 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[02-Jan-2025 09:48:00 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[02-Jan-2025 09:48:00 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[02-Jan-2025 09:48:00 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[02-Jan-2025 09:48:00 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[02-Jan-2025 09:48:00 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[05-Jan-2025 04:40:10 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[05-Jan-2025 04:40:10 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[05-Jan-2025 04:40:10 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[05-Jan-2025 04:40:10 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[05-Jan-2025 04:40:10 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[05-Jan-2025 04:40:10 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[05-Jan-2025 04:40:10 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[05-Jan-2025 04:40:10 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[07-Jan-2025 20:02:12 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[07-Jan-2025 20:02:12 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[07-Jan-2025 20:02:12 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[07-Jan-2025 20:02:12 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[07-Jan-2025 20:02:12 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[07-Jan-2025 20:02:12 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[07-Jan-2025 20:02:12 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[07-Jan-2025 20:02:12 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[09-Jan-2025 06:30:27 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[09-Jan-2025 06:30:27 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[09-Jan-2025 06:30:27 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[09-Jan-2025 06:30:27 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[09-Jan-2025 06:30:27 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[09-Jan-2025 06:30:27 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[09-Jan-2025 06:30:27 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[09-Jan-2025 06:30:27 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[11-Jan-2025 21:09:24 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[11-Jan-2025 21:09:24 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[11-Jan-2025 21:09:24 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[11-Jan-2025 21:09:24 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[11-Jan-2025 21:09:24 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[11-Jan-2025 21:09:24 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[11-Jan-2025 21:09:24 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[11-Jan-2025 21:09:24 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[15-Jan-2025 03:32:16 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[15-Jan-2025 03:32:16 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[15-Jan-2025 03:32:16 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[15-Jan-2025 03:32:16 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[15-Jan-2025 03:32:16 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[15-Jan-2025 03:32:16 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[15-Jan-2025 03:32:16 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[15-Jan-2025 03:32:16 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[19-Jan-2025 10:22:06 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[19-Jan-2025 10:22:06 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[19-Jan-2025 10:22:06 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[19-Jan-2025 10:22:06 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[19-Jan-2025 10:22:06 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[19-Jan-2025 10:22:06 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[19-Jan-2025 10:22:06 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[19-Jan-2025 10:22:06 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[22-Jan-2025 06:57:23 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[22-Jan-2025 06:57:23 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[22-Jan-2025 06:57:23 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[22-Jan-2025 06:57:23 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[22-Jan-2025 06:57:23 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[22-Jan-2025 06:57:23 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[22-Jan-2025 06:57:23 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[22-Jan-2025 06:57:23 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[26-Jan-2025 05:43:59 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[26-Jan-2025 05:43:59 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[26-Jan-2025 05:43:59 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[26-Jan-2025 05:43:59 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[26-Jan-2025 05:43:59 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[26-Jan-2025 05:43:59 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[26-Jan-2025 05:43:59 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[26-Jan-2025 05:43:59 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[05-Feb-2025 08:00:59 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[05-Feb-2025 08:00:59 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[05-Feb-2025 08:00:59 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[05-Feb-2025 08:00:59 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[05-Feb-2025 08:00:59 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[05-Feb-2025 08:00:59 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[05-Feb-2025 08:00:59 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[05-Feb-2025 08:00:59 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[07-Feb-2025 00:56:10 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[07-Feb-2025 00:56:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[07-Feb-2025 00:56:10 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[07-Feb-2025 00:56:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[07-Feb-2025 00:56:10 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[07-Feb-2025 00:56:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[07-Feb-2025 00:56:10 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[07-Feb-2025 00:56:10 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[07-Feb-2025 16:01:15 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[07-Feb-2025 16:01:15 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[07-Feb-2025 16:01:15 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[07-Feb-2025 16:01:15 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[07-Feb-2025 16:01:15 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[07-Feb-2025 16:01:15 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[07-Feb-2025 16:01:15 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[07-Feb-2025 16:01:15 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[07-Feb-2025 22:40:21 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[07-Feb-2025 22:40:21 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[07-Feb-2025 22:40:21 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[07-Feb-2025 22:40:21 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[07-Feb-2025 22:40:21 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[07-Feb-2025 22:40:21 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[07-Feb-2025 22:40:21 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[07-Feb-2025 22:40:21 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[10-Feb-2025 15:08:13 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[10-Feb-2025 15:08:13 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[10-Feb-2025 15:08:13 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[10-Feb-2025 15:08:13 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[10-Feb-2025 15:08:13 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[10-Feb-2025 15:08:13 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[10-Feb-2025 15:08:13 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[10-Feb-2025 15:08:13 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[12-Feb-2025 05:13:21 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[12-Feb-2025 05:13:21 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[12-Feb-2025 05:13:21 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[12-Feb-2025 05:13:21 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[12-Feb-2025 05:13:21 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[12-Feb-2025 05:13:21 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[12-Feb-2025 05:13:21 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[12-Feb-2025 05:13:21 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[17-Apr-2025 07:57:08 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[17-Apr-2025 07:57:08 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[17-Apr-2025 07:57:08 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[17-Apr-2025 07:57:08 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[17-Apr-2025 07:57:08 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[17-Apr-2025 07:57:08 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[17-Apr-2025 07:57:08 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[17-Apr-2025 07:57:08 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[01-Jul-2025 05:25:53 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[01-Jul-2025 05:25:53 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[01-Jul-2025 05:25:53 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[01-Jul-2025 05:25:53 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[01-Jul-2025 05:25:53 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[01-Jul-2025 05:25:53 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[01-Jul-2025 05:25:53 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[01-Jul-2025 05:25:53 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[07-Sep-2025 00:45:04 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[07-Sep-2025 00:45:04 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[07-Sep-2025 00:45:04 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[07-Sep-2025 00:45:04 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[07-Sep-2025 00:45:04 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[07-Sep-2025 00:45:04 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[07-Sep-2025 00:45:04 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[07-Sep-2025 00:45:04 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[22-Oct-2025 19:48:35 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[22-Oct-2025 19:48:35 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[22-Oct-2025 19:48:35 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[22-Oct-2025 19:48:35 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[22-Oct-2025 19:48:35 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[22-Oct-2025 19:48:35 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[22-Oct-2025 19:48:35 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[22-Oct-2025 19:48:35 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[27-Oct-2025 05:13:35 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[27-Oct-2025 05:13:35 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[27-Oct-2025 05:13:35 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[27-Oct-2025 05:13:35 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[27-Oct-2025 05:13:35 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[27-Oct-2025 05:13:35 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[27-Oct-2025 05:13:35 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[27-Oct-2025 05:13:35 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[31-Oct-2025 06:55:07 UTC] PHP Warning:  Undefined variable $config in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[31-Oct-2025 06:55:07 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 2
+[31-Oct-2025 06:55:07 UTC] PHP Warning:  Undefined array key "me" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[31-Oct-2025 06:55:07 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[31-Oct-2025 06:55:07 UTC] PHP Warning:  Undefined array key "lang" in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[31-Oct-2025 06:55:07 UTC] PHP Warning:  Trying to access array offset on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 8
+[31-Oct-2025 06:55:07 UTC] PHP Warning:  Undefined variable $ui in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9
+[31-Oct-2025 06:55:07 UTC] PHP Fatal error:  Uncaught Error: Call to a member function intel() on null in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/riskouts/fumigram.com/apps/viga/tokens/handlers/tokens.php on line 9

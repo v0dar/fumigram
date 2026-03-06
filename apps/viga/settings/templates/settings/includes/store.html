@@ -1,0 +1,119 @@
+<div class="sett-active">
+	<div class="valign settings-holder store">
+		<img src="<?php echo($context['me']['avatar']) ?>" class="avatar cha" alt="...">
+		<div class="infoz">
+			<h5 title="<?php echo($context['me']['name']) ?>"><a><?php echo($context['me']['name']) ?></a></h5>
+			<p>{{LANG system_store}}</p>
+			<span>{{LANG ps_system_store}}</span>
+		</div>
+	</div><br>
+	<div class="credit-plans">
+		<div class="cr-plans">
+			<p>
+				<input type="radio" name="plans" id="rs-point" value="sack_of_points" data-price="<?php echo($config['sack_of_points_price']) ?>">
+				<label for="rs-point" class="rs-point">
+					<span class="title">{{LANG sack_of_points}}</span>
+					<b><img src="{{CONFIG site_url}}/media/img/icons/olive-oil.png" alt=""/> <?php echo $config['sack_of_points']; ?></b>
+					<img src="{{CONFIG site_url}}/media/img/icons/points.png" alt=""/>
+					<span class="amount"><?php echo($config['sack_of_points_price']) ?> {{LANG credits}}</span>
+				</label>
+			</p>
+			<p>
+				<input type="radio" name="plans" id="r-pot" value="rain_of_tokens" data-price="<?php echo($config['rain_of_tokens_price']) ?>">
+				<label for="r-pot" class="r-pot">
+					<span class="title">{{LANG rain_of_tokens}}</span>
+					<b><img src="{{CONFIG site_url}}/media/img/icons/snail.png" alt=""/> <?php echo $config['rain_of_tokens']; ?></b>
+					<img src="{{CONFIG site_url}}/media/img/tokens/tokens.png" alt=""/>
+					<span class="amount"><?php echo($config['rain_of_tokens_price']) ?> {{LANG credits}}</span>
+				</label>
+			</p>
+			<p>
+				<input type="radio" name="plans" id="r-boost" value="box_of_boosts" data-price="<?php echo($config['box_of_boost_price']) ?>">
+				<label for="r-boost" class="r-boost">
+					<span class="title">{{LANG box_of_boosts}}</span>
+					<b>	<img src="{{CONFIG site_url}}/media/img/icons/energy.png" alt=""/> <?php echo $config['box_of_boosts']; ?></b>
+					<img src="{{CONFIG site_url}}/media/img/boosts/boosts.png" alt=""/>
+					<span class="amount"><?php echo($config['box_of_boost_price']) ?> {{LANG credits}}</span>
+				</label>
+			</p>
+		</div>
+
+		<div class="tokens-exp hidden"><hr>
+			<h4 class="text-align tokens">{{LANG token_redeemer}}</h4>
+			<h5 class="text-align">{{LANG token_red_expla}}</h5>
+			<h6 class="text-align">{{LANG token_small_txt}}</h6>
+		</div>
+
+		<div class="box-boost hidden"><hr>
+			<h4 class="text-align boosts">{{LANG box_of_boosts}}</h4>
+			<h5 class="text-align">{{LANG box_of_boosts_txt}}</h5>
+		</div>
+
+		<div class="points-sack hidden"><hr>
+			<h4 class="text-align points">{{LANG sack_of_points}}</h4>
+			<h5 class="text-align">{{LANG sack_of_points_txt}}</h5>
+		</div>
+
+		<div class="pay-with credit-pay">
+			<div class="pay_u_btns valign">
+				<button id="creditPay" onclick="ProcessPayment()" class="payment btn bank valign hidden"></button>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<script type="text/javascript">
+document.getElementById('r-pot').addEventListener('click', function(e) {
+	$('.tokens-exp').fadeIn(400).removeClass('hidden');
+	$('.box-boost').fadeOut(400).addClass('hidden');
+	$('.points-sack').fadeOut(400).addClass('hidden');
+	$('#creditPay').html('<span>{{LANG pay}} ' + Price() + ' {{LANG credits}}</span>');
+
+});
+document.getElementById('r-boost').addEventListener('click', function(e) {
+	$('.box-boost').fadeIn(400).removeClass('hidden');
+	$('.tokens-exp').fadeOut(400).addClass('hidden');
+	$('.points-sack').fadeOut(400).addClass('hidden');
+	$('#creditPay').html('<span>{{LANG pay}} ' + Price() + ' {{LANG credits}}</span>');
+});
+
+document.getElementById('rs-point').addEventListener('click', function(e) {
+	$('.points-sack').fadeIn(400).removeClass('hidden');
+	$('.tokens-exp').fadeOut(400).addClass('hidden');
+	$('.box-boost').fadeOut(400).addClass('hidden');
+	$('#creditPay').html('<span>{{LANG pay}} ' + Price() + ' {{LANG credits}}</span>');
+});
+
+
+// Credits PAy
+function ProcessPayment(){
+	$('#creditPay').attr('disabled','true');
+	$.post(link('payment/pay'), {description:description(), price:Price(), mode: "credits"}, function(data, textStatus, xhr) {
+		Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">{{LANG c_payment}}</div>'});
+		if (data.status == 200) {
+			setTimeout(function () {
+				Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+	        }, 5000);
+			delay(function(){
+				$('#creditPay').removeAttr('disabled');
+				$('#ajax_redirect').attr('href', "{{CONFIG site_url}}/settings/store/<?php echo $context['me']['user_id'] ?>");
+				$('#ajax_redirect').attr('data-ajax', "load.php?app=settings&apph=settings&user=<?php echo($context['me']['username']) ?>&page=store");
+				$('#ajax_redirect').click();
+			},8000);
+		
+		} else {
+			setTimeout(function () {
+				Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+	        }, 5000);
+			delay(function(){
+				$('#creditPay').removeAttr('disabled');
+				$('#ajax_redirect').attr('href', "{{CONFIG site_url}}/settings/store/<?php echo $context['me']['user_id'] ?>");
+				$('#ajax_redirect').attr('data-ajax', "load.php?app=settings&apph=settings&user=<?php echo($context['me']['username']) ?>&page=store");
+				$('#ajax_redirect').click();
+			},8000);
+		}
+		
+	});
+}
+</script>

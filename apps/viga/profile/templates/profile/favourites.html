@@ -1,0 +1,49 @@
+<div class="container container-profile user-posts__container">
+	<div class="user-posts pg_grid_posts pg_grid_posts_tag">
+		<?php if ($context['favorite_posts'] > 0) {
+			foreach ($context['favorite_posts'] as $key => $post_data) {
+				include 'includes/fav.html';
+			}
+		} else{ include 'includes/no-posted.html'; } ?>
+	</div>
+</div>
+
+<script>
+	var ajax_url = '<?php echo($context["rita"]) ?>';
+	jQuery(document).ready(function($) {
+		var scrolled = 0;
+		var last_id  = 0;
+		$(window).scroll(function() {
+			if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+				if (scrolled == 0 && $('.user-postset_fav').length > 0) {
+					scrolled = 1;
+	                var list_ids = $("div.user-postset_fav[id]").map(function() {
+		                if($(this).attr('id') > 0) {
+							return $(this).attr('id');
+						}
+		            }).get();
+		            if (!list_ids) {
+		                return false;
+		            }
+					var last_id  = Math.min.apply(Math,list_ids);
+					var pathname = window.location.pathname
+					var str2 = "DEFG";
+					$.ajax({
+						url: ajax_url + '/load-saved-posts',
+						type: 'GET',
+						dataType: 'json',
+						data: {offset:last_id},
+					}).done(function(data) {
+						if (data.status == 200) {
+							$(".user-posts").append(data.html);
+							scrolled = 0;
+						}
+						else{
+							$(window).unbind('scroll');
+						}
+					});
+				}
+			}
+		});
+	});
+</script>

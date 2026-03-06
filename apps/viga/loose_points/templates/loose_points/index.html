@@ -1,0 +1,158 @@
+<div class="row pg_sett_row">
+	<div class="col-md-3">
+		<div class="home-sidebar-right">
+			<div class="feed-btn timeline-picker">
+				<div class="feed-space">
+					<div class="feed-item first">
+						<a class="line-badge" href="{{CONFIG site_url}}/boosts" data-ajax="load.php?app=boosts&apph=boosts">
+							<label class="timeline-wrapper not-checked">
+								<span class="timeline-button">
+									<input type="radio" value="follow"><span></span>
+								</span>
+								<span>
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M8.04492,22a.99922.99922,0,0,1-.96533-1.25879L8.88574,14H5.04541a1.00007,1.00007,0,0,1-.96582-1.25879l2.67969-10A.99954.99954,0,0,1,7.7251,2h7a1.00008,1.00008,0,0,1,.96582,1.25879L14.42041,8h4.53418a1,1,0,0,1,.73975,1.67285l-10.90918,12A.99947.99947,0,0,1,8.04492,22Z"></path></svg>
+									<article class="timeline-title">{{LANG r_boosts}}</article>
+								</span>
+							</label>
+						</a>
+					</div>
+					<div class="feed-item first">
+						<a class="line-badge" href="{{CONFIG site_url}}/tokens" data-ajax="load.php?app=tokens&apph=tokens">
+							<label class="timeline-wrapper not-checked">
+								<span class="timeline-button">
+									<input type="radio" value="follow"><span></span>
+								</span>
+								<span>
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M18 8C18 11.3137 15.3137 14 12 14C8.68629 14 6 11.3137 6 8C6 4.68629 8.68629 2 12 2C15.3137 2 18 4.68629 18 8ZM13.9932 14.7121C13.3615 14.8995 12.6925 15 12 15C8.71646 15 5.96095 12.7392 5.2052 9.6893C3.29924 10.6944 2 12.6955 2 15C2 18.3137 4.68629 21 8 21C11.3137 21 14 18.3137 14 15C14 14.9035 13.9977 14.8075 13.9932 14.7121ZM14.9693 14.3408C16.8562 13.4557 18.2833 11.7532 18.7948 9.68929C20.7007 10.6944 22 12.6955 22 15C22 18.3137 19.3137 21 16 21C14.8285 21 13.7355 20.6643 12.8119 20.0839C14.1594 18.808 15 17.0022 15 15C15 14.7777 14.9896 14.5578 14.9693 14.3408Z" fill="currentColor"></path></svg>
+									<article class="timeline-title">{{LANG t_tokens}}</article>
+								</span>
+							</label>
+						</a>
+					</div>
+					<div class="feed-item first">
+						<a class="line-badge" href="{{CONFIG site_url}}/points" data-ajax="load.php?app=points&apph=points">
+							<label class="timeline-wrapper not-checked">
+								<span class="timeline-button"><input type="radio" value="foryou" checked=""><span></span></span>
+								<span>
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 5C7.031 5 2 6.546 2 9.5S7.031 14 12 14c4.97 0 10-1.546 10-4.5S16.97 5 12 5zM7 14.938v3c1.237.299 2.605.482 4 .541v-3C9.605 15.419 8.237 15.236 7 14.938zM13 15.478v3c1.395-.059 2.764-.242 4-.541v-3C15.764 15.236 14.395 15.419 13 15.478zM19 14.297v3c1.801-.755 3-1.857 3-3.297v-3C22 12.44 20.801 13.542 19 14.297zM5 17.297v-3C3.2 13.542 2 12.439 2 11v3C2 15.439 3.2 16.542 5 17.297z"></path></svg>
+									<article class="timeline-title">{{LANG earn_points}}</article>
+								</span>
+							</label>
+						</a>
+					</div>
+					<div class="feed-item first">
+						<a class="line-badge" href="{{CONFIG site_url}}/loose_points" data-ajax="load.php?app=loose_points&apph=loose_points">
+							<label class="timeline-wrapper timeline-checked">
+								<span class="timeline-button">
+									<input type="radio" value="follow"><span></span>
+								</span>
+								<span>
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 5C7.031 5 2 6.546 2 9.5S7.031 14 12 14c4.97 0 10-1.546 10-4.5S16.97 5 12 5zM7 14.938v3c1.237.299 2.605.482 4 .541v-3C9.605 15.419 8.237 15.236 7 14.938zM13 15.478v3c1.395-.059 2.764-.242 4-.541v-3C15.764 15.236 14.395 15.419 13 15.478zM19 14.297v3c1.801-.755 3-1.857 3-3.297v-3C22 12.44 20.801 13.542 19 14.297zM5 17.297v-3C3.2 13.542 2 12.439 2 11v3C2 15.439 3.2 16.542 5 17.297z"></path></svg>
+									<article class="timeline-title">{{LANG loose_points}}</article>
+								</span>
+							</label>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<h3 class="text-center points_center loose"><b>{{LANG points_center}}</b></h3>
+		<img src="{{CONFIG site_url}}/media/img/icons/loose-points.png" height="180px" />
+	</div>
+	<div class="col-md-9 page-content">
+		<div class="static_page padd">
+			<div class="ac_points dt_sections loose">
+				<h4 class="bold">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 5C7.031 5 2 6.546 2 9.5S7.031 14 12 14c4.97 0 10-1.546 10-4.5S16.97 5 12 5zM7 14.938v3c1.237.299 2.605.482 4 .541v-3C9.605 15.419 8.237 15.236 7 14.938zM13 15.478v3c1.395-.059 2.764-.242 4-.541v-3C15.764 15.236 14.395 15.419 13 15.478zM19 14.297v3c1.801-.755 3-1.857 3-3.297v-3C22 12.44 20.801 13.542 19 14.297zM5 17.297v-3C3.2 13.542 2 12.439 2 11v3C2 15.439 3.2 16.542 5 17.297z"></path></svg>
+					<b>{{LANG point_system}}</b>
+				</h4>
+				<div class="qd_cred_bl loose">
+					<div class="loose_points_circle-1"></div>
+					<div class="loose_points_circle-2"></div>
+					<div class="loose_points_circle-3"></div>
+					<h2><span><?php echo($context['me']['lost_points']) ?></span> {{LANG lost_points}}</h2>
+					<p>{{LANG your_total_lost_points}}</p>
+					<span class="can-rd">{{LANG can_be_redeemed}}</span><br>
+					<?php if($context['me']['tokens'] >= $config['rain_of_tokens']) { ?>
+						<button class="btn btn-mat main Redeem" onclick="Redeem();">
+							<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-8h2a3 3 0 0 0 6 0h2a5 5 0 0 1-10 0z"></path></svg> {{LANG redeem_points}}</span>
+						</button>
+					<?php } ?>
+				</div>
+				<hr class="border_hr">
+				<h4 class="bold">
+					{{LANG notice}}: 
+					<span><b>&nbsp;<?php echo number_format($config['points_to_credits']); ?></b> {{LANG points}} = <b>1</b> {{LANG credit}}!</span>
+				</h4> 
+			</div>
+			<div class="ac_points dw_sections">
+				<ul class="points_ftr">
+					<div class="valign ep_how_many by_doing loose">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+						<b>{{LANG loose}} <span><?php echo $config['point_delete_post_cost']; ?></span> {{LANG points}} {{LANG by_deleting_a_post}}</b>
+					</div>
+					<?php if ($config['story_system'] == 'on') { ?>
+					<div class="valign ep_how_many by_doing loose">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"></path></svg>
+						<b>{{LANG loose}} <span><?php echo $config['point_delete_story_cost']; ?></span> {{LANG points}} {{LANG by_deleting_a_story}}</b>
+					</div>
+					<?php } ?>
+					<div class="valign ep_how_many by_doing loose">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-thumbs-down"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"></path></svg>
+						<b>{{LANG loose}} <span><?php echo $config['point_unlike_post_cost']; ?></span> {{LANG points}} {{LANG by_unlike_post}}</b>
+					</div>
+					<div class="valign ep_how_many by_doing loose">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 24 20"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" transform="translate(1 1)"><path d="M15 18v-2a4 4 0 0 0-4-4H4a4 4 0 0 0-4 4v2"/><circle cx="7.5" cy="4" r="4"/><path d="M22 8h-6"/></g></svg>
+						<b>{{LANG loose}} <span><?php echo $config['point_unfollow_users_cost']; ?></span> {{LANG points}} {{LANG by_unfollowing_a_user}}</b>
+					</div>
+					<div class="valign ep_how_many by_doing loose">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"></path></svg>
+						<b>{{LANG loose}} <span><?php echo $config['point_delete_comment_cost']; ?></span> {{LANG points}} {{LANG by_deleting_a_comment}}</b>
+					</div>
+					<div class="valign ep_how_many by_doing loose">
+						<svg xmlns="http://www.w3.org/2000/svg" height="19" viewBox="0 0 24 24" width="19" opacity="0.5"><path fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-9h10v2H7v-2z"></path></svg>
+						<b>{{LANG loose}} <span><?php echo $config['point_delete_reply_cost']; ?></span> {{LANG points}} {{LANG by_deleting_a_comment_reply}}</b>
+					</div>
+					<div class="valign ep_how_many by_doing loose">
+						<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="M20,2H4C2.897,2,2,2.897,2,4v18l4-4h14c1.103,0,2-0.897,2-2V4C22,2.897,21.103,2,20,2z M9,12c-1.104,0-2-0.896-2-2 s0.896-2,2-2s2,0.896,2,2S10.104,12,9,12z M15,12c-1.104,0-2-0.896-2-2s0.896-2,2-2s2,0.896,2,2S16.104,12,15,12z"></path></svg>
+						<b>{{LANG loose}} <span><?php echo $config['point_unlike_comment_cost']; ?></span> {{LANG points}} {{LANG by_unliking_a_comment}}</b>
+					</div>
+					<div class="valign ep_how_many by_doing loose">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-thumbs-down"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"></path></svg>
+						<b>{{LANG loose}} <span><?php echo $config['point_unlike_reply_cost']; ?></span> {{LANG points}} {{LANG by_unliking_a_comment_reply}}</b>
+					</div>
+					<div class="valign ep_how_many by_doing loose">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M17,3H7A2,2 0 0,0 5,5V21L12,18L19,21V5C19,3.89 18.1,3 17,3Z"></path></svg>
+						<b>{{LANG loose}} <span><?php echo $config['point_remove_star_cost']; ?></span> {{LANG points}} {{LANG by_removing_a_post_from_list}}</b>
+					</div>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<script>
+	function Redeem(){
+		$('.Redeem').attr('disabled','true');
+		Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">{{LANG redeeming_points}}</div>'});
+		setTimeout(function(){
+			$.post(link('payment/redeem'), {}, function(data, textStatus, xhr) {
+			if (data.status == 200) {
+				$('.Redeem').removeAttr('disabled');
+				Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+				$('#ajax_redirect').attr('href', "{{CONFIG site_url}}/loose_points");
+				$('#ajax_redirect').attr('data-ajax', "load.php?app=loose_points&apph=loose_points");
+				$('#ajax_redirect').click();
+			} else {
+				$('.Redeem').removeAttr('disabled');
+				Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+				$('#ajax_redirect').attr('href', "{{CONFIG site_url}}/loose_points");
+				$('#ajax_redirect').attr('data-ajax', "load.php?app=loose_points&apph=loose_points");
+				$('#ajax_redirect').click();
+			}	
+		});
+		},1000);
+	}
+</script>

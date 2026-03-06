@@ -1,0 +1,70 @@
+<style>.explore-page-container .explore {background-image: linear-gradient(rgba(0, 0, 0, 0.363), rgba(0, 0, 0, 0.407)), url('{{CONFIG site_url}}/media/img/str/aaa-06.jpg');height:350px;}</style>
+	<div class="explore-page-container">
+		<div class="sub__header explore">
+			<div class="explore-coverbg"></div>
+			<div class="container exp-head">
+				<h3 class="animated fadeInUpBig"><a class="text-decoration-none">{{LANG explore_posts}}</a></h3>
+				<p class="animated fadeInUpBig"><?php echo lang('explore_posts_desc') ?></p>
+				<?php if (IS_LOGGED !== true) { ?>
+					<a href="<?php echo(pxp_link('explore/home')); ?>" data-ajax="load.php?app=home&apph=home" class="btn btn-white animated fadeInUpBig"><?php echo lang('login_to_explore');?></a>
+				<?php } else { ?>	
+					<a href="<?php echo(pxp_link('explore/people')); ?>" data-ajax="load.php?app=explore&apph=people" class="btn btn-white animated fadeInUpBig"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus active"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg> <?php echo lang('add_more_followers');?></a>
+				<?php } ?>
+			</div>
+		</div>
+		<div class="container">
+			<div class="explore-posts-container pg_grid_posts epg">
+				<?php if ($context['posts']) {
+					foreach ($context['posts'] as $key => $post_data) {
+						include 'includes/list.html';
+					}
+				} else{ 
+					include 'includes/no-posts-found.html';
+				} ?>
+			</div>
+		</div>
+    </div>
+<?php
+include $context['dirname_theme'].'/main/templates/modals/delete-post.html';
+include $context['dirname_theme'].'/main/templates/modals/embed_post.html';
+include $context['dirname_theme'].'/main/templates/includes/lazy-load.html';
+include $context['dirname_theme'].'/main/templates/modals/delete-comment.html';?>
+<script>
+tippy('.promo', {arrow: true,content: '{{LANG promoted_post}}'});
+	jQuery(document).ready(function($) {
+		var scrolled = 0;
+		var last_id  = 0;
+		$(window).unbind('scroll');
+		$(window).scroll(function() {
+			if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+				if (scrolled == 0 && $('.explore-postset').length > 0) {
+					scrolled = 1;
+					var list_ids = $("div.explore-postset[id]").map(function() {
+						if($(this).attr('id') > 0) {
+							return $(this).attr('id');
+						}
+					}).get();
+
+					if (!list_ids) {
+						return false;
+					}
+					var last_id  = Math.min.apply(Math,list_ids);
+					$.ajax({
+						url: link('posts/explore-posts'),
+						type: 'GET',
+						dataType: 'json',
+						data: {offset:last_id},
+					}).done(function(data) {
+						if (data.status == 200) {
+							$(".explore-posts-container").gridalicious('append', $(data.html));
+							scrolled = 0;
+						}
+						else{
+							$(window).unbind('scroll');
+						}
+					});
+				   }
+			}
+		});
+	});
+</script>

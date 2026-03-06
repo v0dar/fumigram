@@ -1,0 +1,36 @@
+<div class="footer clearfix pp_side_footer">
+	<div class="pull-right">
+		<div class="footer-powered">
+			<p style="text-transform: uppercase;">&copy; <?php echo date('Y');?> {{CONFIG site_name}}</p>
+		</div>
+	</div>
+	<ul class="nav">
+		<li class="dropup" style="padding-right: 0px;">
+			<span class="dropdown-toggle" data-toggle="dropdown">
+				<a class="sidebar_lang">
+					<svg fill="#929292" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" class="feather feather-translate" style="margin-top: -3px;width: 15px;height: 15px;"><path d="M12.87,15.07L10.33,12.56L10.36,12.53C12.1,10.59 13.34,8.36 14.07,6H17V4H10V2H8V4H1V6H12.17C11.5,7.92 10.44,9.75 9,11.35C8.07,10.32 7.3,9.19 6.69,8H4.69C5.42,9.63 6.42,11.17 7.67,12.56L2.58,17.58L4,19L9,14L12.11,17.11L12.87,15.07M18.5,10H16.5L12,22H14L15.12,19H19.87L21,22H23L18.5,10M15.88,17L17.5,12.67L19.12,17H15.88Z"></path></svg> 
+					<b>{{LANG language}}</b>
+				</a>
+			</span>
+			<ul class="dropdown-menu ultimate-menu">
+				<?php foreach ($context['langs'] as $key => $val) { ?>
+					<li>
+						<a class="menu-option pointer" href='?lang=<?php echo($key); ?>'>
+							<svg height="15" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M5 15v2a2 2 0 0 0 1.85 1.995L7 19h3v2H7a4 4 0 0 1-4-4v-2h2zm13-5l4.4 11h-2.155l-1.201-3h-4.09l-1.199 3h-2.154L16 10h2zm-1 2.885L15.753 16h2.492L17 12.885zM8 2v2h4v7H8v3H6v-3H2V4h4V2h2zm9 1a4 4 0 0 1 4 4v2h-2V7a2 2 0 0 0-2-2h-3V3h3zM6 6H4v3h2V6zm4 0H8v3h2V6z"></path></svg>&nbsp;&nbsp;&nbsp;
+							<div><b><?php echo $val; ?></b></div>
+						</a>
+					</li>
+				<?php } ?>
+			</ul>
+		</li>
+	</ul>
+	<ul class="nav">
+		<li><a href="<?php echo(pxp_link('help')); ?>/terms-of-use" target="_blank">{{LANG terms}}</a></li>
+		<li><a  href="<?php echo(pxp_link('help')); ?>/privacy-policy" target="_blank">{{LANG privacy_and_policy}}</a></li>
+		<li><a href="<?php echo(pxp_link('help')); ?>" target="_blank">{{LANG about}}</a></li>
+		<li><a href="<?php echo(pxp_link('contact_us')) ?>"  data-ajax="load.php?app=contact_us&apph=contact_us">{{LANG contact_us}}</a></li>
+		<?php if ($config['user_ads'] == 'on') { ?>
+			<li><a href="{{CONFIG site_url}}/ads" data-ajax="load.php?app=ads&apph=ads">{{LANG advertising}}</a></li>
+		<?php } ?>
+	</ul>
+</div>

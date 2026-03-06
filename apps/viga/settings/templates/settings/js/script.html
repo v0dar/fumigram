@@ -1,0 +1,386 @@
+<script>$("body").on("contextmenu", ".nav-banner-icon", function(e) {return false});</script>
+<?php if ($context['page'] == 'blocked') { ?>
+	<script data-page="blocked-users">
+		jQuery(document).ready(function($) {
+			$("button.unblock-user").click(function(event) {
+				var user_id = $(this).attr('id');
+				var zis     = $(this);
+				$('.unblockuser--modal').data('id',user_id).fadeIn(400);
+			});
+			$('.block--user').click(function(event) {
+				var zis     = $(this);
+				var uid     = zis.closest('.confirm--modal').data('id');
+				if (!uid || !$.isNumeric(uid)) {
+					return false;
+				}
+				zis.closest('.confirm--modal').data('id','').fadeOut(400);
+				$.ajax({
+					url: link('settings/unblock-user'),
+					type: 'POST',
+					dataType: 'json',
+					data: {id:uid},
+				}).done(function(data) {
+					Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+					delay(function(){
+						$('#ajax_redirect').attr('href', "{{CONFIG site_url}}/settings/blocked/<?php echo $context['me']['user_id'] ?>");
+						$('#ajax_redirect').attr('data-ajax', "load.php?app=settings&apph=settings&user=<?php echo($context['me']['username']) ?>&page=blocked");
+						$('#ajax_redirect').click();
+					},1000);
+				});	
+			});
+		});
+	</script>
+<?php } ?>
+<?php if ($context['page'] == 'account') { ?>
+	<script data-page="account">
+		jQuery(document).ready(function($) {
+			$("form#edit-account-settings").ajaxForm({
+				url: '<?php echo($context["rita"]) ?>/account',
+				type: 'POST',
+				dataType: 'json',
+				beforeSubmit: function(arr,form){
+					$(form).find('.pp_load_loader').addClass('loadingg');
+					$(form).find('button[type="submit"]').attr('disabled','true');
+				},
+				success: function(data,stat,xhr,form){
+					scroll2top();
+					if (data.message) {
+						Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+					}
+					$(form).find('.pp_load_loader').removeClass('loadingg');
+	                $(form).find('button[type="submit"]').removeAttr('disabled');
+					$('#ajax_redirect').attr('href', "{{CONFIG site_url}}/settings/account/<?php echo $context['me']['user_id'] ?>");
+					$('#ajax_redirect').attr('data-ajax', "load.php?app=settings&apph=settings&user=<?php echo($context['me']['username']) ?>&page=account");
+					$('#ajax_redirect').click();
+				}
+			});
+		});
+	</script>
+<?php } ?>
+<?php if ($context['page'] == 'general') { ?>
+	<script data-page="general">
+		jQuery(document).ready(function($) {
+			$("form#edit-general-settings").ajaxForm({
+				url: '<?php echo($context["rita"]) ?>/general',
+				type: 'POST',
+				dataType: 'json',
+				beforeSubmit: function(arr,form){
+					header_loadbar('show');
+					$(form).find('.pp_load_loader').addClass('loadingg');
+					$(form).find('button[type="submit"]').attr('disabled','true');
+				},
+				success: function(data,stat,xhr,form){
+					scroll2top();
+					if (data.message) {
+						Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+				    }
+					$(form).find('.pp_load_loader').removeClass('loadingg');
+	                $(form).find('button[type="submit"]').removeAttr('disabled');
+					delay(function(){header_loadbar()},1000);
+				}
+			});	
+		});
+	</script>
+<?php } ?>
+<?php if ($context['page'] == 'profile') { ?>
+	<script data-page="profile">
+		jQuery(document).ready(function($) {
+			$("form#edit-profile-settings").ajaxForm({
+				url: '<?php echo($context["rita"]) ?>/profile',
+				type: 'POST',
+				dataType: 'json',
+				beforeSubmit: function(arr,form){
+					header_loadbar('show');
+					$(form).find('.pp_load_loader').addClass('loadingg');
+					$(form).find('button[type="submit"]').attr('disabled','true');
+				},
+				success: function(data,stat,xhr,form){
+					scroll2top();
+					if (data.message) {Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});}
+					$(form).find('.pp_load_loader').removeClass('loadingg');
+	                $(form).find('button[type="submit"]').removeAttr('disabled');
+					delay(function(){header_loadbar()},1000);
+				}
+			});
+			var maxLength = 150;
+			$('#about_u').keyup(function() {
+				var length = $(this).val().length;
+				var length = maxLength-length;
+				$('#chars').text(length);
+			});
+            $('#about_u').keydown(function(event){
+            if(event.keyCode == 13) {
+                event.preventDefault();
+					return false;
+				}
+			});
+		});
+	</script>
+<?php } ?>
+<?php if ($context['page'] == 'social_account') { ?>
+	<script data-page="social_account">
+		jQuery(document).ready(function($) {
+			$("form#edit-social-settings").ajaxForm({
+				url: '<?php echo($context["rita"]) ?>/social_account',
+				type: 'POST',
+				dataType: 'json',
+				beforeSubmit: function(arr,form){
+					header_loadbar('show');
+					$(form).find('.pp_load_loader').addClass('loadingg');
+					$(form).find('button[type="submit"]').attr('disabled','true');
+				},
+				success: function(data,stat,xhr,form){
+					scroll2top();
+					if (data.message) {
+						Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+					}
+					$(form).find('.pp_load_loader').removeClass('loadingg');
+	                $(form).find('button[type="submit"]').removeAttr('disabled');
+					delay(function(){header_loadbar()},1000);
+				}
+			});
+		});
+	</script>
+<?php } ?>
+<?php if ($context['page'] == 'password') { ?>
+	<script data-page="password">
+		jQuery(document).ready(function($) {
+			$("form#edit-password-settings").ajaxForm({
+				url: '<?php echo($context["rita"]) ?>/change-password',
+				type: 'POST',
+				dataType: 'json',
+				beforeSubmit: function(arr,form){
+					header_loadbar('show');
+					$(form).find('.pp_load_loader').addClass('loadingg');
+					$(form).find('button[type="submit"]').attr('disabled','true');
+				},
+				success: function(data,stat,xhr,form){
+					scroll2top();
+					Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+					$(form).find('.pp_load_loader').removeClass('loadingg');
+	                $(form).find('button[type="submit"]').removeAttr('disabled');
+	                $(form).get(0).reset();
+					delay(function(){header_loadbar()},1000);
+				}
+			});
+		});
+	</script>	
+<?php } ?>
+<?php if ($context['page'] == 'password_reset') { ?>
+	<script data-page="password_reset">
+		jQuery(document).ready(function($) {
+			$("form#reset-password-settings").ajaxForm({
+				url: '<?php echo($context["rita"]) ?>/reset-password',
+				type: 'POST',
+				dataType: 'json',
+				beforeSubmit: function(arr,form){
+					header_loadbar('show');
+					$(form).find('.pp_load_loader').addClass('loadingg');
+					$(form).find('button[type="submit"]').attr('disabled','true');
+				},
+				success: function(data,stat,xhr,form){
+					scroll2top();
+					Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+					$(form).find('.pp_load_loader').removeClass('loadingg');
+	                $(form).find('button[type="submit"]').removeAttr('disabled');
+	                $(form).get(0).reset();
+					delay(function(){header_loadbar()},1000);
+				}
+			});
+		});
+	</script>	
+<?php } ?>
+<?php if ($context['page'] == 'privacy') { ?>
+	<script>
+		jQuery(document).ready(function($) {
+			var form = $("form#edit-privacy-settings");
+			form.ajaxForm({
+				url: link('settings/privacy'),
+				type: 'POST',
+				dataType: 'json',
+				beforeSend: function(){
+					$(form).find('.pp_load_loader').addClass('loadingg');
+					form.find('button[type="submit"]').attr('disabled','true');
+				},
+				success: function(data){
+					scroll2top();
+					$(form).find('.pp_load_loader').removeClass('loadingg');
+					form.find('button[type="submit"]').removeAttr('disabled');
+					if (data.message) {
+						Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+						$('#ajax_redirect').attr('href', "{{CONFIG site_url}}/settings/privacy/<?php echo $context['me']['user_id'] ?>");
+						$('#ajax_redirect').attr('data-ajax', "load.php?app=settings&apph=settings&user=<?php echo($context['me']['username']) ?>&page=privacy");
+						$('#ajax_redirect').click();
+				    }
+				}
+			});
+		});
+	</script>
+<?php } ?>
+<?php if ($context['page'] == 'notifications') { ?>
+	<script>
+		jQuery(document).ready(function($) {
+			var form = $("form#edit-notification-settings");
+			form.ajaxForm({
+				url: link('settings/notifications'),
+				type: 'POST',
+				dataType: 'json',
+				beforeSend: function(){
+					header_loadbar('show');
+					$(form).find('.pp_load_loader').addClass('loadingg');
+					form.find('button[type="submit"]').attr('disabled','true');
+				},
+				success: function(data){
+				scroll2top();
+				Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+				$(form).find('.pp_load_loader').removeClass('loadingg');
+				form.find('button[type="submit"]').removeAttr('disabled');
+				delay(function(){header_loadbar()},1000);
+				}
+			});
+		});
+	</script>
+<?php } ?>
+<?php if ($context['page'] == 'administration') { ?>
+	<script>
+		jQuery(document).ready(function($) {
+			var form = $("form#edit-administration-settings");
+			form.ajaxForm({
+				url: link('settings/administration'),
+				type: 'POST',
+				dataType: 'json',
+				beforeSend: function(){
+					$(form).find('.pp_load_loader').addClass('loadingg');
+					form.find('button[type="submit"]').attr('disabled','true');
+				},
+				success: function(data){
+					Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+					$(form).find('.pp_load_loader').removeClass('loadingg');
+					form.find('button[type="submit"]').removeAttr('disabled');
+				}
+			});
+		});
+	</script>
+<?php } ?>
+<?php if ($context['page'] == 'delete') { ?>
+	<script>
+		jQuery(document).ready(function($) {
+			$("form#delete-account-settings").ajaxForm({
+				url: link('settings/delete-account'),
+				type: 'POST',
+				dataType: 'json',
+				beforeSubmit: function(arr,form){
+					$(form).find('.pp_load_loader').addClass('loadingg');
+					$(form).find('button[type="submit"]').attr('disabled', 'true');
+				},
+				success: function(data){
+					Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+	                if (data.status == 200) {
+	                	delay(function(){
+							window.location.href = site_url("home");
+						},2500);
+	                }else{
+	                	$('.pp_load_loader').removeClass('loadingg');
+						$('button[type="submit"]').removeAttr('disabled');
+						Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+	                }
+				}
+			});
+		});
+	</script>
+<?php } ?>
+<?php if ($context['page'] == 'verification') { ?>
+	<script>
+		jQuery(document).ready(function($) {
+		    $("#ip-photo").change(function(event) {
+		        $("#user_fav").html("<img src='" + window.URL.createObjectURL(this.files[0]) + "' alt='Picture' width='100%'>")
+		    });
+		    $("#user-photo").change(function(event) {
+		        $("#user_image").html("<img src='" + window.URL.createObjectURL(this.files[0]) + "' alt='Picture' width='100%'>")
+		    });
+			var form = $("form#verify-profile-settings");
+			form.ajaxForm({
+				url: link('settings/verify'),
+				type: 'POST',
+				dataType: 'json',
+				beforeSend: function(){
+					$(form).find('.pp_load_loader').addClass('loadingg');
+					form.find('button[type="submit"]').attr('disabled','true');
+				},
+				success: function(data){
+					Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+					$(form).find('.pp_load_loader').removeClass('loadingg');
+					form.find('button[type="submit"]').removeAttr('disabled');
+					if (data.status == 200) {
+					    setTimeout(function () {
+							$('#ajax_redirect').attr('href', "{{CONFIG site_url}}/settings/verification/<?php echo $context['me']['user_id'] ?>");
+							$('#ajax_redirect').attr('data-ajax', "load.php?app=settings&apph=settings&user=<?php echo($context['me']['username']) ?>&page=verification");
+							$('#ajax_redirect').click();
+						},5000);
+					}
+				}
+			});
+		});
+	</script>
+<?php } ?>
+<?php if ($context['page'] == 'manage_sessions') { ?>
+	<script data-page="manage_sessions">
+		function delete_u_session(id,is_current) {
+			if (is_current == true) {
+				window.location.href = site_url('signout');
+			}else{
+				$.post(link('settings/delete_session'), {id: id}, function(data, textStatus, xhr) {
+					if (data.status == 200) {
+						Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+						$('#ajax_redirect').attr('href', "{{CONFIG site_url}}/settings/manage_sessions/<?php echo $context['me']['user_id'] ?>");
+						$('#ajax_redirect').attr('data-ajax', "load.php?app=settings&apph=settings&user=<?php echo($context['me']['username']) ?>&page=manage_sessions");
+						$('#ajax_redirect').click();
+				    }
+				});
+			}
+		}
+	</script>
+<?php } ?>
+<?php if ($context['page'] == 'business_account') { ?>
+	<script data-page="business-account">
+		jQuery(document).ready(function($) {
+			var form = $("form#business-profile-settings");
+			form.ajaxForm({
+				url: link('settings/business'),
+				type: 'POST',
+				dataType: 'json',
+				beforeSend: function(){
+					$(form).find('.pp_load_loader').addClass('loadingg');
+					form.find('button[type="submit"]').attr('disabled','true');
+				},
+				success: function(data){
+					Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+					$(form).find('.pp_load_loader').removeClass('loadingg');
+					form.find('button[type="submit"]').removeAttr('disabled');
+				}
+			});
+		});
+	</script>
+<?php } ?>
+
+<script type="text/javascript">
+	$("#avatar").change(function(event) {
+		$("#edit-avatar").submit();
+	});
+	$("#edit-avatar").ajaxForm({
+		url: '<?php echo($context["rita"]) ?>/edit-avatar',
+		type: 'POST',
+		dataType: 'json',
+		data:{user_id: '<?php echo($context["me"]["user_id"]) ?>'},
+		beforeSend: function(){header_loadbar('show')},
+		success: function(data){
+		if (data.status == 200) {
+			$('.ha').attr('src', data.avatar);
+			$('.cha').attr('src', data.avatar);
+			$('.d-me').attr('src', data.avatar);
+			$('.nv-me').attr('src', data.avatar);
+			Snackbar.show({showAction: false,backgroundColor: '#fff',text: '<div class="snack-div">'+data.message+'</div>'});
+		}		
+		delay(function(){header_loadbar()},1000);}
+	});
+</script>
