@@ -98,11 +98,22 @@ Password
 - New user startup wizard (avatar setup, follow suggestions)
 
 ### 📸 Posts & Content
-- Image posts (multi-image support), video posts (YouTube, Vimeo, Dailymotion, MP4), GIFs, and text posts
+- Image posts (multi-image support), GIFs, and text posts
+- Embedded video posts (YouTube, Vimeo, Dailymotion, MP4 links)
 - Private/paid photo posts with blurred previews
 - Comments, reactions, sharing, saving, and bookmarking
-- Hashtag support for discovery and categorization
+- Hashtag support and @mentions in captions
 - 24-hour Stories with view tracking
+
+#### 🎬 Video Upload
+Upload videos directly with a clean guided multi-step flow (Upload → Details → Finalizing → Uploaded):
+- Supported formats: `mp4`, `mkv`, `mov`, `webm`, `mpeg`
+- Minimum resolution: 720×1280 or higher
+- Max duration: 80 seconds · Max file size: 48MB
+- Set video privacy (Public / Private), toggle comments on/off, and upload a custom thumbnail
+
+#### 🖼️ Tile Upload
+Tiles are a unique short-form image content type — separate from regular posts and displayed in a dedicated Tiles grid view. When uploading, users choose between posting a **Video** or a **Tile**, keeping the two content streams distinct and browsable.
 
 ### 🏠 Feed & Discovery
 - Personalized home timeline
@@ -117,6 +128,49 @@ Password
 - Real-time message notifications
 
 ### 💰 Monetization
+#### ⭐ Premium Membership
+Fumigram has a fully-featured premium system. When a user upgrades, they unlock:
+
+| Perk | Detail |
+|---|---|
+| 🖼️ GIF Profile Picture | Animate your profile avatar |
+| 🛡️ Featured Member | Highlighted badge across the platform |
+| ⚡ Plus 3 Boosts Extra | Bonus boosts on upgrade |
+| 💛 x2 Affiliate Credits | Double earnings from referrals |
+| 👑 Multiple Profile Types | Switch between 4 unique profile layouts |
+| 🔕 Remove Watermark | Clean posts with no platform watermark |
+| 🟢 x2 Exp Points Earning | Earn experience points twice as fast |
+| ☁️ Post Without Limits | No cap on how much you can post |
+| 🎨 Change Profile Banner | Custom banner image on your profile |
+| ✏️ Change Your Username | Update your username anytime |
+| 📣 Promote Up To 9 Posts | Boost up to 9 posts simultaneously |
+| 💰 Plus 5,000 Points Extra | Bonus points on upgrade |
+| ✅ Request For Verification | Apply for a verified badge |
+| 💼 Unlock Business Account | Access business-tier features |
+| 🔗 Clickable Links | URLs in post descriptions become clickable |
+
+#### 🎭 4 Switchable Profile Types
+Premium users can switch between **4 unique profile layouts** to personalize how their page looks:
+- **Nova Profile**
+- **Linear Profile**
+- **Oceana Profile**
+- **Hexagon Profile**
+
+#### 📅 Premium Plans
+Choose a plan that fits — all plans and prices are fully configurable from the admin panel:
+
+| Plan | Credits |
+|---|---|
+| 1 Hour | 10 Credits |
+| Daily *(Most Popular)* | 20 Credits |
+| 3 Days | 55 Credits |
+| Weekly | 150 Credits |
+| Monthly | 780 Credits |
+| Yearly *(Recommended)* | 4,500 Credits |
+| Life Time | 9,000 Credits |
+
+> ⚙️ All premium settings — plan prices, boost limits, boost timer duration, clickable links, and more — are fully configurable from **Admin Panel → Premium System → Premium Settings**.
+
 - Premium membership (Pro) with badge and exclusive content
 - **Points/Rewards System** — earn points for activity (uploading, engaging)
 - **Tokens System** — purchasable token packs used to redeem lost points:
@@ -155,6 +209,29 @@ Password
 - RESTful API endpoints
 - Cron job support and error logging
 - Cookie consent (GDPR)
+
+### ⚙️ User Settings
+Every user has a rich settings dashboard to manage their account:
+
+| Section | What it does |
+|---|---|
+| **Account** | General info — email, gender, country |
+| **General** | Personalize your account details |
+| **Notifications** | Control what alerts you receive |
+| **Administration** | Account-level admin controls |
+| **Profile Settings** | Edit display name, bio, avatar, banner |
+| **Privacy** | Control who can see your content and profile |
+| **Password** | Change your login password |
+| **Blocked Users** | View and manage blocked accounts |
+| **Social Account** | Link your Discord and other social profiles |
+| **Manage Sessions** | View and revoke active login sessions |
+| **Store** | Access your purchases and digital items |
+| **Credits** | View your credit balance and history |
+| **Verification** | Request a verified badge (Premium) |
+| **My Affiliates** | Track your referral earnings |
+| **Business Account** | Unlock business-tier features (Premium) |
+
+> 💡 Users can also set a **Monthly Subscription Price** — a credit amount followers pay to subscribe to their account. Earned credits go directly to the user.
 
 ---
 
