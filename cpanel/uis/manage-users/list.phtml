@@ -1,0 +1,130 @@
+
+<tr id="list-<?php echo($cd['user']['user_id']); ?>" data_selected="<?php echo($cd['user']['user_id']); ?>">
+  <td>
+   <div class="form-check">
+      <input class="form-check-input delete-checkbox" id="check-data-<?php echo($cd['user']['user_id']); ?>" type="checkbox" value="" />
+      <label class="form-check-label" for="check-data-<?php echo($cd['user']['user_id']); ?>"></label>
+   </div>
+  </td>
+  <td><?php echo($cd['user']['user_id']); ?></td>
+  <td>
+      <a href="<?php echo($cd['user']['url']); ?>" target="_blank" class="text-decoration-none">
+         <img src="<?php echo(media($cd['user']['avatar'])); ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo($cd['user']['username']); ?>'s Profile" class="rounded-circle" alt="..." style="height: 2rem;weight:2rem;">
+      </a>
+      &nbsp; <?php echo($cd['user']['username']); ?> 
+      <?php if ($cd['user']['verified'] == 1): ?>
+      <img src="<?php echo cpanel('si/img/icons/verify.png');?>" alt="..." id="verify" style="height: 1rem;weight:1rem;">
+      <?php endif; ?>
+  </td>
+  <td><?php echo($cd['user']['mode']); ?></td>
+  <td><?php echo($cd['user']['gender']); ?></td>
+  <td><?php echo($cd['user']['registered']); ?></td>
+  <td class="text-center">
+  <?php if ($cd['user']['is_pro'] == 1): ?>
+      <span class="badge bg-orange">Premium</span>
+  <?php else: ?>
+      <span class="badge bg-light text-dark">Free Member</span>
+	<?php endif; ?>
+  </td>
+  <td>
+      <?php if ($cd['user']['profile'] == 1): ?>
+         Linear
+      <?php elseif ($cd['user']['profile'] == 2): ?>
+         Nova
+      <?php elseif ($cd['user']['profile'] == 3): ?>
+         Blue Tech
+      <?php elseif ($cd['user']['profile'] == 4): ?>
+         Pathfinder
+      <?php elseif ($cd['user']['profile'] == 5): ?>   
+         Oceana
+      <?php elseif ($cd['user']['profile'] == 6): ?>
+         Hexagon
+      <?php endif; ?>
+   </td>
+   <td>
+      <?php if (strtolower($cd['user']['src']) == 'facebook') { ?>
+         <img class="mr-1 facebook" width="22" src="<?php echo cpanel('si/img/socials/facebook.png');?>" alt="...">
+      <?php }elseif (strtolower($cd['user']['src']) == 'google') { ?>
+         <img class="mr-1 google" width="22" src="<?php echo cpanel('si/img/socials/google.png');?>" alt="...">
+      <?php }elseif (strtolower($cd['user']['src']) == 'vkontakte') { ?>
+         <img class="mr-1 vkontakte" width="22" src="<?php echo cpanel('si/img/socials/vk.png');?>" alt="...">
+      <?php }elseif (strtolower($cd['user']['src']) == 'twitter') { ?>
+         <img class="mr-1 twitter" width="22" src="<?php echo cpanel('si/img/socials/twitter.png');?>" alt="...">
+      <?php }elseif (strtolower($cd['user']['src']) == 'linkedIn') { ?>
+         <img class="mr-1 linkedIn" width="22" src="<?php echo cpanel('si/img/socials/linkedin.png');?>" alt="...">
+      <?php }elseif (strtolower($cd['user']['src']) == 'instagram') { ?>
+         <img class="mr-1 instagram" width="22" src="<?php echo cpanel('si/img/socials/Instagram.png');?>" alt="...">
+      <?php }elseif (strtolower($cd['user']['src']) == 'discord') { ?>
+         <img class="mr-1 discord" width="22" src="<?php echo cpanel('si/img/socials/discord.png');?>" alt="...">
+      <?php }elseif (strtolower($cd['user']['src']) == '') { ?>
+         <img class="mr-1 fumigram" width="22" src="<?php echo $config['site_url']; ?>/media/img/logo.<?php echo($config['logo_extension']) ?>" alt="...">
+      <?php }elseif (strtolower($cd['user']['src']) == 'referrer') { ?>
+         <img class="mr-1 referrer" width="22" src="<?php echo cpanel('si/img/icons/linkc.png');?>" alt="...">
+      <?php }else{ ?>
+         <?php echo $cd['user']['src']?>
+      <?php } ?>
+   </td>
+  <td>
+      <?php if ($cd['user']['active'] == 1): ?>
+         <span class="badge bg-success">Active</span>
+      <?php elseif ($cd['user']['active'] == 2): ?>
+         <span class="badge bg-danger">Deactivated</span>
+      <?php else: ?>
+         <span class="badge bg-danger">Inactive</span>
+	   <?php endif; ?>
+  </td>
+  <td>
+      <div class="dropdown">
+         <div class="btn btn-outline-primary dropdown-toggle" id="dropdownMenuDarkButton" data-bs-toggle="dropdown" aria-expanded="false">Action</div>
+         <ul class="dropdown-menu" aria-labelledby="dropdownMenuDarkButton" style="min-width: 10.5rem">
+            <li>
+               <a class="dropdown-item"  target="_blank" href="<?php echo($cd['user']['edit']); ?>">Edit</a>
+            </li>
+            <?php if ($cd['user']['verified'] == 0): ?>
+            <li>
+               <a class="dropdown-item" href="javascript:void(0)" data-id="<?php echo($cd['user']['user_id']); ?>" onclick="verify('<?php echo($cd['user']['user_id']); ?>','hide');">Verify</a>
+            </li>
+            <?php elseif ($cd['user']['verified'] == 1): ?>
+            <li>
+               <a class="dropdown-item" href="javascript:void(0)" data-id="<?php echo($cd['user']['user_id']); ?>" onclick="Unverify('<?php echo($cd['user']['user_id']); ?>','hide');">Un-Verify</a>
+            </li>
+            <?php endif; ?>
+            <li>
+               <a class="dropdown-item" href="javascript:void(0)" data-id="<?php echo($cd['user']['user_id']); ?>" onclick="DeleteAcc('<?php echo($cd['user']['user_id']); ?>','hide');">Delete</a>
+            </li>
+            <?php if ($cd['user']['active'] == 0): ?>
+            <li>
+               <a class="dropdown-item" href="javascript:void(0)" data-id="<?php echo($cd['user']['user_id']); ?>" onclick="Activate('<?php echo($cd['user']['user_id']); ?>','hide');">Activate</a>
+            </li>
+            <?php elseif ($cd['user']['active'] == 2): ?>
+            <li>
+               <a class="dropdown-item" href="javascript:void(0)" data-id="<?php echo($cd['user']['user_id']); ?>" onclick="Activate('<?php echo($cd['user']['user_id']); ?>','hide');">Activate</a>
+            </li>
+            <?php else: ?>
+            <li>
+               <a class="dropdown-item" href="javascript:void(0)" data-id="<?php echo($cd['user']['user_id']); ?>" onclick="Deactivate('<?php echo($cd['user']['user_id']); ?>','hide');">Deactivate</a>
+            </li>
+            <?php endif; ?>
+            <!-- <li>
+               <a class="dropdown-item" href="javascript:void(0)" data-id="<?php echo($cd['user']['user_id']); ?>" onclick="SendMoney('<?php echo($cd['user']['user_id']); ?>','hide');">Send Money</a>
+            </li> -->
+            <!-- <li>
+               <a class="dropdown-item" href="javascript:void(0)" data-id="<?php echo($cd['user']['user_id']); ?>" onclick="DeleteUserPosts('<?php echo($cd['user']['user_id']); ?>','hide');">Delete Posts</a>
+            </li>
+            <li>
+               <a class="dropdown-item" href="javascript:void(0)">Delete Stories</a>
+            </li>
+            <li>
+               <a class="dropdown-item" href="javascript:void(0)">Delete Messages</a>
+            </li>
+            <li>
+               <a class="dropdown-item" href="javascript:void(0)">Manage Permissions</a>
+            </li> -->
+         </ul>
+      </div>
+  </td>
+</tr>
+<script>
+tippy('.Activated', {arrow: false,content: "Account is Activated"});
+tippy('.Deactivated', {arrow: false,content: "Account is Deactivated"});
+</script>

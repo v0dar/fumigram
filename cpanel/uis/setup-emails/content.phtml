@@ -1,0 +1,356 @@
+<?php 
+if ($me['manager'] == 0 && $me['admin'] == 0) {    
+    header("Location: " . cpanel('overview'));
+    exit();
+}
+?>
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">Setup Emails</h1>
+        <div class="text-muted">Setup & configure the website emails!</div>
+    </div>
+</div>
+<!-- Colored status cards-->
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Info@<b style="font-weight: 500;text-transform:lowercase"><?php echo $config['site_name']; ?></b>.com email</h2>
+                            <div class="card-subtitle">Setup the info@<b style="font-weight: 500;text-transform:lowercase"><?php echo $config['site_name']; ?></b>.com email</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/gmail.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form infoemail-settings-form" method="POST">
+                        <label for="raise_money_type" class="main-label">Server Type</label>
+                        <br><small class="admin-info">Select which E-mail server you want to use!</small><br><br>
+                        <mwc-select outlined class="w-100" id="smtp_or_mail" name="" label="Select the email server! Recommended: (SMTP)">
+                            <mwc-list-item value="smtp" <?php if($config['smtp_or_mail'] == 'smtp'){ echo("selected");}?>>SMTP Server</mwc-list-item>
+                            <mwc-list-item value="mail" <?php if($config['smtp_or_mail'] == 'mail'){ echo("selected");}?>>Server Mail (Default)</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">SMTP Host</label><br>
+                        <small class="admin-info">The SMTP account host name, can be IP, domain or subdomain.</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" name="smtp_host" value="<?php echo $config['smtp_host']?>" label="SMTP Host! Recommended: (IP)"></mwc-textfield>               
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">SMTP Username</label><br>
+                        <small class="admin-info">The websites account username! Eg: info@<b style="font-weight: 500;text-transform:lowercase"><?php echo $config['site_name']; ?></b>.com</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" name="smtp_username" value="<?php echo $config['smtp_username']?>" label="SMTP Account Username!"></mwc-textfield>   
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">SMTP Password</label><br>
+                        <small class="admin-info">The websites email account password! Eg: Info@<b style="font-weight: 500;text-transform:lowercase"><?php echo $config['site_name']; ?></b>1.com</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" name="smtp_password" value="<?php echo openssl_decrypt($config['smtp_password'], "AES-128-ECB", 'mysecretkey1234');?>" label="SMTP email account password!"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">SMTP Port</label><br>
+                        <small class="admin-info">Our SMTP server! Some uses 587 for TLS, and 465 for SSL encryption.</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" name="smtp_port" value="<?php echo $config['smtp_port']?>" label="SMTP Server Port!"></mwc-textfield>   
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label for="raise_money_type" class="main-label">SMTP Server Encryption</label>
+                        <br><small class="admin-info">Which encryption method does our SMTP server uses?</small><br><br>
+                        <mwc-select outlined class="w-100" id="smtp_encryption" name="smtp_encryption" label="SMTP Encryption">
+                            <mwc-list-item value="tls" <?php if($config['smtp_encryption'] == 'tls'){ echo("selected");}?>>TLS</mwc-list-item>
+                            <mwc-list-item value="ssl" <?php if($config['smtp_encryption'] == 'ssl'){ echo("selected");}?>>SSL</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_changes">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">no-reply@<b style="font-weight: 500;text-transform:lowercase"><?php echo $config['site_name']; ?></b>.com email</h2>
+                            <div class="card-subtitle">Setup the no-reply@<b style="font-weight: 500;text-transform:lowercase"><?php echo $config['site_name']; ?></b>.com email</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/gmail.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form infoemail-settings-form" method="POST">
+                        <label for="raise_money_type" class="main-label">Server Type</label>
+                        <br><small class="admin-info">Select which E-mail server you want to use!</small><br><br>
+                        <mwc-select outlined class="w-100" id="smtp_or_mail" name="" label="Select the email server! Recommended: (SMTP)">
+                            <mwc-list-item value="smtp" <?php if($config['smtp_or_mail'] == 'smtp'){ echo("selected");}?>>SMTP Server</mwc-list-item>
+                            <mwc-list-item value="mail" <?php if($config['smtp_or_mail'] == 'mail'){ echo("selected");}?>>Server Mail (Default)</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">SMTP Host</label><br>
+                        <small class="admin-info">The SMTP account host name, can be IP, domain or subdomain.</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" name="smtp_host" value="<?php echo $config['smtp_host']?>" label="SMTP Host! Recommended: (IP)"></mwc-textfield>               
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">SMTP Username</label><br>
+                        <small class="admin-info">The websites account username! Eg: no-reply@<b style="font-weight: 500;text-transform:lowercase"><?php echo $config['site_name']; ?></b>.com</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" name="noreply_email" value="<?php echo $config['noreply_email']?>" label="SMTP Account Username!"></mwc-textfield>   
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">SMTP Password</label><br>
+                        <small class="admin-info">The websites email account password! Eg: noreply_email@<b style="font-weight: 500;text-transform:lowercase"><?php echo $config['site_name']; ?></b>1.com</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" name="smtp_password" value="<?php echo openssl_decrypt($config['smtp_password'], "AES-128-ECB", 'mysecretkey1234');?>" label="SMTP email account password!"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">SMTP Port</label><br>
+                        <small class="admin-info">Our SMTP server! Some uses 587 for TLS, and 465 for SSL encryption.</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" name="smtp_port" value="<?php echo $config['smtp_port']?>" label="SMTP Server Port!"></mwc-textfield>   
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label for="raise_money_type" class="main-label">SMTP Server Encryption</label>
+                        <br><small class="admin-info">Which encryption method does our SMTP server uses?</small><br><br>
+                        <mwc-select outlined class="w-100" id="smtp_encryption" name="smtp_encryption" label="SMTP Encryption">
+                            <mwc-list-item value="tls" <?php if($config['smtp_encryption'] == 'tls'){ echo("selected");}?>>TLS</mwc-list-item>
+                            <mwc-list-item value="ssl" <?php if($config['smtp_encryption'] == 'ssl'){ echo("selected");}?>>SSL</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_noreply">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">payment@<b style="font-weight: 500;text-transform:lowercase"><?php echo $config['site_name']; ?></b>.com email</h2>
+                            <div class="card-subtitle">Setup the payment@<b style="font-weight: 500;text-transform:lowercase"><?php echo $config['site_name']; ?></b>.com email</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/gmail.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form infoemail-settings-form" method="POST">
+                        <label for="raise_money_type" class="main-label">Server Type</label>
+                        <br><small class="admin-info">Select which E-mail server you want to use!</small><br><br>
+                        <mwc-select outlined class="w-100" id="smtp_or_mail" name="" label="Select the email server! Recommended: (SMTP)">
+                            <mwc-list-item value="smtp" <?php if($config['smtp_or_mail'] == 'smtp'){ echo("selected");}?>>SMTP Server</mwc-list-item>
+                            <mwc-list-item value="mail" <?php if($config['smtp_or_mail'] == 'mail'){ echo("selected");}?>>Server Mail (Default)</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">SMTP Host</label><br>
+                        <small class="admin-info">The SMTP account host name, can be IP, domain or subdomain.</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" name="smtp_host" value="<?php echo $config['smtp_host']?>" label="SMTP Host! Recommended: (IP)"></mwc-textfield>               
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">SMTP Username</label><br>
+                        <small class="admin-info">The websites account username! Eg: payment@<b style="font-weight: 500;text-transform:lowercase"><?php echo $config['site_name']; ?></b>.com</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" name="payment_email" value="<?php echo $config['payment_email']?>" label="SMTP Account Username!"></mwc-textfield>   
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">SMTP Password</label><br>
+                        <small class="admin-info">The websites email account password! Eg: payment@<b style="font-weight: 500;text-transform:lowercase"><?php echo $config['site_name']; ?></b>1.com</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" name="smtp_password" value="<?php echo openssl_decrypt($config['smtp_password'], "AES-128-ECB", 'mysecretkey1234');?>" label="SMTP email account password!"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">SMTP Port</label><br>
+                        <small class="admin-info">Our SMTP server! Some uses 587 for TLS, and 465 for SSL encryption.</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" name="smtp_port" value="<?php echo $config['smtp_port']?>" label="SMTP Server Port!"></mwc-textfield>   
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label for="raise_money_type" class="main-label">SMTP Server Encryption</label>
+                        <br><small class="admin-info">Which encryption method does our SMTP server uses?</small><br><br>
+                        <mwc-select outlined class="w-100" id="smtp_encryption" name="smtp_encryption" label="SMTP Encryption">
+                            <mwc-list-item value="tls" <?php if($config['smtp_encryption'] == 'tls'){ echo("selected");}?>>TLS</mwc-list-item>
+                            <mwc-list-item value="ssl" <?php if($config['smtp_encryption'] == 'ssl'){ echo("selected");}?>>SSL</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_payment_email">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xxl-6 col-md-6 mb-6">
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">business@<b style="font-weight: 500;text-transform:lowercase"><?php echo $config['site_name']; ?></b>.com email</h2>
+                            <div class="card-subtitle">Setup the business@<b style="font-weight: 500;text-transform:lowercase"><?php echo $config['site_name']; ?></b>.com email</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/gmail.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form infoemail-settings-form" method="POST">
+                        <label for="raise_money_type" class="main-label">Server Type</label>
+                        <br><small class="admin-info">Select which E-mail server you want to use!</small><br><br>
+                        <mwc-select outlined class="w-100" id="smtp_or_mail" name="" label="Select the email server! Recommended: (SMTP)">
+                            <mwc-list-item value="smtp" <?php if($config['smtp_or_mail'] == 'smtp'){ echo("selected");}?>>SMTP Server</mwc-list-item>
+                            <mwc-list-item value="mail" <?php if($config['smtp_or_mail'] == 'mail'){ echo("selected");}?>>Server Mail (Default)</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">SMTP Host</label><br>
+                        <small class="admin-info">The SMTP account host name, can be IP, domain or subdomain.</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" name="smtp_host" value="<?php echo $config['smtp_host']?>" label="SMTP Host! Recommended: (IP)"></mwc-textfield>               
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">SMTP Username</label><br>
+                        <small class="admin-info">The websites account username! Eg: business@<b style="font-weight: 500;text-transform:lowercase"><?php echo $config['site_name']; ?></b>.com</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" name="business_email" value="<?php echo $config['business_email']?>" label="SMTP Account Username!"></mwc-textfield>   
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">SMTP Password</label><br>
+                        <small class="admin-info">The websites email account password! Eg: business@<b style="font-weight: 500;text-transform:lowercase"><?php echo $config['site_name']; ?></b>1.com</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" name="smtp_password" value="<?php echo openssl_decrypt($config['smtp_password'], "AES-128-ECB", 'mysecretkey1234');?>" label="SMTP email account password!"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">SMTP Port</label><br>
+                        <small class="admin-info">Our SMTP server! Some uses 587 for TLS, and 465 for SSL encryption.</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" name="smtp_port" value="<?php echo $config['smtp_port']?>" label="SMTP Server Port!"></mwc-textfield>   
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label for="raise_money_type" class="main-label">SMTP Server Encryption</label>
+                        <br><small class="admin-info">Which encryption method does our SMTP server uses?</small><br><br>
+                        <mwc-select outlined class="w-100" id="smtp_encryption" name="smtp_encryption" label="SMTP Encryption">
+                            <mwc-list-item value="tls" <?php if($config['smtp_encryption'] == 'tls'){ echo("selected");}?>>TLS</mwc-list-item>
+                            <mwc-list-item value="ssl" <?php if($config['smtp_encryption'] == 'ssl'){ echo("selected");}?>>SSL</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_business">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- END -->
+</div>
+
+<script>
+    $(function() {
+        let notify_error = {status: 'error',title: 'Emails Settings',text: 'Failed to updated this settings',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_warning = {status: 'warning',title: 'Emails Settings',text: "Oops there's an error in the script",effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_success = {status: 'success',title: 'Emails Settings',text: 'Configurations Updated Successfully',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        $('.switcher input[type=checkbox]').click(function () {
+            var configName = $(this).attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            if ($(this).is(":checked") === true) {
+                objData[configName] = $(this).val();
+                new Notify({ ...notify_success })
+            }
+            else{
+                if ($('input[name='+configName+']')[0]) {
+                    objData[configName] = $($('input[name='+configName+']')[0]).val();
+                    new Notify({ ...notify_success })
+                }
+            }
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('email-settings'), objData);
+        });
+
+        $('mwc-select').on('change', function() {
+            var thisElement = $(this);
+            var configName = thisElement.attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            objData[configName] = thisElement.val();
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('email-settings'), objData, function (data) {
+                if (data.status == 200) {
+                    new Notify({ ...notify_success });
+                } else {
+                    new Notify({ ...notify_error });
+                }
+            });
+        });
+
+        function update_input(){
+            $('mwc-textfield, mwc-textarea').on('keyup', function() {
+                var thisElement = $(this);
+                var configName = thisElement.attr('name');
+                var hash_id = $('mwc-textfield[name=hash_id]').val();
+                var objData = {};
+                objData[configName] = this.value;
+                objData['hash_id'] = hash_id;
+                $.post(cpanel_ajax_url('email-settings'), objData, function (data) {
+                    if (data.status == 200) {
+                    } else {
+                        new Notify({ ...notify_error })
+                    }
+                });
+            });
+        }
+        $('#save_changes').on('click', function() {
+            $('#save_changes').text('Please Wait...');
+			$('#save_changes').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_changes').text('Save Changes');
+			$('#save_changes').removeAttr('disabled');
+            }, 2000);
+        });
+        $('#save_noreply').on('click', function() {
+            $('#save_noreply').text('Please Wait...');
+			$('#save_noreply').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_noreply').text('Save Changes');
+			$('#save_noreply').removeAttr('disabled');
+            }, 1000);
+        });
+        $('#save_payment_email').on('click', function() {
+            $('#save_payment_email').text('Please Wait...');
+			$('#save_payment_email').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_payment_email').text('Save Changes');
+			$('#save_payment_email').removeAttr('disabled');
+            }, 1000);
+        });
+        $('#save_business').on('click', function() {
+            $('#save_business').text('Please Wait...');
+			$('#save_business').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_business').text('Save Changes');
+			$('#save_business').removeAttr('disabled');
+            }, 1000);
+        });
+        setTimeout(function () {
+            update_input();
+        }, 2000);
+    });
+</script>

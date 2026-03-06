@@ -1,0 +1,36 @@
+<tr id="list-<?php echo($cd['story']['id']); ?>" data-id="<?php echo($cd['story']['id']); ?>" data_selected="<?php echo($cd['story']['id']) ?>">
+  <td>
+   <div class="form-check">
+      <input class="form-check-input delete-checkbox" id="check-data-<?php echo($cd['story']['id']); ?>" type="checkbox" value="" />
+      <label class="form-check-label" for="check-data-<?php echo($cd['story']['id']); ?>"></label>
+   </div>
+  </td>
+  <td><?php echo($cd['story']['id']); ?></td>
+  <td>
+      <a href="<?php echo(un2url($cd['story']['username'])); ?>" target="_blank" class="text-decoration-none">
+         <img src="<?php echo(media($cd['story']['avatar'])); ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo($cd['story']['username']); ?>'s Profile" class="rounded-circle" alt="..." style="height: 2rem;weight:2rem;">
+      </a>
+      &nbsp; <?php echo($cd['story']['username']); ?>
+      <?php if ($cd['story']['verified'] == 1): ?>
+      <img src="<?php echo pxp_cpanel_link('si/img/icons/verify.png');?>" alt="..." id="verify" style="height: 1rem;weight:1rem;">
+      <?php endif; ?>
+  </td>
+  <td>
+    <?php if ($cd['story']['type'] == 1): ?>
+      Image
+    <?php else: ?>
+      Video
+    <?php endif; ?>
+  </td>
+  <td><?php echo(time2str($cd['story']['time'])); ?></td>
+  <td>
+  <?php if ($cd['story']['active'] == 1): ?>
+      <span class="badge bg-success">Active</span>
+  <?php else: ?>
+      <span class="badge bg-danger">Inactive</span>
+	<?php endif; ?>
+  </td>
+  <td>
+      <a class="btn btn-outline-danger" href="javascript:void(0)" data-id="<?php echo($cd['story']['id']); ?>" onclick="nope('<?php echo($cd['story']['id']); ?>','hide');">Delete Story</a>
+  </td>
+</tr>

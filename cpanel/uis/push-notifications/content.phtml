@@ -1,0 +1,129 @@
+<?php
+if ($me['manager'] == 0 && $me['admin'] == 0) {    
+    header("Location: " . cpanel('overview'));
+    exit();
+}
+?>
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">Push Notifications System</h1>
+        <div class="text-muted">This system allows your website to send push notifications to any application!</div>
+    </div>
+</div>
+<!-- Colored status cards-->
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Push Notifications System</h2>
+                            <div class="card-subtitle">Send push notifications to application who uses our API!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/notification-bell.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="business_account" class="check-label">Push Notifications</label><br>
+                            <small class="admin-info">Send push notifications to applications!<br>To Get started, Create an account on <a href="https://onesignal.com/" target="_blank">onesignal</a></small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="push" value="0" />
+                                <input type="checkbox" name="push" id="chck-push" value="1" <?php echo ($config['push'] == '1') ? 'checked': '';?>>
+                                <label for="chck-push" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">OneSignal APP ID</label><br>
+                        <small class="admin-info" name="amount_ref">You application ID in onesignal!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="push_id" value="<?php echo $config['push_id']?>" label="APP ID"></mwc-textfield>
+                        <hr>
+                        <label class="form-label" class="main-label">REST API Key</label><br>
+                        <small class="admin-info" name="amount_ref">You application api key onesignal!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="push_key" value="<?php echo $config['push_key']?>" label="API KEY"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_changes">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
+
+<script>
+    $(function() {
+        let notify_error = {status: 'error',title: 'Push Notifications',text: 'Failed to updated this settings',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_success = {status: 'success',title: 'Push Notifications',text: 'Configurations Updated Successfully!',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        $('.switcher input[type=checkbox]').click(function () {
+            var configName = $(this).attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            if ($(this).is(":checked") === true) {
+                objData[configName] = $(this).val();
+                new Notify({ ...notify_success })
+            }
+            else{
+                if ($('input[name='+configName+']')[0]) {
+                    objData[configName] = $($('input[name='+configName+']')[0]).val();
+                    new Notify({ ...notify_success })
+                }
+            }
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('site-settings'), objData);
+        });
+
+        $('mwc-select').on('change', function() {
+            var thisElement = $(this);
+            var configName = thisElement.attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            objData[configName] = thisElement.val();
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('site-settings'), objData, function (data) {
+                if (data.status == 200) {
+                    new Notify({ ...notify_success });
+                } else {
+                    new Notify({ ...notify_error });
+                }
+            });
+        });
+
+        function update_input(){
+            $('mwc-textfield, mwc-textarea').on('keyup', function() {
+                var thisElement = $(this);
+                var configName = thisElement.attr('name');
+                var hash_id = $('mwc-textfield[name=hash_id]').val();
+                var objData = {};
+                objData[configName] = this.value;
+                objData['hash_id'] = hash_id;
+                $.post(cpanel_ajax_url('site-settings'), objData, function (data) {
+                    if (data.status == 200) {
+                    } else {
+                        new Notify({ ...notify_error })
+                    }
+                });
+            });
+        }
+        $('#save_changes').on('click', function() {
+            $('#save_changes').text('Please Wait...');
+			$('#save_changes').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_changes').text('Save Changes');
+			$('#save_changes').removeAttr('disabled');
+            }, 2000);
+        });
+        setTimeout(function () {
+            update_input();
+        }, 1000);
+    });
+</script>

@@ -1,0 +1,20 @@
+<tr id="list-<?php echo($cd['comment']['id']); ?>" data-id="<?php echo($cd['comment']['id']); ?>" data_selected="<?php echo($cd['comment']['id']) ?>">
+  <td>
+   <div class="form-check">
+      <input class="form-check-input delete-checkbox" id="check-data-<?php echo($cd['comment']['id']); ?>" type="checkbox" value="" />
+      <label class="form-check-label" for="check-data-<?php echo($cd['comment']['id']); ?>"></label>
+   </div>
+  </td>
+  <td><?php echo($cd['comment']['id']); ?></td>
+  <td>
+      <a href="<?php echo(un2url($cd['comment']['username'])); ?>" target="_blank" class="text-decoration-none">
+         <img src="<?php echo(media($cd['comment']['avatar'])); ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo($cd['comment']['username']); ?>'s Profile" class="rounded-circle" alt="..." style="height: 2rem;weight:2rem;">
+      </a>
+      &nbsp; <?php echo($cd['comment']['username']); ?>
+      <?php if ($cd['comment']['verified'] == 1): ?>
+      <img src="<?php echo cpanel('si/img/icons/verify.png');?>" alt="..." id="verify" style="height: 1rem;weight:1rem;">
+      <?php endif; ?>
+  </td>
+  <td style="width:40%"><?php echo($cd['comment']['text']); ?></td>
+  <td><?php echo(time2str($cd['comment']['time'])); ?></td>
+</tr>

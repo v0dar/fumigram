@@ -1,0 +1,244 @@
+<?php 
+if ($me['manager'] == 0 && $me['admin'] == 0) {    
+    header("Location: " . cpanel('overview'));
+    exit();
+}
+
+$ui             = (!empty($_GET['ui-id'])) ? $_GET['ui-id'] : 1;
+$filter_keyword = (!empty($_GET['query'])) ? $cpanel::secure($_GET['query']) : '';
+$filter_type    = '';
+$link = '';
+$search_link = '&';
+$rang_link_href = '?';
+$cpanel::$db->pageLimit  = 18;
+
+// $total       = $cpanel::$db->getValue(T_TRANSACTIONS, 'sum(amount)');
+// $team_earn   = $cpanel::$db->getValue(T_TRANSACTIONS, 'sum(admin_com)');
+// $total       = $total + $team_earn;
+
+$sack        = $cpanel::$db->where('type','Bought a sack of credits')->getValue(T_TRANSACTIONS, 'sum(amount)');
+$pot         = $cpanel::$db->where('type','Bought a pot of credits')->getValue(T_TRANSACTIONS, 'sum(amount)');
+$cup         = $cpanel::$db->where('type','Bought a cup of credits')->getValue(T_TRANSACTIONS, 'sum(amount)');
+$wal         = $cpanel::$db->where('type','Added_money_to_wallet')->getValue(T_TRANSACTIONS, 'sum(amount)');
+if($pot == '') {
+    $pot = '0';
+}
+if($cup == '') {
+    $cup = '0';
+}
+if($sack == '') {
+    $sack = '0';
+}
+if($wal == '') {
+    $wal = '0';
+}
+
+$transactions = $cpanel::$db->orderBy('id','DESC')->objectbuilder()->paginate(T_TRANSACTIONS,$ui);
+if (($ui > $cpanel::$db->totalPages) && !empty($_GET['ui-id'])) {
+    header("Location: " . cpanel('earnings'));
+    exit();
+}
+?>
+<style>.crex {font-size: 16px;}</style>
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">Earnings</h1>
+        <div class="text-muted">Full statistics on how much the site generating.</div>
+    </div>
+</div>
+<!-- Colored status cards-->
+<div class="row gx-5">
+    <div class="col-xxl-3 col-md-6 mb-5">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+            <div class="card-body px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <div class="display-5"><?php echo Currency($context['config']['currency']).$sack; ?></div>
+                        <div class="card-text">Sack of Credits</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/bag-of-credits.png');?>" alt="..." style="height: 3.3rem;weight:3.3rem;" />
+                </div>
+                <div class="card-text">
+                    <div class="d-inline-flex align-items-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-3 col-md-6 mb-5">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+            <div class="card-body px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <div class="display-5"><?php echo Currency($context['config']['currency']).$pot; ?></div>
+                        <div class="card-text">Pot of Credits</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/pot-of-credits.png');?>" alt="..." style="height: 3.3rem;weight:3.3rem;" />
+                </div>
+                <div class="card-text">
+                    <div class="d-inline-flex align-items-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-3 col-md-6 mb-5">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+            <div class="card-body px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <div class="display-5"><?php echo Currency($context['config']['currency']).$cup; ?></div>
+                        <div class="card-text">Cup of Credits</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/cup-of-credits.png');?>" alt="..." style="height: 3.3rem;weight:3.3rem;" />
+                </div>
+                <div class="card-text">
+                    <div class="d-inline-flex align-items-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-3 col-md-6 mb-5">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+            <div class="card-body px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <div class="display-5"><?php echo Currency($context['config']['currency']).$wal; ?></div>
+                        <div class="card-text">Replenish Balance</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/cash-money.png');?>" alt="..." style="height: 3.3rem;weight:3.3rem;" />
+                </div>
+                <div class="card-text">
+                    <div class="d-inline-flex align-items-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row gx-5">
+    <!-- Revenue breakdown chart example-->
+    <div class="col-lg-12 mb-5">
+        <div class="card card-raised h-100 border-start border-<?php echo $me['dash_color']; ?> border-4">
+            <div class="card-header bg-white px-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="me-4">
+                        <h6 class="card-title">Transactions & Earnings</h6>
+                        <form method="get" action="<?php echo cpanel('earnings'); ?>">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <label class="form-label search-form">Community transactions and users spending activities!</label>
+                                        </div>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                    <div class="d-flex gap-2 me-n2">
+                        <img src="<?php echo cpanel('si/img/icons/donation+.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-4">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Profile</th>
+                                    <th>Amount</th>
+                                    <th>Admin Earnings</th>
+                                    <th>Transaction Date</th>
+                                    <th>Transaction Type</th>
+                                    <th>Transaction Text</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
+                                    if (!empty($transactions)) {
+                                        foreach ($transactions as $key => $trans) {
+                                            $user = $cpanel::$db->where('user_id',$trans->user_id)->getOne(T_USERS);
+                                            $context['trans'] = o2array($trans);
+                                            $context['user'] = o2array($cpanel->userData($user));
+                                            echo $cpanel->Senction('earnings/list');
+                                        }
+                                    } else {
+                                        echo $cpanel::createHtmlEl('tr',null,$cpanel::createHtmlEl('td',array(
+                                            'colspan' => 4,
+                                            'class' => 'empty-table text-center',
+                                        ),"No request data found to display"));
+                                    }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="float-start">
+                        <?php echo "Showing $ui out of " . $cpanel::$db->totalPages; ?> Pages
+                    </div>
+                    <div class="float-end">
+                        <nav>
+                            <ul class="pagination">
+                                <li>
+                                    <a class="text-decoration-none firstpage" href="<?php echo cpanel('earnings?ui-id=1').$link; ?>" data-ajax="?path=earnings&ui-id=1<?php echo($link); ?>">
+                                        <i class="material-icons">first_page</i>
+                                    </a>
+                                </li>
+                                <?php if ($ui > 1) {  ?>
+                                <li>
+                                    <a class="text-decoration-none previouspage" href="<?php echo cpanel('earnings?ui-id=' . ($ui - 1)).$link; ?>" data-ajax="?path=earnings&ui-id=<?php echo($ui - 1) ?><?php echo($link); ?>">
+                                        <i class="material-icons">chevron_left</i>
+                                    </a>
+                                </li>
+                                <?php  } ?>
+                                <?php 
+                                $nums       = 0;
+                                $nums_uis = ($ui > 4) ? ($ui - 4) : $ui;
+                                for ($i=$nums_uis; $i <= $cpanel::$db->totalPages; $i++) { 
+                                    if ($nums < 8) {
+                                ?>
+                                <li class="<?php echo ($ui == $i) ? 'active' : ''; ?>">
+                                    <a class="text-decoration-none" href="<?php echo cpanel('earnings?ui-id=' . ($i)).$link; ?>" data-ajax="?path=earnings&ui-id=<?php echo($i) ?><?php echo($link); ?>" class="waves-effect">
+                                        <?php echo $i ?>   
+                                    </a>
+                                </li>
+                                <?php } $nums++; }?>
+                                <?php if ($cpanel::$db->totalPages > $ui) { ?>
+                                <li>
+                                    <a class="text-decoration-none nextpage" href="<?php echo cpanel('earnings?ui-id=' . ($ui + 1)).$link; ?>" data-ajax="?path=earnings&ui-id=<?php echo($ui + 1) ?><?php echo($link); ?>">
+                                        <i class="material-icons">chevron_right</i>
+                                    </a>
+                                </li>
+                                <?php } ?>
+                                <li>
+                                    <a class="text-decoration-none lastpage" href="<?php echo cpanel('earnings?ui-id=' . ($cpanel::$db->totalPages)).$link; ?>" data-ajax="?path=earnings&ui-id=<?php echo($cpanel::$db->totalPages) ?><?php echo($link); ?>">
+                                        <i class="material-icons">last_page</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+</div>
+<script>
+$('#Search').on('click', function(event) {
+    event.preventDefault();
+    const trans = $('#filter');
+    const trans_type = trans.val();
+    $('#redirect_link').attr('href', "<?php echo cpanel('earnings').$rang_link_href; ?>filter="+trans_type);
+    $('#redirect_link').attr('data-ajax', "?path=earnings<?php echo($search_link); ?>filter="+trans_type);
+    $('#redirect_link').click();
+});
+tippy('.lastpage', {arrow: false,content: 'Last Page'});
+tippy('.nextpage', {arrow: false,content: 'Next Page'});
+tippy('.previouspage', {arrow: false,content: 'Previous Page'});
+tippy('.firstpage', {arrow: false,content: 'First Page'});
+tippy('.credits', {arrow: false,content: 'Credits'});
+</script>

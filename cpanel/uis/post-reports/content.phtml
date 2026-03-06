@@ -1,0 +1,324 @@
+<?php
+$ui = (!empty($_GET['ui-id'])) ? $_GET['ui-id'] : 1;
+$link = '';
+$rang_link_href = '?';
+$t_users   = T_USERS;
+$t_reports = T_POST_REPORTS;
+$cpanel::$db->pageLimit  = 25;
+
+$cpanel::$db->join("`$t_users` u",'u.`user_id` = r.`user_id`','INNER');
+$reports = $cpanel::$db->orderBy('r.`id`', 'DESC')->paginate("`$t_reports` r",$ui,array(
+    'r.`id`',
+    'r.`type`',
+    'r.`time`',
+    'r.`post_id`',
+    'r.`text`',
+    'u.`username`',
+    'u.`avatar`',
+));
+
+$tot_reports  = $cpanel::$db->getValue(T_POST_REPORTS, 'COUNT(*)');
+if (($ui > $cpanel::$db->totalPages) && !empty($_GET['ui-id'])) {
+    header("Location: " . cpanel('post-reports'));
+    exit();
+}
+$mode = 'day';
+if (!empty($_COOKIE['mode']) && $_COOKIE['mode'] == 'night') {
+    $mode = 'night';
+}
+?>
+<style>.crex {font-size: 16px;}</style>
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">Post Reports</h1>
+        <div class="text-muted">
+           Manage all post reports in this dictionary!
+        </div>
+    </div>
+</div>
+<!-- Colored status cards-->
+<div class="row gx-5">
+    <div class="col-xxl-3 col-md-6 mb-5">
+            <div class="card card-raised border-start border-danger border-4">
+                <div class="card-body px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <div class="display-5"><?php echo $tot_reports; ?></div>
+                            <div class="card-text">Total Reports</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/megaphone.png');?>" alt="..." style="height: 3.3rem;weight:3.3rem;" />
+                    </div>
+                    <div class="card-text">
+                        <div class="d-inline-flex align-items-center"></div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<div class="row gx-5">
+    <!-- Revenue breakdown chart example-->
+    <div class="col-lg-12 mb-5">
+        <div class="card card-raised h-100 border-start border-<?php echo $me['dash_color']; ?> border-4">
+            <div class="card-header bg-white px-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="me-4">
+                        <h6 class="card-title">Post Reports</h6>
+                        <div class="card-subtitle">Take action and moderate users post reports!</div>
+                    </div>
+                    <div class="d-flex gap-2 me-n2">
+                        <img src="<?php echo cpanel('si/img/icons/3d-movie.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-4">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="form-check">
+                                            <input class="form-check-input check-all" id="check-all" type="checkbox"/>
+                                            <label class="form-check-label" for="check-all"></label>
+                                        </div>
+                                    </th>
+
+                                      <th>ID</th>
+                                      <th>Reporter</th>
+                                      <th>Type</th>
+                                      <th>Message</th>
+                                      <th>Reported</th>
+                                      <th>Post URL</th>
+                                      <th>Moderate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                                if (!empty($reports)) {
+                                    foreach ($reports as $key => $context['report']) {
+                                        $context['report'] = o2array($context['report']);
+                                        echo $cpanel->Senction('post-reports/list');
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="float-start">
+                        <?php echo "Showing $ui out of " . $cpanel::$db->totalPages; ?> Pages
+                    </div>
+                    <div class="float-end">
+                        <nav>
+                            <ul class="pagination">
+                                <li>
+                                    <a class="text-decoration-none firstpage" href="<?php echo cpanel('post-reports?ui-id=1').$link; ?>" data-ajax="?path=post-reports&ui-id=1<?php echo($link); ?>">
+                                        <i class="material-icons">first_page</i>
+                                    </a>
+                                </li>
+                                <?php if ($ui > 1) {  ?>
+                                <li>
+                                    <a class="text-decoration-none previouspage" href="<?php echo cpanel('post-reports?ui-id=' . ($ui - 1)).$link; ?>" data-ajax="?path=post-reports&ui-id=<?php echo($ui - 1) ?><?php echo($link); ?>">
+                                        <i class="material-icons">chevron_left</i>
+                                    </a>
+                                </li>
+                                <?php  } ?>
+                                <?php 
+                                $nums       = 0;
+                                $nums_uis = ($ui > 4) ? ($ui - 4) : $ui;
+                                for ($i=$nums_uis; $i <= $cpanel::$db->totalPages; $i++) { 
+                                    if ($nums < 8) {
+                                ?>
+                                <li class="<?php echo ($ui == $i) ? 'active' : ''; ?>">
+                                    <a class="text-decoration-none" href="<?php echo cpanel('post-reports?ui-id=' . ($i)).$link; ?>" data-ajax="?path=post-reports&ui-id=<?php echo($i) ?><?php echo($link); ?>" class="waves-effect">
+                                        <?php echo $i ?>   
+                                    </a>
+                                </li>
+                                <?php } $nums++; }?>
+                                <?php if ($cpanel::$db->totalPages > $ui) { ?>
+                                <li>
+                                    <a class="text-decoration-none nextpage" href="<?php echo cpanel('post-reports?ui-id=' . ($ui + 1)).$link; ?>" data-ajax="?path=post-reports&ui-id=<?php echo($ui + 1) ?><?php echo($link); ?>">
+                                        <i class="material-icons">chevron_right</i>
+                                    </a>
+                                </li>
+                                <?php } ?>
+                                <li>
+                                    <a class="text-decoration-none lastpage" href="<?php echo cpanel('post-reports?ui-id=' . ($cpanel::$db->totalPages)).$link; ?>" data-ajax="?path=post-reports&ui-id=<?php echo($cpanel::$db->totalPages) ?><?php echo($link); ?>">
+                                        <i class="material-icons">last_page</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="clearfix"></div>
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2">
+                            <select class="form-control show-tick" id="action_type">
+                                <option value="mark_safe">Mark Safe</option>
+                                <option value="delete_post">Delete Posts</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <button type="button" class="btn btn btn-outline-primary delete-selected d-block">Take Action<span></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<!-- Mark Safe -->
+<div class="modal fade" id="MarkSafe" tabindex="-1" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel">Mark Safe!</h5>
+            </div>
+            <div class="modal-body">Are you sure you want to mark this post as a safe content?</div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-dark me-2" type="button" data-bs-dismiss="modal">Nope</button>
+                <button class="btn btn-outline-primary" type="button">Yeah Sure</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Post -->
+<div class="modal fade" id="DeletePost" tabindex="-1" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel">Delete Post!</h5>
+            </div>
+            <div class="modal-body">Are you sure you want to delete this post?</div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-dark me-2" type="button" data-bs-dismiss="modal">Nope</button>
+                <button class="btn btn-outline-primary" type="button">Yeah Sure</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Single User -->
+<div class="modal fade" id="SelectedDeleteModal" tabindex="-1" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel">Take Action!</h5>
+            </div>
+            <div class="modal-body">Are you sure you want to take this action?</div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-dark me-2" type="button" data-bs-dismiss="modal">Nope</button>
+                <button class="btn btn-outline-primary" type="button" onclick="DeleteSelected()">Yes Take Action</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$('.check-all').on('click', function(event) {
+    $('input:checkbox').not(this).prop('checked', this.checked);
+});
+$('.delete-checkbox, .check-all').change(function(event) {
+    $('.delete-selected').attr('disabled', false);
+    $('.delete-selected').find('span').text(' (' + $('.delete-checkbox:checked').length + ')');
+});
+$('.delete-selected').on('click', function(event) {
+    event.preventDefault();
+    action_type = $('#action_type').val();
+    if (action_type == 'mark_safe') {
+        $('#SelectedDeleteModal').find('.modal-body').html('Are you sure you want to mark the selected posts as a safe content?');
+        $('#SelectedDeleteModal').find('#exampleModalCenteredLabel').html('Mark Safe!');
+        $('#SelectedDeleteModal').find('.btn-outline-primary').text('Mark Safe');
+        $('#SelectedDeleteModal').modal('show');
+    } else {
+        $('#SelectedDeleteModal').find('.modal-body').html('Are you sure that you want to delete the selected post(s)?');
+        $('#SelectedDeleteModal').find('#exampleModalCenteredLabel').html('Delete Posts!');
+        $('#SelectedDeleteModal').find('.btn-outline-primary').text('Delete Posts');
+        $('#SelectedDeleteModal').modal('show');
+    }
+});
+function DeleteSelected() {
+    action_type = $('#action_type').val();
+    data = new Array();
+    $('td input:checked').parents('tr').each(function () {
+        data.push($(this).attr('data_selected'));
+    });
+    $('.delete-selected').attr('disabled', true);
+    $('.delete-selected').text('Please wait...');
+    $.post(cpanel_ajax_url('update-post_reports'), {ids: data, type: action_type}, function () {
+        if (action_type == 'mark_safe') {
+            let notify_200 = {status: 'success',title: 'Post Reports',text: 'Successfully marked the selected post as safe',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+            new Notify({ ...notify_200 });
+            $('#SelectedDeleteModal').modal('hide');
+            $.each( data, function( index, value ){$('#list-' + value).remove();});
+            $('#redirect_link').attr('href', "<?php echo cpanel('post-reports'); ?>");
+            $('#redirect_link').attr('data-ajax', "?path=post-reports");
+            $('#redirect_link').click();
+        } else if (action_type == 'delete_post') {
+            $('#redirect_link').attr('href', "<?php echo cpanel('post-reports'); ?>");
+            $('#redirect_link').attr('data-ajax', "?path=post-reports");
+            $('#redirect_link').click();
+            let notify_success200 = {status: 'success',title: 'Post Reports',text: 'Successfully deleted the selected posts!',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+            new Notify({ ...notify_success200 });
+            $('#SelectedDeleteModal').modal('hide');
+        } else {
+            location.reload();
+        }
+        $('#SelectedDeleteModal').modal('hide');
+        $('.delete-selected').text('Take Action');
+    });
+}
+
+function MarkSafe(id,type = 'show'){
+    if (type == 'hide') {
+        $('#MarkSafe').find('.btn-outline-primary').attr('onclick', "MarkSafe('"+id+"')");
+        $('#MarkSafe').modal('show');
+        return false;
+    }
+    $.post(cpanel_ajax_url('delete-report'), {id:id,t:2}, function(data, textStatus, xhr) {
+        if (data.status == 200) {
+            $('#MarkSafe').modal('hide');
+            $('#list-' + id).fadeOut(300, function() {$(this).remove()});
+            $('#redirect_link').attr('href', "<?php echo cpanel('post-reports'); ?>");
+            $('#redirect_link').attr('data-ajax', "?path=post-reports");
+            $('#redirect_link').click();
+            let notify_success201 = {status: 'success',title: 'Post Reports',text: "Report Marked As Safe!",effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+            new Notify({ ...notify_success201 });
+        } else {
+            $('#MarkSafe').modal('hide');
+            $('#redirect_link').attr('href', "<?php echo cpanel('post-reports'); ?>");
+            $('#redirect_link').attr('data-ajax', "?path=post-reports");
+            $('#redirect_link').click();
+            let notify_error = {status: 'error',title: 'Post Reports',text: "Failed to mark as safe!",effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+            new Notify({ ...notify_error });
+        }
+    });
+}
+function DeletePost(id,type = 'show'){
+        if (id && id > 0) {
+            if (type == 'hide') {
+                $('#DeletePost').find('.btn-outline-primary').attr('onclick', "DeletePost('"+id+"')");
+                $('#DeletePost').modal('show');
+                return false;
+            }
+            $("#DeletePost").modal("hide");
+            $("#list-"+id).slideUp(function(){$(this).remove();});
+            $.ajax({
+                url: cpanel_ajax_url('delete-post'),
+                type: 'POST',
+                dataType: 'json',
+                data: {id:id}
+            });
+            $('#redirect_link').attr('href', "<?php echo cpanel('post-reports'); ?>");
+            $('#redirect_link').attr('data-ajax', "?path=post-reports");
+            $('#redirect_link').click();
+            let notify_success201 = {status: 'success',title: 'Post Reports',text: 'Post deleted Successfully!',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+            new Notify({ ...notify_success201 });
+        }
+}
+
+tippy('.lastpage', {arrow: false,content: 'Last Page'});
+tippy('.nextpage', {arrow: false,content: 'Next Page'});
+tippy('.previouspage', {arrow: false,content: 'Previous Page'});
+tippy('.firstpage', {arrow: false,content: 'First Page'});
+tippy('#verify', {arrow: false,content: 'Verified'});
+</script>

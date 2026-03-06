@@ -1,0 +1,126 @@
+<?php
+if($config['blog_system'] == 'off') {   
+    header("Location: " . cpanel('overview'));
+    exit();
+}
+?>
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">Create New article</h1>
+        <div class="text-muted">Admins can actually create blogs on the site using this settings!</div>
+    </div>
+</div>
+<!-- Colored status cards-->
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Create a Blog</h2>
+                            <div class="card-subtitle">Create a new blog and have it published</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/content-writing.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form add-new-blog" method="POST">
+                        <label for="currency" class="main-label">Blog Category</label>
+                        <br><small class="admin-info">Select a blog category to use when creating blogs</small><br><br>
+                        <mwc-select outlined class="w-100" id="category" name="category" label="Categories">
+                        <?php
+                            $blog_categories = blog_categories();
+                            foreach ($blog_categories as $category_key => $category) {
+                            ?>
+                            <mwc-list-item value="<?php echo $category_key;?>"><?php echo $category;?></mwc-list-item>
+                        <?php }?>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Blog Title</label><br>
+                        <small class="admin-info">Enter the blog title you want</small><br><br>
+                        <input type="text" class="form-control" name="title">
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Description</label><br>
+                        <small class="admin-info">Enter the blog description</small><br><br>
+                        <textarea style="resize: none;" name="description" class="form-control" cols="20" rows="2"></textarea> 
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Blog Content (HTML allowed)</label><br>
+                        <small class="admin-info">Enter the blog content. you can use html tags</small><br><br>
+                        <textarea style="resize: none;" name="content" id="content" class="form-control" cols="20" rows="2"></textarea>  
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="mb-3">
+                            <label class="form-label" for="thumbnail">Blog Thumbnail</label>
+                            <input class="form-control" type="file" id="thumbnail" name="thumbnail">
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Blog Tags</label><br>
+                        <input type="text" name="tags" class="form-control" autocomplete="off">
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                        <input type="hidden" name="user_id" value="<?php echo($context['me']['user_id']) ?>">
+                            <button class="btn btn-outline-primary" type="submit">
+                                Create <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
+
+<script>
+$(function() {
+tinymce.init({
+    selector: '#content',
+    height: 270,
+    entity_encoding : "raw",
+    paste_data_images: true,
+    image_advtab: true,
+    toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+    toolbar2: "print preview media | forecolor backcolor",
+    plugins: [
+        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+        "searchreplace wordcount visualblocks visualchars code fullscreen",
+        "insertdatetime media nonbreaking save table contextmenu directionality",
+        "template paste textcolor colorpicker textpattern"
+    ],
+});
+
+
+var form_add_settings = $('form.add-new-blog');
+form_add_settings.ajaxForm({
+    url: cpanel_ajax_url('add_new_blog_article'),
+    beforeSend: function() {
+        form_add_settings.find('.btn-outline-primary').text('Please wait...');
+    },
+    beforeSubmit : function(arr, $form, options){
+        //arr.splice(0, 1);
+        tinymce.get("content").setContent(tinymce.activeEditor.getContent());
+        document.getElementById("content").value=tinymce.activeEditor.getContent();
+        arr.push({name:'content', value:btoa(unescape(encodeURIComponent($('#content').val())))});
+        arr.push({name:'category', value:$('#category').val()})
+    },
+    success: function(data) {
+        if (data.status == 200) {
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+            $('#redirect_link').attr('href', "<?php echo cpanel('add-new-article'); ?>");
+            $('#redirect_link').attr('data-ajax', "?path=add-new-article");
+            $('#redirect_link').click();
+            let notify_success201 = {status: 'success',title: 'Create New article',text: 'Blog article created successfully',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+            new Notify({ ...notify_success201 });
+        } else if (data.status == 400) {
+            let notify_error = {status: 'error',title: 'Create New article',text: ''+data.message+'',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+            new Notify({ ...notify_error });
+        }
+        form_add_settings.find('.btn-outline-primary').text('Create');
+    }
+});
+});
+</script>

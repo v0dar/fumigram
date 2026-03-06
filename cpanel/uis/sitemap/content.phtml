@@ -1,0 +1,79 @@
+<?php $site_url = $config['site_url']; ?>
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">Generate Sitemap</h1>
+        <div class="text-muted">We can generate a sitemap for fumigram!</div>
+    </div>
+</div>
+<!-- Colored status cards-->
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Generate Sitemap</h2>
+                            <div class="card-subtitle">Allow search engines to index fumigram by sitemaps!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/linkc.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form sitemap-settings">
+                        <div class="float-start">
+                            <label for="sitemap" class="check-label">Generate Sitemap</label><br>
+                        </div>
+                        <div class="float-start"><br>
+                        <div class="alert alert-primary">
+                            The sitemap link is: <a href="<?php echo($site_url); ?>/sitemap-index.xml" target="_blank">
+                            <?php echo($site_url); ?>/sitemap-index.xml</a>
+                        </div>
+                        </div>
+                        <div class="float-start">
+                            <label class="check-label"> Last created sitemap: <span class="last-created"><?php echo $config['last_created_sitemap']?></span></label><br>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="float-start"><br>
+                            <button class="btn btn-outline-primary" type="submit">
+                                Generate Sitemap <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
+
+<script>
+    $(function() {
+    var sitemap_settings = $('form.sitemap-settings');
+    let notify_error = {status: 'error',title: 'Affiliates System',text: 'Failed to updated this settings',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+    let notify_success = {status: 'success',title: 'Affiliates System',text: 'Configurations Updated Successfully!',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+
+    sitemap_settings.ajaxForm({
+        url: cpanel_ajax_url('sitemap'),
+        beforeSend: function() {
+            var percentage = (Math.floor(Math.random() * (75 - 35)) + 35);
+            sitemap_settings.find('button').text('Please wait..').attr('disabled','true');
+            sitemap_settings.find('.progress').removeClass('hidden');
+            sitemap_settings.find('.progress-bar').width(percentage + '%').text(percentage + "%");
+        },
+        success: function(data) {
+            if (data.status == 200) {
+                $('.last-created').text(data.time);
+                let notify_200 = {status: 'success',title: 'Generate Sitemap',text: ' '+ data.message + ' ',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 4000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                new Notify({ ...notify_200 });
+            }
+            else{
+                let notify_400 = {status: 'error',title: 'Generate Sitemap',text: ' '+ data.message + ' ',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 4000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                new Notify({ ...notify_400 });
+            }
+            sitemap_settings.find('button').text('Generate Sitemap').removeAttr('disabled');
+            sitemap_settings.find('.progress').addClass('hidden');
+            sitemap_settings.find('.progress-bar').width(0).text(0);
+        }
+    });
+});
+</script>

@@ -1,0 +1,457 @@
+<?php 
+if ($me['manager'] == 0 && $me['admin'] == 0) {    
+    header("Location: " . cpanel('overview'));
+    exit();
+}
+?>
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">Storage & CDN System</h1>
+        <div class="text-muted">This System uses a third party storage & CDN Services!</div>
+    </div>
+</div>
+<!-- Colored status cards-->
+
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Amazon S3 Configuration</h2>
+                            <div class="card-subtitle">Allows the website to store uploaded files in Amazon S3 Storage!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/Amazon.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="upload_images" class="main-label">Amazon S3 Storage</label>
+                            <br><small class="admin-info">Enable Amazon Storage to store all uploaded files in Amazon S3!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="amazone_s3" value="0" />
+                                <input type="checkbox" name="amazone_s3" id="chck-amazone_s3" value="1" <?php echo ($config['amazone_s3'] == 1) ? 'checked': '';?>>
+                                <label for="chck-amazone_s3" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label class="form-label" class="main-label">Amazon Bucket Name</label><br>
+                        <small class="admin-info">The name of fumigram's <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html" target="_blank">amazon bucket</a></small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="bucket_name" value="<?php echo $config['bucket_name'] ?>" label="Bucket Name?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label class="form-label" class="main-label">Amazon S3 Key</label><br>
+                        <small class="admin-info">The Amazon Key from <a href="https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html" target="_blank">AWS credentials</a></small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="amazone_s3_key" value="<?php echo $config['amazone_s3_key'] ?>" label="Amazone S3 key?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label class="form-label" class="main-label">Amazon S3 Secret Key</label><br>
+                        <small class="admin-info">The Amazon Key Secret from <a href="https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html" target="_blank">AWS credentials</a></small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="amazone_s3_s_key" value="<?php echo $config['amazone_s3_s_key'] ?>" label="Amazone S3 Secret key?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label for="language" class="main-label">Amazon S3 bucket Region</label><br>
+                        <small class="admin-info">Choose the Amazon's S3 Region</small><br><br>
+                        <mwc-select outlined label="Your Amazon's S3 Region" class="w-100" name="region">
+                            <mwc-list-item value="us-east-1" <?php echo ($config['region'] == 'us-east-1')   ? ' selected' : '';?> >US East (N. Virginia)</mwc-list-item>
+                            <mwc-list-item value="us-east-2" <?php echo ($config['region'] == 'us-east-2')   ? ' selected' : '';?> >US East (Ohio)</mwc-list-item>
+                            <mwc-list-item value="us-west-1" <?php echo ($config['region'] == 'us-west-1')   ? ' selected' : '';?> >US West (N. California)</mwc-list-item>
+                            <mwc-list-item value="us-west-2" <?php echo ($config['region'] == 'us-west-2')   ? ' selected' : '';?> >US West (Oregon)</mwc-list-item>
+                            <mwc-list-item value="ap-northeast-2" <?php echo ($config['region'] == 'ap-northeast-2')   ? ' selected' : '';?> >Asia Pacific (Seoul)</mwc-list-item>
+                            <mwc-list-item value="ap-south-1" <?php echo ($config['region'] == 'ap-south-1')   ? ' selected' : '';?> >Asia Pacific (Mumbai)</mwc-list-item>
+                            <mwc-list-item value="ap-southeast-1" <?php echo ($config['region'] == 'ap-southeast-1')   ? ' selected' : '';?> >Asia Pacific (Singapore)</mwc-list-item>
+                            <mwc-list-item value="ap-southeast-2" <?php echo ($config['region'] == 'ap-southeast-2')   ? ' selected' : '';?> >Asia Pacific (Sydney)</mwc-list-item>
+                            <mwc-list-item value="ap-northeast-1" <?php echo ($config['region'] == 'ap-northeast-1')   ? ' selected' : '';?> >Asia Pacific (Tokyo)</mwc-list-item>
+                            <mwc-list-item value="ca-central-1" <?php echo ($config['region'] == 'ca-central-1')   ? ' selected' : '';?> >Canada (Central)</mwc-list-item>
+                            <mwc-list-item value="eu-central-1" <?php echo ($config['region'] == 'eu-central-1')   ? ' selected' : '';?> >EU (Frankfurt)</mwc-list-item>
+                            <mwc-list-item value="eu-west-1" <?php echo ($config['region'] == 'eu-west-1')   ? ' selected' : '';?> >EU (Ireland)</mwc-list-item>
+                            <mwc-list-item value="eu-west-2" <?php echo ($config['region'] == 'eu-west-2')   ? ' selected' : '';?> >EU (London)</mwc-list-item>
+                            <mwc-list-item value="sa-east-1" <?php echo ($config['region'] == 'sa-east-1')   ? ' selected' : '';?> >South America (São Paulo)</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <div class="alert alert-primary">
+                           Before enabling Amazon S3, make sure you upload the whole "upload/" folder to your bucket. <br><br>
+                            Before disabling Amazon S3, make sure you download the whole "upload/" folder to your server.<br><br>
+                            We highly recommend that you upload the folder and files via <a href="http://s3tools.org/s3cmd">S3cmd</a>.
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-success" type="button" id="s3test"> Test Connection <i class="trailing-icon material-icons">history</i></button>&nbsp;&nbsp;
+                            <button class="btn btn-outline-primary" type="button" id="save_amazon">Save Changes <i class="trailing-icon material-icons">arrow_forward</i></button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+
+            <br><br>
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Google Cloud Storage</h2>
+                            <div class="card-subtitle">Allows the website to store uploaded files in Google Cloud Storage!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/cloud.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="upload_images" class="main-label">Google Cloud Storage</label>
+                            <br><small class="admin-info">Enable Google Cloud Storage to store all uploaded files in the Cloud!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="google_cloud_storage" value="0" />
+                                <input type="checkbox" name="google_cloud_storage" id="chck-google_cloud_storage" value="1" <?php echo ($config['google_cloud_storage'] == 1) ? 'checked': '';?>>
+                                <label for="chck-google_cloud_storage" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label class="form-label" class="main-label">Google Cloud Bucket Name</label><br>
+                        <small class="admin-info">The google cloud storage bucket name for fumigram</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="google_cloud_storage_bucket_name" value="<?php echo $config['google_cloud_storage_bucket_name'] ?>" label="Storage Bucket Name?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label class="form-label" class="main-label">Google Cloud File</label><br>
+                        <small class="admin-info">The google cloud file should be in a JSON format</small><br><br>
+                        <mwc-textarea type="text" outlined class="w-100" name="google_cloud_storage_service_account" value="<?php echo $config['google_cloud_storage_service_account']?>" label="The Cloud File?" style="height:110px;"></mwc-textarea>               
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <div class="alert alert-primary">
+                        Make sure you upload the whole "upload/" folder to your bucket.<br><br>
+                        Make sure to keep (Google Cloud File) on your server. in Google Cloud File Path (<?php echo $config['google_cloud_storage_service_account']?>)<br>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-success" type="button" id="TestCloud"> Test Cloud Connection <i class="trailing-icon material-icons">history</i></button>&nbsp;&nbsp;
+                            <button class="btn btn-outline-primary" type="button" id="save_google">Save Changes <i class="trailing-icon material-icons">arrow_forward</i></button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xxl-6 col-md-6 mb-6">
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Digitalocean Spaces Configuration</h2>
+                            <div class="card-subtitle">Allows the website to store uploaded files in Digitalocean Storage!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/Digitalocean.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="upload_images" class="main-label">Digitalocean Spaces Storage</label>
+                            <br><small class="admin-info">Digitalocean Storage to store the uploaded files Digitalocean Spaces!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="digital_ocean" value="0" />
+                                <input type="checkbox" name="digital_ocean" id="chck-digital_ocean" value="1" <?php echo ($config['digital_ocean'] == 1) ? 'checked': '';?>>
+                                <label for="chck-digital_ocean" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label class="form-label" class="main-label">Digitalocean Space Name</label><br>
+                        <small class="admin-info">Enter the Digitalocean Space Bucket name</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="digital_ocean_space_name" value="<?php echo $config['digital_ocean_space_name'] ?>" label="Your Space Name?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label class="form-label" class="main-label">Digitalocean Key</label><br>
+                        <small class="admin-info">Enter the Digitalocean Space credentials key!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="digital_ocean_key" value="<?php echo $config['digital_ocean_key'] ?>" label="Space Credentials key?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label class="form-label" class="main-label">Digitalocean Secret</label><br>
+                        <small class="admin-info">Enter the Digitalocean Space credentials secret key!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="digital_ocean_s_key" value="<?php echo $config['digital_ocean_s_key'] ?>" label="Space Credentials Secret key?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label for="space_region" class="main-label">Digitalocean bucket region</label><br>
+                        <small class="admin-info">Choose The Digitalocean Space Region</small><br><br>
+                        <mwc-select outlined label="Your Space Region" class="w-100" id="digital_ocean_region" name="digital_ocean_region">
+                            <mwc-list-item value="nyc3" <?php echo ($config['digital_ocean_region'] == 'nyc3')   ? ' selected' : '';?> >New York</mwc-list-item>
+                            <mwc-list-item value="ams3" <?php echo ($config['digital_ocean_region'] == 'ams3')   ? ' selected' : '';?> >Amsterdam</mwc-list-item>
+                            <mwc-list-item value="sgp1" <?php echo ($config['digital_ocean_region'] == 'sgp1')   ? ' selected' : '';?> >Singapore</mwc-list-item>
+                            <mwc-list-item value="FRA1" <?php echo ($config['digital_ocean_region'] == 'FRA1')   ? ' selected' : '';?> >Frankfurt</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <div class="alert alert-primary">
+                            Before enabling Digitalocean, make sure you upload the whole "upload/" folder to your bucket. <br><br>
+                            Before disabling Digitalocean, make sure you download the whole "upload/" folder to your server. <br><br>
+                            Please make sure to click on the "Test & Verify Connection" button.
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-success" type="button" id="TestSpaces"> Test & Verify Connection <i class="trailing-icon material-icons">history</i></button>&nbsp;&nbsp;
+                            <button class="btn btn-outline-primary" type="button" id="save_digitalocean">Save Changes <i class="trailing-icon material-icons">arrow_forward</i></button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+
+            <br><br>
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">FTP Storage Settings</h2>
+                            <div class="card-subtitle">Upload files from this server to another then load them from there!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/FTP.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="upload_images" class="main-label">FTP Storage</label>
+                            <br><small class="admin-info">Enable FTP Storage to store the files in our own FTP server!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="ftp_upload" value="0" />
+                                <input type="checkbox" name="ftp_upload" id="chck-ftp_upload" value="1" <?php echo ($config['ftp_upload'] == 1) ? 'checked': '';?>>
+                                <label for="chck-ftp_upload" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label class="form-label" class="main-label">FTP Hostname</label><br>
+                        <small class="admin-info">The FTP server hostname</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="ftp_host" value="<?php echo $config['ftp_host'] ?>" label="FTP Host Name?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label class="form-label" class="main-label">FTP Username</label><br>
+                        <small class="admin-info">The FTP server Username</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="ftp_username" value="<?php echo $config['ftp_username'] ?>" label="FTP Account's Username?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label class="form-label" class="main-label">FTP Password</label><br>
+                        <small class="admin-info">The FTP server Password</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="ftp_password" value="<?php echo $config['ftp_password'] ?>" label="FTP Account's Password?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label class="form-label" class="main-label">FTP Port</label><br>
+                        <small class="admin-info">The FTP server Port</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="ftp_port" value="<?php echo $config['ftp_port'] ?>" label="FTP server's port?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label class="form-label" class="main-label">FTP Endpoint</label><br>
+                        <small class="admin-info">IP or domain where the FTP server is pointed to, example: fumigramftpstorage.com</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="ftp_endpoint" value="<?php echo $config['ftp_endpoint'] ?>" label="IP Address or domain?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <div class="alert alert-primary">
+                        This may slow down your site's upload/delete speed, make sure to use fast FTP server.<br><br>
+                        Before enabling FTP, make sure you upload the whole "upload/" folder to your FTP server.<br><br>
+                        Before disabling FTP, make sure you download the whole "upload/" folder to your server.<br><br>
+                        Please always make sure to click on "Test Connection".
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-success" type="button" id="TestFTP"> Test Connection <i class="trailing-icon material-icons">history</i></button>&nbsp;&nbsp;
+                            <button class="btn btn-outline-primary" type="button" id="save_ftp">Save Changes <i class="trailing-icon material-icons">arrow_forward</i></button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- END -->
+</div>
+
+<script>
+    $(function() {
+        let notify_error = {status: 'error',title: 'Storage & CDN System',text: 'Failed to updated this settings',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_warning = {status: 'warning',title: 'Storage & CDN System',text: "Oops there's an error in the script",effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_success = {status: 'success',title: 'Storage & CDN System',text: 'Configurations Updated Successfully',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+
+        function TestS3() {
+            $('#s3test').text('Please wait...');
+            $.get(cpanel_ajax_url('test_s3'), {}, function (data) {
+                if (data.status == 200) {
+                    let notify_200 = {status: 'success',title: 'Storage & CDN System',text: 'Connection Established Successfully!',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 4000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                    new Notify({ ...notify_200 });
+                } else if (data.status == 300) {
+                    let notify_300 = {status: 'error',title: 'Storage & CDN System',text: "Oops bucket doesn't exists!",effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                    new Notify({ ...notify_300 });
+                } else if (data.status == 500) {
+                    let notify_500 = {status: 'warning',title: 'Storage & CDN System',text: "Your s3 account doesn't have any buckets, Please create one!",effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                    new Notify({ ...notify_500 });
+                } else if (data.status == 400) {
+                    let notify_404 = {status: 'error',title: 'Storage & CDN System',text: ' '+ data.message + ' ',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: false,showCloseButton: true,autoclose: true,autotimeout: 15000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                    new Notify({ ...notify_404 });
+                } else  {
+                    let notify_main = {status: 'error',title: 'Storage & CDN System',text: "Error while connecting to amazone, Please check your details again!",effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                    new Notify({ ...notify_main });
+                }
+                $('#s3test').text('Test Connection');
+            });
+        }; 
+
+        function TestSpaces() {
+            $('#TestSpaces').text('Please wait...');
+            $.get(cpanel_ajax_url('test_s3'), {}, function (data) {
+                if (data.status == 200) {
+                    let notify_200 = {status: 'success',title: 'Storage & CDN System',text: 'Connection Established Successfully!',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 4000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                    new Notify({ ...notify_200 });
+                } else if (data.status == 300) {
+                    let notify_300 = {status: 'error',title: 'Storage & CDN System',text: "Oops bucket doesn't exists!",effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                    new Notify({ ...notify_300 });
+                } else if (data.status == 500) {
+                    let notify_500 = {status: 'warning',title: 'Storage & CDN System',text: "Your s3 account doesn't have any buckets, Please create one!",effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                    new Notify({ ...notify_500 });
+                } else if (data.status == 400) {
+                    let notify_404 = {status: 'error',title: 'Storage & CDN System',text: ' '+ data.message + ' ',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: false,showCloseButton: true,autoclose: true,autotimeout: 15000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                    new Notify({ ...notify_404 });
+                } else  {
+                    let notify_main = {status: 'error',title: 'Storage & CDN System',text: "Error while connecting to Digitalocean, Please check your details again!",effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                    new Notify({ ...notify_main });
+                }
+                $('#TestSpaces').text('Test & Verify Connection');
+            });
+        };  
+
+        function TestCloud() {
+            $('#TestCloud').text('Please wait...');
+            $.get(cpanel_ajax_url('test_cloud'), {}, function (data) {
+                if (data.status == 200) {
+                    let notify_200 = {status: 'success',title: 'Storage & CDN System',text: 'Connection Established Successfully!',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 4000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                    new Notify({ ...notify_200 });
+                } else {
+                    let notify_404 = {status: 'error',title: 'Storage & CDN System',text: ' '+ data.message + ' ',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: false,showCloseButton: true,autoclose: true,autotimeout: 10000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                    new Notify({ ...notify_404 });
+                }
+                $('#TestCloud').text('Test Cloud Connection');
+            });
+        }
+
+        function TestFTP() {
+            $('#TestFTP').html('Please wait..');
+            $.get(cpanel_ajax_url('test_ftp'), {}, function (data) {
+                if (data.status == 200) {
+                    let notify_200 = {status: 'success',title: 'Storage & CDN System',text: 'Connection Established Successfully!',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 4000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                    new Notify({ ...notify_200 });
+                } else if (data.status == 400) {
+                    let notify_404 = {status: 'error',title: 'Storage & CDN System',text: ' '+ data.message + ' ',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: false,showCloseButton: true,autoclose: true,autotimeout: 8000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                    new Notify({ ...notify_404 });
+                }
+                $('#TestFTP').text('Test Connection');
+            });
+        }
+
+        $('#s3test').on('click', function() { TestS3(); });
+        $('#TestFTP').on('click', function() { TestFTP(); });
+        $('#TestCloud').on('click', function() { TestCloud(); });
+        $('#TestSpaces').on('click', function() { TestSpaces(); });
+
+        $('.switcher input[type=checkbox]').click(function () {
+            var configName = $(this).attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            if ($(this).is(":checked") === true) {
+                objData[configName] = $(this).val();
+                new Notify({ ...notify_success })
+            }
+            else{
+                if ($('input[name='+configName+']')[0]) {
+                    objData[configName] = $($('input[name='+configName+']')[0]).val();
+                    new Notify({ ...notify_success })
+                }
+            }
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('storeg-settings'), objData);
+        });
+
+        $('mwc-select').on('change', function() {
+            var thisElement = $(this);
+            var configName = thisElement.attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            objData[configName] = thisElement.val();
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('storeg-settings'), objData, function (data) {
+                if (data.status == 200) {
+                    new Notify({ ...notify_success });
+                } else {
+                    new Notify({ ...notify_error });
+                }
+            });
+        });
+
+        function update_input(){
+            $('mwc-textfield').on('keyup', function() {
+                var thisElement = $(this);
+                var configName = thisElement.attr('name');
+                var hash_id = $('mwc-textfield[name=hash_id]').val();
+                var objData = {};
+                objData[configName] = this.value;
+                objData['hash_id'] = hash_id;
+                $.post(cpanel_ajax_url('storeg-settings'), objData, function (data) {
+                    if (data.status == 200) {
+                    } else {
+                        new Notify({ ...notify_error })
+                    }
+                });
+            });
+        }
+        $('#save_amazon').on('click', function() {
+            $('#save_amazon').text('Please Wait...');
+			$('#save_amazon').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_amazon').text('Save Changes');
+			$('#save_amazon').removeAttr('disabled');
+            }, 2000);
+        });
+        $('#save_digitalocean').on('click', function() {
+            $('#save_digitalocean').text('Please Wait...');
+			$('#save_digitalocean').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_digitalocean').text('Save Changes');
+			$('#save_digitalocean').removeAttr('disabled');
+            }, 1000);
+        });
+        $('#save_google').on('click', function() {
+            $('#save_google').text('Please Wait...');
+			$('#save_google').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_google').text('Save Changes');
+			$('#save_google').removeAttr('disabled');
+            }, 1000);
+        });
+        $('#save_ftp').on('click', function() {
+            $('#save_ftp').text('Please Wait...');
+			$('#save_ftp').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_ftp').text('Save Changes');
+			$('#save_ftp').removeAttr('disabled');
+            }, 1000);
+        });
+        setTimeout(function () {
+            update_input();
+        }, 1000);
+    });
+</script>

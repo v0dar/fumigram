@@ -1,0 +1,692 @@
+<?php
+if($config['campaign'] == 'off') {
+    header("Location: " . cpanel('overview'));
+    exit();
+}
+
+$ui             = (!empty($_GET['ui-id'])) ? $_GET['ui-id'] : 1;
+$filter_keyword = (!empty($_GET['query'])) ? $cpanel::secure($_GET['query']) : '';
+$link = '';
+$search_link = '&';
+$rang_link_href = '?';
+$cpanel::$db->pageLimit  = 15;
+
+if (!empty($filter_keyword)) {
+  $link .= '&query='.$filter_keyword;
+  $rang_link_href =  '?query='.$cpanel::secure($filter_keyword)."&";
+  $sql   = "(
+    `name`     LIKE '%$filter_keyword%' OR 
+    `headline`        LIKE '%$filter_keyword%' OR 
+    `description`   LIKE '%$filter_keyword%' OR 
+    `location`   LIKE '%$filter_keyword%'
+  )";
+  $cpanel::$db->where($sql);
+}
+
+if (!empty($_GET['range']) && in_array($_GET['range'], array('Today','Yesterday','This Week','This Month','Last Month','This Year'))) {
+    if ($_GET['range'] == 'Today' || $_GET['range'] == 'Yesterday') {
+        $this_start = strtotime(date('M')." ".date('d').", ".date('Y')." 12:00am");
+        $this_end = strtotime(date('M')." ".date('d').", ".date('Y')." 11:59pm");
+        if ($_GET['range'] == 'Yesterday') {
+            $this_start = strtotime(date('M')." ".date('d',strtotime("-1 days")).", ".date('Y')." 12:00am");
+            $this_end = strtotime(date('M')." ".date('d',strtotime("-1 days")).", ".date('Y')." 11:59pm");
+        }
+        $main_range = 'Today';
+        $title = "Daily";
+    }
+    elseif ($_GET['range'] == 'This Week') {
+        $time = strtotime(date('l').", ".date('M')." ".date('d').", ".date('Y'));
+
+        if (date('l') == 'Saturday') {
+            $this_start = strtotime(date('M')." ".date('d').", ".date('Y')." 12:00am");
+        }
+        else{
+            $this_start = strtotime('last saturday, 12:00am', $time);
+        }
+
+        if (date('l') == 'Friday') {
+            $this_end = strtotime(date('M')." ".date('d').", ".date('Y')." 11:59pm");
+        }
+        else{
+            $this_end = strtotime('next Friday, 11:59pm', $time);
+        }
+        
+        $main_range = 'This Week';
+        $title = "Weekly";
+    }
+    elseif ($_GET['range'] == 'This Month' ||$_GET['range'] == 'Last Month') {
+        $this_start = strtotime("1 ".date('M')." ".date('Y')." 12:00am");
+        $this_end = strtotime(cal_days_in_month(CAL_GREGORIAN, date('m'), date('Y'))." ".date('M')." ".date('Y')." 11:59pm");
+        if ($_GET['range'] == 'Last Month') {
+            $this_start = strtotime("1 ".date('M',strtotime("-1 month"))." ".date('Y')." 12:00am");
+            $this_end = strtotime(cal_days_in_month(CAL_GREGORIAN, date('m',strtotime("-1 month")), date('Y'))." ".date('M',strtotime("-1 month"))." ".date('Y')." 11:59pm");
+        }
+        $main_range = 'This Month';
+        $title = "Monthly";
+    }
+    elseif ($_GET['range'] == 'This Year') {
+        $this_start = strtotime("1 January ".date('Y')." 12:00am");
+        $this_end = strtotime("31 December ".date('Y')." 11:59pm");
+        $main_range = 'This Year';
+        $title = "Yearly";
+    }
+}
+$start = '';
+$end = '';
+$first_code = '';
+$second_code = '';
+if (!empty($_GET['range']) && !in_array($_GET['range'], array('Today','Yesterday','This Week','This Month','Last Month','This Year'))) {
+    $_GET['range'] = str_replace('_', '/', $_GET['range']);
+    $arr = explode('-', $_GET['range']);
+    if (preg_match('~(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d~m', $arr[0]) && preg_match('~(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d~m', $arr[1])) {
+        $start = $cpanel::secure($arr[0]);
+        $end = $cpanel::secure($arr[1]);
+        $this_start = strtotime($start);
+        $this_end = strtotime($end);
+        $month_days = cal_days_in_month(CAL_GREGORIAN, date('m',strtotime($start)), date('Y',strtotime($start)));
+        $diff = abs(strtotime($end) - strtotime($start));
+        $years = floor($diff / (365*60*60*24));
+        $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+        $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+        if ($years >= 1) {
+            $array = array();
+            for ($i=date('Y',strtotime($start)); $i <= date('Y',strtotime($end)); $i++) { 
+                $array["'".$i."'"] = 0;
+            }
+            $main_range = 'Custom';
+            $code = 'Y';
+            $title = "Yearly";
+        }
+        elseif ($months >= 1) {
+            $array = array('01' => 0 ,'02' => 0 ,'03' => 0 ,'04' => 0 ,'05' => 0 ,'06' => 0 ,'07' => 0 ,'08' => 0 ,'09' => 0 ,'10' => 0 ,'11' => 0 ,'12' => 0);
+            $code = 'm';
+            $main_range = 'This Year';
+            $title = "Monthly";
+            if (date('Y',strtotime($start)) == date('Y',strtotime($end))) {
+                $array = array();
+                for ($i=date('m',strtotime($start)); $i <= date('m',strtotime($end)); $i++) { 
+                    $array["'".(int)$i."'"] = 0;
+                }
+                $code = 'm';
+                $main_range = 'Custom';
+            }
+            else{
+                $month = cal_days_in_month(CAL_GREGORIAN, date('m',strtotime($start)), date('Y',strtotime($start)));
+                $array = array();
+                for ($i=(int)date('m',strtotime($start)); $i <= 12; $i++) { 
+                    $array["'".(int)$i.'-'.date('Y',strtotime($start))."'"] = 0;
+                }
+                for ($i=1; $i <= (int)date('m',strtotime($end)); $i++) { 
+                    $array["'".(int)$i.'-'.date('Y',strtotime($end))."'"] = 0;
+                }
+                $first_code = 'm';
+                $second_code = 'Y';
+                $main_range = 'Custom';
+            }
+        }
+        elseif ($days > 7) {
+            if (date('m',strtotime($start)) == date('m',strtotime($end))) {
+                $array = array();
+                for ($i=date('d',strtotime($start)); $i <= date('d',strtotime($end)); $i++) { 
+                    $array["'".(int)$i."'"] = 0;
+                }
+                $code = 'd';
+                $main_range = 'Custom';
+            }
+            else{
+                $month = cal_days_in_month(CAL_GREGORIAN, date('m',strtotime($start)), date('Y',strtotime($start)));
+                $array = array();
+                for ($i=(int)date('d',strtotime($start)); $i <= $month; $i++) { 
+                    $array["'".(int)$i.'-'.date('m',strtotime($start))."'"] = 0;
+                }
+                for ($i=1; $i <= (int)date('d',strtotime($end)); $i++) { 
+                    $array["'".(int)$i.'-'.date('m',strtotime($end))."'"] = 0;
+                }
+                $first_code = 'd';
+                $second_code = 'm';
+                $main_range = 'Custom';
+            }
+            $title = "Daily";
+        }
+        elseif ($days >= 1 && $days < 8) {
+            $title = "Daily";
+            $code = 'l';
+            $array = array('Saturday' => 0 , 'Sunday' => 0 , 'Monday' => 0 , 'Tuesday' => 0 , 'Wednesday' => 0 , 'Thursday' => 0 , 'Friday' => 0);
+            if (date('m',strtotime($start)) == date('m',strtotime($end))) {
+                $array = array();
+                for ($i=date('d',strtotime($start)); $i <= date('d',strtotime($end)); $i++) { 
+                    $array["'".(int)$i."'"] = 0;
+                }
+                $code = 'd';
+                $main_range = 'Custom';
+            }
+            else{
+                $month = cal_days_in_month(CAL_GREGORIAN, date('m',strtotime($start)), date('Y',strtotime($start)));
+                $array = array();
+                for ($i=(int)date('d',strtotime($start)); $i <= $month; $i++) { 
+                    $array["'".(int)$i.'-'.date('m',strtotime($start))."'"] = 0;
+                }
+                for ($i=1; $i <= (int)date('d',strtotime($end)); $i++) { 
+                    $array["'".(int)$i.'-'.date('m',strtotime($end))."'"] = 0;
+                }
+                $first_code = 'd';
+                $second_code = 'm';
+                $main_range = 'Custom';
+            }
+        }
+    }
+}
+
+
+$rang_link = $link;
+if (!empty($this_start) && !empty($this_end)) {
+    $link .= "&range=".$cpanel::secure($_GET['range']);
+    $cpanel::$db->where('posted',$this_start,'>=')->where('posted',$this_end,'<=');
+}
+$sort_link = $link;
+$sort_array = array('DESC_i' => array('id' , 'DESC'),
+                    'ASC_i'  => array('id' , 'ASC'));
+if (!empty($_GET['sort']) && in_array($_GET['sort'], array_keys($sort_array))) {
+    $cpanel::$db->orderBy($sort_array[$_GET['sort']][0],$sort_array[$_GET['sort']][1]);
+    $link .= "&sort=".$cpanel::secure($_GET['sort']);
+    $rang_link .= "&sort=".$cpanel::secure($_GET['sort']);
+}
+else{
+    $_GET['sort'] = 'DESC_i';
+    $cpanel::$db->orderBy('user_id', 'DESC');
+} 
+
+if (!empty($_GET['filter']) && in_array($_GET['filter'], array('active','inactive', 'clicks', 'views', 'sidebar', 'post', 'male', 'female'))) {
+    if ($_GET['filter'] == 'active') {
+        $cpanel::$db->where('status', '1');
+        $cpanel::$db->pageLimit  = 50;
+    }
+    elseif ($_GET['filter'] == 'inactive') {
+        $cpanel::$db->where('status', '0');
+        $cpanel::$db->pageLimit  = 50;
+    }
+    elseif ($_GET['filter'] == 'sidebar') {
+        $cpanel::$db->where('appears', 'sidebar');
+        $cpanel::$db->pageLimit  = 50;
+    }
+    elseif ($_GET['filter'] == 'post') {
+        $cpanel::$db->where('appears', 'post');
+        $cpanel::$db->pageLimit  = 50;
+    }
+    elseif ($_GET['filter'] == 'male') {
+        $cpanel::$db->where('gender', 'male');
+        $cpanel::$db->pageLimit  = 50;
+    }
+    elseif ($_GET['filter'] == 'female') {
+        $cpanel::$db->where('gender', 'female');
+        $cpanel::$db->pageLimit  = 50;
+    }
+    elseif ($_GET['filter'] == 'clicks') {
+        $cpanel::$db->where('bidding', 'clicks');
+        $cpanel::$db->pageLimit  = 50;
+    }
+    elseif ($_GET['filter'] == 'views') {
+        $cpanel::$db->where('bidding', 'views');
+        $cpanel::$db->pageLimit  = 50;
+    }
+}
+
+$ads        = $cpanel::$db->objectbuilder()->paginate(T_ADS, $ui);
+$total_ads  = $cpanel::$db->getValue(T_ADS, 'COUNT(*)');
+$pending    = $cpanel::$db->where('status', 0)->getValue(T_ADS, 'COUNT(*)');
+
+if (($ui > $cpanel::$db->totalPages) && !empty($_GET['ui-id'])) {
+  header("Location: " . cpanel('manage-user-ads'));
+  exit();
+}
+
+?>
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">Mambers Ads</h1>
+        <div class="text-muted">Manage our users advertisements!</div>
+    </div>
+</div>
+<!-- Colored status cards-->
+<div class="row gx-5">
+    <div class="col-xxl-3 col-md-6 mb-5">
+        <div class="card card-raised border-start border-success border-4">
+            <div class="card-body px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <div class="display-5"><?php echo $pending; ?></div>
+                        <div class="card-text">Pending</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/to-do-list.png');?>" alt="..." style="height: 3.3rem;weight:3.3rem;" />
+                </div>
+                <div class="card-text">
+                    <div class="d-inline-flex align-items-center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-3 col-md-6 mb-5">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+            <div class="card-body px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <div class="display-5"><?php echo $total_ads; ?></div>
+                        <div class="card-text">Total Ads</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/ads.png');?>" alt="..." style="height: 3.3rem;weight:3.3rem;" />
+                </div>
+                <div class="card-text">
+                    <div class="d-inline-flex align-items-center"></div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+<div class="row gx-5">
+    <!-- Revenue breakdown chart example-->
+    <div class="col-lg-12 mb-5">
+        <div class="card card-raised h-100 border-start border-<?php echo $me['dash_color']; ?> border-4">
+            <div class="card-header bg-white px-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="me-4">
+                        <form method="get" action="<?php echo cpanel('manage-user-ads'); ?>">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <label class="form-label search-form">Search for ad name, description and location</label>
+                                            <input type="text" name="query" id="query" class="form-control" value="<?php echo($filter_keyword); ?>" autocomplete="off">
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <label class="form-label search-form">Ads filter</label>
+                                    <select class="form-control show-tick" id="filter" name="filter">
+                                        <option value="all">All</option>
+                                        <option value="active" <?php echo ((!empty($_GET['filter']) && $_GET['filter'] == 'active') ? 'selected' : ''); ?>>Active</option>
+                                        <option value="inactive" <?php echo ((!empty($_GET['filter']) && $_GET['filter'] == 'inactive') ? 'selected' : ''); ?>>Inactive</option>
+                                        <option value="post" <?php echo ((!empty($_GET['filter']) && $_GET['filter'] == 'post') ? 'selected' : ''); ?>>Post Ads</option>
+                                        <option value="views" <?php echo ((!empty($_GET['filter']) && $_GET['filter'] == 'views') ? 'selected' : ''); ?>>Per Views</option>
+                                        <option value="clicks" <?php echo ((!empty($_GET['filter']) && $_GET['filter'] == 'clicks') ? 'selected' : ''); ?>>Per Clicks</option>
+                                        <option value="sidebar" <?php echo ((!empty($_GET['filter']) && $_GET['filter'] == 'sidebar') ? 'selected' : ''); ?>>Sidebar Ads</option>
+                                        <option value="male" <?php echo ((!empty($_GET['filter']) && $_GET['filter'] == 'male') ? 'selected' : ''); ?>>Targeted to males</option>
+                                        <option value="female" <?php echo ((!empty($_GET['filter']) && $_GET['filter'] == 'female') ? 'selected' : ''); ?>>Targeted to females</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-md-1">
+                                     <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <label class="form-label" for="priceto">&nbsp;</label>
+                                            <button class="btn btn-outline-primary" id="Search">Search</button>
+                                        </div>
+                                     </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                    <div class="d-flex gap-2 me-n2 mb-n4">
+                        <label class="form-label" for="priceto">&nbsp;</label>
+                        <div id="dashboard-daterangepicker" class="btn btn-outline-primary">
+                            <?php 
+                                if (!empty($_GET['range']) && in_array($_GET['range'], array('Today','Yesterday','This Week','This Month','Last Month','This Year'))) {
+                                    echo $_GET['range'];
+                                }else if (!empty($start) && !empty($end)){
+                                    echo $_GET['range'];
+                                }else{
+                                    echo 'Current';
+                            } ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-4">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="form-check">
+                                            <input class="form-check-input check-all" id="check-all" type="checkbox"/>
+                                            <label class="form-check-label" for="check-all"></label>
+                                        </div>
+                                    </th>
+                                      <th>ID</th>
+                                      <th>Website</th>
+                                      <th>Creator</th>
+                                      <th>Type</th>
+                                      <th>Created</th>
+                                      <th>Bidding</th>
+                                      <th>Clicks</th>
+                                      <th>Views</th>
+                                      <th>Location</th>
+                                      <th>Status</th>
+                                      <th>Moderate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                                foreach ($ads as $key => $context['ad']) {
+                                  $user = $cpanel::$db->where('user_id',$context['ad']->user_id)->getOne(T_USERS);
+                                  $context['user'] = o2array($cpanel->userData($user));
+                                  $context['ad'] = o2array($context['ad']);
+                                  echo $cpanel->Senction('manage-user-ads/list');
+                                 } 
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="float-start">
+                        <?php echo "Showing $ui out of " . $cpanel::$db->totalPages; ?> Pages
+                    </div>
+                    <div class="float-end">
+                        <nav>
+                            <ul class="pagination">
+                                <li>
+                                    <a class="text-decoration-none firstpage" href="<?php echo cpanel('manage-user-ads?ui-id=1').$link; ?>" data-ajax="?path=manage-user-ads&ui-id=1<?php echo($link); ?>">
+                                        <i class="material-icons">first_page</i>
+                                    </a>
+                                </li>
+                                <?php if ($ui > 1) {  ?>
+                                <li>
+                                    <a class="text-decoration-none previouspage" href="<?php echo cpanel('manage-user-ads?ui-id=' . ($ui - 1)).$link; ?>" data-ajax="?path=manage-user-ads&ui-id=<?php echo($ui - 1) ?><?php echo($link); ?>">
+                                        <i class="material-icons">chevron_left</i>
+                                    </a>
+                                </li>
+                                <?php  } ?>
+                                <?php 
+                                $nums       = 0;
+                                $nums_uis = ($ui > 4) ? ($ui - 4) : $ui;
+                                for ($i=$nums_uis; $i <= $cpanel::$db->totalPages; $i++) { 
+                                    if ($nums < 8) {
+                                ?>
+                                <li class="<?php echo ($ui == $i) ? 'active' : ''; ?>">
+                                    <a class="text-decoration-none" href="<?php echo cpanel('manage-user-ads?ui-id=' . ($i)).$link; ?>" data-ajax="?path=manage-user-ads&ui-id=<?php echo($i) ?><?php echo($link); ?>" class="waves-effect">
+                                        <?php echo $i ?>   
+                                    </a>
+                                </li>
+                                <?php } $nums++; }?>
+                                <?php if ($cpanel::$db->totalPages > $ui) { ?>
+                                <li>
+                                    <a class="text-decoration-none nextpage" href="<?php echo cpanel('manage-user-ads?ui-id=' . ($ui + 1)).$link; ?>" data-ajax="?path=manage-user-ads&ui-id=<?php echo($ui + 1) ?><?php echo($link); ?>">
+                                        <i class="material-icons">chevron_right</i>
+                                    </a>
+                                </li>
+                                <?php } ?>
+                                <li>
+                                    <a class="text-decoration-none lastpage" href="<?php echo cpanel('manage-user-ads?ui-id=' . ($cpanel::$db->totalPages)).$link; ?>" data-ajax="?path=manage-user-ads&ui-id=<?php echo($cpanel::$db->totalPages) ?><?php echo($link); ?>">
+                                        <i class="material-icons">last_page</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3">
+                            <button type="button" class="btn btn btn-outline-primary delete-selected d-block" disabled>Takedown<span></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<!-- Delete Single User -->
+<div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel">Delete this Ad!</h5>
+            </div>
+            <div class="modal-body">Are you sure you want to delete this advertisment?</div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-primary me-2" type="button" data-bs-dismiss="modal">Nope</button>
+                <button class="btn btn-outline-danger" type="button">Yes Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Single User -->
+<div class="modal fade" id="DeleteAdsModal" tabindex="-1" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel">Delete this Ads!</h5>
+            </div>
+            <div class="modal-body">Are you sure you want to delete this advertisments?</div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-primary me-2" type="button" data-bs-dismiss="modal">Nope</button>
+                <button class="btn btn-outline-danger" onclick="DeleteSelected()" type="button">Yes Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Activate Ad -->
+<div class="modal fade" id="ActivateAd" tabindex="-1" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel">Activate Campaign!</h5>
+            </div>
+            <div class="modal-body">Are you sure you want to activate this campaign? The ad will be approved and published</div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-dark me-2" type="button" data-bs-dismiss="modal">Nope</button>
+                <button class="btn btn-outline-primary" type="button">Activate</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Deactivated Ad -->
+<div class="modal fade" id="DeactivatedAd" tabindex="-1" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel">Deactivated Campaign!</h5>
+            </div>
+            <div class="modal-body">Are you sure you want to deactivated this campaign? The ad will be declined and un-published</div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-dark me-2" type="button" data-bs-dismiss="modal">Nope</button>
+                <button class="btn btn-outline-danger" type="button">Deactivate</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+jQuery(document).ready(function($) {
+        var range = { "Current": [moment().startOf('year') , moment().endOf('year')],
+        "Today": [moment() , moment()], 
+        "Yesterday": [moment().subtract(1, 'days') , moment().subtract(1, 'days')], 
+        "This_Week": [moment().subtract(6, 'days') , moment()],
+        "This_Month": [moment().startOf('month') , moment().endOf('month')],
+        "Last_Month": [moment().subtract(1, 'month').startOf('month') , moment().subtract(1, 'month').endOf('month')],
+        "This_Year": [moment().subtract(1, 'year').startOf('year') , moment().subtract(1, 'year').endOf('year')]}; 
+        <?php 
+        if (!empty($_GET['range']) && in_array($_GET['range'], array('Today','Yesterday','This Week','This Month','Last Month','This Year'))) { 
+            if ($_GET['range'] == 'Today') { ?>
+                var start = range.Today[0];
+                var end = range.Today[1];
+            <?php }elseif ($_GET['range'] == 'Yesterday') { ?>
+                var start = range.Yesterday[0];
+                var end = range.Yesterday[1];
+            <?php }elseif ($_GET['range'] == 'This Week') { ?>
+                var start = range.This_Week[0];
+                var end = range.This_Week[1];
+            <?php }elseif ($_GET['range'] == 'This Month') { ?>
+                var start = range.This_Month[0];
+                var end = range.This_Month[1];
+            <?php }elseif ($_GET['range'] == 'Last Month') { ?>
+                var start = range.Last_Month[0];
+                var end = range.Last_Month[1];
+            <?php }elseif ($_GET['range'] == 'This Year') { ?>
+                var start = range.This_Year[0];
+                var end = range.This_Year[1];
+            <?php } ?>
+        <?php } elseif (!empty($_GET['range']) && !empty($start) && !empty($end)) { ?>
+            var start = "<?php echo($start) ?>";
+            var end = "<?php echo($end) ?>";
+        <?php } else{ ?>
+            var start = range.Current[0];
+            var end = range.Current[1];
+        <?php } ?>
+
+        function cb(start, end) {}
+        $('#dashboard-daterangepicker').daterangepicker({
+            startDate: start,
+            endDate: end,
+            opens: $('body').hasClass('rtl') ? 'right' : 'left',
+            ranges: {
+                'Current': [moment().startOf('year') , moment().endOf('year')],
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'This Week': [moment().subtract(6, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                'This Year': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')],
+            }
+        }, cb);
+        cb(start, end);
+        $(document).on('click', '.ranges ul li', function(event) {
+            event.preventDefault();
+            if ($(this).attr('data-range-key') != 'Custom Range') {
+                $(document).off('click', '.ranges ul li');
+                $('#redirect_link').attr('href', "<?php echo cpanel('manage-user-ads').$rang_link_href; ?>range="+$(this).attr('data-range-key'));
+                $('#redirect_link').attr('data-ajax', "?path=manage-user-ads<?php echo('&'.$rang_link) ?>&range="+$(this).attr('data-range-key'));
+                $('#redirect_link').click();
+            }
+        });
+        $(document).on('click', '.applyBtn', function(event) {
+            event.preventDefault();
+            $(document).off('click', '.applyBtn');
+            var text = $(this).parent('.drp-buttons').find('.drp-selected').html().toString();
+            text = text.replaceAll("/", "_");
+            $('#redirect_link').attr('href', "<?php echo cpanel('manage-user-ads').$rang_link_href; ?>range="+text);
+            $('#redirect_link').attr('data-ajax', "?path=manage-user-ads<?php echo('&'.$rang_link) ?>&range="+text);
+            $('#redirect_link').click();
+        });
+});
+
+$('#Search').on('click', function(event) {
+    event.preventDefault();
+    var item = $('#query');
+    var text = item.val();
+
+    const tf = $('#filter');
+    const filter = tf.val();
+    $('#redirect_link').attr('href', "<?php echo cpanel('manage-user-ads').$rang_link_href; ?>query="+text+"&filter="+filter);
+    $('#redirect_link').attr('data-ajax', "?path=manage-user-ads&query="+text+"&filter="+filter);
+    $('#redirect_link').click();
+});
+
+$('.check-all').on('click', function(event) {
+    $('input:checkbox').not(this).prop('checked', this.checked);
+});
+$('.delete-checkbox, .check-all').change(function(event) {
+    $('.delete-selected').attr('disabled', false);
+    $('.delete-selected').find('span').text(' (' + $('.delete-checkbox:checked').length + ')');
+});
+$('.delete-selected').on('click', function(event) {
+    event.preventDefault();
+    $('#DeleteAdsModal').modal('show');
+});
+
+function DeleteSelected() {
+    data = new Array();
+    $('td input:checked').parents('tr').each(function () {
+        data.push($(this).attr('data_selected'));
+    });
+    $('.delete-selected').attr('disabled', true);
+    $('.delete-selected').text('Please wait...');
+    $.post(cpanel_ajax_url('remove_multi_ads'), {ids: data}, function () {
+        $('#DeleteAdsModal').modal('hide');
+        $.each( data, function( index, value ){
+            $("tr[data-userad-id="+value+"]").remove();
+        });
+        $('.delete-selected').text('Delete Selected');
+        $('#redirect_link').attr('href', "<?php echo cpanel('manage-user-ads'); ?>");
+        $('#redirect_link').attr('data-ajax', "?path=manage-user-ads");
+        $('#redirect_link').click();
+        let notify_success201 = {status: 'success',title: 'Mambers Ads',text: "Ads delected successfully!",effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        new Notify({ ...notify_success201 });
+    });
+}
+
+function DeleteAd(id,type = 'show'){
+  if (id && id > 0) {
+    if (type == 'hide') {
+        $('#DeleteModal').find('.btn-outline-danger').attr('onclick', "DeleteAd('"+id+"')");
+        $('#DeleteModal').modal('show');
+        return false;
+    }
+    $("tr[data-userad-id="+id+"]").slideUp(function(){ $(this).remove(); });
+    $("#DeleteModal").modal("hide");
+    $.ajax({ url: cpanel_ajax_url('delete-ad'), type: 'POST', dataType: 'json', data: {id:id} });
+    $('#DeleteModal').modal('hide');
+    $('#redirect_link').attr('href', "<?php echo cpanel('manage-user-ads'); ?>");
+    $('#redirect_link').attr('data-ajax', "?path=manage-user-ads");
+    $('#redirect_link').click();
+    let notify_success201 = {status: 'success',title: 'Mambers Ads',text: "Ad delected successfully!",effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+    new Notify({ ...notify_success201 });
+  }
+}
+
+function Activate(id,type = 'show') {
+    if (id == '') {return false;}
+    if (type == 'hide') {
+      $('#ActivateAd').find('.btn-outline-primary').attr('onclick', "Activate('"+id+"')");
+      $('#ActivateAd').modal('show');
+      return false;
+    }
+    $.post(cpanel_ajax_url('activate-ad'), {id: id}, function(data, textStatus, xhr) {
+        if (data.status == 200) {
+            $('#ActivateAd').modal('hide');
+            $('#redirect_link').attr('href', "<?php echo cpanel('manage-user-ads'); ?>");
+            $('#redirect_link').attr('data-ajax', "?path=manage-user-ads");
+            $('#redirect_link').click();
+            let notify_success201 = {status: 'success',title: 'Mambers Ads',text: ''+ data.message + '',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+            new Notify({ ...notify_success201 });
+        } else {
+            $('#ActivateAd').modal('hide');
+            $('#redirect_link').attr('href', "<?php echo cpanel('manage-user-ads'); ?>");
+            $('#redirect_link').attr('data-ajax', "?path=manage-user-ads");
+            $('#redirect_link').click();
+            let notify_error = {status: 'error',title: 'Mambers Ads',text: ''+ data.error + '',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+            new Notify({ ...notify_error });
+        }
+    });
+}
+
+function Deactivate(id,type = 'show') {
+    if (id == '') {return false;}
+    if (type == 'hide') {
+      $('#DeactivatedAd').find('.btn-outline-danger').attr('onclick', "Deactivate('"+id+"')");
+      $('#DeactivatedAd').modal('show');
+      return false;
+    }
+    $.post(cpanel_ajax_url('deactivate-ad'), {id: id}, function(data, textStatus, xhr) {
+        if (data.status == 200) {
+            $('#DeactivatedAd').modal('hide');
+            $('#redirect_link').attr('href', "<?php echo cpanel('manage-user-ads'); ?>");
+            $('#redirect_link').attr('data-ajax', "?path=manage-user-ads");
+            $('#redirect_link').click();
+            let notify_success201 = {status: 'success',title: 'Mambers Ads',text: ''+ data.message + '',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+            new Notify({ ...notify_success201 });
+        } else {
+            $('#DeactivatedAd').modal('hide');
+            $('#redirect_link').attr('href', "<?php echo cpanel('manage-user-ads'); ?>");
+            $('#redirect_link').attr('data-ajax', "?path=manage-user-ads");
+            $('#redirect_link').click();
+            let notify_error = {status: 'error',title: 'Mambers Ads',text: ''+ data.error + '',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+            new Notify({ ...notify_error });
+        }
+    });
+}
+
+tippy('.lastpage', {arrow: false,content: 'Last Page'});
+tippy('.nextpage', {arrow: false,content: 'Next Page'});
+tippy('.previouspage', {arrow: false,content: 'Previous Page'});
+tippy('.firstpage', {arrow: false,content: 'First Page'});
+</script>

@@ -1,0 +1,313 @@
+<?php 
+if ($me['manager'] == 0 && $me['admin'] == 0) {    
+    header("Location: " . cpanel('overview'));
+    exit();
+}
+?>
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">Website Information</h1>
+        <div class="text-muted">Crucial set of information that makes the community whole</div>
+    </div>
+</div>
+<!-- Colored status cards-->
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Website Information</h2>
+                            <div class="card-subtitle">Informations that search engines will use to ping your site</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/megaphone.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <label class="form-label" class="main-label">Site Name</label><br>
+                        <small class="admin-info">Website name, it will appear on Google and on your browser tab</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" name="site_name" value="<?php echo $config['site_name']?>" label="Website Name?"></mwc-textfield>               
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Site Title</label><br>
+                        <small class="admin-info">Website title, it will appear on SEO search engines and your browser tab</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" name="site_title" value="<?php echo $config['site_title']?>" label="Website Title?"></mwc-textfield>               
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Site keywords</label><br>
+                        <small class="admin-info">The website's keyword, used mostly for SEO and search engines.</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" name="meta_keywords" value="<?php echo $config['meta_keywords']?>" label="Website's Keywords?"></mwc-textfield>               
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Site description</label><br>
+                        <small class="admin-info">Used mostly for SEO and search engines. <br> Max characters that is recommended is 100</small><br><br>
+                        <mwc-textarea type="text" outlined class="w-100" name="site_desc" value="<?php echo $config['site_desc']?>" label="Website's Description?" style="height:130px;"></mwc-textarea>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_changes">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Features API Keys & Information</h2>
+                            <div class="card-subtitle">Api & keys that <?php echo $config['site_name']; ?> uses to get data from other sites</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/api.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <label class="form-label" class="main-label">YouTube API key</label><br>
+                        <small class="admin-info">API key that allows <?php echo $config['site_name']; ?> to embed youtube videos in post!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="yt_api" value="<?php echo $config['yt_api']?>" label="Youtube api key.."></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Giphy API key</label><br>
+                        <small class="admin-info">API key that allows <?php echo $config['site_name']; ?> to download gifs from giphy.com!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="giphy_api" value="<?php echo $config['giphy_api']?>" label="Giphy API key.."></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <div class="float-start">
+                            <label for="private_videos" class="main-label">Google Map</label>
+                            <br><small class="admin-info">Show Google Map on the website.</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="google_map" value="off" />
+                                <input type="checkbox" name="google_map" id="chck-google_map" value="on" <?php echo ($config['google_map'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-google_map" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Google Map API</label><br>
+                        <small class="admin-info">This key is required for GEO and viewing Google Maps!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="google_map_api" value="<?php echo $config['google_map_api']?>" label="Google Map API.."></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Google Analytics Code</label><br>
+                        <small class="admin-info">Paste the full Google Analytics Code here to track site traffic.</small><br><br>
+                        <mwc-textarea outlined class="w-100" type="text" name="google_analytics" value="<?php echo $config['google_analytics']?>" label="Google Analytics Code.."></mwc-textarea>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_apis">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Post Settings</h2>
+                            <div class="card-subtitle">General post settings characters length control</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/blog.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <label class="form-label" class="main-label">Max Caption Characters Length</label><br>
+                        <small class="admin-info">The amount of caption characters to be displayed on a post!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="caption_len" value="<?php echo $config['caption_len']?>" label="Max Caption Length"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Max Comment Characters Length</label><br>
+                        <small class="admin-info">The amount of caption characters to be displayed on a comment!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="comment_len" value="<?php echo $config['comment_len']?>" label="Max Caption Length"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="float-start">
+                            <label for="private_videos" class="main-label">Zoom In Emoji</label>
+                            <br><small class="admin-info">Allow the emoji dropdown to zoom in.</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="emoji_zoom_in" value="off" />
+                                <input type="checkbox" name="emoji_zoom_in" id="chck-emoji_zoom_in" value="on" <?php echo ($config['emoji_zoom_in'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-emoji_zoom_in" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Post Emojis</label><br>
+                        <small class="admin-info">Emojis that will be used in the post comments section and captions!<br> It's very important that you add the <b>*</b> sign whenever you add new emojis to this list.</small><br><br>
+                        <mwc-textarea type="text" outlined class="w-100" name="site_emojis" value="<?php echo $config['site_emojis']?>" label="Emojis?" style="height:180px;"></mwc-textarea> 
+                        
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_post">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xxl-6 col-md-6 mb-6">
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Other Settings</h2>
+                            <div class="card-subtitle">More settings to go with the flow of this community</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/working.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <label class="form-label" class="main-label">Website Category</label><br>
+                        <small class="admin-info">Which type of category does this communty fall into?</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="site_category" value="<?php echo $config['site_category']?>" label="Category"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label class="form-label" class="main-label">Banned words and expressions</label><br>
+                        <small class="admin-info">The words you put here will be replaced with a <b>*</b> <br>Which makes that word a banned word and will not be allowed in the site.</small><br><br>
+                        <mwc-textarea outlined class="w-100" type="text" name="obscene" value="<?php echo $config['obscene']?>" label="Banned word"></mwc-textarea>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_others">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- END -->
+</div>
+
+<script>
+    $(function() {
+        let notify_error = {status: 'error',title: 'Website Settings',text: 'Failed to updated this settings',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_warning = {status: 'warning',title: 'Website Settings',text: "Oops there's an error in the script",effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_success = {status: 'success',title: 'Website Settings',text: 'Configurations Updated Successfully',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        $('.switcher input[type=checkbox]').click(function () {
+            var configName = $(this).attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            if ($(this).is(":checked") === true) {
+                objData[configName] = $(this).val();
+                new Notify({ ...notify_success })
+            }
+            else{
+                if ($('input[name='+configName+']')[0]) {
+                    objData[configName] = $($('input[name='+configName+']')[0]).val();
+                    new Notify({ ...notify_success })
+                }
+            }
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('site-settings'), objData);
+        });
+
+        $('mwc-select').on('change', function() {
+            var thisElement = $(this);
+            var configName = thisElement.attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            objData[configName] = thisElement.val();
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('site-settings'), objData, function (data) {
+                if (data.status == 200) {
+                    new Notify({ ...notify_success });
+                } else {
+                    new Notify({ ...notify_error });
+                }
+            });
+        });
+
+        function update_input(){
+            $('mwc-textfield, mwc-textarea').on('keyup', function() {
+                var thisElement = $(this);
+                var configName = thisElement.attr('name');
+                var hash_id = $('mwc-textfield[name=hash_id]').val();
+                var objData = {};
+                objData[configName] = this.value;
+                objData['hash_id'] = hash_id;
+                $.post(cpanel_ajax_url('site-settings'), objData, function (data) {
+                    if (data.status == 200) {
+                    } else {
+                        new Notify({ ...notify_error })
+                    }
+                });
+            });
+        }
+        $('#save_changes').on('click', function() {
+            $('#save_changes').text('Please Wait...');
+			$('#save_changes').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_changes').text('Save Changes');
+			$('#save_changes').removeAttr('disabled');
+            }, 2000);
+        });
+        $('#save_apis').on('click', function() {
+            $('#save_apis').text('Please Wait...');
+			$('#save_apis').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_apis').text('Save Changes');
+			$('#save_apis').removeAttr('disabled');
+            }, 1000);
+        });
+        $('#save_watermark').on('click', function() {
+            $('#save_watermark').text('Please Wait...');
+			$('#save_watermark').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_watermark').text('Save Changes');
+			$('#save_watermark').removeAttr('disabled');
+            }, 1000);
+        });
+        $('#save_post').on('click', function() {
+            $('#save_post').text('Please Wait...');
+			$('#save_post').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_post').text('Save Changes');
+			$('#save_post').removeAttr('disabled');
+            }, 1000);
+        });
+        $('#save_others').on('click', function() {
+            $('#save_others').text('Please Wait...');
+			$('#save_others').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_others').text('Save Changes');
+			$('#save_others').removeAttr('disabled');
+            }, 1000);
+        });
+        setTimeout(function () {
+            update_input();
+        }, 2000);
+    });
+</script>

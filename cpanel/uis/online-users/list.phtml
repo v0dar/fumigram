@@ -1,0 +1,47 @@
+
+<tr id="list-<?php echo($cd['user']['user_id']); ?>" data_selected="<?php echo($cd['user']['user_id']); ?>">
+  <td>
+   <div class="form-check">
+      <input class="form-check-input delete-checkbox" id="check-data-<?php echo($cd['user']['user_id']); ?>" type="checkbox" value="" />
+      <label class="form-check-label" for="check-data-<?php echo($cd['user']['user_id']); ?>"></label>
+   </div>
+  </td>
+  <td><?php echo($cd['user']['user_id']); ?></td>
+  <td>
+      <a href="<?php echo($cd['user']['url']); ?>" target="_blank" class="text-decoration-none">
+         <img src="<?php echo(media($cd['user']['avatar'])); ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo($cd['user']['username']); ?>'s Profile" class="rounded-circle" alt="..." style="height: 2rem;weight:2rem;">
+      </a>
+      &nbsp; <?php echo($cd['user']['username']); ?> 
+      <?php if ($cd['user']['verified'] == 1): ?>
+      <img src="<?php echo cpanel('si/img/icons/verify.png');?>" alt="..." id="verify" style="height: 1rem;weight:1rem;">
+      <?php endif; ?>
+  </td>
+  <td><?php echo($cd['user']['gender']); ?></td>
+  <td><?php echo($cd['user']['mode']); ?></td>
+  <td><?php echo($cd['user']['language']); ?></td>
+  <td><?php echo($cd['user']['ip_address']); ?></td>
+  <td><button class="btn btn-outline-success" data-id="<?php echo($cd['user']['user_id']); ?>" onclick="SendCredits('<?php echo($cd['user']['user_id']); ?>','hide');">Credit</button></td>
+  <td>
+      <div class="dropdown">
+         <div class="btn btn-outline-primary dropdown-toggle" id="dropdownMenuDarkButton" data-bs-toggle="dropdown" aria-expanded="false">Action</div>
+         <ul class="dropdown-menu" aria-labelledby="dropdownMenuDarkButton" style="min-width: 10.5rem">
+            <li>
+               <a class="dropdown-item" target="_blank" href="<?php echo($cd['user']['edit']); ?>">Edit</a>
+            </li>
+            <?php if ($cd['user']['active'] == 0): ?>
+            <li>
+               <a class="dropdown-item" href="javascript:void(0)" data-id="<?php echo($cd['user']['user_id']); ?>" onclick="Activate('<?php echo($cd['user']['user_id']); ?>','hide');">Activate</a>
+            </li>
+            <?php else: ?>
+            <li>
+               <a class="dropdown-item" href="javascript:void(0)" data-id="<?php echo($cd['user']['user_id']); ?>" onclick="Deactivate('<?php echo($cd['user']['user_id']); ?>','hide');">Deactivate</a>
+            </li>
+            <?php endif; ?>
+         </ul>
+      </div>
+  </td>
+</tr>
+<script>
+tippy('.Activated', {arrow: false,content: "Account is Activated"});
+tippy('.Deactivated', {arrow: false,content: "Account is Deactivated"});
+</script>

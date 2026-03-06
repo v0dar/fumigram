@@ -1,0 +1,246 @@
+<?php
+if ($me['manager'] == 0 && $me['admin'] == 0) {    
+    header("Location: " . cpanel('overview'));
+    exit();
+}
+?>
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">Premium System</h1>
+        <div class="text-muted">Professional system that enables users to upgrade their account!</div>
+    </div>
+</div>
+<!-- Colored status cards-->
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Premium System</h2>
+                            <div class="card-subtitle">Extra features will be locked to users with a free account!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/pro-badge.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="business_account" class="check-label">Premium System</label><br>
+                            <small class="admin-info">All features will be free without the boost feature if disabled!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="pro_system" value="off" />
+                                <input type="checkbox" name="pro_system" id="chck-pro_system" value="on" <?php echo ($config['pro_system'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-pro_system" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="float-start">
+                            <label for="business_account" class="check-label">Clickable Links</label><br>
+                            <small class="admin-info">Make URL in post descriptions clickable for pro users!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="clickable_url" value="off" />
+                                <input type="checkbox" name="clickable_url" id="chck-clickable_url" value="on" <?php echo ($config['clickable_url'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-clickable_url" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Boosted Posts</label><br>
+                        <small class="admin-info" name="boosted_posts">The amount of posts a premium user can boost!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="boosted_posts" value="<?php echo $config['boosted_posts']?>" label="Boosted Posts"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Default Boost Timer</label><br>
+                        <small class="admin-info" name="boost_timer">The default time every boosted post will last for!<br>This will be overridden if a user buys a boost timer from <a href="<?php echo($config['site_url']); ?>/cpanel/credits-system">here</a></small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="boost_timer" value="<?php echo $config['boost_timer']?>" label="Timer?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_changes">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Premium Plan x2</h2>
+                            <div class="card-subtitle">Premium plans Configurations!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/credit.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form general-settings-form">
+                        <label class="form-label" class="main-label">3 Days Premium</label><br>
+                        <small class="admin-info">How many credits will it cost for 3 days of premium</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['three_days_premium_price']?>" name="three_days_premium_price" label="Credits?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Weekly Premium</label><br>
+                        <small class="admin-info">How many credits will it cost for 1 week of premium</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['weekly_premium_price']?>" name="weekly_premium_price" label="Credits?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_changes">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xxl-6 col-md-6 mb-6">
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Premium Plan</h2>
+                            <div class="card-subtitle">Premium plans Configurations!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/credit.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form general-settings-form">
+                        <label class="form-label" class="main-label">1 Hour Premium</label><br>
+                        <small class="admin-info">How many credits will it cost for 1 hour of premium</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['one_hour_premium_price']?>" name="one_hour_premium_price" label="Credits?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Daily Premium</label><br>
+                        <small class="admin-info">How many credits will it cost for 1 day of premium</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['daily_premium_price']?>" name="daily_premium_price" label="Credits?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_changes">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Premium Plan x3</h2>
+                            <div class="card-subtitle">Premium plans Configurations!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/credit.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form general-settings-form">
+                        <label class="form-label" class="main-label">Monthly Premium</label><br>
+                        <small class="admin-info">How many credits will it cost for 1 month of premium</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['monthly_premium_price']?>" name="monthly_premium_price" label="Credits?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Yearly Premium</label><br>
+                        <small class="admin-info">How many credits will it cost for 1 year premium</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['yearly_premium_price']?>" name="yearly_premium_price" label="Credits?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Life Time Premium</label><br>
+                        <small class="admin-info">How many credits will it cost for a life time of premium</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['life_time_premium_price']?>" name="life_time_premium_price" label="Credits?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_changes">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
+
+<script>
+    $(function() {
+        let notify_error = {status: 'error',title: 'Pro Settings',text: 'Failed to updated this settings',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_success = {status: 'success',title: 'Pro Settings',text: 'Configurations Updated Successfully!',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        $('.switcher input[type=checkbox]').click(function () {
+            var configName = $(this).attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            if ($(this).is(":checked") === true) {
+                objData[configName] = $(this).val();
+                new Notify({ ...notify_success })
+            }
+            else{
+                if ($('input[name='+configName+']')[0]) {
+                    objData[configName] = $($('input[name='+configName+']')[0]).val();
+                    new Notify({ ...notify_success })
+                }
+            }
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('site-settings'), objData);
+        });
+
+        $('mwc-select').on('change', function() {
+            var thisElement = $(this);
+            var configName = thisElement.attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            objData[configName] = thisElement.val();
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('site-settings'), objData, function (data) {
+                if (data.status == 200) {
+                    new Notify({ ...notify_success });
+                } else {
+                    new Notify({ ...notify_error });
+                }
+            });
+        });
+
+        function update_input(){
+            $('mwc-textfield, mwc-textarea').on('keyup', function() {
+                var thisElement = $(this);
+                var configName = thisElement.attr('name');
+                var hash_id = $('mwc-textfield[name=hash_id]').val();
+                var objData = {};
+                objData[configName] = this.value;
+                objData['hash_id'] = hash_id;
+                $.post(cpanel_ajax_url('site-settings'), objData, function (data) {
+                    if (data.status == 200) {
+                    } else {
+                        new Notify({ ...notify_error })
+                    }
+                });
+            });
+        }
+        $('#save_changes').on('click', function() {
+            $('#save_changes').text('Please Wait...');
+			$('#save_changes').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_changes').text('Save Changes');
+			$('#save_changes').removeAttr('disabled');
+            }, 2000);
+        });
+        setTimeout(function () {
+            update_input();
+        }, 1000);
+    });
+</script>

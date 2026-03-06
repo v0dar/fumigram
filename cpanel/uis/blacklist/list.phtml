@@ -1,0 +1,20 @@
+<tr class="setting-banlist" id="IPID_<?php echo $cd['user']['id']?>" data_selected="<?php echo($cd['user']['id']) ?>">
+   <td>
+      <div class="form-check">
+         <input class="form-check-input delete-checkbox" id="check-data-<?php echo($cd['user']['id']) ?>" type="checkbox" value="" />
+         <label class="form-check-label" for="check-data-<?php echo($cd['user']['id']) ?>"></label>
+      </div>
+   </td>
+   <td><?php echo $cd['user']['id']?></td>
+   <td>
+      <div class="ajax-time" title="<?php echo date('c',$cd['user']['time']); ?>">
+         <?php echo time2str($cd['user']['time']);?>
+      </div>
+   </td>
+   <td>
+     <?php echo $cd['user']['value']?>
+   </td>
+   <td>
+      <a href="javascript:void(0)" class="btn btn-outline-danger" onclick="DeleteBan(<?php echo $cd['user']['id']; ?>,'hide')">Delete</a>
+   </td>
+</tr>

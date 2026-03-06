@@ -1,0 +1,29 @@
+
+<tr id="list-<?php echo($cd['user']['user_id']); ?>" data_selected="<?php echo($cd['user']['user_id']); ?>">
+  <td>
+   <div class="form-check">
+      <input class="form-check-input delete-checkbox" id="check-data-<?php echo($cd['user']['user_id']); ?>" type="checkbox" value="" />
+      <label class="form-check-label" for="check-data-<?php echo($cd['user']['user_id']); ?>"></label>
+   </div>
+  </td>
+  <td><?php echo($cd['user']['user_id']); ?></td>
+  <td>
+      <a href="<?php echo($cd['user']['url']); ?>" target="_blank" class="text-decoration-none">
+         <img src="<?php echo(media($cd['user']['avatar'])); ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo($cd['user']['username']); ?>'s Profile" class="rounded-circle" alt="..." style="height: 2rem;weight:2rem;">
+      </a>
+      &nbsp; <?php echo($cd['user']['username']); ?> 
+      <?php if ($cd['user']['verified'] == 1): ?>
+      <img src="<?php echo cpanel('si/img/icons/verify.png');?>" alt="..." id="verify" style="height: 1rem;weight:1rem;">
+      <?php endif; ?>
+  </td>
+  <td><?php echo($cd['user']['gender']); ?></td>
+  <td><?php echo($cd['user']['ip_address']); ?></td>
+  <td><?php echo($cd['user']['ac_code']); ?></td>
+  <td><?php echo time2str($cd['user']['last_seen']); ?></td>
+  <td>
+    <?php if ($config['email_validation'] == 'on') { ?>
+      <button class="btn btn-outline-primary" data-id="<?php echo($cd['user']['user_id']); ?>" onclick="ResendCode('<?php echo($cd['user']['user_id']); ?>','hide');">Resend Code</button>&nbsp;&nbsp;
+    <?php } ?>
+      <a class="btn btn-outline-danger" href="javascript:void(0)" data-id="<?php echo($cd['user']['user_id']); ?>" onclick="DeleteAcc('<?php echo($cd['user']['user_id']); ?>','hide');">Delete Account</a>
+  </td>
+</tr>

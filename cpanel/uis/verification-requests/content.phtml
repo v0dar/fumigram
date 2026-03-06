@@ -1,0 +1,369 @@
+<?php
+$verify_users = $cpanel->verfiedUsers();
+$ui = (!empty($_GET['ui-id'])) ? $_GET['ui-id'] : 1;
+$link = "";
+$cpanel::$db->pageLimit = 20;
+
+$sort_link = $link;
+$sort_array = array('DESC_i' => array('user_id' , 'DESC'),
+                    'ASC_i'  => array('user_id' , 'ASC'),
+                    'DESC_u' => array('username' , 'DESC'),
+                    'ASC_u'  => array('username' , 'ASC'));
+if (!empty($_GET['sort']) && in_array($_GET['sort'], array_keys($sort_array))) {
+    $cpanel::$db->orderBy($sort_array[$_GET['sort']][0],$sort_array[$_GET['sort']][1]);
+    $link .= "&sort=".$cpanel::secure($_GET['sort']);
+    $rang_link .= "&sort=".$cpanel::secure($_GET['sort']);
+}
+else{
+    $_GET['sort'] = 'DESC_i';
+    $cpanel::$db->orderBy('user_id', 'DESC');
+}
+
+$total_requests  = $cpanel::$db->getValue(T_VERIFY, 'COUNT(*)');
+$verif_requests      = $cpanel::$db->objectbuilder()->paginate(T_VERIFY,$ui);
+$get_online_users    = $cpanel::$db->where('last_seen', time() - 60, '>')->getValue(T_USERS, 'COUNT(*)');
+$get_offline_users   = $cpanel::$db->where('last_seen', time() - 60, '<')->getValue(T_USERS, 'COUNT(*)');
+
+foreach ($verif_requests as $key => $value) {
+    $value->request_from = $cpanel->getUserDataById($value->user_id);
+}
+
+if (($ui > $cpanel::$db->totalPages) && !empty($_GET['ui-id'])) {
+    header("Location: " . cpanel('verification-requests'));
+    exit();
+}
+?>
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">Verification Requests</h1>
+        <div class="text-muted">Manage & verfiy our members who want's to verfiy their account!</div>
+    </div>
+</div>
+<!-- Colored status cards-->
+<div class="row gx-5">
+    <div class="col-xxl-3 col-md-6 mb-5">
+        <div class="card card-raised border-start border-info border-4">
+            <div class="card-body px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <div class="display-5"><?php echo $total_requests; ?></div>
+                        <div class="card-text">Pending Verification</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/to-do-list.png');?>" alt="..." style="height: 3.3rem;weight:3.3rem;" />
+                </div>
+                <div class="card-text">
+                    <div class="d-inline-flex align-items-center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-3 col-md-6 mb-5">
+        <div class="card card-raised border-start border-pink border-4">
+            <div class="card-body px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <div class="display-5"><?php echo $verify_users; ?></div>
+                        <div class="card-text">Verified Members</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/woman.png');?>" alt="..." style="height: 3.3rem;weight:3.3rem;" />
+                </div>
+                <div class="card-text">
+                    <div class="d-inline-flex align-items-center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-3 col-md-6 mb-5">
+        <div class="card card-raised border-start border-success border-4">
+            <div class="card-body px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <div class="display-5"><?php echo $get_online_users; ?></div>
+                        <div class="card-text">Online Members</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/webinar.png');?>" alt="..." style="height: 3.3rem;weight:3.3rem;" />
+                </div>
+                <div class="card-text">
+                    <div class="d-inline-flex align-items-center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-3 col-md-6 mb-5">
+        <div class="card card-raised border-start border-dark border-4">
+            <div class="card-body px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <div class="display-5"><?php echo $get_offline_users; ?></div>
+                        <div class="card-text">Offline Members</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/sleeping.png');?>" alt="..." style="height: 3.3rem;weight:3.3rem;" />
+                </div>
+                <div class="card-text">
+                    <div class="d-inline-flex align-items-center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<div class="row gx-5">
+    <!-- Revenue breakdown chart example-->
+    <div class="col-lg-12 mb-5">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4 h-100">
+            <div class="card-header bg-white px-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="me-2">
+                        <h2 class="card-title mb-0">Members Verification Request</h2>
+                        <div class="card-subtitle">Our members comes first. Attend to this users verification request!</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/customer-service-agent.png');?>" alt="..." style="height: 4rem" />
+                </div>
+            </div>
+            <div class="card-body p-4">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="form-check">
+                                            <input class="form-check-input check-all" id="check-all" type="checkbox"/>
+                                            <label class="form-check-label" for="check-all"></label>
+                                        </div>
+                                    </th>
+                                      <th>User ID</th>
+                                      <th>Username</th>
+                                      <th>Joined</th>
+                                      <th>Gender</th>
+                                      <th>Information</th>
+                                      <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php 
+                                foreach ($verif_requests as $context['verification']) {
+                                    echo $cpanel->Senction('verification-requests/list');
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="float-start">
+                        <?php echo "Showing $ui out of " . $cpanel::$db->totalPages; ?> Pages
+                    </div>
+                    <div class="float-end">
+                        <nav>
+                            <ul class="pagination">
+                                <li>
+                                    <a class="text-decoration-none firstpage" href="<?php echo cpanel('verification-requests?ui-id=1').$link; ?>" data-ajax="?path=verification-requests&ui-id=1<?php echo($link); ?>">
+                                        <i class="material-icons">first_page</i>
+                                    </a>
+                                </li>
+                                <?php if ($ui > 1) {  ?>
+                                <li>
+                                    <a class="text-decoration-none previouspage" href="<?php echo cpanel('verification-requests?ui-id=' . ($ui - 1)).$link; ?>" data-ajax="?path=verification-requests&ui-id=<?php echo($ui - 1) ?><?php echo($link); ?>">
+                                        <i class="material-icons">chevron_left</i>
+                                    </a>
+                                </li>
+                                <?php  } ?>
+                                <?php 
+                                $nums       = 0;
+                                $nums_uis = ($ui > 4) ? ($ui - 4) : $ui;
+                                for ($i=$nums_uis; $i <= $cpanel::$db->totalPages; $i++) { 
+                                        if ($nums < 8) {
+                                ?>
+                                <li class="<?php echo ($ui == $i) ? 'active' : ''; ?>">
+                                    <a class="text-decoration-none" href="<?php echo cpanel('verification-requests?ui-id=' . ($i)).$link; ?>" data-ajax="?path=verification-requests&ui-id=<?php echo($i) ?><?php echo($link); ?>" class="waves-effect">
+                                        <?php echo $i ?>   
+                                    </a>
+                                </li>
+                                <?php } $nums++; }?>
+                                <?php if ($cpanel::$db->totalPages > $ui) { ?>
+                                <li>
+                                    <a class="text-decoration-none nextpage" href="<?php echo cpanel('verification-requests?ui-id=' . ($ui + 1)).$link; ?>" data-ajax="?path=verification-requests&ui-id=<?php echo($ui + 1) ?><?php echo($link); ?>">
+                                        <i class="material-icons">chevron_right</i>
+                                    </a>
+                                </li>
+                                <?php } ?>
+                                <li>
+                                    <a class="text-decoration-none lastpage" href="<?php echo cpanel('verification-requests?ui-id=' . ($cpanel::$db->totalPages)).$link; ?>" data-ajax="?path=verification-requests&ui-id=<?php echo($cpanel::$db->totalPages) ?><?php echo($link); ?>">
+                                        <i class="material-icons">last_page</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="clearfix"></div>
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2">
+                            <select class="form-control show-tick" id="action_type">
+                                <option value="Approve">Approve Verification</option>
+                                <option value="Decline">Decline Verification</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <button type="button" class="btn btn btn-outline-primary delete-selected d-block" disabled>Take Action<span></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+<!-- Delete Multi Users -->
+<div class="modal fade" id="SelectedDeleteModal" tabindex="-1" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel">Approve Request!</h5>
+            </div>
+            <div class="modal-body">Are you sure you want to approve the selected user(s) request!</div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-primary me-2" type="button" data-bs-dismiss="modal">Maybe Later</button>
+                <button class="btn btn-outline-indigo" onclick="TakeAction()" type="button">Take Action</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Activate Account -->
+<div class="modal fade" id="ApproveModal" tabindex="-1" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel">Approve Verification Request!</h5>
+            </div>
+            <div class="modal-body">Are you sure you want to Approve this user's request?</div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-primary me-2" type="button" data-bs-dismiss="modal">Nope Later</button>
+                <button class="btn btn-outline-success" type="button">Yes Approve</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Deactivate Account -->
+<div class="modal fade" id="DeclineModal" tabindex="-1" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel">Decline Verification Request!</h5>
+            </div>
+            <div class="modal-body">Are you sure you want to Decline this user's request?</div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-primary me-2" type="button" data-bs-dismiss="modal">Nope Later</button>
+                <button class="btn btn-outline-danger declinev" type="button">Yes Decline</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$('.check-all').on('click', function(event) {
+    $('input:checkbox').not(this).prop('checked', this.checked);
+});
+$('.delete-checkbox, .check-all').change(function(event) {
+    $('.delete-selected').attr('disabled', false);
+    $('.delete-selected').find('span').text(' (' + $('.delete-checkbox:checked').length + ')');
+});
+$('.delete-selected').on('click', function(event) {
+    event.preventDefault();
+    action_type = $('#action_type').val();
+    $('#SelectedDeleteModal').find('.modal-body').html('Are you sure you want to '+action_type+' the selected user(s) request?');
+    $('#SelectedDeleteModal').find('#exampleModalCenteredLabel').html(action_type+' this user(s) request!');
+    $('#SelectedDeleteModal').find('.btn-outline-indigo').text('' + action_type + ' Verification');
+    $('#SelectedDeleteModal').modal('show');
+});
+
+function TakeAction() {
+    action_type = $('#action_type').val();
+    data = new Array();
+    $('td input:checked').parents('tr').each(function () {
+        data.push($(this).attr('data_selected'));
+    });
+    $('.delete-selected').attr('disabled', true);
+    $('.delete-selected').text('Please wait...');
+    $.post(cpanel_ajax_url('multi_verification'), {ids: data,type: action_type}, function () {
+        if (action_type == 'Approve') {
+            $.each( data, function( index, value ){$("#VerificationID_"+value+"").remove();});
+            let notify_200 = {status: 'success',title: 'Verification Requests',text: 'Verification request was Approved',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+            new Notify({ ...notify_200 });
+            $('#SelectedDeleteModal').modal('hide');
+            $('#redirect_link').attr('href', "<?php echo cpanel('verification-requests'); ?>");
+            $('#redirect_link').attr('data-ajax', "?path=verification-requests");
+            $('#redirect_link').click();
+        } else if (action_type == 'Decline') {
+                $.each( data, function( index, value ){$("#VerificationID_"+value+"").remove();});
+                $('#SelectedDeleteModal').modal('hide');
+                $('#redirect_link').attr('href', "<?php echo cpanel('verification-requests'); ?>");
+                $('#redirect_link').attr('data-ajax', "?path=verification-requests");
+                $('#redirect_link').click();
+                let notify_success200 = {status: 'success',title: 'Verification Requests',text: 'Verification request was Declined!',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                new Notify({ ...notify_success200 });
+        } else {
+            location.reload();
+        }
+        $('#SelectedDeleteModal').modal('hide');
+        $('.delete-selected').text('Take Action');
+    });
+}
+
+function DeclineVerification(id, type = 'show') {
+  if (type == 'hide') {
+    $('#DeclineModal').find('.declinev').attr('onclick', "DeclineVerification('"+id+"')");
+    $('#DeclineModal').modal('show');
+    return false;
+  }
+  $('#review-verif-request-info-'+id).slideUp(function(){
+    $(this).remove();
+    $('#VerificationID_' + id).fadeOut(400, function() { $(this).remove(); });
+  })
+  $.post(cpanel_ajax_url('delete_v_request'), {id: id}, function(data, textStatus, xhr) {
+    if (data.status == 200) {
+        $('#DeclineModal').modal('hide');
+        $('#redirect_link').attr('href', "<?php echo cpanel('verification-requests'); ?>");
+        $('#redirect_link').attr('data-ajax', "?path=verification-requests");
+        $('#redirect_link').click();
+        let notify_success201 = {status: 'success',title: 'Verification Requests',text: ''+ data.message + '',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        new Notify({ ...notify_success201 });
+    }
+  });
+}
+
+function ApproveVerify(id, verification_id, type, type2 = 'show') {
+  if (type2 == 'hide') {
+    $('#ApproveModal').find('.btn-outline-success').attr('onclick', "ApproveVerify('"+id+"','"+verification_id+"','"+type+"')");
+    $('#ApproveModal').modal('show');
+    return false;
+  }
+  $('#review-verif-request-info-'+verification_id).slideUp(function(){ $(this).remove();})
+  $('#VerificationID_' + verification_id).fadeOut(300, function() {$(this).remove(); });
+  $.post(cpanel_ajax_url('accept_v_request'), {id: verification_id}, function(data, textStatus, xhr) {
+    if (data.status == 200) {
+        $('#ApproveModal').modal('hide');
+        $('#redirect_link').attr('href', "<?php echo cpanel('verification-requests'); ?>");
+        $('#redirect_link').attr('data-ajax', "?path=verification-requests");
+        $('#redirect_link').click();
+        let notify_success201 = {status: 'success',title: 'Verification Requests',text: ''+ data.message + '',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        new Notify({ ...notify_success201 });
+    }
+  });
+}
+
+$(document).ready(function() {
+  $('.review-verif-request-cont a').magnificPopup({type:'image'});
+});
+
+jQuery(document).ready(function($) {
+  $(document).on('click', '.toggle-verification-request', function(event) {
+    event.preventDefault();
+    $(this).find('i').toggleClass('rotate-90d');
+  });
+});
+
+tippy('.lastpage', {arrow: false,content: 'Last Page'});
+tippy('.nextpage', {arrow: false,content: 'Next Page'});
+tippy('.previouspage', {arrow: false,content: 'Previous Page'});
+tippy('.firstpage', {arrow: false,content: 'First Page'});
+</script>

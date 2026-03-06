@@ -1,0 +1,367 @@
+<?php
+if ($me['manager'] == 0 && $me['admin'] == 0) {    
+    header("Location: " . cpanel('overview'));
+    exit();
+}
+
+$config['ffmpeg']  = is_executable($config['ffmpeg_binary']);
+function isEnabled($func) {
+    return is_callable($func) && false === stripos(ini_get('disable_functions'), $func);
+}
+$enabled = true;
+if (!isEnabled('shell_exec')) {
+    $enabled = false;
+}
+?>
+
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">File Upload System</h1>
+        <div class="text-muted"><?php echo $config['site_name']; ?>'s media upload settings & configuration!</div>
+    </div>
+</div>
+<!-- Colored status cards-->
+
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Media Upload & Import System</h2>
+                            <div class="card-subtitle">Allow users to upload media files on your site!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/photo.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="upload_images" class="main-label">Image Upload System</label>
+                            <br><small class="admin-info">Allow users to upload images!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="upload_images" value="off" />
+                                <input type="checkbox" name="upload_images" id="chck-upload_images" value="on" <?php echo ($config['upload_images'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-upload_images" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <div class="float-start">
+                            <label for="upload_tiles" class="main-label">Tiles Upload System</label>
+                            <br><small class="admin-info">Allow users to upload tiles!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="upload_tiles" value="off" />
+                                <input type="checkbox" name="upload_tiles" id="chck-upload_tiles" value="on" <?php echo ($config['upload_tiles'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-upload_tiles" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <div class="float-start">
+                            <label for="upload_videos" class="main-label">Video Upload System</label>
+                            <br><small class="admin-info">Allow users to upload video & tiles!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="upload_videos" value="off" />
+                                <input type="checkbox" name="upload_videos" id="chck-upload_videos" value="on" <?php echo ($config['upload_videos'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-upload_videos" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <div class="float-start">
+                            <label for="import_videos" class="main-label">Import Video System</label>
+                            <br><small class="admin-info">Allow users to import videos from third party!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="import_videos" value="off" />
+                                <input type="checkbox" name="import_videos" id="chck-import_videos" value="on" <?php echo ($config['import_videos'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-import_videos" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <div class="float-start">
+                            <label for="import_images" class="main-label">Import GIF System</label>
+                            <br><small class="admin-info">Allow users to import gifs from giphy.com website!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="import_images" value="off" />
+                                <input type="checkbox" name="import_images" id="chck-import_images" value="on" <?php echo ($config['import_images'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-import_images" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <div class="float-start">
+                            <label for="mp4_links" class="main-label">Import Videos (MP4 Links)</label>
+                            <br><small class="admin-info">Allow users to import other videos from all .mp4 links!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="mp4_links" value="off" />
+                                <input type="checkbox" name="mp4_links" id="chck-mp4_links" value="on" <?php echo ($config['mp4_links'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-mp4_links" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label for="language" class="main-label">Max Upload Size</label><br>
+                        <small class="admin-info">Limit the size of all content that will be uploaded on the system!</small><br><br>
+                        <mwc-select outlined label="Set the max upload size" class="w-100" name="max_upload">
+                            <mwc-list-item value="2000000" <?php if($config['max_upload'] == '2000000'){ echo("selected");}?>>2MB</mwc-list-item>
+                            <mwc-list-item value="6000000" <?php if($config['max_upload'] == '6000000'){ echo("selected");}?>>6MB</mwc-list-item>
+                            <mwc-list-item value="12000000" <?php if($config['max_upload'] == '12000000'){ echo("selected");}?>>12MB</mwc-list-item>
+                            <mwc-list-item value="24000000" <?php if($config['max_upload'] == '24000000'){ echo("selected");}?>>24MB</mwc-list-item>
+                            <mwc-list-item value="48000000" <?php if($config['max_upload'] == '48000000'){ echo("selected");}?>>48MB</mwc-list-item>
+                            <mwc-list-item value="96000000" <?php if($config['max_upload'] == '96000000'){ echo("selected");}?>>96MB</mwc-list-item>
+                            <mwc-list-item value="256000000" <?php if($config['max_upload'] == '256000000'){ echo("selected");}?>>256MB</mwc-list-item>
+                            <mwc-list-item value="512000000" <?php if($config['max_upload'] == '512000000'){ echo("selected");}?>>512MB</mwc-list-item>
+                            <mwc-list-item value="1000000000" <?php if($config['max_upload'] == '1000000000'){ echo("selected");}?>>1GB</mwc-list-item>
+                            <mwc-list-item value="10000000000" <?php if($config['max_upload'] == '10000000000'){ echo("selected");}?>>10GB</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Free Members Storage Limit</label><br>
+                        <small class="admin-info">Limit storage for free users when premium system is on</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" id="free_user_storage_limit" name="free_user_storage_limit" value="<?php echo $config['free_user_storage_limit']?>" label="Size in Kilobyte, 0 for unlimited!"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_upload">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xxl-6 col-md-6 mb-6">
+           <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">FFMPEG Configuration</h2>
+                            <div class="card-subtitle">This system will compress, convert, and optimzise videos to mp4!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/convert.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="upload_images" class="main-label">FFMPEG System</label>
+                            <br><small class="admin-info">This system require ffmpeg to be installed in the server</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="ffmpeg_sys" value="off" />
+                                <input type="checkbox" name="ffmpeg_sys" id="chck-ffmpeg_sys" value="on" <?php echo ($config['ffmpeg_sys'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-ffmpeg_sys" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <?php if ($enabled == false): ?>
+                        <div class="alert alert-danger">shell_exec() has been disabled for security reasons, please contact the host provider to enable it. shell_exec is required to enable this system.</div>
+                        <?php endif; ?>
+                        <?php if (!$config['ffmpeg']) { ?>
+                        <div class="alert alert-danger">FFmpeg binary does not exist on path: <?php echo $config['ffmpeg_binary'] ?></div>
+                        <?php } ?>
+                        <label class="form-label" class="main-label">FFMPEG Binary File Path</label><br>
+                        <small class="admin-info">Example: Linux(/usr/bin/ffmpeg) or Windows(C:\\ffmpeg\bin\ffmpeg.exe)</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" id="ffmpeg_binary" name="ffmpeg_binary" value="<?php echo $config['ffmpeg_binary'] ?>" label="ffmpeg full path location?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="float-start">
+                            <label for="upload_images" class="main-label">Video Frames</label>
+                            <br><small class="admin-info">System will generate video frames when a video is uploaded</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="video_frames" value="off" />
+                                <input type="checkbox" name="video_frames" id="chck-video_frames" value="on" <?php echo ($config['video_frames'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-video_frames" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Max video duration</label><br>
+                        <small class="admin-info">Set a Max video duration length in seconds</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="max_video_duration" value="<?php echo $config['max_video_duration'] ?>" label="Your Max video duration in seconds?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label for="language" class="main-label">Video Conversation Speed</label><br>
+                        <small class="admin-info">This affect the encoding speed. Using a slower preset gives you better compression, or quality per filesize, whereas faster presets give you worse compression and higher filesize.</small><br><br>
+                        <mwc-select outlined label="Conversation Speed" class="w-100" name="convert_speed">
+                            <mwc-list-item value="ultrafast" <?php if($config['convert_speed'] == 'ultrafast'){ echo("selected");}?>>Ultrafast</mwc-list-item>
+                            <mwc-list-item value="superfast" <?php if($config['convert_speed'] == 'superfast'){ echo("selected");}?>>Superfast</mwc-list-item>
+                            <mwc-list-item value="veryfast" <?php if($config['convert_speed'] == 'veryfast'){ echo("selected");}?>>Veryfast</mwc-list-item>
+                            <mwc-list-item value="faster" <?php if($config['convert_speed'] == 'faster'){ echo("selected");}?>>Faster</mwc-list-item>
+                            <mwc-list-item value="fast" <?php if($config['convert_speed'] == 'fast'){ echo("selected");}?>>Fast</mwc-list-item>
+                            <mwc-list-item value="medium" <?php if($config['convert_speed'] == 'medium'){ echo("selected");}?>>Medium</mwc-list-item>
+                            <mwc-list-item value="slow" <?php if($config['convert_speed'] == 'slow'){ echo("selected");}?>>Slow</mwc-list-item>
+                            <mwc-list-item value="slower" <?php if($config['convert_speed'] == 'slower'){ echo("selected");}?>>Slower</mwc-list-item>
+                            <mwc-list-item value="veryslow" <?php if($config['convert_speed'] == 'veryslow'){ echo("selected");}?>>Veryslow</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_ffmpeg">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+            <!-- <br><br>
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Collection System</h2>
+                            <div class="card-subtitle">This system allows users to upload a 20 set of image collections!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/picture.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="upload_collections" class="main-label">Upload Collection</label>
+                            <br><small class="admin-info">Allow users to upload image collection</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="upload_collections" value="off" />
+                                <input type="checkbox" name="upload_collections" id="chck-upload_collections" value="on" <?php echo ($config['upload_collections'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-upload_collections" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label for="collection_style" class="main-label">Collection Story View</label><br>
+                        <small class="admin-info">This will change the way users view the story collection!</small><br><br>
+                        <mwc-select outlined label="You collection style?" class="w-100" name="collections_style">
+                            <mwc-list-item value="flat" <?php if($config['collections_style'] == 'flat'){ echo("selected"); }?>>Flat</mwc-list-item>
+                            <mwc-list-item value="wheel" <?php if($config['collections_style'] == 'wheel'){ echo("selected"); }?>>Wheel</mwc-list-item>
+                            <mwc-list-item value="carousel" <?php if($config['collections_style'] == 'carousel'){ echo("selected"); }?>>Carousel</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_collection">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div> -->
+        </div>
+        <!-- END -->
+</div>
+
+<div class="row">
+
+</div>
+
+
+<script>
+    $(function() {
+        let notify_error = {status: 'error',title: 'File Upload System',text: 'Failed to updated this settings',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_warning = {status: 'warning',title: 'File Upload System',text: "Oops there's an error in the script",effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_success = {status: 'success',title: 'File Upload System',text: 'Configurations Updated Successfully',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        $('.switcher input[type=checkbox]').click(function () {
+            var configName = $(this).attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            if ($(this).is(":checked") === true) {
+                objData[configName] = $(this).val();
+                new Notify({ ...notify_success })
+            }
+            else{
+                if ($('input[name='+configName+']')[0]) {
+                    objData[configName] = $($('input[name='+configName+']')[0]).val();
+                    new Notify({ ...notify_success })
+                }
+            }
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('storeg-settings'), objData);
+        });
+
+        $('mwc-select').on('change', function() {
+            var thisElement = $(this);
+            var configName = thisElement.attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            objData[configName] = thisElement.val();
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('storeg-settings'), objData, function (data) {
+                if (data.status == 200) {
+                    new Notify({ ...notify_success });
+                } else {
+                    new Notify({ ...notify_error });
+                }
+            });
+        });
+
+        function update_input(){
+            $('mwc-textfield').on('keyup', function() {
+                var thisElement = $(this);
+                var configName = thisElement.attr('name');
+                var hash_id = $('mwc-textfield[name=hash_id]').val();
+                var objData = {};
+                objData[configName] = this.value;
+                objData['hash_id'] = hash_id;
+                $.post(cpanel_ajax_url('storeg-settings'), objData, function (data) {
+                    if (data.status == 200) {
+                    } else {
+                        new Notify({ ...notify_error })
+                    }
+                });
+            });
+        }
+        $('#save_upload').on('click', function() {
+            $('#save_upload').text('Please Wait...');
+			$('#save_upload').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_upload').text('Save Changes');
+			$('#save_upload').removeAttr('disabled');
+            }, 2000);
+        });
+        $('#save_ffmpeg').on('click', function() {
+            $('#save_ffmpeg').text('Please Wait...');
+			$('#save_ffmpeg').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_ffmpeg').text('Save Changes');
+			$('#save_ffmpeg').removeAttr('disabled');
+            }, 1000);
+        });
+        $('#save_collection').on('click', function() {
+            $('#save_collection').text('Please Wait...');
+			$('#save_collection').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_collection').text('Save Changes');
+			$('#save_collection').removeAttr('disabled');
+            }, 1000);
+        });
+        setTimeout(function () {
+            update_input();
+        }, 1000);
+    });
+</script>

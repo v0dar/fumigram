@@ -1,0 +1,182 @@
+<?php
+
+$get_usersInPro_badge    = $cpanel::$db->where('is_pro', 1)->getValue(T_USERS, 'COUNT(*)');
+$get_usersInVerified_badge   = $cpanel::$db->where('verified', 1)->getValue(T_USERS, 'COUNT(*)');
+?>
+<style>b {font-weight: 500;}</style>
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">System Badges</h1>
+        <div class="text-muted">Extra badges that can be given to  users! <br> Please NOTE this system is <b style="color:red;">disabled</b> for the time being.</div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Badge System</h2>
+                            <div class="card-subtitle">The badges will be display on users profile when enabled!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/theatre-mask.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="dev_badge" class="check-label"><img class="dev" src="<?php echo cpanel('si/img/badges/developer.png');?>" alt="..." style="height: 1rem;margin-top:-3px;" /> Developer Badge</label><br>
+                            <small class="admin-info">This badge has Full access to <b style="text-transform: lowercase;"><?php echo $config['site_name']; ?></b> backend code and</small><br>
+                            <small class="admin-info">Must only be given to developers who worked on the backend code!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="dev_badge" value="off" />
+                                <input type="checkbox" name="dev_badge" disabled id="chck-dev_badge" value="on" <?php echo ($config['dev_badge'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-dev_badge" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="float-start">
+                            <label for="manager_badge" class="check-label"><img class="manager" src="<?php echo cpanel('si/img/badges/manager.png');?>" alt="..." style="height: 1rem;margin-top:-3px;" /> Community Manager</label><br>
+                            <small class="admin-info">This badge has Full admin access to <b style="text-transform: lowercase;"><?php echo $config['site_name']; ?></b> secret panel and</small><br>
+                            <small class="admin-info">Must only be given to people who were selected by the admin of the community!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="manager_badge" value="off" />
+                                <input type="checkbox" name="manager_badge" disabled id="chck-manager_badge" value="on" <?php echo ($config['manager_badge'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-manager_badge" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="float-start">
+                            <label for="mod_badge" class="check-label"><img class="moderator" src="<?php echo cpanel('si/img/badges/moderator.png');?>" alt="..." style="height: 1rem;margin-top:-3px;" /> Moderator Badge</label><br>
+                            <small class="admin-info">This badge also has Full access to <b style="text-transform: lowercase;"><?php echo $config['site_name']; ?></b> secret panel and</small><br>
+                            <small class="admin-info">Can only be given to people who will moderate the entire community!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="mod_badge" value="off" />
+                                <input type="checkbox" name="mod_badge" id="chck-mod_badge" disabled value="on" <?php echo ($config['mod_badge'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-mod_badge" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="float-start">
+                            <label for="graphis_badge" class="check-label"><img class="graphis" src="<?php echo cpanel('si/img/badges/graphis.png');?>" alt="..." style="height: 1rem;margin-top:-3px;" /> Graphis Badge</label><br>
+                            <small class="admin-info">This badge has NO access to the <b style="text-transform: lowercase;"><?php echo $config['site_name']; ?></b> secret panel and</small><br>
+                            <small class="admin-info">Can only be given to users who creates animated content using <b style="text-transform: lowercase;"><?php echo $config['site_name']; ?></b>!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="graphis_badge" value="off" />
+                                <input type="checkbox" name="graphis_badge" disabled id="chck-graphis_badge" value="on" <?php echo ($config['graphis_badge'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-graphis_badge" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="float-start">
+                            <label for="partner_badge" class="check-label"><img class="partner" src="<?php echo cpanel('si/img/badges/partner.png');?>" alt="..." style="height: 1rem;margin-top:-3px;" /> Partner Badge</label><br>
+                            <small class="admin-info">This badge has NO access to the <b style="text-transform: lowercase;"><?php echo $config['site_name']; ?></b> secret panel and</small><br>
+                            <small class="admin-info">Can be given to users who partnered their businesses or communities with us!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="partner_badge" value="off" />
+                                <input type="checkbox" name="partner_badge" disabled id="chck-partner_badge" value="on" <?php echo ($config['partner_badge'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-partner_badge" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="float-start">
+                            <label for="trans_badge" class="check-label"><img class="translator" src="<?php echo cpanel('si/img/badges/translator.png');?>" alt="..." style="height: 1rem;margin-top:-3px;" /> Translator Badge</label><br>
+                            <small class="admin-info">This badge has NO access to the <b style="text-transform: lowercase;"><?php echo $config['site_name']; ?></b> secret panel and</small><br>
+                            <small class="admin-info">Can be given to users who help translate the site language or correct errors!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="trans_badge" value="off" />
+                                <input type="checkbox" name="trans_badge" id="chck-trans_badge" disabled value="on" <?php echo ($config['trans_badge'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-trans_badge" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="float-start">
+                            <label for="promot_badge" class="check-label"><img class="promoter" src="<?php echo cpanel('si/img/badges/feather-pen.png');?>" alt="..." style="height: 1rem;margin-top:-3px;" /> Promoter Badge</label><br>
+                            <small class="admin-info">This badge has NO access to the <b style="text-transform: lowercase;"><?php echo $config['site_name']; ?></b> secret panel and</small><br>
+                            <small class="admin-info">Can be given to users who advertise <b style="text-transform: lowercase;"><?php echo $config['site_name']; ?></b> to their friends & communities!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="promot_badge" value="off" />
+                                <input type="checkbox" name="promot_badge" disabled id="chck-promot_badge" value="on" <?php echo ($config['promot_badge'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-promot_badge" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="clearfix"></div>
+                        <br>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+<script>
+    $(function() {
+        let notify_error = {status: 'error',title: 'Badge System',text: 'Failed to updated this settings',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_success = {status: 'success',title: 'Badge System',text: 'Configurations Updated Successfully',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        $('.switcher input[type=checkbox]').click(function () {
+            var configName = $(this).attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            if ($(this).is(":checked") === true) {
+                objData[configName] = $(this).val();
+                new Notify({ ...notify_success })
+            }
+            else{
+                if ($('input[name='+configName+']')[0]) {
+                    objData[configName] = $($('input[name='+configName+']')[0]).val();
+                    new Notify({ ...notify_success })
+                }
+            }
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('general-settings'), objData);
+        });
+
+        $('mwc-select').on('change', function() {
+            var thisElement = $(this);
+            var configName = thisElement.attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            objData[configName] = thisElement.val();
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('general-settings'), objData, function (data) {
+                if (data.status == 200) {
+                    new Notify({ ...notify_success });
+                } else {
+                    new Notify({ ...notify_error });
+                }
+            });
+        });
+
+        tippy('.dev', {arrow: false,content: 'Developers Badge'});
+        tippy('.manager', {arrow: false,content: 'Community Managers Badge'});
+        tippy('.moderator', {arrow: false,content: 'Moderators Badge'});
+        tippy('.graphis', {arrow: false,content: 'Graphis Content Creators'});
+        tippy('.partner', {arrow: false,content: 'Partners Badge'});
+        tippy('.translator', {arrow: false,content: 'Translators Badge'});
+        tippy('.promoter', {arrow: false,content: 'Promoters Badge'});
+    });
+</script>

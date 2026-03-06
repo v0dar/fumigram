@@ -1,0 +1,56 @@
+<?php $user = $cpanel::$db->where('type', 'business_member')->where('user_id', $cd['user']['user_id'])->getOne(T_TRANSACTIONS); ?>
+<tr id="UserID_<?php echo $cd['user']['user_id']?>" data-user-id="<?php echo $cd['user']['user_id']?>" data_selected="<?php echo $cd['user']['user_id']?>">
+  <td>
+   <div class="form-check">
+      <input class="form-check-input delete-checkbox" id="check-data-<?php echo $cd['user']['user_id']?>" type="checkbox" value="" />
+      <label class="form-check-label" for="check-data-<?php echo $cd['user']['user_id']?>"></label>
+   </div>
+  </td>
+  <td><?php echo $cd['user']['user_id']?></td>
+  <td>
+      <a href="<?php echo($cd['user']['url']); ?>" target="_blank" class="text-decoration-none">
+         <img src="<?php echo(media($cd['user']['avatar'])); ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo($cd['user']['username']); ?>'s Profile" class="rounded-circle" alt="..." style="height: 2rem;weight:2rem;">
+      </a>
+      &nbsp; <?php echo $cd['user']['username']; ?>
+      <?php if ($cd['user']['verified'] == 1): ?>
+      <img src="<?php echo cpanel('si/img/icons/verify.png');?>" alt="..." id="verify" style="height: 1rem;weight:1rem;">
+      <?php endif; ?>
+  </td>
+  <td><?php echo($cd['user']['gender']); ?></td>
+  <td>
+      <?php if ($cd['user']['active'] == 1): ?>
+         <span class="badge bg-success">Active</span>
+      <?php elseif ($cd['user']['active'] == 2): ?>
+         <span class="badge bg-danger">Deactivated</span>
+      <?php else: ?>
+         <span class="badge bg-danger">Inactive</span>
+	   <?php endif; ?>
+  </td>
+  <td><?php echo($cd['user']['mode']); ?></td>
+  <td>
+      <?php if ($cd['user']['profile'] == 1): ?>
+         Linear
+      <?php elseif ($cd['user']['profile'] == 2): ?>
+         Nova
+      <?php elseif ($cd['user']['profile'] == 3): ?>
+         Blue Tech
+      <?php elseif ($cd['user']['profile'] == 4): ?>
+         Pathfinder
+      <?php elseif ($cd['user']['profile'] == 5): ?>   
+         Oceana
+      <?php elseif ($cd['user']['profile'] == 6): ?>
+         Hexagon
+      <?php endif; ?>
+   </td>
+   <td class="text-center">
+  <?php if ($cd['user']['is_pro'] == 1): ?>
+      <span class="badge bg-orange">Premium</span>
+  <?php else: ?>
+      <span class="badge bg-light text-dark">Free Member</span>
+	<?php endif; ?>
+  </td>
+  <td>
+      <a class="btn btn-outline-primary" target="_blank" href="<?php echo($cd['user']['edit']); ?>">Edit</a>&nbsp;&nbsp;
+      <button class="btn btn-outline-success" data-id="<?php echo($cd['user']['user_id']); ?>" onclick="SendCredits('<?php echo($cd['user']['user_id']); ?>','hide');">Credit</button>
+  </td>
+</tr>

@@ -1,0 +1,649 @@
+<?php 
+if ($me['manager'] == 0 && $me['admin'] == 0) {    
+    header("Location: " . cpanel('overview'));
+    exit();
+}
+?>
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">Social Login System</h1>
+        <div class="text-muted">Other ways for users to login using their social account</div>
+    </div>
+</div>
+<!-- Colored status cards-->
+
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Facebook Social Login</h2>
+                            <div class="card-subtitle">Allow users to login with their facebook account!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/socials/facebook.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="private_photos" class="main-label">Facebook</label>
+                            <br><small class="admin-info">Please note this websites may require app verification!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="fb_login" value="off" />
+                                <input type="checkbox" name="fb_login" id="chck-fb_login" value="on" <?php echo ($config['fb_login'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-fb_login" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Facebook App ID</label><br>
+                        <small class="admin-info">Facebook app ID configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="facebook_app_id" value="<?php echo $config['facebook_app_id']?>" label="Application ID"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Facebook Secret Key</label><br>
+                        <small class="admin-info">Facebook app secret key configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="facebook_app_key" value="<?php echo $config['facebook_app_key']?>" label="Application Secret Key"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_facebook">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xxl-6 col-md-6 mb-6">
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Twitter Social Login</h2>
+                            <div class="card-subtitle">Allow users to login with their twitter account!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/socials/twitter.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="private_photos" class="main-label">Twitter</label>
+                            <br><small class="admin-info">Please note this websites may require app verification!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="tw_login" value="off" />
+                                <input type="checkbox" name="tw_login" id="chck-tw_login" value="on" <?php echo ($config['tw_login'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-tw_login" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Twitter App ID</label><br>
+                        <small class="admin-info">Twitter app ID configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="twitter_app_id" value="<?php echo $config['twitter_app_id']?>" label="Consumer Key"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Twitter Secret Key</label><br>
+                        <small class="admin-info">Twitter app secret key configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="twitter_app_key" value="<?php echo $config['twitter_app_key']?>" label="Consumer Secret"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_twitter">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- END -->
+</div>
+
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Discord Social Login</h2>
+                            <div class="card-subtitle">Allow users to login with their Discord account!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/socials/discord.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="discord" class="main-label">Discord</label>
+                            <br><small class="admin-info">Enable the ability for users to login with their Discord account!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="discord_login" value="off" />
+                                <input type="checkbox" name="discord_login" id="chck-discord_login" value="on" <?php echo ($config['discord_login'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-discord_login" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Discord App ID</label><br>
+                        <small class="admin-info">Discord app ID configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" id="DiscordAppId" name="DiscordAppId" value="<?php echo $config['DiscordAppId']?>" label="Application ID"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Discord Secret Key</label><br>
+                        <small class="admin-info">Discord app secret key configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" id="DiscordAppkey" name="DiscordAppkey" value="<?php echo $config['DiscordAppkey']?>" label="Application Secret Key"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_Discord">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xxl-6 col-md-6 mb-6">
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Instagram Social Login</h2>
+                            <div class="card-subtitle">Allow users to login with their Instagram account!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/socials/Instagram.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="private_photos" class="main-label">Instagram</label>
+                            <br><small class="admin-info">Enable the ability for users to login with their Instagram account!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="instagram_login" value="off" />
+                                <input type="checkbox" name="instagram_login" id="chck-instagram_login" value="on" <?php echo ($config['instagram_login'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-instagram_login" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Instagram App ID</label><br>
+                        <small class="admin-info">Instagram app ID configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" id="instagramAppId" name="instagramAppId" value="<?php echo $config['instagramAppId']?>" label="Application ID"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Instagram Secret Key</label><br>
+                        <small class="admin-info">Instagram secret key configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" id="instagramAppkey" name="instagramAppkey" value="<?php echo $config['instagramAppkey']?>" label="Application Secret Key"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_Instagram">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- END -->
+</div>
+
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Vkontakte Social Login</h2>
+                            <div class="card-subtitle">Allow users to login with their Vkontakte account!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/socials/vk.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="private_photos" class="main-label">Vkontakte</label>
+                            <br><small class="admin-info">Enable the ability for users to login with their Vkontakte account!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="vkontakte_login" value="off" />
+                                <input type="checkbox" name="vkontakte_login" id="chck-vkontakte_login" value="on" <?php echo ($config['vkontakte_login'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-vkontakte_login" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Vkontakte App ID</label><br>
+                        <small class="admin-info">Vkontakte app ID configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" id="VkontakteAppId" name="VkontakteAppId" value="<?php echo $config['VkontakteAppId']?>" label="Application ID"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Vkontakte Secret Key</label><br>
+                        <small class="admin-info">Vkontakte app secret key configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" id="VkontakteAppKey" name="VkontakteAppKey" value="<?php echo $config['VkontakteAppKey']?>" label="Application Secret Key"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_Vkontakte">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xxl-6 col-md-6 mb-6">
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">LinkedIn Social Login</h2>
+                            <div class="card-subtitle">Allow users to login with their linkedIn account!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/socials/linkedin.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="private_photos" class="main-label">LinkedIn</label>
+                            <br><small class="admin-info">Enable the ability for users to login with their linkedIn account!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="linkedin_login" value="off" />
+                                <input type="checkbox" name="linkedin_login" id="chck-linkedin_login" value="on" <?php echo ($config['linkedin_login'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-linkedin_login" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">LinkedIn App ID</label><br>
+                        <small class="admin-info">LinkedIn app ID configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" id="linkedinAppId" name="linkedinAppId" value="<?php echo $config['linkedinAppId']?>" label="Application App ID"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">LinkedIn Secret Key</label><br>
+                        <small class="admin-info">LinkedIn secret key configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" id="linkedinAppKey" name="linkedinAppKey" value="<?php echo $config['linkedinAppKey']?>" label="Application Secret Key"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_linkedIn">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- END -->
+</div>
+
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">QQ Social Login</h2>
+                            <div class="card-subtitle">Allow users to login with their QQ account!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/socials/QQ.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="private_photos" class="main-label">QQ</label>
+                            <br><small class="admin-info">Enable the ability for users to login with their QQ account!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="qq_login" value="off" />
+                                <input type="checkbox" name="qq_login" id="chck-qq_login" value="on" <?php echo ($config['qq_login'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-qq_login" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">QQ App ID</label><br>
+                        <small class="admin-info">QQ app ID configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" id="qqAppId" name="qqAppId" value="<?php echo $config['qqAppId']?>" label="Application ID"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">QQ Secret Key</label><br>
+                        <small class="admin-info">QQ app secret key configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" id="qqAppkey" name="qqAppkey" value="<?php echo $config['qqAppkey']?>" label="Application Secret Key"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_QQ">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xxl-6 col-md-6 mb-6">
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">WeChat Social Login</h2>
+                            <div class="card-subtitle">Allow users to login with their WeChat account!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/socials/wechat.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="private_photos" class="main-label">WeChat</label>
+                            <br><small class="admin-info">Enable the ability for users to login with their WeChat account!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="wechat_login" value="off" />
+                                <input type="checkbox" name="wechat_login" id="chck-wechat_login" value="on" <?php echo ($config['wechat_login'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-wechat_login" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">WeChat App ID</label><br>
+                        <small class="admin-info">WeChat app ID configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" id="WeChatAppId" name="WeChatAppId" value="<?php echo $config['WeChatAppId']?>" label="Application ID"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">WeChat Secret Key</label><br>
+                        <small class="admin-info">WeChat secret key configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" id="WeChatAppkey" name="WeChatAppkey" value="<?php echo $config['WeChatAppkey']?>" label="Application Secret Key"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_WeChat">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- END -->
+</div>
+
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Google Social Login</h2>
+                            <div class="card-subtitle">Allow users to login with their google account!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/socials/google.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="private_photos" class="main-label">Google</label>
+                            <br><small class="admin-info">Please note this websites App requires reviewing!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="gl_login" value="off" />
+                                <input type="checkbox" name="gl_login" id="chck-gl_login" value="on" <?php echo ($config['gl_login'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-gl_login" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Google App ID</label><br>
+                        <small class="admin-info">Google app ID configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="google_app_id" value="<?php echo $config['google_app_id']?>" label="Client ID"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Google Secret Key</label><br>
+                        <small class="admin-info">Google app secret key configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="google_app_key" value="<?php echo $config['google_app_key']?>" label="Client Secret Key"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_google">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xxl-6 col-md-6 mb-6">
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Mailru Social Login</h2>
+                            <div class="card-subtitle">Allow users to login with their Mailru account!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/socials/Mailru.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="private_photos" class="main-label">Mailru</label>
+                            <br><small class="admin-info">Enable the ability for users to login with their Mailru account!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="mailru_login" value="off" />
+                                <input type="checkbox" name="mailru_login" id="chck-mailru_login" value="on" <?php echo ($config['mailru_login'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-mailru_login" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Mailru App ID</label><br>
+                        <small class="admin-info">Mailru app ID configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" id="MailruAppId" name="MailruAppId" value="<?php echo $config['MailruAppId']?>" label="Application ID"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Mailru Secret Key</label><br>
+                        <small class="admin-info">Mailru secret key configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" id="MailruAppkey" name="MailruAppkey" value="<?php echo $config['MailruAppkey']?>" label="Application Secret Key"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_Mailru">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- END -->
+</div>
+
+<script>
+    $(function() {
+        let notify_error = {status: 'error',title: 'Social Login Settings',text: 'Failed to updated this settings',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_warning = {status: 'warning',title: 'Social Login Settings',text: "Oops there's an error in the script",effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_success = {status: 'success',title: 'Social Login Settings',text: 'Configurations Updated Successfully',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        $('.switcher input[type=checkbox]').click(function () {
+            var configName = $(this).attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            if ($(this).is(":checked") === true) {
+                objData[configName] = $(this).val();
+                new Notify({ ...notify_success })
+            }
+            else{
+                if ($('input[name='+configName+']')[0]) {
+                    objData[configName] = $($('input[name='+configName+']')[0]).val();
+                    new Notify({ ...notify_success })
+                }
+            }
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('login-settings'), objData);
+        });
+
+        $('mwc-select').on('change', function() {
+            var thisElement = $(this);
+            var configName = thisElement.attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            objData[configName] = thisElement.val();
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('login-settings'), objData, function (data) {
+                if (data.status == 200) {
+                    new Notify({ ...notify_success });
+                } else {
+                    new Notify({ ...notify_error });
+                }
+            });
+        });
+
+        function update_input(){
+            $('mwc-textfield').on('keyup', function() {
+                var thisElement = $(this);
+                var configName = thisElement.attr('name');
+                var hash_id = $('mwc-textfield[name=hash_id]').val();
+                var objData = {};
+                objData[configName] = this.value;
+                objData['hash_id'] = hash_id;
+                $.post(cpanel_ajax_url('login-settings'), objData, function (data) {
+                    if (data.status == 200) {
+                    } else {
+                        new Notify({ ...notify_error })
+                    }
+                });
+            });
+        }
+        $('#save_facebook').on('click', function() {
+            $('#save_facebook').text('Please Wait...');
+			$('#save_facebook').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_facebook').text('Save Changes');
+			$('#save_facebook').removeAttr('disabled');
+            }, 2000);
+        });
+        $('#save_twitter').on('click', function() {
+            $('#save_twitter').text('Please Wait...');
+			$('#save_twitter').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_twitter').text('Save Changes');
+			$('#save_twitter').removeAttr('disabled');
+            }, 1000);
+        });
+        $('#save_watermark').on('click', function() {
+            $('#save_watermark').text('Please Wait...');
+			$('#save_watermark').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_watermark').text('Save Changes');
+			$('#save_watermark').removeAttr('disabled');
+            }, 1000);
+        });
+        $('#save_linkedIn').on('click', function() {
+            $('#save_linkedIn').text('Please Wait...');
+			$('#save_linkedIn').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_linkedIn').text('Save Changes');
+			$('#save_linkedIn').removeAttr('disabled');
+            }, 1000);
+        });
+        $('#save_Vkontakte').on('click', function() {
+            $('#save_Vkontakte').text('Please Wait...');
+			$('#save_Vkontakte').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_Vkontakte').text('Save Changes');
+			$('#save_Vkontakte').removeAttr('disabled');
+            }, 1000);
+        });
+        $('#save_Instagram').on('click', function() {
+            $('#save_Instagram').text('Please Wait...');
+			$('#save_Instagram').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_Instagram').text('Save Changes');
+			$('#save_Instagram').removeAttr('disabled');
+            }, 1000);
+        });
+        $('#save_QQ').on('click', function() {
+            $('#save_QQ').text('Please Wait...');
+			$('#save_QQ').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_QQ').text('Save Changes');
+			$('#save_QQ').removeAttr('disabled');
+            }, 1000);
+        });
+        $('#save_WeChat').on('click', function() {
+            $('#save_WeChat').text('Please Wait...');
+			$('#save_WeChat').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_WeChat').text('Save Changes');
+			$('#save_WeChat').removeAttr('disabled');
+            }, 1000);
+        });
+        $('#save_Discord').on('click', function() {
+            $('#save_Discord').text('Please Wait...');
+			$('#save_Discord').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_Discord').text('Save Changes');
+			$('#save_Discord').removeAttr('disabled');
+            }, 1000);
+        });
+        $('#save_Mailru').on('click', function() {
+            $('#save_Mailru').text('Please Wait...');
+			$('#save_Mailru').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_Mailru').text('Save Changes');
+			$('#save_Mailru').removeAttr('disabled');
+            }, 1000);
+        });
+        setTimeout(function () {
+            update_input();
+        }, 2000);
+    });
+</script>

@@ -1,0 +1,328 @@
+<?php
+if ($me['manager'] == 0 && $me['admin'] == 0) {    
+    header("Location: " . cpanel('overview'));
+    exit();
+}
+
+$langs = $cpanel::Langs();
+$total_langs = count($langs); 
+$count_langs_keys  = $cpanel::$db->getValue(T_LANGS, 'COUNT(*)');
+?>
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">Languages</h1>
+        <div class="text-muted">Manage Languages, Add new Languages and keys</div>
+    </div>
+</div>
+<!-- Colored status cards-->
+<div class="row gx-5">
+    <div class="col-xxl-3 col-md-6 mb-5">
+        <div class="card card-raised border-start border-primary border-4">
+            <div class="card-body px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <div class="display-5"><?php echo $total_langs; ?></div>
+                        <div class="card-text">Total Language</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/languages.png');?>" alt="..." style="height: 3.3rem;weight:3.3rem;" />
+                </div>
+                <div class="card-text">
+                    <div class="d-inline-flex align-items-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-3 col-md-6 mb-5">
+        <div class="card card-raised border-start border-success border-4">
+            <div class="card-body px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <div class="display-5"><?php echo $count_langs_keys; ?></div>
+                        <div class="card-text">Total Langs Keys</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/language-learning.png');?>" alt="..." style="height: 3.3rem;weight:3.3rem;" />
+                </div>
+                <div class="card-text">
+                    <div class="d-inline-flex align-items-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+            <div class="card-header bg-white px-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="me-2">
+                        <h2 class="card-title mb-0">Manage & Edit Languages</h2>
+                        <div class="card-subtitle">Please understand how the language system works first!</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/english.png');?>" alt="..." style="height: 4rem" />
+                </div>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="form-check">
+                                            <input class="form-check-input check-all" id="check-all" type="checkbox"/>
+                                            <label class="form-check-label" for="check-all"></label>
+                                        </div>
+                                    </th>
+                                    <th>Language</th>
+                                    <th>Moderate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                                if (count($langs) > 0) {
+                                    foreach ($langs as $key => $lang) {
+                                        $context['lang_key']  = $key;   
+                                        $context['lang_name'] = $lang;
+                                        $context['langs_len'] = len($langs);    
+                                      echo $cpanel->Senction('manage-langs/list');
+                                    }
+                                } 
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>     
+                    <div class="clearfix"></div>
+                    <div class="float-start">
+                        <button type="button" class="btn btn-outline-primary delete-selected" disabled>Delete Selected</button>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+            <div class="card-header bg-white px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <h2 class="card-title mb-0">Add New Key</h2>
+                        <div class="card-subtitle">Add new language key to translate the site language!</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/key.png');?>" alt="..." style="height: 4rem" />
+                </div>
+            </div>
+            <div class="card-body">
+                <form class="form key-settings" method="POST">
+                    <label class="form-label">New Language Key</label><br>
+                    <small class="admin-info">Please use only English letters, No spaces allowed, Example: this_is_my_home</small><br><br>
+                    <input class="form-control" type="text" id="lang_key" name="lang_key" autocomplete="off"></input>
+                    <div class="clearfix"></div>
+                    <div class="float-end"><br>
+                        <button class="btn btn-outline-primary" type="submit">Add Key</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+        <br>
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+            <div class="card-header bg-white px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <h2 class="card-title mb-0">Add New Language</h2>
+                        <div class="card-subtitle">Only add country languages that we are stationed in!</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/language.png');?>" alt="..." style="height: 4rem" />
+                </div>
+            </div>
+            <div class="alert-primary alert" style="border-radius:0 !important;">Note: Adding a new language may take up to 5 minutes time</div>
+            <div class="card-body">
+                <form class="form add-new-language" method="POST">
+                    <label class="form-label">New Language Name</label><br>
+                    <small class="admin-info">Please use only English letters, No spaces allowed, Example: spanish</small><br><br>
+                    <input class="form-control" type="text" id="lang" name="lang" autocomplete="off"></input>
+                    <div class="clearfix"></div>
+                    <div class="float-end"><br>
+                        <button class="btn btn-outline-primary" type="submit">Add Language</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Delete Single Ip -->
+<div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel">Delete Language!</h5>
+            </div>
+            <div class="modal-body">Are you sure you want to delete this language?</div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-dark me-2" type="button" data-bs-dismiss="modal">Maybe Later</button>
+                <button class="btn btn-outline-primary" type="button">Yes Sure</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Multi Ips -->
+<div class="modal fade" id="SelectedDeleteModal" tabindex="-1" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel">Delete Languages!</h5>
+            </div>
+            <div class="modal-body">Are you sure you want to delete the selected languages?</div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-primary me-2" type="button" data-bs-dismiss="modal">Maybe Later</button>
+                <button class="btn btn-outline-secondary" onclick="DeleteSelected()" type="button">Yeah Sure</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(function() {
+    $('.check-all').on('click', function(event) {
+        $('input:checkbox').not(this).prop('checked', this.checked);
+    });
+    $('.delete-checkbox, .check-all').change(function(event) {
+        $('.delete-selected').attr('disabled', false);
+        $('.delete-selected').find('span').text(' (' + $('.delete-checkbox:checked').length + ')');
+    });
+
+    $('.delete-selected').on('click', function(event) {
+        event.preventDefault();
+        $('#SelectedDeleteModal').modal('show');
+    });
+});
+
+function DeleteSelectedNOPE() {
+    data = new Array();
+    $('td input:checked').parents('tr').each(function () {
+        data.push($(this).attr('data_selected'));
+    });
+    $('.delete-selected').attr('disabled', true);
+    $('.delete-selected').text('Please wait..');
+    $.post(cpanel_ajax_url('remove_multi_lang'), {ids: data}, function () {
+        $.each( data, function( index, value ){
+            $('#' + value).remove();
+        });
+        $('#SelectedDeleteModal').modal('hide');
+        let notify_success201 = {status: 'success',title: 'Languages',text: 'Delected the selected languages!',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        new Notify({ ...notify_success201 });
+        $('.delete-selected').text('Delete Selected');
+        $('#redirect_link').attr('href', "<?php echo cpanel('manage-langs'); ?>");
+        $('#redirect_link').attr('data-ajax', "?path=manage-langs");
+        $('#redirect_link').click();
+    });
+}
+
+function DeleteLang(id,type = 'show') {
+    if (id == '') {
+        return false;
+    }
+    if (type == 'hide') {
+        $('#DeleteModal').find('.btn-outline-primary').attr('onclick', "DeleteLang('"+id+"')");
+        $('#DeleteModal').modal('show');
+        return false;
+        }
+                
+    $('#' + id).fadeOut(300, function () {$(this).remove();});
+    $.post(cpanel_ajax_url('delete-lang'), {id: id}, function(data, textStatus, xhr) {
+        $('#DeleteModal').modal('hide');
+        if (data.status == 200) {
+            let notify_success201 = {status: 'success',title: 'Language',text: 'Language delected successfully!',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+            new Notify({ ...notify_success201 });
+        } else {
+            let notify_error = {status: 'error',title: 'Language',text: 'Failed to delete this language!',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+            new Notify({ ...notify_error });
+        }
+    });
+}
+
+$(function() {
+    var form_key_settings = $('form.key-settings');
+    form_key_settings.ajaxForm({
+        url: cpanel_ajax_url('new-key'),
+        beforeSend: function() {
+            form_key_settings.find('button').text('Please wait...');
+        },
+        success: function(data) {
+            if (data.status == 200) {
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                let notify_success201 = {status: 'success',title: 'Languages',text: 'Key successfully added!',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 4000,gap: 20,distance: 20,type: 1,position: 'right top',customWrapper: ''}
+                new Notify({ ...notify_success201 });
+                $('#redirect_link').attr('href', "<?php echo cpanel('manage-langs'); ?>");
+                $('#redirect_link').attr('data-ajax', "?path=manage-langs");
+                $('#redirect_link').click();
+            }
+            else if(data.status == 401){
+                let notify_error = {status: 'error',title: 'Languages',text: 'Invalid language key characters. Please use only english letters!',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 4000,gap: 20,distance: 20,type: 1,position: 'right top',customWrapper: ''}
+                new Notify({ ...notify_error });
+                $('#redirect_link').attr('href', "<?php echo cpanel('manage-langs'); ?>");
+                $('#redirect_link').attr('data-ajax', "?path=manage-langs");
+                $('#redirect_link').click();
+            }
+            else if(data.status == 402){
+                let notify_error = {status: 'error',title: 'Languages',text: 'Language key max length is 100 characters!',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 4000,gap: 20,distance: 20,type: 1,position: 'right top',customWrapper: ''}
+                new Notify({ ...notify_error });
+                $('#redirect_link').attr('href', "<?php echo cpanel('manage-langs'); ?>");
+                $('#redirect_link').attr('data-ajax', "?path=manage-langs");
+                $('#redirect_link').click();
+            }
+            else if(data.status == 403){
+                let notify_error = {status: 'error',title: 'Languages',text: 'This language key is already being used, Please use other one!',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 4000,gap: 20,distance: 20,type: 1,position: 'right top',customWrapper: ''}
+                new Notify({ ...notify_error });
+                $('#redirect_link').attr('href', "<?php echo cpanel('manage-langs'); ?>");
+                $('#redirect_link').attr('data-ajax', "?path=manage-langs");
+                $('#redirect_link').click();
+            }
+            form_key_settings.find('button').text('Add Key');
+        }
+    });
+});
+
+$(function() {
+    var form_new_langs = $('form.add-new-language');
+    form_new_langs.ajaxForm({
+        url: cpanel_ajax_url('new-lang'),
+        beforeSend: function() {
+            form_new_langs.find('button').text('Please wait...');
+        },
+        success: function(data) {
+            if (data.status == 200) {
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                let notify_success201 = {status: 'success',title: 'Languages',text: 'Language successfully added!',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 4000,gap: 20,distance: 20,type: 1,position: 'right top',customWrapper: ''}
+                new Notify({ ...notify_success201 });
+                setTimeout(function () {
+                    $('#redirect_link').attr('href', "<?php echo cpanel('manage-langs'); ?>");
+                    $('#redirect_link').attr('data-ajax', "?path=manage-langs");
+                    $('#redirect_link').click();
+                }, 2000);
+            }
+            else if(data.status == 401){
+                let notify_error = {status: 'error',title: 'Languages',text: 'Language name is invalid. Please enter a valid language name!',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 4000,gap: 20,distance: 20,type: 1,position: 'right top',customWrapper: ''}
+                new Notify({ ...notify_error });
+                $('#redirect_link').attr('href', "<?php echo cpanel('manage-langs'); ?>");
+                $('#redirect_link').attr('data-ajax', "?path=manage-langs");
+                $('#redirect_link').click();
+            }
+            else if(data.status == 402){
+                let notify_error = {status: 'error',title: 'Languages',text: 'This langguage is already being used!',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 4000,gap: 20,distance: 20,type: 1,position: 'right top',customWrapper: ''}
+                new Notify({ ...notify_error });
+                $('#redirect_link').attr('href', "<?php echo cpanel('manage-langs'); ?>");
+                $('#redirect_link').attr('data-ajax', "?path=manage-langs");
+                $('#redirect_link').click();
+            }
+            form_new_langs.find('button').text('Add Language');
+        }
+    });
+});
+
+</script>

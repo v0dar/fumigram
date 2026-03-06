@@ -1,0 +1,43 @@
+<?php if(!empty($context['user'])){ ?>
+<tr id="list-<?php echo($context['trans']['id']) ?>">
+	<td><?php echo($context['trans']['id']) ?></td>
+	<td>
+		<a href="<?php echo($cd['user']['url']); ?>" target="_blank" class="text-decoration-none">
+			<img src="<?php echo(media($cd['user']['avatar'])); ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo($cd['user']['username']); ?>'s Profile" class="rounded-circle" alt="..." style="height: 2rem;weight:2rem;">
+		</a>
+		&nbsp; <?php echo($cd['user']['username']); ?> 
+		<?php if ($cd['user']['verified'] == 1): ?>
+		<img src="<?php echo cpanel('si/img/icons/verify.png');?>" alt="..." id="verify" style="height: 1rem;weight:1rem;">
+		<?php endif; ?>
+	</td>
+	<td>
+		<?php if($context['trans']['type'] == 'Added_money_to_wallet'): ?>
+			<?php echo(cpanel($context['config']['currency']).$context['trans']['amount']) ?>
+		<?php elseif ($context['trans']['type'] == 'Bought a sack of credits'): ?>
+			<?php echo(cpanel($context['config']['currency']).$context['trans']['amount']) ?>
+		<?php elseif ($context['trans']['type'] == 'Bought a pot of credits'): ?>
+			<?php echo(cpanel($context['config']['currency']).$context['trans']['amount']) ?>
+		<?php elseif ($context['trans']['type'] == 'Bought a cup of credits'): ?>
+			<?php echo(cpanel($context['config']['currency']).$context['trans']['amount']) ?>
+		<?php else: ?>
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" class="credits"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="#ff6303"></path></svg> <?php echo($context['trans']['amount']) ?>
+		<?php endif; ?>
+	</td>
+	<td>
+		<?php if($context['trans']['type'] == 'Added_money_to_wallet'): ?>
+			<?php echo(cpanel($context['config']['currency']).$context['trans']['admin_com']) ?>
+		<?php elseif ($context['trans']['type'] == 'Bought a sack of credits'): ?>
+			<?php echo(cpanel($context['config']['currency']).$context['trans']['admin_com']) ?>
+		<?php elseif ($context['trans']['type'] == 'Bought a pot of credits'): ?>
+			<?php echo(cpanel($context['config']['currency']).$context['trans']['admin_com']) ?>
+		<?php elseif ($context['trans']['type'] == 'Bought a cup of credits'): ?>
+			<?php echo(cpanel($context['config']['currency']).$context['trans']['admin_com']) ?>
+		<?php else: ?>
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" class="credits"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-12.95L16.95 12 12 16.95 7.05 12 12 7.05zm0 2.829L9.879 12 12 14.121 14.121 12 12 9.879z" fill="#ff6303"></path></svg> <?php echo($context['trans']['admin_com']) ?>
+		<?php endif; ?>
+	</td>
+	<td><time><?php echo time2str($context['trans']['time']); ?></time></td>
+	<td><?php echo($context['trans']['type']) ?></td>
+	<td><?php echo($context['trans']['text']) ?></td>
+</tr>
+<?php } ?>

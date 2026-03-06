@@ -1,0 +1,14 @@
+<tr id="list-<?php echo $cd['blog-categories']['category_key'];?>" data_selected="<?php echo($cd['blog-categories']['category_key']) ?>">
+<td>
+   <div class="form-check">
+      <input class="form-check-input delete-checkbox" id="check-data-<?php echo $cd['blog-categories']['category_key'];?>" type="checkbox" value="" />
+      <label class="form-check-label" for="check-data-<?php echo $cd['blog-categories']['category_key'];?>"></label>
+   </div>
+  </td>
+    <td><?php echo $cd['blog-categories']['category_id'];?></td>
+    <td id="edit_<?php echo $cd['blog-categories']['category_key'];?>"><?php echo $cd['blog-categories']['category'];?></td>
+    <td>
+        <button type="button" class="btn btn-outline-primary btn-lang" data-id="<?php echo $cd['blog-categories']['category_key'];?>" data-toggle="modal" data-target="#defaultModal">Make Changes</button>&nbsp;&nbsp;
+        <button onclick="nope('<?php echo $cd['blog-categories']['category_key'];?>','hide');" type="button" class="btn btn-outline-danger">Delete</button>
+    </td>
+</tr>

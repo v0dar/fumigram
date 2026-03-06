@@ -1,0 +1,347 @@
+<?php 
+if ($me['manager'] == 0 && $me['admin'] == 0) {    
+    header("Location: " . cpanel('overview'));
+    exit();
+}
+?>
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">Points System</h1>
+        <div class="text-muted">The points system of <?php echo $config['site_name']; ?></div>
+    </div>
+</div>
+<!-- Colored status cards-->
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Points Settings</h2>
+                            <div class="card-subtitle">Configure how the points system should work!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/points.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form general-settings-form">
+                        <div class="float-start">
+                            <label for="point_system" class="check-label">Points System</label><br>
+                            <small class="admin-info">Users can start earning points for fun.</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="point_system" value="off" />
+                                <input type="checkbox" name="point_system" id="chck-point_system" value="on" <?php echo ($config['point_system'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-point_system" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Points to Credits</label><br>
+                        <small class="admin-info">How many points it will take to get 1 credits</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['points_to_credits']?>" name="points_to_credits" label="Points to credits"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Points on Comments</label><br>
+                        <small class="admin-info">Earn <?php echo $config['point_add_comment_cost']?> points by commenting on a post!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_add_comment_cost']?>" name="point_add_comment_cost" label="Points?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Points on Registration Setup</label><br>
+                        <small class="admin-info">Earn <?php echo $config['point_register_cost']?> by completing registration setup!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_register_cost']?>" name="point_register_cost" label="Points?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Points on Subscribing</label><br>
+                        <small class="admin-info">Earn <?php echo $config['point_subscribe_cost']?> points by subscribing to another user's account!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_subscribe_cost']?>" name="point_subscribe_cost" label="Points?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Points on Favourits</label><br>
+                        <small class="admin-info">Earn <?php echo $config['point_star_post_cost']?> points by adding a post to favourite list!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_star_post_cost']?>" name="point_star_post_cost" label="Points?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Points on Like Post</label><br>
+                        <small class="admin-info">Earn <?php echo $config['point_liked_post_cost']?> points by liking to a post!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_liked_post_cost']?>" name="point_liked_post_cost" label="Points?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Points on Share Post</label><br>
+                        <small class="admin-info">Earn <?php echo $config['point_share_post_cost']?> points by sharing a post on your timeline!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_share_post_cost']?>" name="point_share_post_cost" label="Points?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Points on Create Campaign</label><br>
+                        <small class="admin-info">Earn <?php echo $config['point_create_ads_cost']?> points by creating a new campaign!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_create_ads_cost']?>" name="point_create_ads_cost" label="Points?"></mwc-textfield>
+                        <!-- <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Points on Upgrading your Account</label><br>
+                        <small class="admin-info">Earn <?php echo $config['buy_premium']?> points by creating a new campaign!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['buy_premium']?>" name="buy_premium" label="Points?"></mwc-textfield> -->
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Points on Upload Tile</label><br>
+                        <small class="admin-info">Earn <?php echo $config['point_upload_tile_cost']?> points by uploading a new Tile!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_upload_tile_cost']?>" name="point_upload_tile_cost" label="Points?"></mwc-textfield>
+
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_changes">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Loose Points</h2>
+                            <div class="card-subtitle">Users will loose points!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/loose-points.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form general-settings-form">
+                        <label class="form-label" class="main-label">Loose Points Un-liking a Post</label><br>
+                        <small class="admin-info">Loose <?php echo $config['point_unlike_post_cost']?> by points un-liking a post!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_unlike_post_cost']?>" name="point_unlike_post_cost" label="Points?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Loose Points Deleting a Reply</label><br>
+                        <small class="admin-info">Loose <?php echo $config['point_delete_reply_cost']?> by points deleting a comment reply!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_delete_reply_cost']?>" name="point_delete_reply_cost" label="Points?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Loose Points Un-liking a Comment</label><br>
+                        <small class="admin-info">Loose <?php echo $config['point_unlike_comment_cost']?> points by un-liking a post comment!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_unlike_comment_cost']?>" name="point_unlike_comment_cost" label="Points?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Loose Points on Delete Comment</label><br>
+                        <small class="admin-info">Loose <?php echo $config['point_delete_comment_cost']?> points by deleting a comment!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_delete_comment_cost']?>" name="point_delete_comment_cost" label="Points?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Loose Points on Delete Post</label><br>
+                        <small class="admin-info">Loose <?php echo $config['point_delete_post_cost']?> points by deleting a post!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_delete_post_cost']?>" name="point_delete_post_cost" label="Points?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Loose Points on Un-like Reply</label><br>
+                        <small class="admin-info">Loose <?php echo $config['point_unlike_reply_cost']?> points by un-liking a comment reply!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_unlike_reply_cost']?>" name="point_unlike_reply_cost" label="Points?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Loose Points on Un-follow User</label><br>
+                        <small class="admin-info">Loose <?php echo $config['point_unfollow_users_cost']?> points by unfollowing a user!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_unfollow_users_cost']?>" name="point_unfollow_users_cost" label="Points?"></mwc-textfield>
+                        <!-- <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Loose Points on Delete Story</label><br>
+                        <small class="admin-info">Loose <?php echo $config['point_delete_story_cost']?> points by deleting a story!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_delete_story_cost']?>" name="point_delete_story_cost" label="Points?"></mwc-textfield> -->
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Loose Points on Removing a Favourite Post</label><br>
+                        <small class="admin-info">Loose <?php echo $config['point_remove_star_cost']?> points by removing a post from your favorite list!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_remove_star_cost']?>" name="point_remove_star_cost" label="Points?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_lock">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Earn Points</h2>
+                            <div class="card-subtitle">Allows users to earn points!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/pointsx2.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form general-settings-form">
+                        <label class="form-label" class="main-label">Points on Upload Image</label><br>
+                        <small class="admin-info">Earn <?php echo $config['point_upload_image_cost']?> points by uploading a new Image!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_upload_image_cost']?>" name="point_upload_image_cost" label="Points?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Points on Upload Video</label><br>
+                        <small class="admin-info">Earn <?php echo $config['point_upload_video_cost']?> points by uploading a new Video!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_upload_video_cost']?>" name="point_upload_video_cost" label="Points?"></mwc-textfield>
+                        <!-- <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Points on Upload Story</label><br>
+                        <small class="admin-info">Earn <?php echo $config['point_upload_story_cost']?> points by uploading a new Story!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_upload_story_cost']?>" name="point_upload_story_cost" label="Points?"></mwc-textfield> -->
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Points on Import Gif</label><br>
+                        <small class="admin-info">Earn <?php echo $config['point_import_gifs_cost']?> points by importing a new Gif!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_import_gifs_cost']?>" name="point_import_gifs_cost" label="Points?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Points on Embed Video</label><br>
+                        <small class="admin-info">Earn <?php echo $config['point_embed_videos_cost']?> points by embeding a new Video!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_embed_videos_cost']?>" name="point_embed_videos_cost" label="Points?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Points on Follow User</label><br>
+                        <small class="admin-info">Earn <?php echo $config['point_follow_users_cost']?> points by following a new User!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_follow_users_cost']?>" name="point_follow_users_cost" label="Points?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Points on Comment Reply</label><br>
+                        <small class="admin-info">Earn <?php echo $config['point_reply_comment_cost']?> points by replying to a post comment!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_reply_comment_cost']?>" name="point_reply_comment_cost" label="Points?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Points on Like Comment</label><br>
+                        <small class="admin-info">Earn <?php echo $config['point_liked_comment_cost']?> points by liking a post comment!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_liked_comment_cost']?>" name="point_liked_comment_cost" label="Points?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Points on Profile Verified</label><br>
+                        <small class="admin-info">Earn <?php echo $config['point_profile_verified_cost']?> points by getting your profile verified!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_profile_verified_cost']?>" name="point_profile_verified_cost" label="Points?"></mwc-textfield>
+                        <!-- <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Points on Profile Cover Update</label><br>
+                        <small class="admin-info">Earn <?php echo $config['point_update_cover_cost']?> points by updating your profile cover!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_update_cover_cost']?>" name="point_update_cover_cost" label="Points?"></mwc-textfield> -->
+                        <!-- <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Points on Profile Avatar Update</label><br>
+                        <small class="admin-info">Earn <?php echo $config['point_update_avatar_cost']?> points by updating your profile avatar!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_update_avatar_cost']?>" name="point_update_avatar_cost" label="Points?"></mwc-textfield> -->
+                        <!-- <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Points on Profile Avatar Update</label><br>
+                        <small class="admin-info">Earn <?php echo $config['point_upload_collections_cost']?> points by uploading a new collection!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_upload_collections_cost']?>" name="point_upload_collections_cost" label="Points?"></mwc-textfield> -->
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Points on Like Comment Reply</label><br>
+                        <small class="admin-info">Earn <?php echo $config['point_like_reply_cost']?> points by liking a comment reply!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['point_like_reply_cost']?>" name="point_like_reply_cost" label="Points?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_lock">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>        
+    </div>
+
+<script>
+    $(function() {
+        let notify_error = {status: 'error',title: 'Points Settings',text: 'Failed to updated this settings',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_warning = {status: 'warning',title: 'Points Settings',text: "Oops there's an error in the script",effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_success = {status: 'success',title: 'Points Settings',text: 'Configurations Updated Successfully',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        $('.switcher input[type=checkbox]').click(function () {
+            var configName = $(this).attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            if ($(this).is(":checked") === true) {
+                objData[configName] = $(this).val();
+                new Notify({ ...notify_success })
+            }
+            else{
+                if ($('input[name='+configName+']')[0]) {
+                    objData[configName] = $($('input[name='+configName+']')[0]).val();
+                    new Notify({ ...notify_success })
+                }
+            }
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('general-settings'), objData);
+        });
+
+        $('mwc-select').on('change', function() {
+            var thisElement = $(this);
+            var configName = thisElement.attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            objData[configName] = thisElement.val();
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('general-settings'), objData, function (data) {
+                if (data.status == 200) {
+                    new Notify({ ...notify_success });
+                } else {
+                    new Notify({ ...notify_error });
+                }
+            });
+        });
+
+        function update_input(){
+            $('mwc-textfield').on('keyup', function() {
+                var thisElement = $(this);
+                var configName = thisElement.attr('name');
+                var hash_id = $('mwc-textfield[name=hash_id]').val();
+                var objData = {};
+                objData[configName] = this.value;
+                objData['hash_id'] = hash_id;
+                $.post(cpanel_ajax_url('general-settings'), objData, function (data) {
+                    if (data.status == 200) {
+                    } else {
+                        new Notify({ ...notify_error })
+                    }
+                });
+            });
+        }
+        $('#save_changes').on('click', function() {
+            $('#save_changes').text('Please Wait...');
+			$('#save_changes').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_changes').text('Save Changes');
+			$('#save_changes').removeAttr('disabled');
+            }, 2000);
+        });
+        $('#save_lock').on('click', function() {
+            $('#save_lock').text('Please Wait...');
+			$('#save_lock').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_lock').text('Save Changes');
+			$('#save_lock').removeAttr('disabled');
+            }, 1000);
+        });
+        $('#save_login').on('click', function() {
+            $('#save_login').text('Please Wait...');
+			$('#save_login').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_login').text('Save Changes');
+			$('#save_login').removeAttr('disabled');
+            }, 1000);
+        });
+        setTimeout(function () {
+            update_input();
+        }, 2000);
+    });
+</script>

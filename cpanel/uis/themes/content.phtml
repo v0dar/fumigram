@@ -1,0 +1,59 @@
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">System Themes</h1>
+        <div class="text-muted">You can build your own theme and activate it here!</div>
+    </div>
+</div>
+
+<div>
+    <form action="#" method="post" class="themes-setting">
+        <div class="row">
+            <?php
+            $themes = $cpanel::Themes();
+            foreach ($themes as $theme) { ?>
+                <div class="col-lg-6">
+                    <div class="card card-raised border-start border-pink border-4">
+                        <div class="card-body">
+                            <div class="d-flex theme <?php echo ($theme['folder'] == $config['theme']) ? ' active' : ''; ?>">
+                                <div class="mr-3 theme-img">
+                                    <img src="<?php echo $theme['cover']; ?>" alt="..." width="100%">
+                                </div>
+                                <div style="padding: 20px">
+                                    <h5 class="card-title mb-2 themeName"><?php echo $theme['name']; ?> <span class="badge bg-danger themeVirsion" style="position:relative;top:-4px; font-size:10.5px;">v<?php echo $theme['version']; ?></span></h5>
+                                    <p class="card-text themeAuthor"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5,12A1.5,1.5 0 0,1 16,10.5A1.5,1.5 0 0,1 17.5,9A1.5,1.5 0 0,1 19,10.5A1.5,1.5 0 0,1 17.5,12M14.5,8A1.5,1.5 0 0,1 13,6.5A1.5,1.5 0 0,1 14.5,5A1.5,1.5 0 0,1 16,6.5A1.5,1.5 0 0,1 14.5,8M9.5,8A1.5,1.5 0 0,1 8,6.5A1.5,1.5 0 0,1 9.5,5A1.5,1.5 0 0,1 11,6.5A1.5,1.5 0 0,1 9.5,8M6.5,12A1.5,1.5 0 0,1 5,10.5A1.5,1.5 0 0,1 6.5,9A1.5,1.5 0 0,1 8,10.5A1.5,1.5 0 0,1 6.5,12M12,3A9,9 0 0,0 3,12A9,9 0 0,0 12,21A1.5,1.5 0 0,0 13.5,19.5C13.5,19.11 13.35,18.76 13.11,18.5C12.88,18.23 12.73,17.88 12.73,17.5A1.5,1.5 0 0,1 14.23,16H16A5,5 0 0,0 21,11C21,6.58 16.97,3 12,3Z"></path></svg> Author <a href="https://web.facebook.com/Andrew.frankspartts.9"> <?php echo $theme['author']; ?></a></p>
+                                    <?php if ($theme['folder'] == $config['theme']) { ?>
+                                        <div class="active"><button type="button" class="btn btn-main" disabled="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="mr-1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg> &nbsp;Activeted</button></div>
+                                    <?php } else { ?>
+                                        <div class="active"><a href="#" id="active" value="<?php echo $theme['folder']; ?>" class="btn btn-main">Activate Theme</a></div>
+                                    <?php } ?>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+        <input type="hidden" name="theme" value="" id="theme_name" />
+    </form>
+</div>
+
+
+<script>
+    $(function() {
+        $('a#active').click(function() {
+            $('#theme_name').val($(this).attr('value'));
+            $('form.themes-setting').submit();
+        });
+        $('form.themes-setting').ajaxForm({
+            url: cpanel_ajax_url('activate-theme'),
+            type: 'POST',
+            success: function(data) {
+                if (data.status == 200) {
+                    window.location.reload();
+                }
+            }
+        });
+    });
+</script>

@@ -1,0 +1,81 @@
+<tr id="UserID_<?php echo $context['wal_requests']['id']?>" data-user-id="<?php echo $context['user']['user_id']?>" data_selected="<?php echo $context['wal_requests']['id']?>">
+   <td>
+    <div class="form-check">
+        <input class="form-check-input delete-checkbox" id="check-data-<?php echo $context['wal_requests']['id']?>" type="checkbox" value="" />
+        <label class="form-check-label" for="check-data-<?php echo $context['wal_requests']['id']?>"></label>
+    </div>
+   </td>
+   <td><?php echo $context['wal_requests']['id']?></td>
+   <td>
+       <a href="<?php echo $context['user']['url']; ?>" target="_blank" class="text-decoration-none">
+         <img src="<?php echo(media($cd['user']['avatar'])); ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo $context['user']['name']; ?>" class="rounded-circle" alt="..." style="height: 2rem;weight:2rem;">
+      </a>
+      &nbsp; <?php echo $context['user']['name']; ?>
+   </td>
+   <td><?php echo $context['user']['paypal_email'];?></td>
+   <td><?php echo(Currency($context['wal_requests']['currency']).$context['wal_requests']['amount']) ?></td>
+   <td>
+    <?php 
+    if ($context['wal_requests']['status'] == 0) {
+        echo '<span class="badge bg-orange">Pending</span>';
+    } else 
+    if ($context['wal_requests']['status'] == 1) {
+        echo '<span class="badge bg-success">Approved</span>';
+    } else
+    if ($context['wal_requests']['status'] == 2) {
+        echo '<span class="badge bg-danger">Declined</span>';
+    }
+    ?>
+   </td>
+   <td>
+   <?php 
+    if ($context['wal_requests']['status'] == 0) { ?>
+        <button onclick="MarkPaid(<?php echo $context['wal_requests']['id']?>,'hide');" type="button" class="btn btn-outline-success">Paid</button>&nbsp;&nbsp;
+        <button onclick="DeclinePayment(<?php echo $context['wal_requests']['id']?>,'hide');" type="button" class="btn btn-outline-danger">Decline</button>
+    <?php } else if ($context['wal_requests']['status'] == 1) { ?> 
+        <button onclick="MarkPaid(<?php echo $context['wal_requests']['id']?>,'hide');" type="button" class="btn btn-outline-success" disabled>Paid</button>&nbsp;&nbsp;
+        <button onclick="DeclinePayment(<?php echo $context['wal_requests']['id']?>,'hide');" type="button" class="btn btn-outline-info" disabled>Approved</button>
+    <?php } else if ($context['wal_requests']['status'] == 2) { ?>
+        <button onclick="MarkPaid(<?php echo $context['wal_requests']['id']?>,'hide');" type="button" class="btn btn-outline-success" disabled>Paid</button>&nbsp;&nbsp;
+        <button onclick="DeclinePayment(<?php echo $context['wal_requests']['id']?>,'hide');" type="button" class="btn btn-outline-danger" disabled>Decline</button>
+    <?php } ?>
+   </td>
+</tr>
+<?php if (!empty($context['wal_requests']['iban'])) { ?>
+<tr id="review-verif-request-info-<?php echo $context['wal_requests']['id']; ?>" style="display: none;">
+   <td colspan="4">
+      <div class="row">
+           <div class="col-md-8">
+               <div class="card">
+                   <div class="card-body">
+                       <div class="row">
+                           <div class="col-md-6">
+                               <p>
+                                   <span class="badge bg-success-bright text-success">IBAN</span>
+                               </p>
+                               <p><?php echo $context['wal_requests']['iban']; ?></p>
+                               <p>
+                                   <span class="badge bg-info-bright text-info">Country</span>
+                               </p>
+                               <p><?php echo $context['wal_requests']['country']; ?></p>
+                               <p>
+                                   <span class="badge bg-info-bright text-info">Full Name</span>
+                               </p>
+                               <p><?php echo $context['wal_requests']['full_name']; ?></p>
+                               <p>
+                                   <span class="badge bg-info-bright text-info">Swift Code</span>
+                               </p>
+                               <p><?php echo $context['wal_requests']['swift_code']; ?></p>
+                               <p>
+                                   <span class="badge bg-info-bright text-info">Address</span>
+                               </p>
+                               <p><?php echo $context['wal_requests']['address']; ?></p>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+      </div>
+   </td>
+</tr>
+<?php } ?>

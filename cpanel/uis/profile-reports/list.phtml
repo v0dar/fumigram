@@ -1,0 +1,45 @@
+
+<tr id="list-<?php echo($cd['report']['id']); ?>" data-report="<?php echo($cd['report']['id']); ?>" data-user="<?php echo($cd['report']['u2_id']); ?>" data_selected="<?php echo($cd['report']['id']); ?>">
+  <td>
+   <div class="form-check">
+      <input class="form-check-input delete-checkbox" id="check-data-<?php echo $cd['report']['id']?>" type="checkbox" value="" />
+      <label class="form-check-label" for="check-data-<?php echo $cd['report']['id']?>"></label>
+   </div>
+  </td>
+  <td><?php echo $cd['report']['id']?></td>
+  <td>
+      <a href="<?php echo(un2url($cd['report']['u1_uname'])); ?>" target="_blank" class="text-decoration-none">
+         <img src="<?php echo(media($cd['report']['u1_uavatar'])); ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo($cd['report']['u1_uname']); ?>'s Profile" class="rounded-circle" alt="..." style="height: 2rem;weight:2rem;">
+      </a>
+      &nbsp; <?php echo $cd['report']['u1_uname']; ?>
+  </td>
+  <td>
+   <?php if ($cd['report']['type'] == 3): ?>
+      <span>Violent threats</span>
+   <?php elseif ($cd['report']['type'] == 4): ?>
+      <span>Sexual content</span>
+   <?php elseif ($cd['report']['type'] == 7): ?>
+      <span>Spam or Advertizing</span>
+   <?php elseif ($cd['report']['type'] == 8): ?>
+      <span>Copyrighted material</span>
+   <?php elseif ($cd['report']['type'] == 2): ?>
+      <span>Impersonation Accounts</span>
+   <?php elseif ($cd['report']['type'] == 6): ?>
+      <span>Accounts expressing hatred</span>
+  <?php else: ?>
+      <span>Unknown</span>
+	<?php endif; ?>
+  </td>
+  <td><?php echo $cd['report']['message']; ?></td>
+  <td>
+      <a href="<?php echo(un2url($cd['report']['u2_uname'])); ?>" target="_blank" class="text-decoration-none">
+         <img src="<?php echo(media($cd['report']['u2_uavatar'])); ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo($cd['report']['u2_uname']); ?>'s Profile" class="rounded-circle" alt="..." style="height: 2rem;weight:2rem;">
+      </a>
+      &nbsp; <?php echo $cd['report']['u2_uname']; ?>
+  </td>
+  <td><?php echo(date('d-F-Y',$cd['report']['time'])); ?></td>
+  <td>
+      <button class="btn btn-outline-success" onclick="MarkSafe(<?php echo($cd['report']['id']); ?>,'hide');">Mark Safe</button>&nbsp;&nbsp;
+      <a class="btn btn-outline-danger off" href="javascript:void(0)" data-id="<?php echo($cd['report']['id']); ?>" onclick="Deactivate('<?php echo($cd['report']['u2_id']); ?>','hide');">Deactivate</a>
+  </td>
+</tr>

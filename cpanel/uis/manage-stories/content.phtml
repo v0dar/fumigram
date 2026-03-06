@@ -1,0 +1,405 @@
+<?php
+if ($config['story_system'] == 'off') {
+    header("Location: " . cpanel('overview'));
+    exit();
+}
+
+$context['stories']  = array();
+$stories   = new story();
+
+$tot_stories      = $cpanel->totalStories();
+$tot_vid_stories  = $cpanel->totalVideoStories();
+$tot_img_stories  = $cpanel->totalImageStories();
+
+$ui = (!empty($_GET['ui-id'])) ? $_GET['ui-id'] : 1;
+$filter_keyword = (!empty($_GET['query'])) ? $cpanel::secure($_GET['query']) : '';
+$link = '';
+$t_users = T_USERS;
+$t_stories = T_STORY;
+$ts_views = T_STORY_VIEWS;
+$search_link = '&';
+$filter_type    = '';
+$rang_link_href = '?';
+$cpanel::$db->pageLimit  = 10;
+
+if (!empty($filter_keyword)) {
+    $cpanel::$db->join("`$t_users` u",'p.`user_id` = u.`user_id`','INNER');
+
+    if (is_numeric($filter_keyword)) {
+        $cpanel::$db->where('p.`id`',"$filter_keyword");
+    } else {
+        $cpanel::$db->where('p.`caption`',"%$filter_keyword%",'LIKE');
+    }
+
+	$stories = $cpanel::$db->orderBy('p.`id`', 'DESC')->paginate("`$t_stories` p", $ui,array(
+        'p.`id`',
+        'p.`time`',
+        'p.`type`',
+        'u.avatar',
+        'u.username',
+        'u.active',
+        'u.mode'
+    ));
+} 
+
+else {
+	$cpanel::$db->join("`$t_users` u",'p.`user_id` = u.`user_id`','INNER');
+    $stories = $cpanel::$db->orderBy('p.`id`', 'DESC')->paginate("`$t_stories` p", $ui,array(
+        'p.`id`',
+        'p.`time`',
+        'p.`type`',
+        'u.avatar',
+        'u.username',
+        'u.active',
+        'u.mode'
+    ));
+}
+
+if (($ui > $cpanel::$db->totalPages) && !empty($_GET['ui-id'])) {
+    header("Location: " . cpanel('manage-stories'));
+    exit();
+}
+
+?>
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">Manage Stories</h1>
+        <div class="text-muted">
+            Members stories can be moderated over here!
+        </div>
+    </div>
+</div>
+<!-- Colored status cards-->
+<div class="row gx-5">
+    <div class="col-xxl-4 col-md-6 mb-5">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+            <div class="card-body px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <div class="display-5"><?php echo $tot_stories; ?></div>
+                        <div class="card-text">Total Stories</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/fairytale.png');?>" alt="..." style="height: 3.3rem;weight:3.3rem;" />
+                </div>
+                <div class="card-text">
+                    <div class="d-inline-flex align-items-center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-4 col-md-6 mb-5">
+        <div class="card card-raised border-start border-pink border-4">
+            <div class="card-body px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <div class="display-5"><?php echo $tot_img_stories; ?></div>
+                        <div class="card-text">Total Image Stories</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/album.png');?>" alt="..." style="height: 3.3rem;weight:3.3rem;" />
+                </div>
+                <div class="card-text">
+                    <div class="d-inline-flex align-items-center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-4 col-md-6 mb-5">
+        <div class="card card-raised border-start border-info border-4">
+            <div class="card-body px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <div class="display-5"><?php echo $tot_vid_stories; ?></div>
+                        <div class="card-text">Total Video Stories</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/video-camera.png');?>" alt="..." style="height: 3.3rem;weight:3.3rem;" />
+                </div>
+                <div class="card-text">
+                    <div class="d-inline-flex align-items-center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row gx-5">
+    <!-- Revenue breakdown chart example-->
+    <div class="col-lg-12 mb-5">
+        <div class="card card-raised h-100 border-start border-<?php echo $me['dash_color']; ?> border-4">
+            <div class="card-header bg-white px-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="me-4">
+                        <form method="get" action="<?php echo cpanel('manage-stories'); ?>">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <label class="form-label search-form">Search for Story ID, Story Caption</label>
+                                            <input type="text" name="query" id="query" class="form-control" value="<?php echo($filter_keyword); ?>" autocomplete="off">
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-1">
+                                     <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <label class="form-label" for="priceto">&nbsp;</label>
+                                            <button class="btn btn-outline-primary" id="Search">Search</button>
+                                        </div>
+                                     </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                    <div class="d-flex gap-2 me-n2 mb-n4">
+                        <label class="form-label" for="priceto">&nbsp;</label>
+                        <img src="<?php echo cpanel('si/img/icons/read.png');?>" alt="..." style="height: 3.3rem;weight:3.3rem;" />
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-4">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="form-check">
+                                            <input class="form-check-input check-all" id="check-all" type="checkbox"/>
+                                            <label class="form-check-label" for="check-all"></label>
+                                        </div>
+                                    </th>
+
+                                    <th>ID</th>
+                                    <th>Profile</th>
+                                    <th>Type</th>
+                                    <th>Published</th>
+                                    <th>Status</th>
+                                    <th>Moderate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                                if (!empty($stories)) {
+                                    foreach ($stories as $key => $context['story']) {
+                                        $context['story'] = o2array($context['story']);
+                                        echo $cpanel->Senction('manage-stories/list');
+                                    }
+                                }  
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="float-start">
+                        <?php echo "Showing $ui out of " . $cpanel::$db->totalPages; ?> Pages
+                    </div>
+                    <div class="float-end">
+                        <nav>
+                            <ul class="pagination">
+                                <li>
+                                    <a class="text-decoration-none firstpage" href="<?php echo cpanel('manage-stories?ui-id=1').$link; ?>" data-ajax="?path=manage-stories&ui-id=1<?php echo($link); ?>">
+                                        <i class="material-icons">first_page</i>
+                                    </a>
+                                </li>
+                                <?php if ($ui > 1) {  ?>
+                                <li>
+                                    <a class="text-decoration-none previouspage" href="<?php echo cpanel('manage-stories?ui-id=' . ($ui - 1)).$link; ?>" data-ajax="?path=manage-stories&ui-id=<?php echo($ui - 1) ?><?php echo($link); ?>">
+                                        <i class="material-icons">chevron_left</i>
+                                    </a>
+                                </li>
+                                <?php  } ?>
+                                <?php 
+                                $nums       = 0;
+                                $nums_uis = ($ui > 4) ? ($ui - 4) : $ui;
+                                for ($i=$nums_uis; $i <= $cpanel::$db->totalPages; $i++) { 
+                                    if ($nums < 8) {
+                                ?>
+                                <li class="<?php echo ($ui == $i) ? 'active' : ''; ?>">
+                                    <a class="text-decoration-none" href="<?php echo cpanel('manage-stories?ui-id=' . ($i)).$link; ?>" data-ajax="?path=manage-stories&ui-id=<?php echo($i) ?><?php echo($link); ?>" class="waves-effect">
+                                        <?php echo $i ?>   
+                                    </a>
+                                </li>
+                                <?php } $nums++; }?>
+                                <?php if ($cpanel::$db->totalPages > $ui) { ?>
+                                <li>
+                                    <a class="text-decoration-none nextpage" href="<?php echo cpanel('manage-stories?ui-id=' . ($ui + 1)).$link; ?>" data-ajax="?path=manage-stories&ui-id=<?php echo($ui + 1) ?><?php echo($link); ?>">
+                                        <i class="material-icons">chevron_right</i>
+                                    </a>
+                                </li>
+                                <?php } ?>
+                                <li>
+                                    <a class="text-decoration-none lastpage" href="<?php echo cpanel('manage-stories?ui-id=' . ($cpanel::$db->totalPages)).$link; ?>" data-ajax="?path=manage-stories&ui-id=<?php echo($cpanel::$db->totalPages) ?><?php echo($link); ?>">
+                                        <i class="material-icons">last_page</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3">
+                            <button type="button" class="btn btn btn-outline-primary delete-selected d-block" disabled>Take Down<span></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<!-- Delete Single User -->
+<div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel">Delete Story!</h5>
+            </div>
+            <div class="modal-body">Are you sure you want to delete this user's story?</div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-primary me-2" type="button" data-bs-dismiss="modal">Nope</button>
+                <button class="btn btn-outline-danger" type="button">Yes Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Single User -->
+<div class="modal fade" id="SelectedDeleteModal" tabindex="-1" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel">Delete Stories!</h5>
+            </div>
+            <div class="modal-body">Are you sure you want to delete the selected users stories?</div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-dark me-2" type="button" data-bs-dismiss="modal">Nope</button>
+                <button class="btn btn-outline-danger" type="button" onclick="DeleteSelected()">Yes Take Down</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .pagination > li > a .material-icons, .pagination > li > a .material-icons {vertical-align: middle;line-height: 26px;}
+    .pagination > li > a, .pagination > li > a {min-width: 32px;border-radius: 16px;padding: 5px 4px !important;background: rgb(0 0 0 / 7%);display: block;text-align: center;margin: 0 2px;}
+    .pagination li.active a {color: #fff;}
+    .pagination .page-item.active .page-link {background: #e882a3;border-color: transparent;}
+    .pagination .page-item .page-link:hover,
+    .pagination .page-item .page-link:focus {text-decoration: none;}
+    .pagination.pagination-rounded .page-item {margin: 0 5px;}
+    .pagination.pagination-rounded .page-item .page-link {border-radius: 50%;padding: 0;display: flex;align-items: center;justify-content: center;height: 40px;width: 40px;}
+    .pagination.pagination-rounded.pagination-sm .page-link {height: 30px;width: 30px;}
+    .pagination.pagination-rounded.pagination-lg .page-link {height: 60px;width: 60px;}
+    .pager li > a {-webkit-border-radius: 0;-moz-border-radius: 0;-ms-border-radius: 0;border-radius: 0;border: none;background-color: transparent;color: #222;font-weight: bold; }
+    .pager li a:focus,
+    .pager li a:active {background-color: transparent; }
+    .pagination .disabled a,
+    .pagination .disabled a:hover,
+    .pagination .disabled a:focus,
+    .pagination .disabled a:active {color: #bbb; }
+    .pagination li.active a { color: #fff; background-color: var(--bs-blue); }
+    .pagination li {-webkit-border-radius: 0;-moz-border-radius: 0;-ms-border-radius: 0;border-radius: 0; }.pagination li a:focus,.pagination li a:active {background-color: var(--bs-blue);color: #fff; }
+    .no-data-found {margin-bottom: 20px;text-align: center;}
+    .pagination > li > a {border: none;font-weight: bold;color: #555; }
+    .pagination > li > a,
+    .pagination > li > a {width: auto;height: 32px;-webkit-border-radius: 0;-moz-border-radius: 0;-ms-border-radius: 0;border-radius: 0; }.pagination > li > a .material-icons,.pagination > li > a .material-icons {position: relative;bottom: 2px; }
+    .pagination-sm > li:first-child > a,
+    .pagination-sm > li:last-child > a {width: 28px;height: 28px; }.pagination-sm > li:first-child > a .material-icons,.pagination-sm > li:last-child > a .material-icons {position: relative;top: -1px;left: -6px;font-size: 20px; }
+    .pagination-lg > li:first-child > a,
+    .pagination-lg > li:last-child > a {width: 44px;height: 44px; }.pagination-lg > li:first-child > a .material-icons,.pagination-lg > li:last-child > a .material-icons {font-size: 30px;position: relative;top: -3px;left: -10px; }
+    nav ul:not(.list-unstyled) li a {padding: 10px;}
+    .hidden{display: none;}
+</style>
+<script>
+$('.check-all').on('click', function(event) {
+    $('input:checkbox').not(this).prop('checked', this.checked);
+});
+$('.delete-checkbox, .check-all').change(function(event) {
+    $('.delete-selected').attr('disabled', false);
+    $('.delete-selected').find('span').text(' (' + $('.delete-checkbox:checked').length + ')');
+});
+$('.delete-selected').on('click', function(event) {
+    event.preventDefault();
+    $('#SelectedDeleteModal').modal('show');
+});
+function DeleteSelectedNOPE() {
+    data = new Array();
+    $('td input:checked').parents('tr').each(function () {
+        data.push($(this).attr('data_selected'));
+    });
+    $('.delete-selected').attr('disabled', true);
+    $('.delete-selected').text('Please wait...');
+    $.post(cpanel_ajax_url('delete-multi-story'), {ids: data}, function () {
+        $.each( data, function( index, value ){
+            $("#list-"+value).remove();
+        });
+        $('#SelectedDeleteModal').modal('hide');
+        let notify_success201 = {status: 'success',title: 'Manage Stories',text: 'Stories deleted Successfully!',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        new Notify({ ...notify_success201 });
+        $('#redirect_link').attr('href', "<?php echo cpanel('manage-stories'); ?>");
+        $('#redirect_link').attr('data-ajax', "?path=manage-stories");
+        $('#redirect_link').click();
+        $('.delete-selected').text('Take Down');
+    });
+}
+$('#Search').on('click', function(event) {
+    event.preventDefault();
+    var item = $('#query');
+    var text = item.val();
+
+    const accinput = $('#user_type');
+    const AccType = accinput.val();
+    $('#redirect_link').attr('href', "<?php echo cpanel('manage-stories').$rang_link_href; ?>query="+text);
+    $('#redirect_link').attr('data-ajax', "?path=manage-stories<?php echo($search_link); ?>query="+text);
+    $('#redirect_link').click();
+});
+
+function DeleteStory(id,type = 'show'){
+  if (id && id > 0) {
+    if (type == 'hide') {
+      $('#DeleteModal').find('.btn-outline-danger').attr('onclick', "DeleteStory('"+id+"')");
+      $('#DeleteModal').modal('show');
+      return false;
+    }
+    $("#list-"+id).slideUp(function(){
+      $(this).remove();
+    });
+    $("#DeleteModal").modal("hide");
+    $.ajax({
+      url: cpanel_ajax_url('delete-story'),
+      type: 'POST',
+      dataType: 'json',
+      data: {id:id}
+    });
+    $('#redirect_link').attr('href', "<?php echo cpanel('manage-stories'); ?>");
+    $('#redirect_link').attr('data-ajax', "?path=manage-stories");
+    $('#redirect_link').click();
+    let notify_success201 = {status: 'success',title: 'Manage Stories',text: 'Story deleted Successfully!',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+    new Notify({ ...notify_success201 });
+  }
+}
+
+
+tippy('.lastpage', {
+	arrow: false,
+	content: 'Last Page',
+});
+tippy('.nextpage', {
+	arrow: false,
+	content: 'Next Page',
+});
+tippy('.previouspage', {
+	arrow: false,
+	content: 'Previous Page',
+});
+tippy('.firstpage', {
+	arrow: false,
+	content: 'First Page',
+});
+
+tippy('#verify', {
+	arrow: false,
+	content: 'Verified',
+});
+tippy('#partner', {
+	arrow: false,
+	content: 'Partner',
+});
+</script>

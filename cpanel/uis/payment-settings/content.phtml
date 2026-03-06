@@ -1,0 +1,973 @@
+<?php
+if ($me['manager'] == 0 && $me['admin'] == 0) {    
+    header("Location: " . cpanel('overview'));
+    exit();
+}
+
+$mode = 'day';
+if (!empty($_COOKIE['mode']) && $_COOKIE['mode'] == 'night') {
+    $mode = 'night';
+}
+?>
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">Payment Configuration</h1>
+        <div class="text-muted">Other ways for users to deploy payment throughout the community!</div>
+    </div>
+</div>
+<!-- Colored status cards-->
+
+
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">PayPal Payment</h2>
+                            <div class="card-subtitle">Allow users to make payment from their paypal account!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/paypal.png');?>" alt="..." style="height: 3.5rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form paypal-settings-form">
+                        <div class="float-start">
+                            <label for="private_photos" class="main-label">PayPal Payment Method</label>
+                            <br><small class="admin-info">Enable PayPal to receive payments from ads and wallet payments!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="paypal_payment" value="off" />
+                                <input type="checkbox" name="paypal_payment" id="chck-paypal_payment" value="on" <?php echo ($config['paypal_payment'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-paypal_payment" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label for="language" class="main-label">PayPal Mode</label><br>
+                        <small class="admin-info">Choose the mode our application is using, for testing use the SandBox mode</small><br><br>
+                        <mwc-select outlined label="Mode" class="w-100" name="paypal_mode">
+                            <mwc-list-item  value="live" <?php if($config['paypal_mode'] == 'live'){ echo("selected");}?>>Live</mwc-list-item>
+                            <mwc-list-item  value="sandbox" <?php if($config['paypal_mode'] == 'sandbox'){ echo("selected");}?>>SandBox</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">PayPal Clinet ID</label><br>
+                        <small class="admin-info">Set the PayPal application ID!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="paypal_id" value="<?php echo $config['paypal_id']?>" label="App ID"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">PayPal Secret Key</label><br>
+                        <small class="admin-info">Set the PayPal application secret key!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="paypal_secret" value="<?php echo $config['paypal_secret']?>" label="App Secret"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Donate Percentage Amount</label><br>
+                        <small class="admin-info">The price that a user will pay to us for each new user donation!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="donate_percentage" value="<?php echo $config['donate_percentage']?>" onkeyup="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" label="Percentage"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label for="paypal_currency" class="main-label">PayPal Currency</label><br>
+                        <small class="admin-info">Set the PayPal currency, this will be used only on PayPal.</small><br><br>
+                        <mwc-select outlined label="Currency" id="paypal_currency" class="w-100" name="paypal_currency">
+                            <mwc-list-item value="USD" <?php echo ($config['paypal_currency'] == 'USD')  ? ' selected': '';?>>USD</mwc-list-item>
+                            <mwc-list-item value="EUR" <?php echo ($config['paypal_currency'] == 'EUR')  ? ' selected': '';?>>EUR</mwc-list-item>
+                            <mwc-list-item value="AUD" <?php echo ($config['paypal_currency'] == 'AUD')  ? ' selected': '';?>>AUD</mwc-list-item>
+                            <mwc-list-item value="BRL" <?php echo ($config['paypal_currency'] == 'BRL')  ? ' selected': '';?>>BRL</mwc-list-item>
+                            <mwc-list-item value="CAD" <?php echo ($config['paypal_currency'] == 'CAD')  ? ' selected': '';?>>CAD</mwc-list-item>
+                            <mwc-list-item value="CZK" <?php echo ($config['paypal_currency'] == 'CZK')  ? ' selected': '';?>>CZK</mwc-list-item>
+                            <mwc-list-item value="DKK" <?php echo ($config['paypal_currency'] == 'DKK')  ? ' selected': '';?>>DKK</mwc-list-item>
+                            <mwc-list-item value="HKD" <?php echo ($config['paypal_currency'] == 'HKD')  ? ' selected': '';?>>HKD</mwc-list-item>
+                            <mwc-list-item value="HUF" <?php echo ($config['paypal_currency'] == 'HUF')  ? ' selected': '';?>>HUF</mwc-list-item>
+                            <mwc-list-item value="INR" <?php echo ($config['paypal_currency'] == 'INR')  ? ' selected': '';?>>INR</mwc-list-item>
+                            <mwc-list-item value="ILS" <?php echo ($config['paypal_currency'] == 'ILS')  ? ' selected': '';?>>ILS</mwc-list-item>
+                            <mwc-list-item value="JPY" <?php echo ($config['paypal_currency'] == 'JPY')  ? ' selected': '';?>>JPY</mwc-list-item>
+                            <mwc-list-item value="MYR" <?php echo ($config['paypal_currency'] == 'MYR')  ? ' selected': '';?>>MYR</mwc-list-item>
+                            <mwc-list-item value="MXN" <?php echo ($config['paypal_currency'] == 'MXN')  ? ' selected': '';?>>MXN</mwc-list-item>
+                            <mwc-list-item value="TWD" <?php echo ($config['paypal_currency'] == 'TWD')  ? ' selected': '';?>>TWD</mwc-list-item>
+                            <mwc-list-item value="NZD" <?php echo ($config['paypal_currency'] == 'NZD')  ? ' selected': '';?>>NZD</mwc-list-item>
+                            <mwc-list-item value="NOK" <?php echo ($config['paypal_currency'] == 'NOK')  ? ' selected': '';?>>NOK</mwc-list-item>
+                            <mwc-list-item value="PHP" <?php echo ($config['paypal_currency'] == 'PHP')  ? ' selected': '';?>>PHP</mwc-list-item>
+                            <mwc-list-item value="PLN" <?php echo ($config['paypal_currency'] == 'PLN')  ? ' selected': '';?>>PLN</mwc-list-item>
+                            <mwc-list-item value="GBP" <?php echo ($config['paypal_currency'] == 'GBP')  ? ' selected': '';?>>GBP</mwc-list-item>
+                            <mwc-list-item value="RUB" <?php echo ($config['paypal_currency'] == 'RUB')  ? ' selected': '';?>>RUB</mwc-list-item>
+                            <mwc-list-item value="SGD" <?php echo ($config['paypal_currency'] == 'SGD')  ? ' selected': '';?>>SGD</mwc-list-item>
+                            <mwc-list-item value="SEK" <?php echo ($config['paypal_currency'] == 'SEK')  ? ' selected': '';?>>SEK</mwc-list-item>
+                            <mwc-list-item value="CHF" <?php echo ($config['paypal_currency'] == 'CHF')  ? ' selected': '';?>>CHF</mwc-list-item>
+                            <mwc-list-item value="THB" <?php echo ($config['paypal_currency'] == 'THB')  ? ' selected': '';?>>THB</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_paypal">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">PaySera Payment</h2>
+                            <div class="card-subtitle">Allow users to make payments with PaySera account!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/Paysera.png');?>" alt="..." style="height: 2rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form payment-settings-form">
+                        <div class="float-start">
+                            <label for="discord" class="main-label">PaySera Payment Method</label>
+                            <br><small class="admin-info">Enable PaySera to receive payments from PaySera payment provider!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="paysera" value="off" />
+                                <input type="checkbox" name="paysera" id="chck-paysera" value="on" <?php echo ($config['paysera'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-paysera" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Project ID</label><br>
+                        <small class="admin-info">Enter the PaySera project ID!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="paysera_project_id" value="<?php echo $config['paysera_project_id']?>" label="Project ID"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">PaySera Account Password</label><br>
+                        <small class="admin-info">Enter the PaySera account password!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="paysera_password" value="<?php echo $config['paysera_password']?>" label="Account Password"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label for="paysera_test_mode" class="main-label">Paysera Mode</label><br>
+                        <small class="admin-info">Choose the mode our application is using, for testing use the Test mode</small><br><br>
+                        <mwc-select outlined label="Mode" class="w-100" name="paysera_test_mode">
+                            <mwc-list-item value="test" <?php if($config['paysera_test_mode'] == 'test'){ echo("selected");}?>>Test Mode</mwc-list-item>
+                            <mwc-list-item value="live" <?php if($config['paysera_test_mode'] == 'live'){ echo("selected");}?>>Live Mode</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_paySera">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">RazorPay (Credit Cards) Payment</h2>
+                            <div class="card-subtitle">Allow users to make payment using their credit card!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/RazorPay.png');?>" alt="..." style="height: 2rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form payment-settings-form">
+                        <div class="float-start">
+                            <label for="private_photos" class="main-label">RazorPay Payment Method</label>
+                            <br><small class="admin-info">Enable RazorPay to receive payments from RazorPay provider!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="razorpay" value="off" />
+                                <input type="checkbox" name="razorpay" id="chck-razorpay" value="on" <?php echo ($config['razorpay'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-razorpay" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Application ID</label><br>
+                        <small class="admin-info">RazorPay application client ID configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="razorpay_key" value="<?php echo $config['razorpay_key']?>" label="Application ID"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Application Secret</label><br>
+                        <small class="admin-info">RazorPay application secret configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="razorpay_secret" value="<?php echo $config['razorpay_secret']?>" label="Application Secret"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_RazorPay">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xxl-6 col-md-6 mb-6">
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Stripe (Credit Cards) Payment</h2>
+                            <div class="card-subtitle">Allow users to make payments with their credit card!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/stripe.png');?>" alt="..." style="height: 3.5rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form payment-settings-form">
+                        <div class="float-start">
+                            <label for="private_photos" class="main-label">Stripe Payment Method</label>
+                            <br><small class="admin-info">Enable Stripe to receive payments from users credit cards!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="credit_card" value="off" />
+                                <input type="checkbox" name="credit_card" id="chck-credit_card" value="on" <?php echo ($config['credit_card'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-credit_card" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Stripe API Secret Key</label><br>
+                        <small class="admin-info">Enter the stripe secret key that starts with sk_</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="stripe_secret" value="<?php echo $config['stripe_secret']?>" label="Stripe Secret"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Stripe Publishable Key</label><br>
+                        <small class="admin-info">Enter the stripe publishable key that starts with pk_</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="stripe_id" value="<?php echo $config['stripe_id']?>" label="Stripe ID"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label for="stripe_currency" class="main-label">Stripe Currency</label><br>
+                        <small class="admin-info">Set the Stripe currency, this will be used only on Stripe!</small><br><br>
+                        <mwc-select outlined label="Currency" class="w-100" id="stripe_currency" name="stripe_currency">
+                            <mwc-list-item value="USD" <?php echo ($config['stripe_currency'] == 'USD')  ? ' selected': '';?>>USD</mwc-list-item>
+                            <mwc-list-item value="EUR" <?php echo ($config['stripe_currency'] == 'EUR')  ? ' selected': '';?>>EUR</mwc-list-item>
+                            <mwc-list-item value="AUD" <?php echo ($config['stripe_currency'] == 'AUD')  ? ' selected': '';?>>AUD</mwc-list-item>
+                            <mwc-list-item value="BRL" <?php echo ($config['stripe_currency'] == 'BRL')  ? ' selected': '';?>>BRL</mwc-list-item>
+                            <mwc-list-item value="CAD" <?php echo ($config['stripe_currency'] == 'CAD')  ? ' selected': '';?>>CAD</mwc-list-item>
+                            <mwc-list-item value="CZK" <?php echo ($config['stripe_currency'] == 'CZK')  ? ' selected': '';?>>CZK</mwc-list-item>
+                            <mwc-list-item value="DKK" <?php echo ($config['stripe_currency'] == 'DKK')  ? ' selected': '';?>>DKK</mwc-list-item>
+                            <mwc-list-item value="HKD" <?php echo ($config['stripe_currency'] == 'HKD')  ? ' selected': '';?>>HKD</mwc-list-item>
+                            <mwc-list-item value="HUF" <?php echo ($config['stripe_currency'] == 'HUF')  ? ' selected': '';?>>HUF</mwc-list-item>
+                            <mwc-list-item value="ILS" <?php echo ($config['stripe_currency'] == 'ILS')  ? ' selected': '';?>>ILS</mwc-list-item>
+                            <mwc-list-item value="JPY" <?php echo ($config['stripe_currency'] == 'JPY')  ? ' selected': '';?>>JPY</mwc-list-item>
+                            <mwc-list-item value="MYR" <?php echo ($config['stripe_currency'] == 'MYR')  ? ' selected': '';?>>MYR</mwc-list-item>
+                            <mwc-list-item value="MXN" <?php echo ($config['stripe_currency'] == 'MXN')  ? ' selected': '';?>>MXN</mwc-list-item>
+                            <mwc-list-item value="TWD" <?php echo ($config['stripe_currency'] == 'TWD')  ? ' selected': '';?>>TWD</mwc-list-item>
+                            <mwc-list-item value="NZD" <?php echo ($config['stripe_currency'] == 'NZD')  ? ' selected': '';?>>NZD</mwc-list-item>
+                            <mwc-list-item value="NOK" <?php echo ($config['stripe_currency'] == 'NOK')  ? ' selected': '';?>>NOK</mwc-list-item>
+                            <mwc-list-item value="PHP" <?php echo ($config['stripe_currency'] == 'PHP')  ? ' selected': '';?>>PHP</mwc-list-item>
+                            <mwc-list-item value="PLN" <?php echo ($config['stripe_currency'] == 'PLN')  ? ' selected': '';?>>PLN</mwc-list-item>
+                            <mwc-list-item value="RUB" <?php echo ($config['stripe_currency'] == 'RUB')  ? ' selected': '';?>>RUB</mwc-list-item>
+                            <mwc-list-item value="SGD" <?php echo ($config['stripe_currency'] == 'SGD')  ? ' selected': '';?>>SGD</mwc-list-item>
+                            <mwc-list-item value="SEK" <?php echo ($config['stripe_currency'] == 'SEK')  ? ' selected': '';?>>SEK</mwc-list-item>
+                            <mwc-list-item value="CHF" <?php echo ($config['stripe_currency'] == 'CHF')  ? ' selected': '';?>>CHF</mwc-list-item>
+                            <mwc-list-item value="THB" <?php echo ($config['stripe_currency'] == 'THB')  ? ' selected': '';?>>THB</mwc-list-item>
+                            <mwc-list-item value="GBP" <?php echo ($config['stripe_currency'] == 'GBP')  ? ' selected': '';?>>GBP</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_stripe">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+            <br>
+
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">2Checkout (Credit Cards) Payment</h2>
+                            <div class="card-subtitle">Allow users to make payment using their credit card!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/2CheckOut.png');?>" alt="..." style="height: 1rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form payment-settings-form">
+                        <div class="float-start">
+                            <label for="private_photos" class="main-label">2Checkout (Credit Cards) Payment Method</label>
+                            <br><small class="admin-info">Enable 2Checkout to receive payments by credit cards!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="checkout_payment" value="no" />
+                                <input type="checkbox" name="checkout_payment" id="chck-checkout_payment" value="yes" <?php echo ($config['checkout_payment'] == 'yes') ? 'checked': '';?>>
+                                <label for="chck-checkout_payment" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label for="checkout_mode" class="main-label">2Checkout Mode</label><br>
+                        <small class="admin-info">Choose the mode our application is using, for testing use the SandBox mode</small><br><br>
+                        <mwc-select outlined label="Mode" class="w-100" name="checkout_mode">
+                            <mwc-list-item value="sandbox" <?php if($config['checkout_mode'] == 'sandbox'){ echo("selected");}?>>SandBox</mwc-list-item>
+                            <mwc-list-item value="live" <?php if($config['checkout_mode'] == 'live'){ echo("selected");}?>>Live Mode</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label for="checkout_currency" class="main-label">2Checkout Currency</label><br>
+                        <small class="admin-info">Set the 2checkout currency, this will be used only on 2checkout.</small><br><br>
+                        <mwc-select outlined label="Currency" class="w-100" name="checkout_currency">
+                            <mwc-list-item value="USD" <?php echo ($config['checkout_currency'] == 'USD')  ? ' selected': '';?>>USD</mwc-list-item>
+                            <mwc-list-item value="EUR" <?php echo ($config['checkout_currency'] == 'EUR')  ? ' selected': '';?>>EUR</mwc-list-item>
+                            <mwc-list-item value="AED" <?php echo ($config['checkout_currency'] == 'AED')  ? ' selected': '';?>>AED</mwc-list-item>
+                            <mwc-list-item value="AFN" <?php echo ($config['checkout_currency'] == 'AFN')  ? ' selected': '';?>>AFN</mwc-list-item>
+                            <mwc-list-item value="ALL" <?php echo ($config['checkout_currency'] == 'ALL')  ? ' selected': '';?>>ALL</mwc-list-item>
+                            <mwc-list-item value="ARS" <?php echo ($config['checkout_currency'] == 'ARS')  ? ' selected': '';?>>ARS</mwc-list-item>
+                            <mwc-list-item value="AUD" <?php echo ($config['checkout_currency'] == 'AUD')  ? ' selected': '';?>>AUD</mwc-list-item>
+                            <mwc-list-item value="AZN" <?php echo ($config['checkout_currency'] == 'AZN')  ? ' selected': '';?>>AZN</mwc-list-item>
+                            <mwc-list-item value="BBD" <?php echo ($config['checkout_currency'] == 'BBD')  ? ' selected': '';?>>BBD</mwc-list-item>
+                            <mwc-list-item value="BDT" <?php echo ($config['checkout_currency'] == 'BDT')  ? ' selected': '';?>>BDT</mwc-list-item>
+                            <mwc-list-item value="BGN" <?php echo ($config['checkout_currency'] == 'BGN')  ? ' selected': '';?>>BGN</mwc-list-item>
+                            <mwc-list-item value="BMD" <?php echo ($config['checkout_currency'] == 'BMD')  ? ' selected': '';?>>BMD</mwc-list-item>
+                            <mwc-list-item value="BND" <?php echo ($config['checkout_currency'] == 'BND')  ? ' selected': '';?>>BND</mwc-list-item>
+                            <mwc-list-item value="BOB" <?php echo ($config['checkout_currency'] == 'BOB')  ? ' selected': '';?>>BOB</mwc-list-item>
+                            <mwc-list-item value="BRL" <?php echo ($config['checkout_currency'] == 'BRL')  ? ' selected': '';?>>BRL</mwc-list-item>
+                            <mwc-list-item value="BSD" <?php echo ($config['checkout_currency'] == 'BSD')  ? ' selected': '';?>>BSD</mwc-list-item>
+                            <mwc-list-item value="BWP" <?php echo ($config['checkout_currency'] == 'BWP')  ? ' selected': '';?>>BWP</mwc-list-item>
+                            <mwc-list-item value="BYN" <?php echo ($config['checkout_currency'] == 'BYN')  ? ' selected': '';?>>BYN</mwc-list-item>
+                            <mwc-list-item value="BZD" <?php echo ($config['checkout_currency'] == 'BZD')  ? ' selected': '';?>>BZD</mwc-list-item>
+                            <mwc-list-item value="CAD" <?php echo ($config['checkout_currency'] == 'CAD')  ? ' selected': '';?>>CAD</mwc-list-item>
+                            <mwc-list-item value="CHF" <?php echo ($config['checkout_currency'] == 'CHF')  ? ' selected': '';?>>CHF</mwc-list-item>
+                            <mwc-list-item value="CLP" <?php echo ($config['checkout_currency'] == 'CLP')  ? ' selected': '';?>>CLP</mwc-list-item>
+                            <mwc-list-item value="CNY" <?php echo ($config['checkout_currency'] == 'CNY')  ? ' selected': '';?>>CNY</mwc-list-item>
+                            <mwc-list-item value="COP" <?php echo ($config['checkout_currency'] == 'COP')  ? ' selected': '';?>>COP</mwc-list-item>
+                            <mwc-list-item value="CRC" <?php echo ($config['checkout_currency'] == 'CRC')  ? ' selected': '';?>>CRC</mwc-list-item>
+                            <mwc-list-item value="CZK" <?php echo ($config['checkout_currency'] == 'CZK')  ? ' selected': '';?>>CZK</mwc-list-item>
+                            <mwc-list-item value="DKK" <?php echo ($config['checkout_currency'] == 'DKK')  ? ' selected': '';?>>DKK</mwc-list-item>
+                            <mwc-list-item value="DOP" <?php echo ($config['checkout_currency'] == 'DOP')  ? ' selected': '';?>>DOP</mwc-list-item>
+                            <mwc-list-item value="DZD" <?php echo ($config['checkout_currency'] == 'DZD')  ? ' selected': '';?>>DZD</mwc-list-item>
+                            <mwc-list-item value="EGP" <?php echo ($config['checkout_currency'] == 'EGP')  ? ' selected': '';?>>EGP</mwc-list-item>
+                            <mwc-list-item value="FJD" <?php echo ($config['checkout_currency'] == 'FJD')  ? ' selected': '';?>>FJD</mwc-list-item>
+                            <mwc-list-item value="GBP" <?php echo ($config['checkout_currency'] == 'GBP')  ? ' selected': '';?>>GBP</mwc-list-item>
+                            <mwc-list-item value="GTQ" <?php echo ($config['checkout_currency'] == 'GTQ')  ? ' selected': '';?>>GTQ</mwc-list-item>
+                            <mwc-list-item value="HKD" <?php echo ($config['checkout_currency'] == 'HKD')  ? ' selected': '';?>>HKD</mwc-list-item>
+                            <mwc-list-item value="HNL" <?php echo ($config['checkout_currency'] == 'HNL')  ? ' selected': '';?>>HNL</mwc-list-item>
+                            <mwc-list-item value="HRK" <?php echo ($config['checkout_currency'] == 'HRK')  ? ' selected': '';?>>HRK</mwc-list-item>
+                            <mwc-list-item value="HUF" <?php echo ($config['checkout_currency'] == 'HUF')  ? ' selected': '';?>>HUF</mwc-list-item>
+                            <mwc-list-item value="IDR" <?php echo ($config['checkout_currency'] == 'IDR')  ? ' selected': '';?>>IDR</mwc-list-item>
+                            <mwc-list-item value="ILS" <?php echo ($config['checkout_currency'] == 'ILS')  ? ' selected': '';?>>ILS</mwc-list-item>
+                            <mwc-list-item value="INR" <?php echo ($config['checkout_currency'] == 'INR')  ? ' selected': '';?>>INR</mwc-list-item>
+                            <mwc-list-item value="JMD" <?php echo ($config['checkout_currency'] == 'JMD')  ? ' selected': '';?>>JMD</mwc-list-item>
+                            <mwc-list-item value="JOD" <?php echo ($config['checkout_currency'] == 'JOD')  ? ' selected': '';?>>JOD</mwc-list-item>
+                            <mwc-list-item value="JPY" <?php echo ($config['checkout_currency'] == 'JPY')  ? ' selected': '';?>>JPY</mwc-list-item>
+                            <mwc-list-item value="KES" <?php echo ($config['checkout_currency'] == 'KES')  ? ' selected': '';?>>KES</mwc-list-item>
+                            <mwc-list-item value="KRW" <?php echo ($config['checkout_currency'] == 'KRW')  ? ' selected': '';?>>KRW</mwc-list-item>
+                            <mwc-list-item value="KWD" <?php echo ($config['checkout_currency'] == 'KWD')  ? ' selected': '';?>>KWD</mwc-list-item>
+                            <mwc-list-item value="KZT" <?php echo ($config['checkout_currency'] == 'KZT')  ? ' selected': '';?>>KZT</mwc-list-item>
+                            <mwc-list-item value="LAK" <?php echo ($config['checkout_currency'] == 'LAK')  ? ' selected': '';?>>LAK</mwc-list-item>
+                            <mwc-list-item value="LBP" <?php echo ($config['checkout_currency'] == 'LBP')  ? ' selected': '';?>>LBP</mwc-list-item>
+                            <mwc-list-item value="LKR" <?php echo ($config['checkout_currency'] == 'LKR')  ? ' selected': '';?>>LKR</mwc-list-item>
+                            <mwc-list-item value="LRD" <?php echo ($config['checkout_currency'] == 'LRD')  ? ' selected': '';?>>LRD</mwc-list-item>
+                            <mwc-list-item value="MAD" <?php echo ($config['checkout_currency'] == 'MAD')  ? ' selected': '';?>>MAD</mwc-list-item>
+                            <mwc-list-item value="MDL" <?php echo ($config['checkout_currency'] == 'MDL')  ? ' selected': '';?>>MDL</mwc-list-item>
+                            <mwc-list-item value="MMK" <?php echo ($config['checkout_currency'] == 'MMK')  ? ' selected': '';?>>MMK</mwc-list-item>
+                            <mwc-list-item value="MOP" <?php echo ($config['checkout_currency'] == 'MOP')  ? ' selected': '';?>>MOP</mwc-list-item>
+                            <mwc-list-item value="MRO" <?php echo ($config['checkout_currency'] == 'MRO')  ? ' selected': '';?>>MRO</mwc-list-item>
+                            <mwc-list-item value="MUR" <?php echo ($config['checkout_currency'] == 'MUR')  ? ' selected': '';?>>MUR</mwc-list-item>
+                            <mwc-list-item value="MVR" <?php echo ($config['checkout_currency'] == 'MVR')  ? ' selected': '';?>>MVR</mwc-list-item>
+                            <mwc-list-item value="MXN" <?php echo ($config['checkout_currency'] == 'MXN')  ? ' selected': '';?>>MXN</mwc-list-item>
+                            <mwc-list-item value="MYR" <?php echo ($config['checkout_currency'] == 'MYR')  ? ' selected': '';?>>MYR</mwc-list-item>
+                            <mwc-list-item value="NAD" <?php echo ($config['checkout_currency'] == 'NAD')  ? ' selected': '';?>>NAD</mwc-list-item>
+                            <mwc-list-item value="NGN" <?php echo ($config['checkout_currency'] == 'NGN')  ? ' selected': '';?>>NGN</mwc-list-item>
+                            <mwc-list-item value="NIO" <?php echo ($config['checkout_currency'] == 'NIO')  ? ' selected': '';?>>NIO</mwc-list-item>
+                            <mwc-list-item value="NOK" <?php echo ($config['checkout_currency'] == 'NOK')  ? ' selected': '';?>>NOK</mwc-list-item>
+                            <mwc-list-item value="NPR" <?php echo ($config['checkout_currency'] == 'NPR')  ? ' selected': '';?>>NPR</mwc-list-item>
+                            <mwc-list-item value="NZD" <?php echo ($config['checkout_currency'] == 'NZD')  ? ' selected': '';?>>NZD</mwc-list-item>
+                            <mwc-list-item value="OMR" <?php echo ($config['checkout_currency'] == 'OMR')  ? ' selected': '';?>>OMR</mwc-list-item>
+                            <mwc-list-item value="PEN" <?php echo ($config['checkout_currency'] == 'PEN')  ? ' selected': '';?>>PEN</mwc-list-item>
+                            <mwc-list-item value="PGK" <?php echo ($config['checkout_currency'] == 'PGK')  ? ' selected': '';?>>PGK</mwc-list-item>
+                            <mwc-list-item value="PHP" <?php echo ($config['checkout_currency'] == 'PHP')  ? ' selected': '';?>>PHP</mwc-list-item>
+                            <mwc-list-item value="PKR" <?php echo ($config['checkout_currency'] == 'PKR')  ? ' selected': '';?>>PKR</mwc-list-item>
+                            <mwc-list-item value="PLN" <?php echo ($config['checkout_currency'] == 'PLN')  ? ' selected': '';?>>PLN</mwc-list-item>
+                            <mwc-list-item value="PYG" <?php echo ($config['checkout_currency'] == 'PYG')  ? ' selected': '';?>>PYG</mwc-list-item>
+                            <mwc-list-item value="QAR" <?php echo ($config['checkout_currency'] == 'QAR')  ? ' selected': '';?>>QAR</mwc-list-item>
+                            <mwc-list-item value="RON" <?php echo ($config['checkout_currency'] == 'RON')  ? ' selected': '';?>>RON</mwc-list-item>
+                            <mwc-list-item value="RSD" <?php echo ($config['checkout_currency'] == 'RSD')  ? ' selected': '';?>>RSD</mwc-list-item>
+                            <mwc-list-item value="RUB" <?php echo ($config['checkout_currency'] == 'RUB')  ? ' selected': '';?>>RUB</mwc-list-item>
+                            <mwc-list-item value="SAR" <?php echo ($config['checkout_currency'] == 'SAR')  ? ' selected': '';?>>SAR</mwc-list-item>
+                            <mwc-list-item value="SBD" <?php echo ($config['checkout_currency'] == 'SBD')  ? ' selected': '';?>>SBD</mwc-list-item>
+                            <mwc-list-item value="SCR" <?php echo ($config['checkout_currency'] == 'SCR')  ? ' selected': '';?>>SCR</mwc-list-item>
+                            <mwc-list-item value="SEK" <?php echo ($config['checkout_currency'] == 'SEK')  ? ' selected': '';?>>SEK</mwc-list-item>
+                            <mwc-list-item value="SGD" <?php echo ($config['checkout_currency'] == 'SGD')  ? ' selected': '';?>>SGD</mwc-list-item>
+                            <mwc-list-item value="SYP" <?php echo ($config['checkout_currency'] == 'SYP')  ? ' selected': '';?>>SYP</mwc-list-item>
+                            <mwc-list-item value="THB" <?php echo ($config['checkout_currency'] == 'THB')  ? ' selected': '';?>>THB</mwc-list-item>
+                            <mwc-list-item value="TND" <?php echo ($config['checkout_currency'] == 'TND')  ? ' selected': '';?>>TND</mwc-list-item>
+                            <mwc-list-item value="TOP" <?php echo ($config['checkout_currency'] == 'TOP')  ? ' selected': '';?>>TOP</mwc-list-item>
+                            <mwc-list-item value="TRY" <?php echo ($config['checkout_currency'] == 'TRY')  ? ' selected': '';?>>TRY</mwc-list-item>
+                            <mwc-list-item value="TTD" <?php echo ($config['checkout_currency'] == 'TTD')  ? ' selected': '';?>>TTD</mwc-list-item>
+                            <mwc-list-item value="TWD" <?php echo ($config['checkout_currency'] == 'TWD')  ? ' selected': '';?>>TWD</mwc-list-item>
+                            <mwc-list-item value="UAH" <?php echo ($config['checkout_currency'] == 'UAH')  ? ' selected': '';?>>UAH</mwc-list-item>
+                            <mwc-list-item value="UYU" <?php echo ($config['checkout_currency'] == 'UYU')  ? ' selected': '';?>>UYU</mwc-list-item>
+                            <mwc-list-item value="VND" <?php echo ($config['checkout_currency'] == 'VND')  ? ' selected': '';?>>VND</mwc-list-item>
+                            <mwc-list-item value="VUV" <?php echo ($config['checkout_currency'] == 'VUV')  ? ' selected': '';?>>VUV</mwc-list-item>
+                            <mwc-list-item value="WST" <?php echo ($config['checkout_currency'] == 'WST')  ? ' selected': '';?>>WST</mwc-list-item>
+                            <mwc-list-item value="XCD" <?php echo ($config['checkout_currency'] == 'XCD')  ? ' selected': '';?>>XCD</mwc-list-item>
+                            <mwc-list-item value="XOF" <?php echo ($config['checkout_currency'] == 'XOF')  ? ' selected': '';?>>XOF</mwc-list-item>
+                            <mwc-list-item value="YER" <?php echo ($config['checkout_currency'] == 'YER')  ? ' selected': '';?>>YER</mwc-list-item>
+                            <mwc-list-item value="ZAR" <?php echo ($config['checkout_currency'] == 'ZAR')  ? ' selected': '';?>>ZAR</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Seller ID</label><br>
+                        <small class="admin-info">2Checkout seller ID configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="checkout_seller_id" value="<?php echo $config['checkout_seller_id']?>" label="Seller ID"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Publishable Key</label><br>
+                        <small class="admin-info">2Checkout publishable key configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="checkout_publishable_key" value="<?php echo $config['checkout_publishable_key']?>" label="Publishable Key"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Private Key</label><br>
+                        <small class="admin-info">2Checkout private key configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="checkout_private_key" value="<?php echo $config['checkout_private_key']?>" label="Private Key"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_2Checkout">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">PayStack (Credit Cards) Payment</h2>
+                            <div class="card-subtitle">Allow users to make payment using their credit card!</div>
+                        </div>
+                        <?php if($mode == 'night') { ?>
+                            <img src="<?php echo cpanel('si/img/icons/Paystack-dark.png');?>" alt="..." style="height: 1.4rem" />
+                        <?php } else { ?>
+                            <img src="<?php echo cpanel('si/img/icons/Paystack-light.png');?>" alt="..." style="height: 1.4rem" />
+                        <?php } ?>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form payment-settings-form">
+                        <div class="float-start">
+                            <label for="private_photos" class="main-label">Paystack Payment Method</label>
+                            <br><small class="admin-info">Enable Paystack to receive payments from Paystack provider!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="paystack" value="off" />
+                                <input type="checkbox" name="paystack" id="chck-paystack" value="on" <?php echo ($config['paystack'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-paystack" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Secret Key</label><br>
+                        <small class="admin-info">Paystack application secret configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="paystack_secret_key" value="<?php echo $config['paystack_secret_key']?>" label="Secret Key"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label for="paystack_currency" class="main-label">Paystack Currency</label><br>
+                        <small class="admin-info">Set the Paystack currency, this will be used only on Paystack!</small><br><br>
+                        <mwc-select outlined label="Currency" class="w-100" id="paystack_currency" name="paystack_currency">
+                            <mwc-list-item value="USD" <?php echo ($config['paystack_currency'] == 'USD')  ? ' selected': '';?>>USD</mwc-list-item>
+                            <mwc-list-item value="GHS" <?php echo ($config['paystack_currency'] == 'GHS')  ? ' selected': '';?>>GHS</mwc-list-item>
+                            <mwc-list-item value="NGN" <?php echo ($config['paystack_currency'] == 'NGN')  ? ' selected': '';?>>NGN</mwc-list-item>
+                            <mwc-list-item value="ZAR" <?php echo ($config['paystack_currency'] == 'ZAR')  ? ' selected': '';?>>ZAR</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div><br>
+                            <div class="alert-primary alert" style="border-radius:0 !important;">
+                            <a class="text-decoration-none" target="_blank" href="https://support.paystack.com/hc/en-us/articles/360009973799-Can-I-accept-payments-in-USD-">Can I accept payments in USD?</a><br>
+                            <a class="text-decoration-none" target="_blank" href="https://support.paystack.com/hc/en-us/articles/360009973779-What-currency-is-available-to-my-business-">What currency is available to my business?</a>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="float-end">
+                            <button class="btn btn-outline-primary" type="button" id="save_Paystack">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <!-- END -->
+</div>
+
+
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Iyzipay payment</h2>
+                            <div class="card-subtitle">Allow users to make payment using their credit card!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/iyzico.png');?>" alt="..." style="height: 3rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form payment-settings-form">
+                        <div class="float-start">
+                            <label for="private_photos" class="main-label">Iyzipay Payment Method<</label>
+                            <br><small class="admin-info">Enable Iyzipay to receive payments by credit cards!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="iyzipay_payment" value="no" />
+                                <input type="checkbox" name="iyzipay_payment" id="chck-iyzipay_payment" value="yes" <?php echo ($config['iyzipay_payment'] == 'yes') ? 'checked': '';?>>
+                                <label for="chck-iyzipay_payment" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label for="iyzipay_mode" class="main-label">Iyzipay Mode</label><br>
+                        <small class="admin-info">Choose the mode our application is using, for testing use the SandBox mode</small><br><br>
+                        <mwc-select outlined label="Mode" class="w-100" name="iyzipay_mode">
+                            <mwc-list-item value="1" <?php if($config['iyzipay_mode'] == 1){ echo("selected");}?>>SandBox</mwc-list-item>
+                            <mwc-list-item value="0" <?php if($config['iyzipay_mode'] == 0){ echo("selected");}?>>Live Mode</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Iyzipay Key</label><br>
+                        <small class="admin-info">Iyzipay key configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="iyzipay_key" value="<?php echo $config['iyzipay_key']?>" label="Iyzipay key"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Iyzipay Secret Key</label><br>
+                        <small class="admin-info">Iyzipay secret key configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="iyzipay_secret_key" value="<?php echo $config['iyzipay_secret_key']?>" label="Secret Key"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Iyzipay Buyer Name</label><br>
+                        <small class="admin-info">Iyzipay buyer name configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="iyzipay_buyer_name" value="<?php echo $config['iyzipay_buyer_name']?>" label="Buyer Name"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Iyzipay Buyer Surname</label><br>
+                        <small class="admin-info">Iyzipay buyer surname configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="iyzipay_buyer_surname" value="<?php echo $config['iyzipay_buyer_surname']?>" label="Buyer Surname"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Iyzipay Buyer Gsm Number</label><br>
+                        <small class="admin-info">Iyzipay buyer gsm configuration (+905350000000)!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="iyzipay_buyer_gsm_number" value="<?php echo $config['iyzipay_buyer_gsm_number']?>" label="Buyer Gsm Number"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label class="form-label" class="main-label">Iyzipay Buyer Email</label><br>
+                        <small class="admin-info">Iyzipay buyer email configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="iyzipay_buyer_email" value="<?php echo $config['iyzipay_buyer_email']?>" label="Buyer Email"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label class="form-label" class="main-label">Iyzipay Buyer Identity Number</label><br>
+                        <small class="admin-info">Iyzipay buyer identity number configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="iyzipay_identity_number" value="<?php echo $config['iyzipay_identity_number']?>" label="Buyer Identity Number"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label class="form-label" class="main-label">Iyzipay Buyer Address</label><br>
+                        <small class="admin-info">Iyzipay buyer address configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="iyzipay_address" value="<?php echo $config['iyzipay_address']?>" label="Buyer Address"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label class="form-label" class="main-label">Iyzipay Buyer City</label><br>
+                        <small class="admin-info">Iyzipay buyer city configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="iyzipay_city" value="<?php echo $config['iyzipay_city']?>" label="Buyer City"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label class="form-label" class="main-label">Iyzipay Buyer Country</label><br>
+                        <small class="admin-info">Iyzipay buyer country configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="iyzipay_country" value="<?php echo $config['iyzipay_country']?>" label="Buyer Country"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label class="form-label" class="main-label">Iyzipay Buyer Zip</label><br>
+                        <small class="admin-info">Iyzipay buyer zip configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="iyzipay_zip" value="<?php echo $config['iyzipay_zip']?>" label="Buyer Zip"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label for="iyzipay_currency" class="main-label">Iyzipay Currency</label><br>
+                        <small class="admin-info">Set the Iyzipay currency, this will be used only on Iyzipay!</small><br><br>
+                        <mwc-select outlined label="Currency" class="w-100" name="iyzipay_currency" id="iyzipay_currency">
+                            <?php foreach ($config['iyzipay_currency_array'] as $key => $value) { ?>
+                                <mwc-list-item value="<?php echo($value); ?>" <?php echo ($config['iyzipay_currency'] == $value)  ? ' selected': '';?>><?php echo($value); ?></mwc-list-item>
+                            <?php } ?>
+                        </mwc-select>
+                        <div class="clearfix"></div><br>
+                        <div class="alert-primary alert" style="border-radius:0 !important;"><a class="text-decoration-none" href="https://dev.iyzipay.com/tr/odeme-formu/odeme-formu-baslatma" target="_blank">By default, TL is available. You can see available currencies.</a></div>
+                        <div class="clearfix"></div>
+                        <div class="float-end">
+                            <button class="btn btn-outline-primary" type="button" id="save_Iyzipay">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xxl-6 col-md-6 mb-6">
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">CashFree (Credit Cards) Payment</h2>
+                            <div class="card-subtitle">Allow users to make payment using their credit card!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/CashFree.png');?>" alt="..." style="height: 2.5rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form payment-settings-form">
+                        <div class="float-start">
+                            <label for="private_photos" class="main-label">CashFree (Credit Cards) Payment Method</label>
+                            <br><small class="admin-info">Enable CashFree to receive payments by credit cards!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="cashfree_payment" value="no" />
+                                <input type="checkbox" name="cashfree_payment" id="chck-cashfree_payment" value="yes" <?php echo ($config['cashfree_payment'] == 'yes') ? 'checked': '';?>>
+                                <label for="chck-cashfree_payment" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label for="cashfree_mode" class="main-label">CashFree Mode</label><br>
+                        <small class="admin-info">Choose the mode our application is using, for testing use the SandBox mode</small><br><br>
+                        <mwc-select outlined label="Mode" class="w-100" name="cashfree_mode">
+                            <mwc-list-item value="sandBox" <?php if($config['cashfree_mode'] == 'sandBox'){ echo("selected");}?>>SandBox</mwc-list-item>
+                            <mwc-list-item value="live" <?php if($config['cashfree_mode'] == 'live'){ echo("selected");}?>>Live Mode</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Client ID</label><br>
+                        <small class="admin-info">CashFree Client ID configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="cashfree_client_key" value="<?php echo $config['cashfree_client_key']?>" label="Client ID"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Client Secret</label><br>
+                        <small class="admin-info">CashFree client ID secret key configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="cashfree_secret_key" value="<?php echo $config['cashfree_secret_key']?>" label="Secret Key"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label for="cashfree_currency" class="main-label">CashFree Currency</label><br>
+                        <small class="admin-info">Set the CashFree currency, this will be used only on CashFree!</small><br><br>
+                        <mwc-select outlined label="Currency" class="w-100" name="cashfree_currency" id="cashfree_currency">
+                            <?php foreach ($config['cashfree_currency_array'] as $key => $value) { ?>
+                                <mwc-list-item value="<?php echo($value); ?>" <?php echo ($config['cashfree_currency'] == $value)  ? ' selected': '';?>><?php echo($value); ?></mwc-list-item>
+                            <?php } ?>
+                        </mwc-select>
+                        <div class="clearfix"></div><br>
+                        <div class="alert-primary alert" style="border-radius:0 !important;"><a class="text-decoration-none" target="_blank" href="https://docs.cashfree.com/docs/currencies-supported">By default, only INR is available.<br> Write to care@cashfree.com to enable new currencies!</a></div>
+                        <div class="clearfix"></div>
+                        <div class="float-end">
+                            <button class="btn btn-outline-primary" type="button" id="save_CashFree">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+            <br>
+
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Authorize.Net payment</h2>
+                            <div class="card-subtitle">Allow users to make payment using their credit card!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/Authorize.Net.png');?>" alt="..." style="height: 2.3rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form payment-settings-form">
+                        <div class="float-start">
+                            <label for="private_photos" class="main-label">Authorize.Net Payment Method</label>
+                            <br><small class="admin-info">Enable Authorize.Net to receive payments by credit cards!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="authorize_payment" value="off">
+                                <input type="checkbox" name="authorize_payment" id="authorize_payment-enabled" value="on" <?php echo ($config['authorize_payment'] == 'on') ? 'checked': '';?>>
+                                <label for="authorize_payment-enabled" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label for="authorize_test_mode" class="main-label">Authorize.Net Mode</label><br>
+                        <small class="admin-info">Choose the mode our application is using, for testing use the SandBox mode</small><br><br>
+                        <mwc-select outlined label="Mode" class="w-100" name="authorize_test_mode">
+                            <mwc-list-item value="PRODUCTION" <?php echo ($config['authorize_test_mode'] == 'PRODUCTION') ? 'selected': '';?>>Live</mwc-list-item>
+                            <mwc-list-item value="SANDBOX" <?php echo ($config['authorize_test_mode'] == 'SANDBOX') ? 'selected': '';?>>Test</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Authorize.Net API LOGIN ID</label><br>
+                        <small class="admin-info">Authorize.Net API login ID configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="authorize_login_id" id="authorize_login_id" value="<?php echo $config['authorize_login_id']?>" label="Login ID"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Authorize.Net TRANSACTION KEY</label><br>
+                        <small class="admin-info">Authorize.Net transaction key configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" id="authorize_transaction_key" name="authorize_transaction_key" value="<?php echo $config['authorize_transaction_key']?>" label="Transaction Key"></mwc-textfield>
+                        <div class="clearfix"></div><br>
+                        <div class="float-end">
+                            <button class="btn btn-outline-primary" type="button" id="save_Authorize">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+            <br><br>
+
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Securionpay Payment</h2>
+                            <div class="card-subtitle">Allow users to make payment using their credit card!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/Securionpay.png');?>" alt="..." style="height: 2.6rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form payment-settings-form">
+                        <div class="float-start">
+                            <label for="private_photos" class="main-label">Securionpay Payment Method</label>
+                            <br><small class="admin-info">Enable to receive payments from Securionpay provider!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="securionpay_payment" value="off">
+                                <input type="checkbox" name="securionpay_payment" id="securionpay_payment-enabled" value="on" <?php echo ($config['securionpay_payment'] == 'on') ? 'checked': '';?>>
+                                <label for="securionpay_payment-enabled" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Securionpay Public key</label><br>
+                        <small class="admin-info">Securionpay public key configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="securionpay_public_key" value="<?php echo $config['securionpay_public_key']?>" label="Public Key"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Securionpay Secret Key</label><br>
+                        <small class="admin-info">Securionpay secret key configuration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="securionpay_secret_key" value="<?php echo $config['securionpay_secret_key']?>" label="Secret Key"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_Securionpay">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- END -->
+</div>
+
+<script>
+    $(function() {
+        let notify_error = {status: 'error',title: 'Payment Configuration',text: 'Failed to updated this settings',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_warning = {status: 'warning',title: 'Payment Configuration',text: "Oops there's an error in the script",effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_success = {status: 'success',title: 'Payment Configuration',text: 'Configurations Updated Successfully',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        $('.switcher input[type=checkbox]').click(function () {
+            var configName = $(this).attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            if ($(this).is(":checked") === true) {
+                objData[configName] = $(this).val();
+                new Notify({ ...notify_success })
+            }
+            else{
+                if ($('input[name='+configName+']')[0]) {
+                    objData[configName] = $($('input[name='+configName+']')[0]).val();
+                    new Notify({ ...notify_success })
+                }
+            }
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('general-settings'), objData);
+        });
+
+        $('mwc-select').on('change', function() {
+            var thisElement = $(this);
+            var configName = thisElement.attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            objData[configName] = thisElement.val();
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('general-settings'), objData, function (data) {
+                if (data.status == 200) {
+                    new Notify({ ...notify_success });
+                } else {
+                    new Notify({ ...notify_error });
+                }
+            });
+        });
+
+        function update_input(){
+            $('mwc-textfield').on('keyup', function() {
+                var thisElement = $(this);
+                var configName = thisElement.attr('name');
+                var hash_id = $('mwc-textfield[name=hash_id]').val();
+                var objData = {};
+                objData[configName] = this.value;
+                objData['hash_id'] = hash_id;
+                $.post(cpanel_ajax_url('general-settings'), objData, function (data) {
+                    if (data.status == 200) {
+                    } else {
+                        new Notify({ ...notify_error })
+                    }
+                });
+            });
+        }
+        setTimeout(function () {
+            update_input();
+        }, 1000);
+
+        $('#save_paypal').on('click', function() {
+            $('#save_paypal').text('Please Wait...');
+			$('#save_paypal').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_paypal').text('Save Changes');
+			$('#save_paypal').removeAttr('disabled');
+            }, 1000);
+        });
+
+        $('#save_stripe').on('click', function() {
+            $('#save_stripe').text('Please Wait...');
+			$('#save_stripe').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_stripe').text('Save Changes');
+			$('#save_stripe').removeAttr('disabled');
+            }, 1000);
+        });
+
+        $('#save_paySera').on('click', function() {
+            $('#save_paySera').text('Please Wait...');
+			$('#save_paySera').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_paySera').text('Save Changes');
+			$('#save_paySera').removeAttr('disabled');
+            }, 1000);
+        });
+
+        $('#save_RazorPay').on('click', function() {
+            $('#save_RazorPay').text('Please Wait...');
+			$('#save_RazorPay').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_RazorPay').text('Save Changes');
+			$('#save_RazorPay').removeAttr('disabled');
+            }, 1000);
+        });
+
+        $('#save_Paystack').on('click', function() {
+            $('#save_Paystack').text('Please Wait...');
+			$('#save_Paystack').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_Paystack').text('Save Changes');
+			$('#save_Paystack').removeAttr('disabled');
+            }, 1000);
+        });
+
+        $('#save_2Checkout').on('click', function() {
+            $('#save_2Checkout').text('Please Wait...');
+			$('#save_2Checkout').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_2Checkout').text('Save Changes');
+			$('#save_2Checkout').removeAttr('disabled');
+            }, 1000);
+        });
+
+        $('#save_Iyzipay').on('click', function() {
+            $('#save_Iyzipay').text('Please Wait...');
+			$('#save_Iyzipay').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_Iyzipay').text('Save Changes');
+			$('#save_Iyzipay').removeAttr('disabled');
+            }, 1000);
+        });
+
+        $('#save_CashFree').on('click', function() {
+            $('#save_CashFree').text('Please Wait...');
+			$('#save_CashFree').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_CashFree').text('Save Changes');
+			$('#save_CashFree').removeAttr('disabled');
+            }, 1000);
+        });
+
+        $('#save_Authorize').on('click', function() {
+            $('#save_Authorize').text('Please Wait...');
+			$('#save_Authorize').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_Authorize').text('Save Changes');
+			$('#save_Authorize').removeAttr('disabled');
+            }, 1000);
+        });
+
+        $('#save_Securionpay').on('click', function() {
+            $('#save_Securionpay').text('Please Wait...');
+			$('#save_Securionpay').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_Securionpay').text('Save Changes');
+			$('#save_Securionpay').removeAttr('disabled');
+            }, 1000);
+        });
+
+        $('#save_Bitcoin').on('click', function() {
+            $('#save_Bitcoin').text('Please Wait...');
+			$('#save_Bitcoin').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_Bitcoin').text('Save Changes');
+			$('#save_Bitcoin').removeAttr('disabled');
+            }, 1000);
+        });
+
+        $('#save_coinbase').on('click', function() {
+            $('#save_coinbase').text('Please Wait...');
+			$('#save_coinbase').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_coinbase').text('Save Changes');
+			$('#save_coinbase').removeAttr('disabled');
+            }, 1000);
+        });
+    });
+</script>

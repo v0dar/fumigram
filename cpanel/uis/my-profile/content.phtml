@@ -1,0 +1,276 @@
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0"><?php echo $me['name']; ?></h1>
+        <div class="text-muted">Every new day is a chance to change your life. God bless you! </div>
+    </div>
+</div>
+<div class="container-xl">
+    <!-- <mwc-tab-bar style="margin-bottom: -1px" activeindex="0">
+        <mwc-tab class="profile-click" label="Profile" icon="face" stacked></mwc-tab>
+        <mwc-tab class="notify-click" label="Notifications" icon="notifications_active" stacked></mwc-tab>
+        <mwc-tab class="admin-click" label="Administration" icon="security" stacked></mwc-tab>
+        <mwc-tab class="password-click" label="Password" icon="lock" stacked></mwc-tab>
+    </mwc-tab-bar>
+    <hr class="mt-0 mb-5" /> -->
+    <div class="row gx-5">
+        <div class="col-xl-4">
+            <div class="card card-raised mb-5">
+                <div class="card-body p-5">
+                    <div class="card-title">Profile Picture</div>
+                    <div class="card-subtitle mb-4">This image will be visible to the general public and also search engines when they search google for your profile or username.</div>
+                    <div class="text-center">
+                        <img class="img-fluid rounded-circle mb-1" src="<?php echo $me['avatar']; ?>" alt="..." style="max-width: 180px; max-height: 180px" />
+                        <div class="caption fst-italic text-muted mb-4">JPG, PNG or GIF no larger than <?php if($config['max_upload'] == '2000000') { ?>2MB<?php }elseif($config['max_upload'] == '6000000') { ?>6MB<?php }elseif($config['max_upload'] == '12000000') { ?>12MB<?php }elseif($config['max_upload'] == '24000000') { ?>24MB<?php }elseif($config['max_upload'] == '48000000') { ?>48MB<?php }elseif($config['max_upload'] == '96000000') { ?>96MB<?php }elseif($config['max_upload'] == '256000000') { ?>256MB<?php }elseif($config['max_upload'] == '512000000') { ?>512MB<?php }elseif($config['max_upload'] == '1000000000') { ?>1GB<?php }elseif($config['max_upload'] == '10000000000') { ?>10GB<?php } ?></div>
+                        <button class="btn btn-primary" type="button" onclick="$('#avatar').trigger('click');">Upload new image <i class="material-icons trailing-icon">upload</i></button>
+                    </div>
+                    <form id="edit-avatar"><input type="file" accept="image/x-png,image/jpg,image/jpeg,image/gif" name="avatar" id="avatar" class="hidden"></form>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8">
+            <!-- Account details card-->
+            <div class="card card-raised mb-5 details">
+                <div class="card-body p-5">
+                    <div class="card-title">Account Details</div>
+                    <div class="card-subtitle mb-4">Review and update your account information below.</div>
+                    <form class="form" id="account-details">
+                        <div class="mb-4">
+                            <mwc-textfield class="w-100" type="text" name="username" outlined="" value="<?php echo $me['username']; ?>" label="Username"></mwc-textfield>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <mwc-textfield class="w-100" type="text" name="fname" outlined="" value="<?php echo $me['fname']; ?>" label="First Name"></mwc-textfield>
+                            </div>
+                            <div class="col-md-6">
+                                <mwc-textfield class="w-100" type="text" name="lname" outlined="" value="<?php echo $me['lname']; ?>" label="Last Name"></mwc-textfield>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <mwc-textfield class="w-100" type="email" name="email" outlined="" value="<?php echo $me['email']; ?>" label="Email Address"></mwc-textfield>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <mwc-textfield class="w-100" type="tel" name="b_phone" outlined="" value="<?php echo $me['b_phone']; ?>" label="Mobile Number"></mwc-textfield>
+                            </div>
+                            <div class="col-md-6">
+                                <mwc-select class="w-100" outlined="" name="profile" label="Profile Type">
+                                    <mwc-list-item value="2" <?php if($me['profile'] == 2){ ?> selected <?php } ?>>Nova Profile</mwc-list-item>
+                                    <mwc-list-item value="1" <?php if($me['profile'] == 1){ ?> selected <?php } ?>>Linear Profile</mwc-list-item>
+                                    <mwc-list-item value="5" <?php if($me['profile'] == 5){ ?> selected <?php } ?>>Oceana Profile</mwc-list-item>
+                                    <mwc-list-item value="6" <?php if($me['profile'] == 6){ ?> selected <?php } ?>>Hexagon Profile</mwc-list-item>
+                                    <mwc-list-item value="3" <?php if($me['profile'] == 3){ ?> selected <?php } ?> disabled>Bluetech Profile</mwc-list-item>
+                                    <mwc-list-item value="4" <?php if($me['profile'] == 4){ ?> selected <?php } ?> disabled>Pathfinder Profile</mwc-list-item>
+                                </mwc-select>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <mwc-textarea class="w-100" type="text" outlined="" name="about" value="<?php echo $me['about']; ?>"  maxlength="150" label="About You" style="height:80px;"></mwc-textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card card-raised mb-5 notifications"  style="display: none;">
+                <div class="card-body p-5">
+                    <div class="card-title">Notifications</div>
+                    <div class="card-subtitle mb-4">Review and update your account notifications intent.</div>
+                    <form class="form" id="account-details">
+                        <div class="float-start">
+                            <label class="main-label">Follow Me</label>
+                            <br><small class="admin-info">Send me a notification when someone follow's me!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="on_follow" value="0" />
+                                <input type="checkbox" name="on_follow" id="chck-on_follow" value="1" <?php if($me['n_on_follow'] == 1){ ?> checked <?php } ?>>
+                                <label for="chck-on_follow" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <div class="float-start">
+                            <label class="main-label">Liked My Post</label>
+                            <br><small class="admin-info">Send me a notification when someone like's my post!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="on_like_post" value="0" />
+                                <input type="checkbox" name="on_like_post" id="chck-on_like_post" value="1" <?php if($me['n_on_like'] == 1){ ?> checked <?php } ?>>
+                                <label for="chck-on_like_post" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <div class="float-start">
+                            <label class="main-label">Mentioned Me</label>
+                            <br><small class="admin-info">Send me a notification whenever someone mention's me!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="on_mention" value="0" />
+                                <input type="checkbox" name="on_mention" id="chck-on_mention" value="1" <?php if($me['n_on_mention'] == 1){ ?> checked <?php } ?>>
+                                <label for="chck-on_mention" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="float-start">
+                            <label class="main-label">Liked My Comment</label>
+                            <br><small class="admin-info">Send me a notification when someone put a like on my comments!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="on_comment_like" value="0" />
+                                <input type="checkbox" name="on_comment_like" id="chck-on_comment_like" value="1" <?php if($me['n_on_comment_like'] == 1){ ?> checked <?php } ?>>
+                                <label for="chck-on_comment_like" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <div class="float-start">
+                            <label class="main-label">Replied My Comments</label>
+                            <br><small class="admin-info">Send me a notification when someone replies to my comment!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="on_comment_reply" value="0" />
+                                <input type="checkbox" name="on_comment_reply" id="chck-on_comment_reply" value="1" <?php if($me['n_on_comment_reply'] == 1){ ?> checked <?php } ?>>
+                                <label for="chck-on_comment_reply" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <div class="float-start">
+                            <label class="main-label">Commented on my Post</label>
+                            <br><small class="admin-info">Send me a notification whenever someone comments on my post!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="on_commnet_post" value="0" />
+                                <input type="checkbox" name="on_commnet_post" id="chck-on_commnet_post" value="1" <?php if($me['n_on_comment'] == 1){ ?> checked <?php } ?>>
+                                <label for="chck-on_commnet_post" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <div class="float-start">
+                            <label class="main-label">Sent me a Follow Request</label>
+                            <br><small class="admin-info">Send me a notification when someone sends me a follow request!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="on_follow_request" value="0" />
+                                <input type="checkbox" name="on_follow_request" id="chck-on_follow_request" value="1" <?php if($me['n_on_follow_request'] == 1){ ?> checked <?php } ?>>
+                                <label for="chck-on_follow_request" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <div class="float-start">
+                            <label class="main-label">Rejected my Follow Request</label>
+                            <br><small class="admin-info">Send me a notification when someone reject's my follow request!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="on_rejected_request" value="0" />
+                                <input type="checkbox" name="on_rejected_request" id="chck-on_rejected_request" value="1" <?php if($me['n_on_rejected_request'] == 1){ ?> checked <?php } ?>>
+                                <label for="chck-on_rejected_request" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(".notify-click").click(function(event) {
+        $(".details").slideUp();
+	    $(".notifications").slideDown();
+	});
+
+    $(".profile-click").click(function(event) {
+        $(".details").slideDown();
+	    $(".notifications").slideUp();
+	});
+
+    $("#avatar").change(function(event) {
+		$("#edit-avatar").submit();
+	});
+	$("#edit-avatar").ajaxForm({
+		url: '<?php echo($config['site_url']) ?>/aj/settings/edit-avatar',
+		type: 'POST',
+		dataType: 'json',
+		data:{user_id: '<?php echo $me['user_id']; ?>'},
+		success: function(data){
+            if (data.status == 200) {
+                $('.img-fluid').attr('src', data.avatar);
+            }
+        }
+	});
+    $('.switcher input[type=checkbox]').click(function () {
+        var data = {};
+        var details = $(this).attr('name');
+        if ($(this).is(":checked") === true) {
+            data[details] = $(this).val();
+            // let notify_success = {status: 'success',title: 'Account Settings',text: data.message,effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+            // new Notify({ ...notify_success });
+        } else {
+            if ($('input[name='+details+']')[0]) {
+                data[details] = $($('input[name='+details+']')[0]).val();
+                // let notify_success = {status: 'success',title: 'Account Settings',text: data.message,effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                // new Notify({ ...notify_success });
+            }
+        }
+        $.post(calling('notifications'), data, function (data) {
+            if (data.status == 200) {
+                let notify_success = {status: 'success',title: 'Account Settings',text: data.message,effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                new Notify({ ...notify_success });
+            } else {
+                let notify_error = {status: 'error',title: 'Account Settings',text: data.message,effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                new Notify({ ...notify_error });
+            }
+        });
+    });
+    function account_data(){
+        clearTimeout(timeout);
+        $('mwc-select').on('change', function() {
+            var data = {};
+            var value = $(this);
+            var details = value.attr('name');
+            data[details] = value.val();
+            $.post(calling('details'), data, function (data) {
+                if (data.status == 200) {
+                    let notify_success = {status: 'success',title: 'Account Settings',text: data.message,effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                    new Notify({ ...notify_success });
+                } else {
+                    let notify_error = {status: 'error',title: 'Account Settings',text: data.message,effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                    new Notify({ ...notify_error });
+                }
+            });
+        });
+
+        $('mwc-textfield, mwc-textarea').on('keyup', function() {
+            var data = {};
+            var value = $(this);
+            var details = value.attr('name');
+            data[details] = value.val();
+            $.post(calling('details'), data, function (data) {
+                if (data.status == 200) {
+                    // let notify_success = {status: 'success',title: 'Account Settings',text: data.message,effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                    // new Notify({ ...notify_success });
+                } else {
+                    let notify_error = {status: 'error',title: 'Account Settings',text: data.message,effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                    new Notify({ ...notify_error });
+                }
+            });
+        });
+    }
+
+    var timeout = setTimeout(function () {
+        account_data();
+    }, 2000);
+
+</script>

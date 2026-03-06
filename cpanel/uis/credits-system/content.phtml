@@ -1,0 +1,515 @@
+<?php 
+if ($me['manager'] == 0 && $me['admin'] == 0) {    
+    header("Location: " . cpanel('overview'));
+    exit();
+}
+
+?>
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">Credits System</h1>
+        <div class="text-muted">The credits system of configurations <?php echo $config['site_name']; ?></div>
+    </div>
+</div>
+<!-- Colored status cards-->
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Sack of Credits</h2>
+                            <div class="card-subtitle">Sack of credits Configurations!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/bag-of-credits.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form general-settings-form">
+                        <label class="form-label" class="main-label">Sack of Credits</label><br>
+                        <small class="admin-info">How many credits will users recieve when they buy one</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['sack_of_credits']?>" name="sack_of_credits" label="Credits?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Sack of Credits Price</label><br>
+                        <small class="admin-info">How much does a sack of credits cost!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['sack_of_credits_price']?>" name="sack_of_credits_price" label="Price <?php echo Currency($context['config']['currency']);?>"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_changes">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Cup of Credits</h2>
+                            <div class="card-subtitle">Pot of credits Configurations!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/cup-of-credits.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form general-settings-form">
+                        <label class="form-label" class="main-label">Cup of Credits</label><br>
+                        <small class="admin-info">How many credits will users recieve when they buy one</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['cup_of_credits']?>" name="cup_of_credits" label="Credits?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Cup of Credits Price</label><br>
+                        <small class="admin-info">How much does a cup of credits cost!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['cup_of_credits_price']?>" name="cup_of_credits_price" label="Price <?php echo Currency($context['config']['currency']);?>"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_changes">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Pot of Credits</h2>
+                            <div class="card-subtitle">Pot of credits Configurations!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/pot-of-credits.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form general-settings-form">
+                        <label class="form-label" class="main-label">Pot of Credits</label><br>
+                        <small class="admin-info">How many credits will users recieve when they buy one</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['pot_of_credits']?>" name="pot_of_credits" label="Credits?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Pot of Credits Price</label><br>
+                        <small class="admin-info">How much does a pot of credits cost!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['pot_of_credits_price']?>" name="pot_of_credits_price" label="Price <?php echo Currency($context['config']['currency']);?>"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_changes">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>     
+            </div>
+            <br>
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Chest of Credits</h2>
+                            <div class="card-subtitle">Chest of credits Configurations!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/chest-of-credits.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form general-settings-form">
+                        <label class="form-label" class="main-label">Chest of Credits</label><br>
+                        <small class="admin-info">How many credits will users recieve when they buy one</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['chest_of_credits']?>" name="chest_of_credits" label="Credits?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Chest of Credits Price</label><br>
+                        <small class="admin-info">How much does a chest of credits cost!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['chest_of_credits_price']?>" name="chest_of_credits_price" label="Price <?php echo Currency($context['config']['currency']);?>"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_changes">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>      
+</div>
+
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+            <div class="card-header bg-white px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <h2 class="card-title mb-0">Sack of Points</h2>
+                        <div class="card-subtitle">Sack of points Configurations!</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/points.png');?>" alt="..." style="height: 4rem" />
+                </div>
+            </div>
+
+            <div class="card-body">
+                <form class="form general-settings-form">
+                    <label class="form-label" class="main-label">Sack of Points</label><br>
+                    <small class="admin-info">How many points will users recieve when they buy one</small><br><br>
+                    <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['sack_of_points']?>" name="sack_of_points" label="Points?"></mwc-textfield>
+                    <div class="clearfix"></div>
+                    <hr>
+                    <label class="form-label" class="main-label">Sack of Points Price</label><br>
+                    <small class="admin-info">How much credits does it cost to buy one!</small><br><br>
+                    <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['sack_of_points_price']?>" name="sack_of_points_price" label="Credits?"></mwc-textfield>
+                    <div class="clearfix"></div>
+                    <div class="float-end"><br>
+                        <button class="btn btn-outline-primary" type="button" id="save_changes">
+                            Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+        <br>
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+            <div class="card-header bg-white px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <h2 class="card-title mb-0">Box of Boosts</h2>
+                        <div class="card-subtitle">Box of boosts Configurations!</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/boosts.png');?>" alt="..." style="height: 4rem" />
+                </div>
+            </div>
+
+            <div class="card-body">
+                <form class="form general-settings-form">
+                    <label class="form-label" class="main-label">Box of Boosts</label><br>
+                    <small class="admin-info">How many boosts will users recieve when they buy one</small><br><br>
+                    <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['box_of_boosts']?>" name="box_of_boosts" label="Boosts?"></mwc-textfield>
+                    <div class="clearfix"></div>
+                    <hr>
+                    <label class="form-label" class="main-label">Box of Boosts Price</label><br>
+                    <small class="admin-info">How much credits does it cost to buy one!</small><br><br>
+                    <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['box_of_boost_price']?>" name="box_of_boost_price" label="Credits?"></mwc-textfield>
+                    <div class="clearfix"></div>
+                    <div class="float-end"><br>
+                        <button class="btn btn-outline-primary" type="button" id="save_changes">
+                            Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+            <div class="card-header bg-white px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <h2 class="card-title mb-0">Rain of Tokens</h2>
+                        <div class="card-subtitle">Rain of tokens Configurations!</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/tokens.png');?>" alt="..." style="height: 4rem" />
+                </div>
+            </div>
+
+            <div class="card-body">
+                <form class="form general-settings-form">
+                    <label class="form-label" class="main-label">Rain of Tokens</label><br>
+                    <small class="admin-info">How many tokens will users recieve when they buy one</small><br><br>
+                    <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['rain_of_tokens']?>" name="rain_of_tokens" label="Tokens?"></mwc-textfield>
+                    <div class="clearfix"></div>
+                    <hr>
+                    <label class="form-label" class="main-label">Rain of Tokens Price</label><br>
+                    <small class="admin-info">How much credits does it cost to buy one!</small><br><br>
+                    <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['rain_of_tokens_price']?>" name="rain_of_tokens_price" label="Credits?"></mwc-textfield>
+                    <div class="clearfix"></div>
+                    <div class="float-end"><br>
+                        <button class="btn btn-outline-primary" type="button" id="save_changes">
+                            Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+        <br>
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+            <div class="card-header bg-white px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <h2 class="card-title mb-0">Bag of Tokens</h2>
+                        <div class="card-subtitle">Bag of tokens Configurations!</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/bag-of-tokens.png');?>" alt="..." style="height: 4rem" />
+                </div>
+            </div>
+
+            <div class="card-body">
+                <form class="form general-settings-form">
+                    <label class="form-label" class="main-label">Bag of Tokens</label><br>
+                    <small class="admin-info">How many tokens will users recieve when they buy one</small><br><br>
+                    <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['bag_of_tokens']?>" name="bag_of_tokens" label="Tokens?"></mwc-textfield>
+                    <div class="clearfix"></div>
+                    <hr>
+                    <label class="form-label" class="main-label">Bag of Tokens Price</label><br>
+                    <small class="admin-info">How much credits does it cost to buy one!</small><br><br>
+                    <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['bag_of_tokens_price']?>" name="bag_of_tokens_price" label="Credits?"></mwc-textfield>
+                    <div class="clearfix"></div>
+                    <div class="float-end"><br>
+                        <button class="btn btn-outline-primary" type="button" id="save_changes">
+                            Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+            <div class="card-header bg-white px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <h2 class="card-title mb-0">Rain of Tokens</h2>
+                        <div class="card-subtitle">Rain of tokens Configurations!</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/tokens.png');?>" alt="..." style="height: 4rem" />
+                </div>
+            </div>
+
+            <div class="card-body">
+                <form class="form general-settings-form">
+                    <label class="form-label" class="main-label">Rain of Tokens</label><br>
+                    <small class="admin-info">How many tokens will users recieve when they buy one</small><br><br>
+                    <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['rain_of_tokens_main']?>" name="rain_of_tokens_main" label="Tokens?"></mwc-textfield>
+                    <div class="clearfix"></div>
+                    <hr>
+                    <label class="form-label" class="main-label">Rain of Tokens Price</label><br>
+                    <small class="admin-info">How much credits does it cost to buy one!</small><br><br>
+                    <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['rain_of_tokens_main_price']?>" name="rain_of_tokens_main_price" label="Credits?"></mwc-textfield>
+                    <div class="clearfix"></div>
+                    <div class="float-end"><br>
+                        <button class="btn btn-outline-primary" type="button" id="save_changes">
+                            Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+        <br>
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+            <div class="card-header bg-white px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <h2 class="card-title mb-0">Boost Timer</h2>
+                        <div class="card-subtitle">Boost timer Configurations!</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/boost-timer.png');?>" alt="..." style="height: 4rem" />
+                </div>
+            </div>
+
+            <div class="card-body">
+                <form class="form general-settings-form">
+                    <label class="form-label" class="main-label">Boost Timer</label><br>
+                    <small class="admin-info">How many days will a user boosted post last for<br>When a user buys this, the default boost timer will be overridden</small><br><br>
+                    <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['boost_timer_count']?>" name="boost_timer_count" label="Timer?"></mwc-textfield>
+                    <div class="clearfix"></div>
+                    <hr>
+                    <label class="form-label" class="main-label">Boost Timer Price</label><br>
+                    <small class="admin-info">How much credits does it cost to buy one!</small><br><br>
+                    <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['boost_timer_price']?>" name="boost_timer_price" label="Credits?"></mwc-textfield>
+                    <div class="clearfix"></div>
+                    <div class="float-end"><br>
+                        <button class="btn btn-outline-primary" type="button" id="save_changes">
+                            Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+            <div class="card-header bg-white px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <h2 class="card-title mb-0">Chest of Tokens </h2>
+                        <div class="card-subtitle">Chest of tokens Configurations!</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/treasure-chest.png');?>" alt="..." style="height: 4rem" />
+                </div>
+            </div>
+
+            <div class="card-body">
+                <form class="form general-settings-form">
+                    <label class="form-label" class="main-label">Chest of Tokens</label><br>
+                    <small class="admin-info">How many tokens will users recieve when they buy one</small><br><br>
+                    <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['chest_of_tokens']?>" name="chest_of_tokens" label="Tokens?"></mwc-textfield>
+                    <div class="clearfix"></div>
+                    <hr>
+                    <label class="form-label" class="main-label">Chest of Tokens Price</label><br>
+                    <small class="admin-info">How much credits does it cost to buy one!</small><br><br>
+                    <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['chest_of_tokens_price']?>" name="chest_of_tokens_price" label="Credits?"></mwc-textfield>
+                    <div class="clearfix"></div>
+                    <div class="float-end"><br>
+                        <button class="btn btn-outline-primary" type="button" id="save_changes">
+                            Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+        <br>
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+            <div class="card-header bg-white px-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="me-2">
+                        <h2 class="card-title mb-0">Crate of Boost</h2>
+                        <div class="card-subtitle">Crate of boost Configurations!</div>
+                    </div>
+                    <img src="<?php echo cpanel('si/img/icons/boosts.png');?>" alt="..." style="height: 4rem" />
+                </div>
+            </div>
+
+            <div class="card-body">
+                <form class="form general-settings-form">
+                    <label class="form-label" class="main-label">Crate of Boost</label><br>
+                    <small class="admin-info">How many boosts will users recieve when they buy one</small><br><br>
+                    <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['crate_of_boost']?>" name="crate_of_boost" label="Boosts?"></mwc-textfield>
+                    <div class="clearfix"></div>
+                    <hr>
+                    <label class="form-label" class="main-label">Crate of Boost Price</label><br>
+                    <small class="admin-info">How much credits does it cost to buy one!</small><br><br>
+                    <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['crate_of_boost_price']?>" name="crate_of_boost_price" label="Credits?"></mwc-textfield>
+                    <div class="clearfix"></div>
+                    <div class="float-end"><br>
+                        <button class="btn btn-outline-primary" type="button" id="save_changes">
+                            Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6"></div>
+    <div class="col-xxl-6 col-md-6 mb-6"></div>
+</div>
+
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6"></div>
+    <div class="col-xxl-6 col-md-6 mb-6"></div>
+</div> -->
+
+
+
+<script>
+    $(function() {
+        let notify_error = {status: 'error',title: 'Points Settings',text: 'Failed to updated this settings',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_warning = {status: 'warning',title: 'Points Settings',text: "Oops there's an error in the script",effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_success = {status: 'success',title: 'Points Settings',text: 'Configurations Updated Successfully',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        $('.switcher input[type=checkbox]').click(function () {
+            var configName = $(this).attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            if ($(this).is(":checked") === true) {
+                objData[configName] = $(this).val();
+                new Notify({ ...notify_success })
+            }
+            else{
+                if ($('input[name='+configName+']')[0]) {
+                    objData[configName] = $($('input[name='+configName+']')[0]).val();
+                    new Notify({ ...notify_success })
+                }
+            }
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('general-settings'), objData);
+        });
+
+        $('mwc-select').on('change', function() {
+            var thisElement = $(this);
+            var configName = thisElement.attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            objData[configName] = thisElement.val();
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('general-settings'), objData, function (data) {
+                if (data.status == 200) {
+                    new Notify({ ...notify_success });
+                } else {
+                    new Notify({ ...notify_error });
+                }
+            });
+        });
+
+        function update_input(){
+            $('mwc-textfield').on('keyup', function() {
+                var thisElement = $(this);
+                var configName = thisElement.attr('name');
+                var hash_id = $('mwc-textfield[name=hash_id]').val();
+                var objData = {};
+                objData[configName] = this.value;
+                objData['hash_id'] = hash_id;
+                $.post(cpanel_ajax_url('general-settings'), objData, function (data) {
+                    if (data.status == 200) {
+                    } else {
+                        new Notify({ ...notify_error })
+                    }
+                });
+            });
+        }
+        $('#save_changes').on('click', function() {
+            $('#save_changes').text('Please Wait...');
+			$('#save_changes').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_changes').text('Save Changes');
+			$('#save_changes').removeAttr('disabled');
+            }, 2000);
+        });
+        $('#save_lock').on('click', function() {
+            $('#save_lock').text('Please Wait...');
+			$('#save_lock').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_lock').text('Save Changes');
+			$('#save_lock').removeAttr('disabled');
+            }, 1000);
+        });
+        $('#save_login').on('click', function() {
+            $('#save_login').text('Please Wait...');
+			$('#save_login').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_login').text('Save Changes');
+			$('#save_login').removeAttr('disabled');
+            }, 1000);
+        });
+        setTimeout(function () {
+            update_input();
+        }, 2000);
+    });
+</script>

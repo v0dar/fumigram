@@ -1,0 +1,86 @@
+<?php 
+if ($me['manager'] == 0 && $me['admin'] == 0) {    
+    header("Location: " . cpanel('overview'));
+    exit();
+}
+
+$ads1 = $config['ad1'];
+$ads2 = $config['ad2'];
+$ads3 = $config['ad3'];
+?>
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">Site Advertisements</h1>
+        <div class="text-muted">Block ads that will be displayed in site blocks!</div>
+    </div>
+</div>
+<!-- Colored status cards-->
+<div class="row">
+        <div class="col-xxl-12 col-md-12 mb-12">
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Manage Website Advertisements</h2>
+                            <div class="card-subtitle">Content placed here appears on diffrent sections of the website!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/web-advertising.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form" method="POST">
+                        <label class="form-label" class="main-label">Navigation</label><br>
+                        <small class="admin-info">Appears under the navigation menu</small><br><br>
+                        <textarea name="ad1" id="ad1" class="form-control" cols="30" rows="4" style="resize:none;"><?php echo $config['ad1'];?></textarea>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label class="form-label" class="main-label">Top Sidebar</label><br>
+                        <small class="admin-info">Appears at the top of the sidebar</small><br><br>
+                        <textarea name="ad2" id="ad2" class="form-control" cols="30" rows="4" style="resize:none;"><?php echo $config['ad2'];?></textarea>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label class="form-label" class="main-label">Bottom Sidebar</label><br>
+                        <small class="admin-info">Appears at the bottom of the sidebar</small><br><br>
+                        <textarea name="ad3" id="ad3" class="form-control" cols="30" rows="4" style="resize:none;"><?php echo $config['ad3'];?></textarea>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="submit">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- END -->
+</div>
+
+<script>
+    $(function() {
+        let notify_success = {status: 'success',title: 'Site Advertisements',text: 'Settings updated successfully',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        jQuery(document).ready(function($) {
+            var ssform = $("form.site-settings-form");
+            ssform.ajaxForm({
+                url: cpanel_ajax_url('ad-settings'),
+                type: 'POST',
+                dataType: 'json',
+                beforeSubmit: function(arr,form){
+                    arr[0]['value'] = btoa(unescape(encodeURIComponent(arr[0]['value'])));
+                    $(form).find('button[type=submit]').text('Please wait...').attr('disabled', 'true');
+                },
+                success: function(data, status, xhr, form){
+                    ssform.find('button[type=submit]').text('Save Changes').removeAttr('disabled');
+                    if (data.status == 200) {
+                        new Notify({ ...notify_success });
+                    }
+                    else{
+                        let notify_error = {status: 'error',title: 'Site Advertisements',text: '' + data.error + '',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                        new Notify({ ...notify_error });
+                    }   
+                }
+            });
+        });
+    });
+</script>

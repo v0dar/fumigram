@@ -1,0 +1,225 @@
+<?php 
+if ($me['manager'] == 0 && $me['admin'] == 0) {    
+    header("Location: " . cpanel('overview'));
+    exit();
+}
+?>
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">Site Design</h1>
+        <div class="text-muted">Configure your site design.</div>
+    </div>
+</div>
+<!-- Colored status cards-->
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Site Design</h2>
+                            <div class="card-subtitle">You can change the logo and favicon here!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/art-and-design.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form id="site-design" method="POST">
+                        <div class="btn-file d-flex align-items-center">
+                            <input type="file" id="favicon" accept="image/x-png, image/gif, image/jpeg" name="favicon" class="hidden">
+                            <div class="mr-3 change-file-ico">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22"><path fill-rule="evenodd" fill="currentColor" d="M19.6017 4.39861C17.3561 2.1531 13.7154 2.1531 11.4699 4.39861L10.7628 5.10572C10.4699 5.39861 10.4699 5.87349 10.7628 6.16638C11.0557 6.45927 11.5306 6.45927 11.8235 6.16638L12.5306 5.45927C14.1903 3.79955 16.8813 3.79955 18.541 5.45927C20.2007 7.119 20.2007 9.80995 18.541 11.4697L16.8548 13.1559C15.3453 14.6654 12.8979 14.6654 11.3883 13.1559L11.1164 12.8839C10.8235 12.591 10.3486 12.591 10.0557 12.8839C9.76283 13.1768 9.76282 13.6517 10.0557 13.9446L10.3277 14.2165C12.423 16.3118 15.8202 16.3118 17.9155 14.2165L19.6017 12.5303C21.8472 10.2848 21.8472 6.64413 19.6017 4.39861ZM7.14582 10.8442C8.65534 9.33464 11.1028 9.33464 12.6123 10.8442L12.8843 11.1161C13.1772 11.409 13.652 11.409 13.9449 11.1161C14.2378 10.8232 14.2378 10.3484 13.9449 10.0555L13.673 9.78351C11.5776 7.6882 8.18047 7.6882 6.08516 9.78351L4.39898 11.4697C2.15346 13.7152 2.15346 17.3559 4.39898 19.6014C6.64449 21.8469 10.2852 21.8469 12.5307 19.6014L13.2378 18.8943C13.5307 18.6014 13.5307 18.1265 13.2378 17.8336C12.9449 17.5408 12.47 17.5408 12.1772 17.8336L11.47 18.5408C9.81032 20.2005 7.11937 20.2005 5.45964 18.5408C3.79991 16.881 3.79991 14.1901 5.45964 12.5303L7.14582 10.8442Z"></path></svg>
+                            </div>
+                            <div>
+                                <b>Favicon</b>
+                                <div class="mt-1 hidden" id="favicon-i">
+                                    <input type="text" class="change-file-input" readonly="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div><br>
+                        <div class="btn-file d-flex align-items-center">
+                            <input type="file" id="logo" accept="image/x-png, image/gif, image/jpeg" name="logo" class="hidden">
+                            <div class="mr-3 change-file-ico">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" fill-rule="evenodd" d="M10.9436 2.25H11H13H13.0564C14.8942 2.24998 16.3498 2.24997 17.489 2.40313C18.6614 2.56076 19.6104 2.89288 20.3588 3.64124C21.1071 4.38961 21.4392 5.33855 21.5969 6.51098C21.75 7.65018 21.75 9.1058 21.75 10.9435V10.9436V11V13V13.0564V13.0565C21.75 14.8942 21.75 16.3498 21.5969 17.489C21.4392 18.6614 21.1071 19.6104 20.3588 20.3588C19.6104 21.1071 18.6614 21.4392 17.489 21.5969C16.3498 21.75 14.8942 21.75 13.0565 21.75H13.0564H13H11H10.9436H10.9435C9.1058 21.75 7.65018 21.75 6.51098 21.5969C5.33855 21.4392 4.38961 21.1071 3.64124 20.3588C2.89288 19.6104 2.56076 18.6614 2.40313 17.489C2.24997 16.3498 2.24998 14.8942 2.25 13.0564V13V11V10.9436C2.24998 9.10582 2.24997 7.65019 2.40313 6.51098C2.56076 5.33855 2.89288 4.38961 3.64124 3.64124C4.38961 2.89288 5.33855 2.56076 6.51098 2.40313C7.65019 2.24997 9.10582 2.24998 10.9436 2.25ZM6.71085 3.88976C5.70476 4.02502 5.12511 4.27869 4.7019 4.7019C4.27869 5.12511 4.02502 5.70476 3.88976 6.71085C3.75159 7.73851 3.75 9.09318 3.75 11V13C3.75 14.7777 3.75138 16.0755 3.86353 17.0758L4.46967 16.4697L6.14124 14.7981L6.17801 14.7613C6.81331 14.126 7.34307 13.5962 7.82019 13.2322C8.32379 12.8479 8.85587 12.5784 9.5 12.5784C10.1441 12.5784 10.6762 12.8479 11.1798 13.2322C11.6569 13.5962 12.1867 14.126 12.822 14.7613L12.822 14.7613L12.8588 14.7981L14.0003 15.9396C14.496 15.4467 14.9261 15.0329 15.3202 14.7322C15.8238 14.3479 16.3559 14.0784 17 14.0784C17.6441 14.0784 18.1762 14.3479 18.6798 14.7322C19.128 15.0741 19.6227 15.5624 20.2077 16.1471C20.2493 15.2994 20.25 14.2727 20.25 13V11C20.25 9.09318 20.2484 7.73851 20.1102 6.71085C19.975 5.70476 19.7213 5.12511 19.2981 4.7019C18.8749 4.27869 18.2952 4.02502 17.2892 3.88976C16.2615 3.75159 14.9068 3.75 13 3.75H11C9.09318 3.75 7.73851 3.75159 6.71085 3.88976ZM19.97 18.0307C19.9699 18.0306 19.9698 18.0305 19.9697 18.0303L19.2981 17.3588C18.6164 16.6771 18.1574 16.2203 17.7699 15.9247C17.3998 15.6423 17.1843 15.5784 17 15.5784C16.8157 15.5784 16.6002 15.6423 16.2301 15.9247C15.9149 16.1652 15.5523 16.5123 15.0611 17.0004L18.0303 19.9697C18.0305 19.9698 18.0306 19.9699 18.0307 19.97C18.6034 19.822 18.9917 19.6045 19.2981 19.2981C19.6045 18.9917 19.822 18.6034 19.97 18.0307ZM16.1471 20.2077L13.4697 17.5303L11.7981 15.8588C11.1164 15.1771 10.6574 14.7203 10.2699 14.4247C9.89977 14.1423 9.6843 14.0784 9.5 14.0784C9.3157 14.0784 9.10023 14.1423 8.73006 14.4247C8.34258 14.7203 7.88356 15.1771 7.2019 15.8588L5.53033 17.5303L4.30302 18.7576C4.41496 18.9675 4.54709 19.1433 4.7019 19.2981C5.12511 19.7213 5.70476 19.975 6.71085 20.1102C7.73851 20.2484 9.09318 20.25 11 20.25H13C14.2727 20.25 15.2994 20.2493 16.1471 20.2077ZM15 7.75C14.3096 7.75 13.75 8.30964 13.75 9C13.75 9.69036 14.3096 10.25 15 10.25C15.6904 10.25 16.25 9.69036 16.25 9C16.25 8.30964 15.6904 7.75 15 7.75ZM12.25 9C12.25 7.48122 13.4812 6.25 15 6.25C16.5188 6.25 17.75 7.48122 17.75 9C17.75 10.5188 16.5188 11.75 15 11.75C13.4812 11.75 12.25 10.5188 12.25 9Z"></path></svg>
+                            </div>
+                            <div>
+                                <b>Logo (470x75)</b>
+                                <div class="mt-1 hidden" id="logo-i">
+                                    <input type="text" class="change-file-input" readonly="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div><br>
+                        <div class="btn-file d-flex align-items-center">
+                            <input type="file" id="light-logo" accept="image/x-png, image/gif, image/jpeg" name="light-logo" class="hidden">
+                            <div class="mr-3 change-file-ico">
+                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" fill-rule="evenodd" d="M10.9436 2.25H11H13H13.0564C14.8942 2.24998 16.3498 2.24997 17.489 2.40313C18.6614 2.56076 19.6104 2.89288 20.3588 3.64124C21.1071 4.38961 21.4392 5.33855 21.5969 6.51098C21.75 7.65018 21.75 9.1058 21.75 10.9435V10.9436V11V13V13.0564V13.0565C21.75 14.8942 21.75 16.3498 21.5969 17.489C21.4392 18.6614 21.1071 19.6104 20.3588 20.3588C19.6104 21.1071 18.6614 21.4392 17.489 21.5969C16.3498 21.75 14.8942 21.75 13.0565 21.75H13.0564H13H11H10.9436H10.9435C9.1058 21.75 7.65018 21.75 6.51098 21.5969C5.33855 21.4392 4.38961 21.1071 3.64124 20.3588C2.89288 19.6104 2.56076 18.6614 2.40313 17.489C2.24997 16.3498 2.24998 14.8942 2.25 13.0564V13V11V10.9436C2.24998 9.10582 2.24997 7.65019 2.40313 6.51098C2.56076 5.33855 2.89288 4.38961 3.64124 3.64124C4.38961 2.89288 5.33855 2.56076 6.51098 2.40313C7.65019 2.24997 9.10582 2.24998 10.9436 2.25ZM6.71085 3.88976C5.70476 4.02502 5.12511 4.27869 4.7019 4.7019C4.27869 5.12511 4.02502 5.70476 3.88976 6.71085C3.75159 7.73851 3.75 9.09318 3.75 11V13C3.75 14.7777 3.75138 16.0755 3.86353 17.0758L4.46967 16.4697L6.14124 14.7981L6.17801 14.7613C6.81331 14.126 7.34307 13.5962 7.82019 13.2322C8.32379 12.8479 8.85587 12.5784 9.5 12.5784C10.1441 12.5784 10.6762 12.8479 11.1798 13.2322C11.6569 13.5962 12.1867 14.126 12.822 14.7613L12.822 14.7613L12.8588 14.7981L14.0003 15.9396C14.496 15.4467 14.9261 15.0329 15.3202 14.7322C15.8238 14.3479 16.3559 14.0784 17 14.0784C17.6441 14.0784 18.1762 14.3479 18.6798 14.7322C19.128 15.0741 19.6227 15.5624 20.2077 16.1471C20.2493 15.2994 20.25 14.2727 20.25 13V11C20.25 9.09318 20.2484 7.73851 20.1102 6.71085C19.975 5.70476 19.7213 5.12511 19.2981 4.7019C18.8749 4.27869 18.2952 4.02502 17.2892 3.88976C16.2615 3.75159 14.9068 3.75 13 3.75H11C9.09318 3.75 7.73851 3.75159 6.71085 3.88976ZM19.97 18.0307C19.9699 18.0306 19.9698 18.0305 19.9697 18.0303L19.2981 17.3588C18.6164 16.6771 18.1574 16.2203 17.7699 15.9247C17.3998 15.6423 17.1843 15.5784 17 15.5784C16.8157 15.5784 16.6002 15.6423 16.2301 15.9247C15.9149 16.1652 15.5523 16.5123 15.0611 17.0004L18.0303 19.9697C18.0305 19.9698 18.0306 19.9699 18.0307 19.97C18.6034 19.822 18.9917 19.6045 19.2981 19.2981C19.6045 18.9917 19.822 18.6034 19.97 18.0307ZM16.1471 20.2077L13.4697 17.5303L11.7981 15.8588C11.1164 15.1771 10.6574 14.7203 10.2699 14.4247C9.89977 14.1423 9.6843 14.0784 9.5 14.0784C9.3157 14.0784 9.10023 14.1423 8.73006 14.4247C8.34258 14.7203 7.88356 15.1771 7.2019 15.8588L5.53033 17.5303L4.30302 18.7576C4.41496 18.9675 4.54709 19.1433 4.7019 19.2981C5.12511 19.7213 5.70476 19.975 6.71085 20.1102C7.73851 20.2484 9.09318 20.25 11 20.25H13C14.2727 20.25 15.2994 20.2493 16.1471 20.2077ZM15 7.75C14.3096 7.75 13.75 8.30964 13.75 9C13.75 9.69036 14.3096 10.25 15 10.25C15.6904 10.25 16.25 9.69036 16.25 9C16.25 8.30964 15.6904 7.75 15 7.75ZM12.25 9C12.25 7.48122 13.4812 6.25 15 6.25C16.5188 6.25 17.75 7.48122 17.75 9C17.75 10.5188 16.5188 11.75 15 11.75C13.4812 11.75 12.25 10.5188 12.25 9Z"></path></svg>
+                            </div>
+                            <div>
+                                <b>Light Logo (470x75)</b>
+                                <div class="mt-1 hidden" id="logo-li">
+                                    <input type="text" class="change-file-input" readonly="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div><br>
+                        <label for="language" class="main-label">Design Mode</label><br>
+                        <small class="admin-info">Set the default mode for your website</small><br><br>
+                        <mwc-select outlined label="Mode" class="w-100" name="site_display_mode">
+                            <mwc-list-item value="night" <?php if($config['site_display_mode'] == 'night'){ echo("selected");}?>>Night</mwc-list-item>
+                            <mwc-list-item value="day" <?php if($config['site_display_mode'] == 'day'){ echo("selected");}?>>Light</mwc-list-item>
+                        </mwc-select>
+                        
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="submit" id="save_changes">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xxl-6 col-md-6 mb-6">
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Cpanel Design</h2>
+                            <div class="card-subtitle">Customize this cpanel logo!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/camera.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form id="cpanel-design" method="POST">
+                        <div class="btn-file d-flex align-items-center">
+                            <input type="file" id="logo-day" accept="image/x-png, image/gif, image/jpeg" name="logo-day" class="hidden">
+                            <div class="mr-3 change-file-ico">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="21" height="21"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M20 5H4v14l9.292-9.294a1 1 0 0 1 1.414 0L20 15.01V5zM2 3.993A1 1 0 0 1 2.992 3h18.016c.548 0 .992.445.992.993v16.014a1 1 0 0 1-.992.993H2.992A.993.993 0 0 1 2 20.007V3.993zM8 11a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path></svg>
+                            </div>
+                            <div>
+                                <b>Logo Day (470x75)</b>
+                                <div class="mt-1 hidden" id="logo-ci">
+                                    <input type="text" class="change-file-input" readonly="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div><br>
+                        <div class="btn-file d-flex align-items-center">
+                            <input type="file" id="logo-night" accept="image/x-png, image/gif, image/jpeg" name="logo-night" class="hidden">
+                            <div class="mr-3 change-file-ico">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="21" height="21"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M20 5H4v14l9.292-9.294a1 1 0 0 1 1.414 0L20 15.01V5zM2 3.993A1 1 0 0 1 2.992 3h18.016c.548 0 .992.445.992.993v16.014a1 1 0 0 1-.992.993H2.992A.993.993 0 0 1 2 20.007V3.993zM8 11a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path></svg>
+                            </div>
+                            <div>
+                                <b>Logo Night (470x75)</b>
+                                <div class="mt-1 hidden" id="logo-cli">
+                                    <input type="text" class="change-file-input" readonly="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="submit">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+<style type="text/css">
+    b {font-weight: 500;padding: 10px;}
+</style>
+<script>
+    $(function() {
+        let notify_error = {status: 'error',title: 'Site Design',text: 'Failed to updated this settings',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_warning = {status: 'warning',title: 'Site Design',text: "Oops there's an error in the script",effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_success = {status: 'success',title: 'Site Design',text: 'Design Updated Successfully',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+
+        $('mwc-select').on('change', function() {
+            var thisElement = $(this);
+            var configName = thisElement.attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            objData[configName] = thisElement.val();
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('general-settings'), objData, function (data) {
+                if (data.status == 200) {
+                    new Notify({ ...notify_success });
+                } else {
+                    new Notify({ ...notify_error });
+                }
+            });
+        });
+
+        $("#favicon").change(function () {
+            var filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+            $("#favicon-i input").val(filename);
+            $("#favicon-i").removeClass('hidden');
+        });
+        $("#logo").change(function () {
+            var filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+            $("#logo-i input").val(filename);
+            $("#logo-i").removeClass('hidden');
+        });
+        $("#light-logo").change(function () {
+            var filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+            $("#logo-li input").val(filename);
+            $("#logo-li").removeClass('hidden');
+        });
+
+        var form = $('form#site-design');
+        form.ajaxForm({
+            url: cpanel_ajax_url('update-design'),
+            beforeSend: function() {
+                form.find('.btn-outline-primary').text('Please wait..');
+            },
+            success: function(data) {
+                if (data.status == 200) {
+                    form.find('.btn-outline-primary').html('Save Changes <i class="trailing-icon material-icons">arrow_forward</i>');
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    new Notify({ ...notify_success });
+                }
+            }
+        });
+
+        $("#logo-day").change(function () {
+            var filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+            $("#logo-ci input").val(filename);
+            $("#logo-ci").removeClass('hidden');
+        });
+        $("#logo-night").change(function () {
+            var filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+            $("#logo-cli input").val(filename);
+            $("#logo-cli").removeClass('hidden');
+        });
+
+        var form = $('form#cpanel-design');
+        form.ajaxForm({
+            url: cpanel_ajax_url('cpanel-design'),
+            beforeSend: function() {
+                form.find('.btn-outline-primary').text('Please wait..');
+            },
+            success: function(data) {
+                if (data.status == 200) {
+                    form.find('.btn-outline-primary').html('Save Changes <i class="trailing-icon material-icons">arrow_forward</i>');
+                    let notify_success = {status: 'success',title: 'Site Design',text: 'Cpanel Updated Successfully',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+                    new Notify({ ...notify_success });
+                    location.reload(0);
+                }
+            }
+        });
+
+    });
+</script>

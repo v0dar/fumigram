@@ -1,0 +1,36 @@
+
+<tr id="list-<?php echo $cd['report']['id']?>" data-report="<?php echo($cd['report']['id']); ?>" data_selected="<?php echo $cd['report']['id']?>" data-post="<?php echo($cd['report']['post_id']); ?>">
+  <td>
+   <div class="form-check">
+      <input class="form-check-input delete-checkbox" id="check-data-<?php echo $cd['report']['id']?>" type="checkbox" value="" />
+      <label class="form-check-label" for="check-data-<?php echo $cd['report']['id']?>"></label>
+   </div>
+  </td>
+  <td><?php echo $cd['report']['id']?></td>
+  <td>
+      <a href="<?php echo(un2url($cd['report']['username'])); ?>" target="_blank" class="text-decoration-none">
+         <img src="<?php echo(media($cd['report']['avatar'])); ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo($cd['report']['username']); ?>'s Profile" class="rounded-circle" alt="..." style="height: 2rem;weight:2rem;">
+      </a>
+      &nbsp; <?php echo $cd['report']['username']; ?>
+  </td>
+  <td>
+   <?php if ($cd['report']['type'] == 3): ?>
+      <span>Violent threats</span>
+   <?php elseif ($cd['report']['type'] == 4): ?>
+      <span>Sexual content</span>
+   <?php elseif ($cd['report']['type'] == 7): ?>
+      <span>Spam or Advertizing</span>
+   <?php elseif ($cd['report']['type'] == 8): ?>
+      <span>Copyrighted material</span>
+  <?php else: ?>
+      <span>Unknown</span>
+	<?php endif; ?>
+  </td>
+  <td><?php echo $cd['report']['text']; ?></td>
+  <td><?php echo(date('d-F-Y',$cd['report']['time'])); ?></td>
+  <td><a class="btn btn-outline-primary" target="_blank" href="<?php echo(pid2url($cd['report']['post_id'])); ?>">URL</a></td>
+  <td>
+      <button class="btn btn-outline-success" onclick="MarkSafe(<?php echo($cd['report']['id']); ?>,'hide');">Mark Safe</button>&nbsp;&nbsp;
+      <a class="btn btn-outline-danger" href="javascript:void(0)" onclick="DeletePost(<?php echo($cd['report']['post_id']); ?>,'hide');">Delete Post</a>
+  </td>
+</tr>

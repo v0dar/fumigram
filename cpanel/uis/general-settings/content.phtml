@@ -1,0 +1,620 @@
+<?php 
+if ($me['manager'] == 0 && $me['admin'] == 0) {    
+    header("Location: " . cpanel('overview'));
+    exit();
+}
+$langs = $cpanel::Langs();
+?>
+<div class="row justify-content-between align-items-center mb-5">
+    <div class="col flex-shrink-0 mb-5 mb-md-0">
+        <h1 class="display-4 mb-0">General Settings</h1>
+        <div class="text-muted">This is the main settings of this community</div>
+    </div>
+</div>
+<!-- Colored status cards-->
+<div class="row">
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">General Configuration</h2>
+                            <div class="card-subtitle">Give your web a nice configurations</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/settings.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form general-settings-form">
+                        <label for="language" class="main-label">Default Language</label><br>
+                        <small class="admin-info">Set the community's default language (Recommended: English)</small><br><br>
+                        <mwc-select outlined label="<?php echo $config['site_name']; ?>'s default language" class="w-100" name="language">
+                            <?php foreach ($langs as $key => $language): ?>
+                                <mwc-list-item value="<?php echo($key); ?>" <?php echo ($key == $config['language']) ? 'selected' : ''; ?>><?php echo($language); ?></mwc-list-item>
+                            <?php endforeach ?>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="float-start">
+                            <label for="share_system" class="main-label">Share system</label>
+                            <br><small class="admin-info">Allow users to share people's posts.</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="share_system" value="off" />
+                                <input type="checkbox" name="share_system" id="chck-share_system" value="on" <?php echo ($config['share_system'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-share_system" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="float-start">
+                            <label for="share_system" class="main-label">Greeting system</label>
+                            <br><small class="admin-info">Greet users every morning, afternoon and evening</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="greeting_system" value="off" />
+                                <input type="checkbox" name="greeting_system" id="chck-greeting_system" value="on" <?php echo ($config['greeting_system'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-greeting_system" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="float-start">
+                            <label for="popover" class="main-label">Popover System</label>
+                            <br><small class="admin-info">Display a popover when a user hover's on other people usernames</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="popover" value="off" />
+                                <input type="checkbox" name="popover" id="chck-popover" value="on" <?php echo ($config['popover'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-popover" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <!-- <div class="clearfix"></div>
+                        <hr>
+                        <div class="float-start">
+                            <label for="blog_system" class="main-label">Blog System</label>
+                            <br><small class="admin-info">Allow admins to create blog articles.</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="" value="off" />
+                                <input type="checkbox" name="" id="chck-blog_system" value="on" <?php echo ($config['blog_system'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-blog_system" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="float-start">
+                            <label for="allow_user_create_blog" class="main-label">Blog System For Users</label>
+                            <br><small class="admin-info">Allow users to create blog articles?</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="" value="off" />
+                                <input type="checkbox" name="" id="chck-allow_user_create_blog" value="on" <?php echo ($config['allow_user_create_blog'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-allow_user_create_blog" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div> -->
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="float-start">
+                            <label for="story_system" class="main-label">Story System</label>
+                            <br><small class="admin-info">Allow users to create stories & status that expire after 24 hours.</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="story_system" value="off" />
+                                <input type="checkbox" name="story_system" id="chck-story_system" value="on" <?php echo ($config['story_system'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-story_system" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="float-start">
+                            <label for="business_account" class="check-label">Business Account System</label><br>
+                            <small class="admin-info">Users can upgrade their accounts to business.</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="business_account" value="off" />
+                                <input type="checkbox" name="business_account" id="chck-business_account" value="on" <?php echo ($config['business_account'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-business_account" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">User story & video slide duration in seconds</label><br>
+                        <small class="admin-info">The amount in seconds you want story indicators to slide for!</small><br><br>
+                        <mwc-textfield type="text" maxLength="2" outlined class="w-100" value="<?php echo $config['story_duration']; ?>" name="story_duration" label="Story & video slide duration in seconds"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Default Username Timeout</label><br>
+                        <small class="admin-info">How long should it take before users can change their usernames again!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['username_timeout']; ?>" name="username_timeout" label="Username timeout?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Home Feed Featured Post</label><br>
+                        <small class="admin-info">How long should a new users post be featured for in the home feed!</small><br><br>
+                        <mwc-textfield type="text" outlined class="w-100" value="<?php echo $config['featured']; ?>" name="featured" label="Featured time?"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_changes">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Login & Registration</h2>
+                            <div class="card-subtitle">Fully control who, and how users enter this community!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/service.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form general-settings-form">
+                        <div class="float-start">
+                            <label for="private_photos" class="main-label">User Registration</label>
+                            <br><small class="admin-info">Allow users to create accounts on the system!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="signup_system" value="off" />
+                                <input type="checkbox" name="signup_system" id="chck-signup_system" value="on" <?php echo ($config['signup_system'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-signup_system" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <div class="float-start">
+                            <label for="delete_account" class="main-label">User Account Delection</label>
+                            <br><small class="admin-info">Allow users to delete their accounts on the system!.</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="delete_account" value="off" />
+                                <input type="checkbox" name="delete_account" id="chck-delete_account" value="on" <?php echo ($config['delete_account'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-delete_account" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <div class="float-start">
+                            <label for="email_validation" class="main-label">Email Validation</label>
+                            <br><small class="admin-info">Send an activation code to the user after registration!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="email_validation" value="off" />
+                                <input type="checkbox" name="email_validation" id="chck-email_validation" value="on" <?php echo ($config['email_validation'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-email_validation" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Allow Specific Emails</label><br>
+                        <small class="admin-info">The emails that should be accepted by the system upon registration!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="specific_email_signup" value="<?php echo $config['specific_email_signup']?>" label="For example: gmail.com, yahoo.com"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <div class="float-start">
+                            <label for="recaptcha" class="main-label">reCaptcha System</label>
+                            <br><small class="admin-info">Enable reCaptcha on the forget password page to prevent spam emails.</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="recaptcha" value="off" />
+                                <input type="checkbox" name="recaptcha" id="chck-recaptcha" value="on" <?php echo ($config['recaptcha'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-recaptcha" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">ReCaptcha Site Key</label><br>
+                        <small class="admin-info">The key that you has created on google's reCaptcha system!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="recaptcha_site_key" value="<?php echo $config['recaptcha_site_key']?>" label="reCaptcha key"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">ReCaptcha Secret Key</label><br>
+                        <small class="admin-info">The secret key that you created on google's reCaptcha system!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="recaptcha_secret_key" value="<?php echo $config['recaptcha_secret_key']?>" label="reCaptcha Secret key"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_login">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Hashtags Settings</h2>
+                            <div class="card-subtitle">Hashtags settings for home and timeline feed</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/solve.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="sidebar_hashtags" class="main-label">Sidebar Hashtags</label>
+                            <br><small class="admin-info">Allow hashtags to display on sidebar!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="sidebar_hashtags" value="off" />
+                                <input type="checkbox" name="sidebar_hashtags" id="chck-sidebar_hashtags" value="on" <?php echo ($config['sidebar_hashtags'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-sidebar_hashtags" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Hashtags Limit</label><br>
+                        <small class="admin-info">How many hashtags can be displayed on the sidebar!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="number" name="htag_limit" value="<?php echo $config['htag_limit']?>" label="Hashtag Limit"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Hashtags Nav Limit</label><br>
+                        <small class="admin-info">How many hashtags can be displayed on the hashtag navbar!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="number" name="htag_nav_limit" value="<?php echo $config['htag_nav_limit']?>" label="Hashtag Limit"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label for="home_htag_type" class="main-label">Home Hashtags</label>
+                        <br><small class="admin-info">What type of hashtags should be displayed on the home sidebar!</small><br><br>
+                        <mwc-select outlined class="w-100" id="home_htag_type" name="home_htag_type" label="Hashtags Type?">
+                            <mwc-list-item value="latest" <?php if($config['home_htag_type'] == 'latest'){ echo("selected");}?>>Latest Hashtags</mwc-list-item>
+                            <mwc-list-item value="popular" <?php if($config['home_htag_type'] == 'popular'){ echo("selected");}?>>Popular Hashtags</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label for="timeline_htag_type" class="main-label">Timeline Hashtags</label>
+                        <br><small class="admin-info">What type of hashtags should be displayed on users timeline sidebar!</small><br><br>
+                        <mwc-select outlined class="w-100" id="timeline_htag_type" name="timeline_htag_type" label="Hashtags Type?">
+                            <mwc-list-item value="latest" <?php if($config['timeline_htag_type'] == 'latest'){ echo("selected");}?>>Latest Hashtags</mwc-list-item>
+                            <mwc-list-item value="popular" <?php if($config['timeline_htag_type'] == 'popular'){ echo("selected");}?>>Popular Hashtags</mwc-list-item>
+                        </mwc-select>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_others">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div> 
+        </div>
+
+
+    <div class="col-xxl-6 col-md-6 mb-6">
+        <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Private Photos & Videos Subscription</h2>
+                            <div class="card-subtitle">Allows users to sell their photos & videos with profile subscription!</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/cash-money.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form general-settings-form">
+                        <div class="float-start">
+                            <label for="private_photos" class="main-label">Lock Private Photos</label>
+                            <br><small class="admin-info">Users can lock their images and sell them.</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="private_photos" value="off" />
+                                <input type="checkbox" name="private_photos" id="chck-private_photos" value="on" <?php echo ($config['private_photos'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-private_photos" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Commission from unlocking locked photos</label><br>
+                        <small class="admin-info">The amount in percentage admins will recieve everytime someone pays to unlock an Image!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="number" name="private_photos_commission" value="<?php echo $config['private_photos_commission']?>" label="Percentage (%)"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Image Blur Level</label><br>
+                        <small class="admin-info">How high should we blur an image when it's being put for sale?</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="number" name="photo_blurred_number" value="<?php echo $config['photo_blurred_number']?>" label="The number of times the image is blurred, 100 is max."></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Downsize the image to make the process faster</label><br>
+                        <small class="admin-info">How much downsize should we give the image for faster process?</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="number" name="downsize_blurred_photo" value="<?php echo $config['downsize_blurred_photo']?>" label="This will not affect the original image (Image Size / Downsize)"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <div class="float-start">
+                            <label for="private_videos" class="main-label">Lock Private Videos</label>
+                            <br><small class="admin-info">All users will be able to lock their videos and sell them for any price!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="private_videos" value="off" />
+                                <input type="checkbox" name="private_videos" id="chck-private_videos" value="on" <?php echo ($config['private_videos'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-private_videos" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Admin commission to unlock any locked videos</label><br>
+                        <small class="admin-info">The amount in percentage admins will recieve everytime someone pays to unlock a video!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="number" name="private_videos_commission" value="<?php echo $config['private_videos_commission']?>" label="Percentage (%)"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Commission from monthly subscribers</label><br>
+                        <small class="admin-info">The amount admins will recieve everytime someone subscribes to another user's account!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="number" name="monthly_subscribers_commission" value="<?php echo $config['monthly_subscribers_commission']?>" label="Percentage (%)"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <div class="float-start">
+                            <label for="explore_locked_post" class="main-label">Explore Locked Content & Posts</label>
+                            <br><small class="admin-info">Allow all locked content & posts to be displayed in the explore page!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="explore_locked_post" value="off" />
+                                <input type="checkbox" name="explore_locked_post" id="chck-explore_locked_post" value="on" <?php echo ($config['explore_locked_post'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-explore_locked_post" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div><hr>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_lock">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Image Watermark</h2>
+                            <div class="card-subtitle">This will put a logo on all images uploaded on the site!</div>
+                        </div>
+                        <img src="<?php echo $config['site_url']; ?>/media/img/logo.<?php echo($config['logo_extension']) ?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="private_photos" class="main-label">Image Watermark System</label>
+                            <br><small class="admin-info">Enable this if you want us to put our logo on any image that is uploaded!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="watermark" value="off" />
+                                <input type="checkbox" name="watermark" id="chck-watermark" value="on" <?php echo ($config['watermark'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-watermark" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Watermark Opacity</label><br>
+                        <small class="admin-info" name="watermark_blur">Watermark opacity value must be between 0 and 1</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="watermark_blur" value="<?php echo $config['watermark_blur']?>" label="Opacity in numbers! Eg: 0, 1, 0.1, 0.2"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Image watermark full url.</label><br>
+                        <small class="admin-info">The image watermark location! Example :: media/img/watermark.png</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="text" name="watermark_link" value="<?php echo $config['watermark_link']?>" label="Image watermark, (jpg, png, jpeg) url."></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <label for="watermark_position" class="main-label">Watermark Placement</label>
+                        <br><small class="admin-info">Where should the image watermark be displayed on the image?</small><br><br>
+                        <mwc-select outlined class="w-100" id="watermark_position" name="watermark_position" label="Where should we put the watermark?">
+                            <mwc-list-item value="top" <?php if($config['watermark_position'] == 'top'){ echo("selected");}?>>Top</mwc-list-item>
+                            <mwc-list-item value="right" <?php if($config['watermark_position'] == 'right'){ echo("selected");}?>>Right</mwc-list-item>
+                            <mwc-list-item value="bottom" <?php if($config['watermark_position'] == 'bottom'){ echo("selected");}?>>Bottom</mwc-list-item>
+                            <mwc-list-item value="top center" <?php if($config['watermark_position'] == 'top center'){ echo("selected");}?>>Center</mwc-list-item>
+                            <mwc-list-item value="top left" <?php if($config['watermark_position'] == 'top left'){ echo("selected");}?>>Top Left</mwc-list-item>
+                            <mwc-list-item value="top right" <?php if($config['watermark_position'] == 'top right'){ echo("selected");}?>>Top Right</mwc-list-item>
+                            <mwc-list-item value="bottom left" <?php if($config['watermark_position'] == 'bottom left'){ echo("selected");}?>>Bottom Left</mwc-list-item>
+                            <mwc-list-item value="bottom right" <?php if($config['watermark_position'] == 'bottom right'){ echo("selected");}?>>Bottom Right</mwc-list-item>
+                        </mwc-select>
+                        <div class="clearfix"></div>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_watermark">Save Changes <i class="trailing-icon material-icons">arrow_forward</i></button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>  
+            <br>
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Video Notification</h2>
+                            <div class="card-subtitle">Optional settings to use for the notification system</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/notification-bell.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">
+                        <div class="float-start">
+                            <label for="video_notify" class="main-label">Video Notification</label>
+                            <br><small class="admin-info">Will automatically play the notification video!</small>
+                        </div>
+                        <div class="float-end"><br>
+                            <div class="form-group float-right switcher">
+                                <input type="hidden" name="video_notify" value="off" />
+                                <input type="checkbox" name="video_notify" id="chck-video_notify" value="on" <?php echo ($config['video_notify'] == 'on') ? 'checked': '';?>>
+                                <label for="chck-video_notify" class="check-trail"><span class="check-handler"></span></label>
+                            </div>
+                        </div><br>
+                        <div class="clearfix"></div>
+                        <hr> 
+                        <small class="admin-info">When a user receives a video notification and this is enabled <br>The video will automatically play when the user opens the notifications bar!</small><br><br>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_others">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>  
+            <br>
+            <div class="card card-raised border-start border-<?php echo $me['dash_color']; ?> border-4">
+                <div class="card-header bg-white px-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="me-2">
+                            <h2 class="card-title mb-0">Records Per Call</h2>
+                            <div class="card-subtitle">Records to be display per action calls</div>
+                        </div>
+                        <img src="<?php echo cpanel('si/img/icons/snail.png');?>" alt="..." style="height: 4rem" />
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form class="form site-settings-form">  
+                        <label class="form-label" class="main-label">Home Feed Record</label><br>
+                        <small class="admin-info">How many posts per call should be displayed on the home feed!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="number" name="home_record" value="<?php echo $config['home_record']?>" label="Home Record"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>  
+                        <label class="form-label" class="main-label">Timeline Feed Record</label><br>
+                        <small class="admin-info">How many posts per call should be displayed on users timeline feed!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="number" name="timeline_record" value="<?php echo $config['timeline_record']?>" label="Timeline Record"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Hashtag Feed Record</label><br>
+                        <small class="admin-info">How many posts per call should be displayed on the hashtag feed!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="number" name="hashtag_record" value="<?php echo $config['hashtag_record']?>" label="Hashtag Record"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Comments Limit Record</label><br>
+                        <small class="admin-info">How many comments should be displayed on users by default!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="number" name="comment_limit" value="<?php echo $config['comment_limit']?>" label="Comment Record"></mwc-textfield>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <label class="form-label" class="main-label">Load More Comments Record</label><br>
+                        <small class="admin-info">How many comments should be loaded when users load more comments!</small><br><br>
+                        <mwc-textfield outlined class="w-100" type="number" name="load_more_comments" value="<?php echo $config['load_more_comments']?>" label="More Comment Record"></mwc-textfield>
+                        <div class="float-end"><br>
+                            <button class="btn btn-outline-primary" type="button" id="save_others">
+                                Save Changes <i class="trailing-icon material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>        
+        </div>        
+    </div>
+
+<script>
+    $(function() {
+        let notify_error = {status: 'error',title: 'General Settings',text: 'Failed to updated this settings',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_warning = {status: 'warning',title: 'General Settings',text: "Oops there's an error in the script",effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        let notify_success = {status: 'success',title: 'General Settings',text: 'Configurations Updated Successfully',effect: 'slide',speed: 600,customClass: '',customIcon: '',showIcon: true,showCloseButton: true,autoclose: true,autotimeout: 3000,gap: 20,distance: 20,type: 1,position: 'right bottom',customWrapper: ''}
+        $('.switcher input[type=checkbox]').click(function () {
+            var configName = $(this).attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            if ($(this).is(":checked") === true) {
+                objData[configName] = $(this).val();
+                new Notify({ ...notify_success })
+            }
+            else{
+                if ($('input[name='+configName+']')[0]) {
+                    objData[configName] = $($('input[name='+configName+']')[0]).val();
+                    new Notify({ ...notify_success })
+                }
+            }
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('general-settings'), objData);
+        });
+
+        $('mwc-select').on('change', function() {
+            var thisElement = $(this);
+            var configName = thisElement.attr('name');
+            var hash_id = $('input[name=hash_id]').val();
+            var objData = {};
+            objData[configName] = thisElement.val();
+            objData['hash_id'] = hash_id;
+            $.post(cpanel_ajax_url('general-settings'), objData, function (data) {
+                if (data.status == 200) {
+                    new Notify({ ...notify_success });
+                } else {
+                    new Notify({ ...notify_error });
+                }
+            });
+        });
+
+        function update_input(){
+            $('mwc-textfield').on('keyup', function() {
+                var thisElement = $(this);
+                var configName = thisElement.attr('name');
+                var hash_id = $('mwc-textfield[name=hash_id]').val();
+                var objData = {};
+                objData[configName] = this.value;
+                objData['hash_id'] = hash_id;
+                $.post(cpanel_ajax_url('general-settings'), objData, function (data) {
+                    if (data.status == 200) {
+                    } else {
+                        new Notify({ ...notify_error })
+                    }
+                });
+            });
+        }
+        $('#save_changes').on('click', function() {
+            $('#save_changes').text('Please Wait...');
+			$('#save_changes').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_changes').text('Save Changes');
+			$('#save_changes').removeAttr('disabled');
+            }, 2000);
+        });
+        $('#save_lock').on('click', function() {
+            $('#save_lock').text('Please Wait...');
+			$('#save_lock').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_lock').text('Save Changes');
+			$('#save_lock').removeAttr('disabled');
+            }, 1000);
+        });
+        $('#save_login').on('click', function() {
+            $('#save_login').text('Please Wait...');
+			$('#save_login').attr('disabled','true');
+            setTimeout(function () {
+                new Notify({ ...notify_success })
+            $('#save_login').text('Save Changes');
+			$('#save_login').removeAttr('disabled');
+            }, 1000);
+        });
+        setTimeout(function () {
+            update_input();
+        }, 2000);
+    });
+</script>

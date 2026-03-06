@@ -1,0 +1,13 @@
+<tr id="<?php echo($cd['lang_key']);?>" data_selected="<?php echo($cd['lang_key']);?>">
+  <td>
+  <div class="form-check">
+         <input class="form-check-input delete-checkbox" id="check-data-<?php echo($cd['lang_key']);?>" type="checkbox" value="" />
+         <label class="form-check-label" for="check-data-<?php echo($cd['lang_key']);?>"></label>
+      </div>
+  </td>
+   <td><?php echo $cd['lang_name']; ?></td>
+   <td>
+      <a class="btn btn-outline-primary" href="<?php echo cpanel("edit-language?id={$cd['lang_key']}"); ?>">Edit Lang</a>&nbsp;&nbsp;
+      <a href="javscript:void(0)" class="delete-field btn btn-outline-danger admn_table_btn" onclick="DeleteLang('<?php echo($cd['lang_key']);?>','hide');">Delete</a>&nbsp;&nbsp;
+   </td>
+</tr>
