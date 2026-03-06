@@ -43,7 +43,7 @@ if (empty($error)) {
 '<?php
 // +------------------------------------------------------------------------+
 // | @author Vidar (https://github.com/v0dar)
-// | @author_url 1: https://fumigram.com
+// | @author_url 1: http://fumigram.free.nf/
 // | @author_url 2: https://github.com/v0dar
 // | @author_email: fumigram.app@gmail.com   
 // +------------------------------------------------------------------------+
